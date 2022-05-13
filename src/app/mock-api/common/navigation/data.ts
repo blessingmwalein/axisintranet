@@ -30,13 +30,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 icon : 'heroicons_outline:cash',
                 link : '/axis/employee/announcements'
             },
-            {
-                id   : 'employee.nortifications',
-                title: 'Nortifications',
-                type : 'basic',
-                icon : 'heroicons_outline:bell',
-                link : '/axis/employee/nortifications'
-            },
+            // {
+            //     id   : 'employee.nortifications',
+            //     title: 'Nortifications',
+            //     type : 'basic',
+            //     icon : 'heroicons_outline:bell',
+            //     link : '/axis/employee/nortifications'
+            // },
             {
                 id      : 'employee.requisitions',
                 title   : 'Requisitions',

@@ -35,7 +35,7 @@ import { FuseVerticalNavigationComponent } from '@fuse/components/navigation/ver
         FuseVerticalNavigationSpacerItemComponent,
         FuseVerticalNavigationComponent
     ],
-    imports     : [
+    imports: [
         CommonModule,
         RouterModule,
         MatButtonModule,
@@ -45,11 +45,10 @@ import { FuseVerticalNavigationComponent } from '@fuse/components/navigation/ver
         MatTooltipModule,
         FuseScrollbarModule
     ],
-    exports     : [
+    exports: [
         FuseHorizontalNavigationComponent,
         FuseVerticalNavigationComponent
     ]
 })
-export class FuseNavigationModule
-{
+export class FuseNavigationModule {
 }

@@ -1,9 +1,9 @@
 {
-    "name": "@fuse/demo",
-    "version": "13.5.0",
-    "description": "Fuse - Angular Admin Template and Starter Project",
-    "author": "https://themeforest.net/user/srcn",
-    "license": "https://themeforest.net/licenses/standard",
+    "name": "axis-intranet-front",
+    "version": "1.0.0",
+    "description": "Axis Intranet Website",
+    "author": "Blessing Mwale",
+    "license": "",
     "private": true,
     "scripts": {
         "ng": "ng",

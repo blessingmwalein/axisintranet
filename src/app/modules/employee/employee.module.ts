@@ -20,7 +20,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { VehicleRequisitionComponent } from './vehicle-requisition/vehicle-requisition.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { FuseFindByKeyPipeModule } from '@fuse/pipes/find-by-key';
@@ -29,11 +28,32 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { CalendarComponent } from './calendar/calendar.component';
+import { CalendarSettingsComponent } from './calendar/settings/settings.component';
+import { CalendarRecurrenceComponent } from './calendar/recurrence/recurrence.component';
+import { CalendarSidebarComponent } from './calendar/sidebar/sidebar.component';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { FuseDateRangeModule } from '@fuse/components/date-range';
+import { MatRadioModule } from '@angular/material/radio';
+import { AnnouncementsComponent } from './announcements/announcements.component';
+import { VehicleRequisitionsComponent } from './vehicle-requisitions/vehicle-requisitions.component';
+import { VehicleRequisitionDetailsComponent } from './vehicle-requisitions/details/details.component';
+import { VehicleRequisitionListComponent } from './vehicle-requisitions/list/list.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    VehicleRequisitionComponent 
+    CalendarComponent,
+    CalendarSettingsComponent,
+    CalendarRecurrenceComponent,
+    CalendarSidebarComponent,
+    AnnouncementsComponent,
+    VehicleRequisitionsComponent,
+    VehicleRequisitionDetailsComponent,
+    VehicleRequisitionListComponent
   ],
   imports: [
     CommonModule,
@@ -64,6 +84,12 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatSortModule,
     MatSelectModule,
     MatSlideToggleModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatMomentDateModule,
+    MatRadioModule,
+    FullCalendarModule,
+    FuseDateRangeModule,
   ],
   providers: [
     {

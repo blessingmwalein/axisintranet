@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewEnca
 import { Router } from '@angular/router';
 import { UserService } from 'app/core/user/user.service';
 import { User } from 'app/core/user/user.types';
-import { ProjectService } from 'app/modules/admin/dashboards/project/project.service';
 import { ApexOptions } from 'ng-apexcharts';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -31,7 +30,6 @@ export class DashboardComponent implements OnInit {
    * Constructor
    */
   constructor(
-    private _projectService: ProjectService,
     private _router: Router,
     private _userService: UserService,
     private _changeDetectorRef: ChangeDetectorRef,
@@ -57,17 +55,7 @@ export class DashboardComponent implements OnInit {
         // Mark for check
         this._changeDetectorRef.markForCheck();
       });
-    // Get the data
-    this._projectService.data$
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((data) => {
-
-        // Store the data
-        this.data = data;
-
-        // Prepare the chart data
-        this._prepareChartData();
-      });
+    
 
     // Attach SVG fill fixer to all ApexCharts
     window['Apex'] = {
