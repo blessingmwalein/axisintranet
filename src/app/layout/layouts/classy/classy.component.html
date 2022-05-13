@@ -1,12 +1,12 @@
 <!-- Navigation -->
 <fuse-vertical-navigation class="dark bg-gray-900 print:hidden" [mode]="isScreenSmall ? 'over' : 'side'"
-    [name]="'mainNavigation'" [navigation]="navigation.default" [opened]="!isScreenSmall">
+    [name]="'mainNavigation'" [navigation]="getSidebarNavigation()" [usertype]="user.usertype" [opened]="!isScreenSmall">
     <!-- Navigation header hook -->
     <ng-container fuseVerticalNavigationContentHeader>
         <div class="flex items-center w-full p-4 pl-6">
             <!-- Logo -->
             <div class="flex items-center justify-center">
-                <h4 class="h1 ">Employee Dash</h4>
+                <h4 class="h1 ">{{user.usertype.toUpperCase()}} PAGES</h4>
             </div>
             <!-- Components -->
             <div class="flex items-center ml-auto">
@@ -36,7 +36,7 @@
     <!-- Navigation footer hook -->
     <ng-container fuseVerticalNavigationContentFooter>
         <div class="flex flex-0 items-center justify-center h-16 pr-6 pl-2 mt-2 mb-4 opacity-10">
-            <h4 class="h2 text-3xl text-white" >Axis Solutions</h4>
+            <h4 class="h2 text-3xl text-white">Axis Solutions</h4>
         </div>
     </ng-container>
 </fuse-vertical-navigation>

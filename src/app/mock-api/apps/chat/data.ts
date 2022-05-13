@@ -324,7 +324,7 @@ export const chats = [
         lastMessageAt: '26/04/2021'
     }
 ];
-export const contacts = [
+export const users = [
     {
         id         : 'cd5fa417-b667-482d-b208-798d9da3213c',
         avatar     : 'assets/images/avatars/male-01.jpg',

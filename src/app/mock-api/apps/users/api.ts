@@ -3,15 +3,15 @@ import { from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { assign, cloneDeep } from 'lodash-es';
 import { FuseMockApiService, FuseMockApiUtils } from '@fuse/lib/mock-api';
-import { contacts as contactsData, countries as countriesData, tags as tagsData } from 'app/mock-api/apps/contacts/data';
+import { users as usersData, departments as departmentsData, tags as tagsData } from 'app/mock-api/apps/users/data';
 
 @Injectable({
     providedIn: 'root'
 })
-export class ContactsMockApi
+export class UsersMockApi
 {
-    private _contacts: any[] = contactsData;
-    private _countries: any[] = countriesData;
+    private _users: any[] = usersData;
+    private _departments: any[] = departmentsData;
     private _tags: any[] = tagsData;
 
     /**
@@ -33,81 +33,81 @@ export class ContactsMockApi
     registerHandlers(): void
     {
         // -----------------------------------------------------------------------------------------------------
-        // @ Contacts - GET
+        // @ Users - GET
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onGet('api/apps/contacts/all')
+            .onGet('api/apps/users/all')
             .reply(() => {
 
-                // Clone the contacts
-                const contacts = cloneDeep(this._contacts);
+                // Clone the users
+                const users = cloneDeep(this._users);
 
-                // Sort the contacts by the name field by default
-                contacts.sort((a, b) => a.name.localeCompare(b.name));
+                // Sort the users by the name field by default
+                users.sort((a, b) => a.name.localeCompare(b.name));
 
                 // Return the response
-                return [200, contacts];
+                return [200, users];
             });
 
         // -----------------------------------------------------------------------------------------------------
-        // @ Contacts Search - GET
+        // @ Users Search - GET
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onGet('api/apps/contacts/search')
+            .onGet('api/apps/users/search')
             .reply(({request}) => {
 
                 // Get the search query
                 const query = request.params.get('query');
 
-                // Clone the contacts
-                let contacts = cloneDeep(this._contacts);
+                // Clone the users
+                let users = cloneDeep(this._users);
 
                 // If the query exists...
                 if ( query )
                 {
-                    // Filter the contacts
-                    contacts = contacts.filter(contact => contact.name && contact.name.toLowerCase().includes(query.toLowerCase()));
+                    // Filter the users
+                    users = users.filter(user => user.name && user.name.toLowerCase().includes(query.toLowerCase()));
                 }
 
-                // Sort the contacts by the name field by default
-                contacts.sort((a, b) => a.name.localeCompare(b.name));
+                // Sort the users by the name field by default
+                users.sort((a, b) => a.name.localeCompare(b.name));
 
                 // Return the response
-                return [200, contacts];
+                return [200, users];
             });
 
         // -----------------------------------------------------------------------------------------------------
-        // @ Contact - GET
+        // @ User - GET
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onGet('api/apps/contacts/contact')
+            .onGet('api/apps/users/user')
             .reply(({request}) => {
 
                 // Get the id from the params
                 const id = request.params.get('id');
 
-                // Clone the contacts
-                const contacts = cloneDeep(this._contacts);
+                // Clone the users
+                const users = cloneDeep(this._users);
 
-                // Find the contact
-                const contact = contacts.find(item => item.id === id);
+                // Find the user
+                const user = users.find(item => item.id === id);
 
                 // Return the response
-                return [200, contact];
+                return [200, user];
             });
 
         // -----------------------------------------------------------------------------------------------------
-        // @ Contact - POST
+        // @ User - POST
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onPost('api/apps/contacts/contact')
+            .onPost('api/apps/users/user')
             .reply(() => {
 
-                // Generate a new contact
-                const newContact = {
+                // Generate a new user
+                const newUser = {
                     id          : FuseMockApiUtils.guid(),
                     avatar      : null,
-                    name        : 'New Contact',
+                    name        : 'New User',
                     emails      : [],
                     phoneNumbers: [],
                     job         : {
@@ -120,60 +120,60 @@ export class ContactsMockApi
                     tags        : []
                 };
 
-                // Unshift the new contact
-                this._contacts.unshift(newContact);
+                // Unshift the new user
+                this._users.unshift(newUser);
 
                 // Return the response
-                return [200, newContact];
+                return [200, newUser];
             });
 
         // -----------------------------------------------------------------------------------------------------
-        // @ Contact - PATCH
+        // @ User - PATCH
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onPatch('api/apps/contacts/contact')
+            .onPatch('api/apps/users/user')
             .reply(({request}) => {
 
-                // Get the id and contact
+                // Get the id and user
                 const id = request.body.id;
-                const contact = cloneDeep(request.body.contact);
+                const user = cloneDeep(request.body.user);
 
-                // Prepare the updated contact
-                let updatedContact = null;
+                // Prepare the updated user
+                let updatedUser = null;
 
-                // Find the contact and update it
-                this._contacts.forEach((item, index, contacts) => {
+                // Find the user and update it
+                this._users.forEach((item, index, users) => {
 
                     if ( item.id === id )
                     {
-                        // Update the contact
-                        contacts[index] = assign({}, contacts[index], contact);
+                        // Update the user
+                        users[index] = assign({}, users[index], user);
 
-                        // Store the updated contact
-                        updatedContact = contacts[index];
+                        // Store the updated user
+                        updatedUser = users[index];
                     }
                 });
 
                 // Return the response
-                return [200, updatedContact];
+                return [200, updatedUser];
             });
 
         // -----------------------------------------------------------------------------------------------------
-        // @ Contact - DELETE
+        // @ User - DELETE
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onDelete('api/apps/contacts/contact')
+            .onDelete('api/apps/users/user')
             .reply(({request}) => {
 
                 // Get the id
                 const id = request.params.get('id');
 
-                // Find the contact and delete it
-                this._contacts.forEach((item, index) => {
+                // Find the user and delete it
+                this._users.forEach((item, index) => {
 
                     if ( item.id === id )
                     {
-                        this._contacts.splice(index, 1);
+                        this._users.splice(index, 1);
                     }
                 });
 
@@ -185,21 +185,21 @@ export class ContactsMockApi
         // @ Countries - GET
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onGet('api/apps/contacts/countries')
-            .reply(() => [200, cloneDeep(this._countries)]);
+            .onGet('api/apps/users/departments')
+            .reply(() => [200, cloneDeep(this._departments)]);
 
         // -----------------------------------------------------------------------------------------------------
         // @ Tags - GET
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onGet('api/apps/contacts/tags')
+            .onGet('api/apps/users/tags')
             .reply(() => [200, cloneDeep(this._tags)]);
 
         // -----------------------------------------------------------------------------------------------------
         // @ Tags - POST
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onPost('api/apps/contacts/tag')
+            .onPost('api/apps/users/tag')
             .reply(({request}) => {
 
                 // Get the tag
@@ -219,7 +219,7 @@ export class ContactsMockApi
         // @ Tags - PATCH
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onPatch('api/apps/contacts/tag')
+            .onPatch('api/apps/users/tag')
             .reply(({request}) => {
 
                 // Get the id and tag
@@ -250,7 +250,7 @@ export class ContactsMockApi
         // @ Tag - DELETE
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onDelete('api/apps/contacts/tag')
+            .onDelete('api/apps/users/tag')
             .reply(({request}) => {
 
                 // Get the id
@@ -265,12 +265,12 @@ export class ContactsMockApi
                     }
                 });
 
-                // Get the contacts that have the tag
-                const contactsWithTag = this._contacts.filter(contact => contact.tags.indexOf(id) > -1);
+                // Get the users that have the tag
+                const usersWithTag = this._users.filter(user => user.tags.indexOf(id) > -1);
 
                 // Iterate through them and delete the tag
-                contactsWithTag.forEach((contact) => {
-                    contact.tags.splice(contact.tags.indexOf(id), 1);
+                usersWithTag.forEach((user) => {
+                    user.tags.splice(user.tags.indexOf(id), 1);
                 });
 
                 // Return the response
@@ -310,15 +310,15 @@ export class ContactsMockApi
         ;
 
         this._fuseMockApiService
-            .onPost('api/apps/contacts/avatar')
+            .onPost('api/apps/users/avatar')
             .reply(({request}) => {
 
                 // Get the id and avatar
                 const id = request.body.id;
                 const avatar = request.body.avatar;
 
-                // Prepare the updated contact
-                let updatedContact: any = null;
+                // Prepare the updated user
+                let updatedUser: any = null;
 
                 // In a real world application, this would return the path
                 // of the saved image file (from host, S3 bucket, etc.) but,
@@ -329,21 +329,21 @@ export class ContactsMockApi
                 return from(readAsDataURL(avatar)).pipe(
                     map((path) => {
 
-                        // Find the contact and update it
-                        this._contacts.forEach((item, index, contacts) => {
+                        // Find the user and update it
+                        this._users.forEach((item, index, users) => {
 
                             if ( item.id === id )
                             {
                                 // Update the avatar
-                                contacts[index].avatar = path;
+                                users[index].avatar = path;
 
-                                // Store the updated contact
-                                updatedContact = contacts[index];
+                                // Store the updated user
+                                updatedUser = users[index];
                             }
                         });
 
                         // Return the response
-                        return [200, updatedContact];
+                        return [200, updatedUser];
                     })
                 );
             });

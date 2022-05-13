@@ -102,11 +102,11 @@ export const defaultNavigation: FuseNavigationItem[] = [
     //             link : '/apps/chat'
     //         },
     //         {
-    //             id   : 'apps.contacts',
+    //             id   : 'apps.users',
     //             title: 'Contacts',
     //             type : 'basic',
     //             icon : 'heroicons_outline:user-group',
-    //             link : '/apps/contacts'
+    //             link : '/apps/users'
     //         },
     //         {
     //             id      : 'apps.ecommerce',
@@ -1185,6 +1185,174 @@ export const defaultNavigation: FuseNavigationItem[] = [
     //     ]
     // }
 ];
+
+export const managerNavigation: FuseNavigationItem[] = [
+    {
+        id      : 'manager',
+        title   : 'Manager',
+        subtitle: 'Manager Pages',
+        type    : 'group',
+        icon    : 'heroicons_outline:home',
+        children: [
+            {
+                id   : 'employee.dashboard',
+                title: 'Dashboard',
+                type : 'basic',
+                icon : 'heroicons_outline:clipboard-check',
+                link : '/axis/employee/dashboard'
+            },
+            {
+                id   : 'employee.calendar',
+                title: 'Calendar',
+                type : 'basic',
+                icon : 'heroicons_outline:calendar',
+                link : '/axis/employee/calendar'
+            },
+            {
+                id   : 'employee.announcements',
+                title: 'Announcements',
+                type : 'basic',
+                icon : 'heroicons_outline:cash',
+                link : '/axis/employee/announcements'
+            },
+          
+            {
+                id      : 'employee.requisitions',
+                title   : 'Requisitions',
+                type    : 'collapsable',
+                icon    : 'heroicons_outline:support',
+                children: [
+                    {
+                        id   : 'employee.requisitions.cash',
+                        title: 'Cash',
+                        type : 'basic',
+                        link : '/axis/employee/requisitions/cash'
+                    },
+                    {
+                        id   : 'employee.requisitions.card',
+                        title: 'Card',
+                        type : 'basic',
+                        link : '/axis/employee/requisitions/card'
+                    },
+                    {
+                        id   : 'employee.requisitions.device',
+                        title: 'Device',
+                        type : 'basic',
+                        link : '/axis/employee/requisitions/device'
+                    },
+                    {
+                        id   : 'employee.requisitions.vehicle',
+                        title: 'Vehicle',
+                        type : 'basic',
+                        link : '/axis/employee/requisitions/vehicle'
+                    }
+                ]
+            },
+        ]
+    },
+  
+];
+
+export const adminNavigation: FuseNavigationItem[] = [
+    {
+        id      : 'admin',
+        title   : 'Admin',
+        subtitle: 'Admin Pages',
+        type    : 'group',
+        icon    : 'heroicons_outline:home',
+        children: [
+            {
+                id   : 'employee.dashboard',
+                title: 'Dashboard',
+                type : 'basic',
+                icon : 'heroicons_outline:clipboard-check',
+                link : '/axis/admin/dashboard'
+            },
+            {
+                id   : 'admin.calendar',
+                title: 'Calendar',
+                type : 'basic',
+                icon : 'heroicons_outline:calendar',
+                link : '/axis/admin/calendar'
+            },
+            {
+                id   : 'admin.announcements',
+                title: 'Announcements',
+                type : 'basic',
+                icon : 'heroicons_outline:cash',
+                link : '/axis/admin/announcements'
+            },
+            {
+                id   : 'admin.departments',
+                title: 'Departments',
+                type : 'basic',
+                icon : 'heroicons_outline:cash',
+                link : '/axis/admin/departments'
+            },
+            {
+                id   : 'admin.users',
+                title: 'Users',
+                type : 'basic',
+                icon : 'heroicons_outline:user-circle',
+                link : '/axis/admin/users'
+            },
+            {
+                id      : 'admin.requisitions',
+                title   : 'Requisitions',
+                type    : 'collapsable',
+                icon    : 'heroicons_outline:support',
+                children: [
+                    {
+                        id   : 'admin.requisitions.cash',
+                        title: 'Cash',
+                        type : 'basic',
+                        link : '/axis/admin/requisitions/cash'
+                    },
+                    {
+                        id   : 'admin.requisitions.card',
+                        title: 'Card',
+                        type : 'basic',
+                        link : '/axis/admin/requisitions/card'
+                    },
+                    {
+                        id   : 'admin.requisitions.device',
+                        title: 'Device',
+                        type : 'basic',
+                        link : '/axis/admin/requisitions/device'
+                    },
+                    {
+                        id   : 'admin.requisitions.vehicle',
+                        title: 'Vehicle',
+                        type : 'basic',
+                        link : '/axis/admin/requisitions/vehicle'
+                    }
+                ]
+            },
+            {
+                id      : 'admin.security',
+                title   : 'Security',
+                type    : 'collapsable',
+                icon    : 'heroicons_outline:support',
+                children: [
+                    {
+                        id   : 'admin.security.roles',
+                        title: 'Role',
+                        type : 'basic',
+                        link : '/axis/admin/security/roles'
+                    },
+                    {
+                        id   : 'admin.security.permissions',
+                        title: 'Permissions',
+                        type : 'basic',
+                        link : '/axis/admin/security/permissions'
+                    },
+                ]
+            },
+        ]
+    },
+  
+];
+
 export const compactNavigation: FuseNavigationItem[] = [
     {
         id      : 'dashboards',

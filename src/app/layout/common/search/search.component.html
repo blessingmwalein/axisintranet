@@ -39,7 +39,7 @@
                         class="group relative mb-1 py-0 px-6 text-md rounded-md hover:bg-gray-100 dark:hover:bg-hover"
                         [routerLink]="result.link">
                         <!-- Contacts -->
-                        <ng-container *ngIf="resultSet.id === 'contacts'">
+                        <ng-container *ngIf="resultSet.id === 'users'">
                             <ng-container *ngTemplateOutlet="contactResult; context: {$implicit: result}"></ng-container>
                         </ng-container>
                         <!-- Pages -->
@@ -95,7 +95,7 @@
                         class="group relative mb-1 py-0 px-6 text-md rounded-md hover:bg-gray-100 dark:hover:bg-hover"
                         [routerLink]="result.link">
                         <!-- Contacts -->
-                        <ng-container *ngIf="resultSet.id === 'contacts'">
+                        <ng-container *ngIf="resultSet.id === 'users'">
                             <ng-container *ngTemplateOutlet="contactResult; context: {$implicit: result}"></ng-container>
                         </ng-container>
                         <!-- Pages -->

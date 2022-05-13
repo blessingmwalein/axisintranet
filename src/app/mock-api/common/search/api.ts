@@ -3,7 +3,7 @@ import { cloneDeep } from 'lodash-es';
 import { FuseNavigationItem, FuseNavigationService } from '@fuse/components/navigation';
 import { FuseMockApiService } from '@fuse/lib/mock-api';
 import { defaultNavigation } from 'app/mock-api/common/navigation/data';
-import { contacts } from 'app/mock-api/apps/contacts/data';
+import { users } from 'app/mock-api/apps/users/data';
 import { tasks } from 'app/mock-api/apps/tasks/data';
 
 @Injectable({
@@ -12,7 +12,7 @@ import { tasks } from 'app/mock-api/apps/tasks/data';
 export class SearchMockApi
 {
     private readonly _defaultNavigation: FuseNavigationItem[] = defaultNavigation;
-    private readonly _contacts: any[] = contacts;
+    private readonly _users: any[] = users;
     private readonly _tasks: any[] = tasks;
 
     /**
@@ -56,8 +56,8 @@ export class SearchMockApi
                     return [200, {results: []}];
                 }
 
-                // Filter the contacts
-                const contactsResults = cloneDeep(this._contacts)
+                // Filter the users
+                const usersResults = cloneDeep(this._users)
                     .filter(contact => contact.name.toLowerCase().includes(query));
 
                 // Filter the navigation
@@ -71,21 +71,21 @@ export class SearchMockApi
                 // Prepare the results array
                 const results = [];
 
-                // If there are contacts results...
-                if ( contactsResults.length > 0 )
+                // If there are users results...
+                if ( usersResults.length > 0 )
                 {
                     // Normalize the results
-                    contactsResults.forEach((result) => {
+                    usersResults.forEach((result) => {
 
                         // Add a link
-                        result.link = '/apps/contacts/' + result.id;
+                        result.link = '/apps/users/' + result.id;
                     });
 
                     // Add to the results
                     results.push({
-                        id     : 'contacts',
+                        id     : 'users',
                         label  : 'Contacts',
-                        results: contactsResults
+                        results: usersResults
                     });
                 }
 

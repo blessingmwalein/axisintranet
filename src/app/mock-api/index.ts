@@ -3,7 +3,7 @@ import { AnalyticsMockApi } from 'app/mock-api/dashboards/analytics/api';
 import { AuthMockApi } from 'app/mock-api/common/auth/api';
 import { CalendarMockApi } from 'app/mock-api/apps/calendar/api';
 import { ChatMockApi } from 'app/mock-api/apps/chat/api';
-import { ContactsMockApi } from 'app/mock-api/apps/contacts/api';
+import { UsersMockApi } from 'app/mock-api/apps/users/api';
 import { CryptoMockApi } from 'app/mock-api/dashboards/crypto/api';
 import { ECommerceInventoryMockApi } from 'app/mock-api/apps/ecommerce/inventory/api';
 import { FileManagerMockApi } from 'app/mock-api/apps/file-manager/api';
@@ -30,7 +30,7 @@ export const mockApiServices = [
     AuthMockApi,
     CalendarMockApi,
     ChatMockApi,
-    ContactsMockApi,
+    UsersMockApi,
     CryptoMockApi,
     ECommerceInventoryMockApi,
     FileManagerMockApi,

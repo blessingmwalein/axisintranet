@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { assign, cloneDeep, omit } from 'lodash-es';
 import { FuseMockApiService } from '@fuse/lib/mock-api';
-import { chats as chatsData, contacts as contactsData, messages as messagesData, profile as profileData } from 'app/mock-api/apps/chat/data';
+import { chats as chatsData, users as usersData, messages as messagesData, profile as profileData } from 'app/mock-api/apps/chat/data';
 
 @Injectable({
     providedIn: 'root'
@@ -9,7 +9,7 @@ import { chats as chatsData, contacts as contactsData, messages as messagesData,
 export class ChatMockApi
 {
     private _chats: any[] = chatsData;
-    private _contacts: any[] = contactsData;
+    private _users: any[] = usersData;
     private _messages: any[] = messagesData;
     private _profile: any = profileData;
 
@@ -25,7 +25,7 @@ export class ChatMockApi
         this._chats = this._chats.map(chat => ({
             ...chat,
             // Get the actual contact object from the id and attach it to the chat
-            contact: this._contacts.find(contact => contact.id === chat.contactId),
+            contact: this._users.find(contact => contact.id === chat.contactId),
             // Since we use same set of messages on all chats, we assign them here.
             messages: this._messages.map(message => ({
                 ...message,
@@ -114,20 +114,20 @@ export class ChatMockApi
         // @ Contacts - GET
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onGet('api/apps/chat/contacts')
+            .onGet('api/apps/chat/users')
             .reply(() => {
 
-                // Clone the contacts
-                let contacts = cloneDeep(this._contacts);
+                // Clone the users
+                let users = cloneDeep(this._users);
 
-                // Sort the contacts by the name field by default
-                contacts.sort((a, b) => a.name.localeCompare(b.name));
+                // Sort the users by the name field by default
+                users.sort((a, b) => a.name.localeCompare(b.name));
 
-                // Omit details and attachments from contacts
-                contacts = contacts.map(contact => omit(contact, ['details', 'attachments']));
+                // Omit details and attachments from users
+                users = users.map(contact => omit(contact, ['details', 'attachments']));
 
                 // Return the response
-                return [200, contacts];
+                return [200, users];
             });
 
         // -----------------------------------------------------------------------------------------------------
@@ -140,11 +140,11 @@ export class ChatMockApi
                 // Get the contact id
                 const id = request.params.get('id');
 
-                // Clone the contacts
-                const contacts = cloneDeep(this._contacts);
+                // Clone the users
+                const users = cloneDeep(this._users);
 
                 // Find the contact
-                const contact = contacts.find(item => item.id === id);
+                const contact = users.find(item => item.id === id);
 
                 // Return the response
                 return [200, contact];

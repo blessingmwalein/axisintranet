@@ -12,22 +12,31 @@ export const user = {
     email: 'bmwale@axissol.com',
     avatar: 'assets/images/avatars/blessing-mwale.webp',
     status: 'online',
-    usertype: usertypes[1]
+    usertype: usertypes[0]
+};
+
+export const user2 = {
+    id: 'cfaad35d-07a3-4447-a6c3-d8c3d54ffdf5df',
+    name: 'Rabington Chitima',
+    email: 'rchitima@axissol.com',
+    avatar: 'assets/images/avatars/blessing-mwale.webp',
+    status: 'online',
+    usertype: usertypes[0]
 };
 
 export const userSideBarLinks = {
-    admin : [
+    admin: [
 
     ],
     employee: [
         {
-            
+
         }
     ],
-    manager:[
+    manager: [
 
     ],
-    finance :[
+    finance: [
 
     ]
 }

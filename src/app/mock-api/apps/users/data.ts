@@ -1,9 +1,9 @@
 /* eslint-disable */
-export const contacts = [
+export const users = [
     {
         id          : 'cd5fa417-b667-482d-b208-798d9da3213c',
-        avatar      : 'assets/images/avatars/male-01.jpg',
-        background  : 'assets/images/cards/14-640x480.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
+        background  : 'assets/images/logo/axis-mob.jpeg',
         name        : 'Dejesus Michael',
         emails      : [
             {
@@ -17,12 +17,12 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'bs',
+                department    : 'bs',
                 phoneNumber: '984 531 2468',
                 label      : 'Mobile'
             },
             {
-                country    : 'bs',
+                department    : 'bs',
                 phoneNumber: '806 470 2693',
                 label      : 'Work'
             }
@@ -53,7 +53,7 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'io',
+                department    : 'io',
                 phoneNumber: '934 537 3180',
                 label      : 'Mobile'
             }
@@ -69,8 +69,8 @@ export const contacts = [
     },
     {
         id          : '9d3f0e7f-dcbd-4e56-a5e8-87b8154e9edf',
-        avatar      : 'assets/images/avatars/male-02.jpg',
-        background  : 'assets/images/cards/15-640x480.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
+        background  : 'assets/images/logo/axis-mob.jpeg',
         name        : 'Bernard Langley',
         emails      : [
             {
@@ -84,7 +84,7 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'md',
+                department    : 'md',
                 phoneNumber: '893 548 2862',
                 label      : 'Mobile'
             }
@@ -100,7 +100,7 @@ export const contacts = [
     },
     {
         id          : '42a5da95-5e6d-42fd-a09d-de755d123a47',
-        avatar      : 'assets/images/avatars/male-03.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/16-640x480.jpg',
         name        : 'Mclaughlin Steele',
         emails      : [
@@ -115,17 +115,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'va',
+                department    : 'va',
                 phoneNumber: '830 484 3813',
                 label      : 'Mobile'
             },
             {
-                country    : 'va',
+                department    : 'va',
                 phoneNumber: '999 475 2789',
                 label      : 'Work'
             },
             {
-                country    : 'va',
+                department    : 'va',
                 phoneNumber: '933 406 3598',
                 label      : 'Home'
             }
@@ -140,7 +140,7 @@ export const contacts = [
     },
     {
         id          : 'a7806ced-03f1-4197-8b30-00bdd463366b',
-        avatar      : 'assets/images/avatars/male-04.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/17-640x480.jpg',
         name        : 'Marsh Cochran',
         emails      : [
@@ -151,12 +151,12 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'tz',
+                department    : 'tz',
                 phoneNumber: '864 401 3980',
                 label      : 'Mobile'
             },
             {
-                country    : 'tz',
+                department    : 'tz',
                 phoneNumber: '956 546 2589',
                 label      : 'Work'
             }
@@ -172,7 +172,7 @@ export const contacts = [
     },
     {
         id          : 'f4ad15d9-5a24-463a-88ea-6189d6bb3a53',
-        avatar      : 'assets/images/avatars/male-05.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/18-640x480.jpg',
         name        : 'Parrish Austin',
         emails      : [
@@ -187,17 +187,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'lv',
+                department    : 'lv',
                 phoneNumber: '834 426 3574',
                 label      : 'Mobile'
             },
             {
-                country    : 'lv',
+                department    : 'lv',
                 phoneNumber: '816 573 3694',
                 label      : 'Work'
             },
             {
-                country    : 'lv',
+                department    : 'lv',
                 phoneNumber: '967 515 2009',
                 label      : 'Home'
             }
@@ -213,7 +213,7 @@ export const contacts = [
     },
     {
         id          : '780d0111-5e5c-4694-8d1d-0ea421971fbf',
-        avatar      : 'assets/images/avatars/female-02.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/19-640x480.jpg',
         name        : 'Laverne Dodson',
         emails      : [
@@ -224,12 +224,12 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'ar',
+                department    : 'ar',
                 phoneNumber: '964 417 2318',
                 label      : 'Mobile'
             },
             {
-                country    : 'ar',
+                department    : 'ar',
                 phoneNumber: '830 410 2506',
                 label      : 'Work'
             }
@@ -245,7 +245,7 @@ export const contacts = [
     },
     {
         id          : 'bf172879-423a-4fd6-8df3-6d1938bbfe1f',
-        avatar      : 'assets/images/avatars/male-06.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/20-640x480.jpg',
         name        : 'Edwards Mckenzie',
         emails      : [
@@ -260,17 +260,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'pe',
+                department    : 'pe',
                 phoneNumber: '934 519 2903',
                 label      : 'Mobile'
             },
             {
-                country    : 'pe',
+                department    : 'pe',
                 phoneNumber: '989 489 3662',
                 label      : 'Work'
             },
             {
-                country    : 'pe',
+                department    : 'pe',
                 phoneNumber: '813 461 2790',
                 label      : 'Home'
             }
@@ -286,7 +286,7 @@ export const contacts = [
     },
     {
         id          : '1eaa3213-ece2-4ba6-8e15-eb36ca388f50',
-        avatar      : 'assets/images/avatars/female-03.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/21-640x480.jpg',
         name        : 'Trudy Berg',
         emails      : [
@@ -301,7 +301,7 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'ls',
+                department    : 'ls',
                 phoneNumber: '912 539 2770',
                 label      : 'Mobile'
             }
@@ -317,7 +317,7 @@ export const contacts = [
     },
     {
         id          : 'abd9e78b-9e96-428f-b3ff-4d934c401bee',
-        avatar      : 'assets/images/avatars/female-04.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/22-640x480.jpg',
         name        : 'Elsie Melendez',
         emails      : [
@@ -332,12 +332,12 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'tg',
+                department    : 'tg',
                 phoneNumber: '907 515 3007',
                 label      : 'Mobile'
             },
             {
-                country    : 'tg',
+                department    : 'tg',
                 phoneNumber: '967 534 2803',
                 label      : 'Work'
             }
@@ -353,7 +353,7 @@ export const contacts = [
     },
     {
         id          : 'efae92cc-3bd1-4c6a-a395-b6760c69bd55',
-        avatar      : 'assets/images/avatars/male-07.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/23-640x480.jpg',
         name        : 'Lamb Underwood',
         emails      : [
@@ -364,17 +364,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'pf',
+                department    : 'pf',
                 phoneNumber: '855 517 2767',
                 label      : 'Mobile'
             },
             {
-                country    : 'pf',
+                department    : 'pf',
                 phoneNumber: '906 442 3593',
                 label      : 'Work'
             },
             {
-                country    : 'pf',
+                department    : 'pf',
                 phoneNumber: '905 402 2121',
                 label      : 'Home'
             }
@@ -401,17 +401,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'dz',
+                department    : 'dz',
                 phoneNumber: '892 430 2631',
                 label      : 'Mobile'
             },
             {
-                country    : 'dz',
+                department    : 'dz',
                 phoneNumber: '997 525 2354',
                 label      : 'Work'
             },
             {
-                country    : 'dz',
+                department    : 'dz',
                 phoneNumber: '907 472 2857',
                 label      : 'Home'
             }
@@ -427,7 +427,7 @@ export const contacts = [
     },
     {
         id          : '6519600a-5eaa-45f8-8bed-c46fddb3b26a',
-        avatar      : 'assets/images/avatars/male-08.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/24-640x480.jpg',
         name        : 'Mcleod Wagner',
         emails      : [
@@ -438,17 +438,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'at',
+                department    : 'at',
                 phoneNumber: '977 590 2773',
                 label      : 'Mobile'
             },
             {
-                country    : 'at',
+                department    : 'at',
                 phoneNumber: '828 496 3813',
                 label      : 'Work'
             },
             {
-                country    : 'at',
+                department    : 'at',
                 phoneNumber: '831 432 2512',
                 label      : 'Home'
             }
@@ -463,7 +463,7 @@ export const contacts = [
     },
     {
         id          : '6d80a6f6-2884-4ac4-9c73-06b82c220017',
-        avatar      : 'assets/images/avatars/female-06.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/25-640x480.jpg',
         name        : 'Kristie Hall',
         emails      : [
@@ -478,17 +478,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'tn',
+                department    : 'tn',
                 phoneNumber: '841 530 3641',
                 label      : 'Mobile'
             },
             {
-                country    : 'tn',
+                department    : 'tn',
                 phoneNumber: '941 410 3743',
                 label      : 'Work'
             },
             {
-                country    : 'tn',
+                department    : 'tn',
                 phoneNumber: '938 599 3850',
                 label      : 'Home'
             }
@@ -504,7 +504,7 @@ export const contacts = [
     },
     {
         id          : '35190d23-036e-44ef-b545-cc744c626edd',
-        avatar      : 'assets/images/avatars/female-07.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/26-640x480.jpg',
         name        : 'Shannon Kennedy',
         emails      : [
@@ -515,17 +515,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'gb',
+                department    : 'gb',
                 phoneNumber: '899 508 2992',
                 label      : 'Mobile'
             },
             {
-                country    : 'gb',
+                department    : 'gb',
                 phoneNumber: '834 499 3354',
                 label      : 'Work'
             },
             {
-                country    : 'gb',
+                department    : 'gb',
                 phoneNumber: '834 526 3388',
                 label      : 'Home'
             }
@@ -541,7 +541,7 @@ export const contacts = [
     },
     {
         id          : 'b018c194-68ec-4915-ab56-e9f3bd2d98db',
-        avatar      : 'assets/images/avatars/female-08.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/27-640x480.jpg',
         name        : 'Martha Swanson',
         emails      : [
@@ -556,17 +556,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'gb',
+                department    : 'gb',
                 phoneNumber: '844 480 3309',
                 label      : 'Mobile'
             },
             {
-                country    : 'gb',
+                department    : 'gb',
                 phoneNumber: '981 591 3239',
                 label      : 'Work'
             },
             {
-                country    : 'gb',
+                department    : 'gb',
                 phoneNumber: '923 484 3147',
                 label      : 'Home'
             }
@@ -582,7 +582,7 @@ export const contacts = [
     },
     {
         id          : 'b7c355e9-e003-467e-82d2-4f6978c1a696',
-        avatar      : 'assets/images/avatars/female-09.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/28-640x480.jpg',
         name        : 'Jacklyn Morgan',
         emails      : [
@@ -597,7 +597,7 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'so',
+                department    : 'so',
                 phoneNumber: '974 542 2061',
                 label      : 'Mobile'
             }
@@ -613,7 +613,7 @@ export const contacts = [
     },
     {
         id          : 'cfa07b7c-93d1-42e7-9592-493d9efc78ae',
-        avatar      : 'assets/images/avatars/female-10.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/29-640x480.jpg',
         name        : 'Tonya Bowers',
         emails      : [
@@ -628,12 +628,12 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'tv',
+                department    : 'tv',
                 phoneNumber: '922 585 2914',
                 label      : 'Mobile'
             },
             {
-                country    : 'tv',
+                department    : 'tv',
                 phoneNumber: '913 538 2961',
                 label      : 'Work'
             }
@@ -649,7 +649,7 @@ export const contacts = [
     },
     {
         id          : '00feeb63-c83a-4655-a37e-a07da10cfa1c',
-        avatar      : 'assets/images/avatars/female-11.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/30-640x480.jpg',
         name        : 'Latonya Cruz',
         emails      : [
@@ -660,17 +660,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'tm',
+                department    : 'tm',
                 phoneNumber: '981 508 2080',
                 label      : 'Mobile'
             },
             {
-                country    : 'tm',
+                department    : 'tm',
                 phoneNumber: '817 425 2052',
                 label      : 'Work'
             },
             {
-                country    : 'tm',
+                department    : 'tm',
                 phoneNumber: '939 434 3805',
                 label      : 'Home'
             }
@@ -686,7 +686,7 @@ export const contacts = [
     },
     {
         id          : '142abf21-e635-4a7d-9330-e57f66adcdbe',
-        avatar      : 'assets/images/avatars/female-12.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/31-640x480.jpg',
         name        : 'Evangelina Mcclain',
         emails      : [
@@ -697,17 +697,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'ck',
+                department    : 'ck',
                 phoneNumber: '992 583 3187',
                 label      : 'Mobile'
             },
             {
-                country    : 'ck',
+                department    : 'ck',
                 phoneNumber: '881 472 3297',
                 label      : 'Work'
             },
             {
-                country    : 'ck',
+                department    : 'ck',
                 phoneNumber: '846 477 3596',
                 label      : 'Home'
             }
@@ -723,7 +723,7 @@ export const contacts = [
     },
     {
         id          : 'e4f255a3-b5dd-45a7-975f-c399604a399a',
-        avatar      : 'assets/images/avatars/male-09.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/32-640x480.jpg',
         name        : 'Herring Gonzales',
         emails      : [
@@ -734,12 +734,12 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'ai',
+                department    : 'ai',
                 phoneNumber: '995 411 2513',
                 label      : 'Mobile'
             },
             {
-                country    : 'ai',
+                department    : 'ai',
                 phoneNumber: '839 492 2760',
                 label      : 'Work'
             }
@@ -755,7 +755,7 @@ export const contacts = [
     },
     {
         id          : 'ab4f712d-d712-41a8-b567-be4c66c349a3',
-        avatar      : 'assets/images/avatars/female-13.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/33-640x480.jpg',
         name        : 'Alyce Cash',
         emails      : [
@@ -766,12 +766,12 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'ht',
+                department    : 'ht',
                 phoneNumber: '969 499 3077',
                 label      : 'Mobile'
             },
             {
-                country    : 'ht',
+                department    : 'ht',
                 phoneNumber: '907 513 2784',
                 label      : 'Work'
             }
@@ -802,7 +802,7 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'mm',
+                department    : 'mm',
                 phoneNumber: '977 516 2492',
                 label      : 'Mobile'
             }
@@ -818,7 +818,7 @@ export const contacts = [
     },
     {
         id          : 'c500255a-1173-47d0-a0e4-4944d48fc12a',
-        avatar      : 'assets/images/avatars/male-10.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/34-640x480.jpg',
         name        : 'English Haney',
         emails      : [
@@ -829,7 +829,7 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'lb',
+                department    : 'lb',
                 phoneNumber: '989 567 3834',
                 label      : 'Mobile'
             }
@@ -845,7 +845,7 @@ export const contacts = [
     },
     {
         id          : 'b62359fd-f2a8-46e6-904e-31052d1cd675',
-        avatar      : 'assets/images/avatars/male-11.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/35-640x480.jpg',
         name        : 'Joseph Strickland',
         emails      : [
@@ -860,7 +860,7 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'jo',
+                department    : 'jo',
                 phoneNumber: '990 450 2729',
                 label      : 'Mobile'
             }
@@ -876,8 +876,8 @@ export const contacts = [
     },
     {
         id          : '16b9e696-ea95-4dd8-86c4-3caf705a1dc6',
-        avatar      : 'assets/images/avatars/male-12.jpg',
-        background  : 'assets/images/cards/36-640x480.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
+        background  : 'assets/images/logo/axis-mob.jpeg',
         name        : 'Nunez Faulkner',
         emails      : [
             {
@@ -887,7 +887,7 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'xk',
+                department    : 'xk',
                 phoneNumber: '909 552 3327',
                 label      : 'Mobile'
             }
@@ -903,8 +903,8 @@ export const contacts = [
     },
     {
         id          : '19662ecf-0686-4aad-a46c-24b552eb2ff5',
-        avatar      : 'assets/images/avatars/female-15.jpg',
-        background  : 'assets/images/cards/14-640x480.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
+        background  : 'assets/images/logo/axis-mob.jpeg',
         name        : 'Juana Morrow',
         emails      : [
             {
@@ -914,7 +914,7 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'ee',
+                department    : 'ee',
                 phoneNumber: '868 438 3943',
                 label      : 'Mobile'
             }
@@ -930,8 +930,8 @@ export const contacts = [
     },
     {
         id          : '26dfe954-8bf3-45ee-b285-1d0a88c8d3ea',
-        avatar      : 'assets/images/avatars/male-13.jpg',
-        background  : 'assets/images/cards/15-640x480.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
+        background  : 'assets/images/logo/axis-mob.jpeg',
         name        : 'Lara Gaines',
         emails      : [
             {
@@ -941,7 +941,7 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'mr',
+                department    : 'mr',
                 phoneNumber: '891 498 2043',
                 label      : 'Mobile'
             }
@@ -957,7 +957,7 @@ export const contacts = [
     },
     {
         id          : 'd6462af2-c488-4de7-9b26-3845bd2983f9',
-        avatar      : 'assets/images/avatars/male-14.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/16-640x480.jpg',
         name        : 'Johnston Riddle',
         emails      : [
@@ -968,17 +968,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'bt',
+                department    : 'bt',
                 phoneNumber: '979 541 2691',
                 label      : 'Mobile'
             },
             {
-                country    : 'bt',
+                department    : 'bt',
                 phoneNumber: '909 407 3887',
                 label      : 'Work'
             },
             {
-                country    : 'bt',
+                department    : 'bt',
                 phoneNumber: '864 557 3128',
                 label      : 'Home'
             }
@@ -1009,7 +1009,7 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'bi',
+                department    : 'bi',
                 phoneNumber: '855 456 2754',
                 label      : 'Mobile'
             }
@@ -1025,7 +1025,7 @@ export const contacts = [
     },
     {
         id          : '823e6166-c0c8-4373-9270-8a0d17489a08',
-        avatar      : 'assets/images/avatars/male-16.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/17-640x480.jpg',
         name        : 'Mccall Day',
         emails      : [
@@ -1036,17 +1036,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'se',
+                department    : 'se',
                 phoneNumber: '993 504 3286',
                 label      : 'Mobile'
             },
             {
-                country    : 'se',
+                department    : 'se',
                 phoneNumber: '924 434 2238',
                 label      : 'Work'
             },
             {
-                country    : 'se',
+                department    : 'se',
                 phoneNumber: '816 466 2634',
                 label      : 'Home'
             }
@@ -1062,7 +1062,7 @@ export const contacts = [
     },
     {
         id          : '2c37ed00-427a-46d7-8f8f-d711c768d1ee',
-        avatar      : 'assets/images/avatars/male-17.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/18-640x480.jpg',
         name        : 'Silva Foster',
         emails      : [
@@ -1073,12 +1073,12 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'bn',
+                department    : 'bn',
                 phoneNumber: '916 511 3837',
                 label      : 'Mobile'
             },
             {
-                country    : 'bn',
+                department    : 'bn',
                 phoneNumber: '949 564 3247',
                 label      : 'Work'
             }
@@ -1094,7 +1094,7 @@ export const contacts = [
     },
     {
         id          : '944764c0-b261-4428-9188-bbd3022d66a8',
-        avatar      : 'assets/images/avatars/female-16.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/19-640x480.jpg',
         name        : 'Cathryn Snider',
         emails      : [
@@ -1109,17 +1109,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'na',
+                department    : 'na',
                 phoneNumber: '896 471 3036',
                 label      : 'Mobile'
             },
             {
-                country    : 'na',
+                department    : 'na',
                 phoneNumber: '851 491 3567',
                 label      : 'Work'
             },
             {
-                country    : 'na',
+                department    : 'na',
                 phoneNumber: '805 487 2016',
                 label      : 'Home'
             }
@@ -1146,12 +1146,12 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'bh',
+                department    : 'bh',
                 phoneNumber: '915 577 3020',
                 label      : 'Mobile'
             },
             {
-                country    : 'bh',
+                department    : 'bh',
                 phoneNumber: '923 431 3594',
                 label      : 'Work'
             }
@@ -1167,7 +1167,7 @@ export const contacts = [
     },
     {
         id          : '54b1c201-4b2b-4be0-ad70-a6413e9628cd',
-        avatar      : 'assets/images/avatars/female-17.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/20-640x480.jpg',
         name        : 'Saundra Murphy',
         emails      : [
@@ -1178,7 +1178,7 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'mt',
+                department    : 'mt',
                 phoneNumber: '902 529 2999',
                 label      : 'Mobile'
             }
@@ -1194,7 +1194,7 @@ export const contacts = [
     },
     {
         id          : 'faf979c7-a13b-445a-b30a-08845f5fa90e',
-        avatar      : 'assets/images/avatars/female-18.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/21-640x480.jpg',
         name        : 'Enid Sparks',
         emails      : [
@@ -1205,12 +1205,12 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'bh',
+                department    : 'bh',
                 phoneNumber: '813 410 3258',
                 label      : 'Mobile'
             },
             {
-                country    : 'bh',
+                department    : 'bh',
                 phoneNumber: '877 501 2767',
                 label      : 'Work'
             }
@@ -1237,12 +1237,12 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'tk',
+                department    : 'tk',
                 phoneNumber: '943 511 2203',
                 label      : 'Mobile'
             },
             {
-                country    : 'tk',
+                department    : 'tk',
                 phoneNumber: '817 578 2993',
                 label      : 'Work'
             }
@@ -1258,7 +1258,7 @@ export const contacts = [
     },
     {
         id          : '77a4383b-b5a5-4943-bc46-04c3431d1566',
-        avatar      : 'assets/images/avatars/male-19.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/22-640x480.jpg',
         name        : 'Best Blackburn',
         emails      : [
@@ -1273,7 +1273,7 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'gl',
+                department    : 'gl',
                 phoneNumber: '814 498 3701',
                 label      : 'Mobile'
             }
@@ -1300,17 +1300,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'jm',
+                department    : 'jm',
                 phoneNumber: '968 547 2111',
                 label      : 'Mobile'
             },
             {
-                country    : 'jm',
+                department    : 'jm',
                 phoneNumber: '968 433 3120',
                 label      : 'Work'
             },
             {
-                country    : 'jm',
+                department    : 'jm',
                 phoneNumber: '905 425 2777',
                 label      : 'Home'
             }
@@ -1326,7 +1326,7 @@ export const contacts = [
     },
     {
         id          : 'c318e31f-1d74-49c5-8dae-2bc5805e2fdb',
-        avatar      : 'assets/images/avatars/male-01.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/23-640x480.jpg',
         name        : 'Martin Richards',
         emails      : [
@@ -1337,17 +1337,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'mg',
+                department    : 'mg',
                 phoneNumber: '902 500 2668',
                 label      : 'Mobile'
             },
             {
-                country    : 'mg',
+                department    : 'mg',
                 phoneNumber: '947 559 2919',
                 label      : 'Work'
             },
             {
-                country    : 'mg',
+                department    : 'mg',
                 phoneNumber: '934 434 3768',
                 label      : 'Home'
             }
@@ -1363,7 +1363,7 @@ export const contacts = [
     },
     {
         id          : '0a8bc517-631a-4a93-aacc-000fa2e8294c',
-        avatar      : 'assets/images/avatars/female-20.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/24-640x480.jpg',
         name        : 'Candice Munoz',
         emails      : [
@@ -1374,7 +1374,7 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'fm',
+                department    : 'fm',
                 phoneNumber: '838 562 2769',
                 label      : 'Mobile'
             }
@@ -1390,7 +1390,7 @@ export const contacts = [
     },
     {
         id          : 'a4c9945a-757b-40b0-8942-d20e0543cabd',
-        avatar      : 'assets/images/avatars/female-01.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/25-640x480.jpg',
         name        : 'Vickie Mosley',
         emails      : [
@@ -1401,12 +1401,12 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'tr',
+                department    : 'tr',
                 phoneNumber: '939 555 3054',
                 label      : 'Mobile'
             },
             {
-                country    : 'tr',
+                department    : 'tr',
                 phoneNumber: '852 486 2053',
                 label      : 'Work'
             }
@@ -1422,7 +1422,7 @@ export const contacts = [
     },
     {
         id          : 'b8258ccf-48b5-46a2-9c95-e0bd7580c645',
-        avatar      : 'assets/images/avatars/female-02.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/26-640x480.jpg',
         name        : 'Tina Harris',
         emails      : [
@@ -1433,12 +1433,12 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'gp',
+                department    : 'gp',
                 phoneNumber: '933 464 2431',
                 label      : 'Mobile'
             },
             {
-                country    : 'gp',
+                department    : 'gp',
                 phoneNumber: '894 535 3609',
                 label      : 'Work'
             }
@@ -1454,7 +1454,7 @@ export const contacts = [
     },
     {
         id          : 'f004ea79-98fc-436c-9ba5-6cfe32fe583d',
-        avatar      : 'assets/images/avatars/male-02.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/27-640x480.jpg',
         name        : 'Holt Manning',
         emails      : [
@@ -1469,12 +1469,12 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'nz',
+                department    : 'nz',
                 phoneNumber: '822 531 2600',
                 label      : 'Mobile'
             },
             {
-                country    : 'nz',
+                department    : 'nz',
                 phoneNumber: '922 549 2094',
                 label      : 'Work'
             }
@@ -1490,7 +1490,7 @@ export const contacts = [
     },
     {
         id          : '8b69fe2d-d7cc-4a3d-983d-559173e37d37',
-        avatar      : 'assets/images/avatars/female-03.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/28-640x480.jpg',
         name        : 'Misty Ramsey',
         emails      : [
@@ -1501,12 +1501,12 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'kp',
+                department    : 'kp',
                 phoneNumber: '990 457 2106',
                 label      : 'Mobile'
             },
             {
-                country    : 'kp',
+                department    : 'kp',
                 phoneNumber: '918 550 2946',
                 label      : 'Work'
             }
@@ -1521,7 +1521,7 @@ export const contacts = [
     },
     {
         id          : 'cdcc62e4-1520-4ccc-803d-52868c7e01ba',
-        avatar      : 'assets/images/avatars/female-04.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/29-640x480.jpg',
         name        : 'Dee Alvarado',
         emails      : [
@@ -1532,17 +1532,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'nu',
+                department    : 'nu',
                 phoneNumber: '855 445 2483',
                 label      : 'Mobile'
             },
             {
-                country    : 'nu',
+                department    : 'nu',
                 phoneNumber: '858 415 2860',
                 label      : 'Work'
             },
             {
-                country    : 'nu',
+                department    : 'nu',
                 phoneNumber: '968 587 2752',
                 label      : 'Home'
             }
@@ -1558,7 +1558,7 @@ export const contacts = [
     },
     {
         id          : 'e2946946-b4b5-4fd7-bab4-62c38cdff2f1',
-        avatar      : 'assets/images/avatars/female-05.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/30-640x480.jpg',
         name        : 'Samantha Jacobson',
         emails      : [
@@ -1569,7 +1569,7 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'es',
+                department    : 'es',
                 phoneNumber: '879 591 3327',
                 label      : 'Mobile'
             }
@@ -1585,7 +1585,7 @@ export const contacts = [
     },
     {
         id          : 'fdc77706-6ba2-4397-b2f8-a9a0b6495153',
-        avatar      : 'assets/images/avatars/female-06.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/31-640x480.jpg',
         name        : 'Rhea Landry',
         emails      : [
@@ -1596,12 +1596,12 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'jp',
+                department    : 'jp',
                 phoneNumber: '906 579 3698',
                 label      : 'Mobile'
             },
             {
-                country    : 'jp',
+                department    : 'jp',
                 phoneNumber: '841 475 2681',
                 label      : 'Work'
             }
@@ -1617,7 +1617,7 @@ export const contacts = [
     },
     {
         id          : '12148fa2-e0a4-49fb-b3c5-daeecdb5180a',
-        avatar      : 'assets/images/avatars/female-07.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/32-640x480.jpg',
         name        : 'Olga Rhodes',
         emails      : [
@@ -1632,17 +1632,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'tl',
+                department    : 'tl',
                 phoneNumber: '971 514 3366',
                 label      : 'Mobile'
             },
             {
-                country    : 'tl',
+                department    : 'tl',
                 phoneNumber: '807 480 2033',
                 label      : 'Work'
             },
             {
-                country    : 'tl',
+                department    : 'tl',
                 phoneNumber: '810 528 3783',
                 label      : 'Home'
             }
@@ -1658,7 +1658,7 @@ export const contacts = [
     },
     {
         id          : '07dd64eb-8b8f-4765-a16c-8db083c45096',
-        avatar      : 'assets/images/avatars/female-08.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/33-640x480.jpg',
         name        : 'Lorraine Pennington',
         emails      : [
@@ -1669,17 +1669,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'fm',
+                department    : 'fm',
                 phoneNumber: '932 404 3308',
                 label      : 'Mobile'
             },
             {
-                country    : 'fm',
+                department    : 'fm',
                 phoneNumber: '979 550 3200',
                 label      : 'Work'
             },
             {
-                country    : 'fm',
+                department    : 'fm',
                 phoneNumber: '868 557 3568',
                 label      : 'Home'
             }
@@ -1695,7 +1695,7 @@ export const contacts = [
     },
     {
         id          : '81fdc48c-5572-4123-8a73-71b7892120de',
-        avatar      : 'assets/images/avatars/female-09.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/34-640x480.jpg',
         name        : 'Earlene Rosales',
         emails      : [
@@ -1710,7 +1710,7 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'ki',
+                department    : 'ki',
                 phoneNumber: '927 589 3619',
                 label      : 'Mobile'
             }
@@ -1726,7 +1726,7 @@ export const contacts = [
     },
     {
         id          : 'f8bbf6be-d49a-41a3-bb80-3d51df84c12b',
-        avatar      : 'assets/images/avatars/female-10.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/35-640x480.jpg',
         name        : 'Marcia Hatfield',
         emails      : [
@@ -1741,17 +1741,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'no',
+                department    : 'no',
                 phoneNumber: '883 432 3718',
                 label      : 'Mobile'
             },
             {
-                country    : 'no',
+                department    : 'no',
                 phoneNumber: '934 516 2135',
                 label      : 'Work'
             },
             {
-                country    : 'no',
+                department    : 'no',
                 phoneNumber: '923 596 3843',
                 label      : 'Home'
             }
@@ -1767,8 +1767,8 @@ export const contacts = [
     },
     {
         id          : 'cd482941-3eaf-4560-ac37-56a9296025df',
-        avatar      : 'assets/images/avatars/female-11.jpg',
-        background  : 'assets/images/cards/36-640x480.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
+        background  : 'assets/images/logo/axis-mob.jpeg',
         name        : 'Liliana Ayala',
         emails      : [
             {
@@ -1778,7 +1778,7 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'bd',
+                department    : 'bd',
                 phoneNumber: '936 590 2412',
                 label      : 'Mobile'
             }
@@ -1794,8 +1794,8 @@ export const contacts = [
     },
     {
         id          : '22f18d47-ff8d-440e-888d-a1747c093052',
-        avatar      : 'assets/images/avatars/female-12.jpg',
-        background  : 'assets/images/cards/14-640x480.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
+        background  : 'assets/images/logo/axis-mob.jpeg',
         name        : 'Alice Harding',
         emails      : [
             {
@@ -1805,17 +1805,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'sx',
+                department    : 'sx',
                 phoneNumber: '881 472 3113',
                 label      : 'Mobile'
             },
             {
-                country    : 'sx',
+                department    : 'sx',
                 phoneNumber: '974 548 3124',
                 label      : 'Work'
             },
             {
-                country    : 'sx',
+                department    : 'sx',
                 phoneNumber: '800 518 3615',
                 label      : 'Home'
             }
@@ -1831,8 +1831,8 @@ export const contacts = [
     },
     {
         id          : 'a9a9f382-e4c3-42fb-9fe9-65aa534732b5',
-        avatar      : 'assets/images/avatars/female-13.jpg',
-        background  : 'assets/images/cards/15-640x480.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
+        background  : 'assets/images/logo/axis-mob.jpeg',
         name        : 'Francisca Perkins',
         emails      : [
             {
@@ -1846,12 +1846,12 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'au',
+                department    : 'au',
                 phoneNumber: '830 430 3437',
                 label      : 'Mobile'
             },
             {
-                country    : 'au',
+                department    : 'au',
                 phoneNumber: '868 538 2886',
                 label      : 'Work'
             }
@@ -1882,17 +1882,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'gt',
+                department    : 'gt',
                 phoneNumber: '847 513 2248',
                 label      : 'Mobile'
             },
             {
-                country    : 'gt',
+                department    : 'gt',
                 phoneNumber: '866 591 3665',
                 label      : 'Work'
             },
             {
-                country    : 'gt',
+                department    : 'gt',
                 phoneNumber: '877 539 3840',
                 label      : 'Home'
             }
@@ -1908,7 +1908,7 @@ export const contacts = [
     },
     {
         id          : '0630f1ca-cdb9-405d-b134-68f733334089',
-        avatar      : 'assets/images/avatars/female-14.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/16-640x480.jpg',
         name        : 'Maryann Mcintyre',
         emails      : [
@@ -1923,12 +1923,12 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'bf',
+                department    : 'bf',
                 phoneNumber: '861 419 2752',
                 label      : 'Mobile'
             },
             {
-                country    : 'bf',
+                department    : 'bf',
                 phoneNumber: '935 553 3031',
                 label      : 'Work'
             }
@@ -1944,7 +1944,7 @@ export const contacts = [
     },
     {
         id          : '999c24f3-7bb8-4a01-85ca-2fca7863c57e',
-        avatar      : 'assets/images/avatars/female-15.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/17-640x480.jpg',
         name        : 'Sharon Marshall',
         emails      : [
@@ -1959,17 +1959,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'fo',
+                department    : 'fo',
                 phoneNumber: '947 441 2999',
                 label      : 'Mobile'
             },
             {
-                country    : 'fo',
+                department    : 'fo',
                 phoneNumber: '984 441 2615',
                 label      : 'Work'
             },
             {
-                country    : 'fo',
+                department    : 'fo',
                 phoneNumber: '824 541 2714',
                 label      : 'Home'
             }
@@ -1985,7 +1985,7 @@ export const contacts = [
     },
     {
         id          : '7e8e1f1e-d19f-45c7-86bd-6fef599dae71',
-        avatar      : 'assets/images/avatars/female-16.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/18-640x480.jpg',
         name        : 'Margo Witt',
         emails      : [
@@ -2000,17 +2000,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'ao',
+                department    : 'ao',
                 phoneNumber: '992 596 3391',
                 label      : 'Mobile'
             },
             {
-                country    : 'ao',
+                department    : 'ao',
                 phoneNumber: '950 489 2505',
                 label      : 'Work'
             },
             {
-                country    : 'ao',
+                department    : 'ao',
                 phoneNumber: '891 540 2231',
                 label      : 'Home'
             }
@@ -2026,7 +2026,7 @@ export const contacts = [
     },
     {
         id          : 'bedcb6a2-da83-4631-866a-77d10d239477',
-        avatar      : 'assets/images/avatars/male-04.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/19-640x480.jpg',
         name        : 'Alvarado Turner',
         emails      : [
@@ -2037,7 +2037,7 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'lv',
+                department    : 'lv',
                 phoneNumber: '961 537 3956',
                 label      : 'Mobile'
             }
@@ -2053,7 +2053,7 @@ export const contacts = [
     },
     {
         id          : '66f9de1b-f842-4d4c-bb59-f97e91db0462',
-        avatar      : 'assets/images/avatars/male-05.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/20-640x480.jpg',
         name        : 'Maldonado Rodriquez',
         emails      : [
@@ -2068,17 +2068,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'et',
+                department    : 'et',
                 phoneNumber: '811 502 3398',
                 label      : 'Mobile'
             },
             {
-                country    : 'et',
+                department    : 'et',
                 phoneNumber: '877 402 2443',
                 label      : 'Work'
             },
             {
-                country    : 'et',
+                department    : 'et',
                 phoneNumber: '949 536 3451',
                 label      : 'Home'
             }
@@ -2094,7 +2094,7 @@ export const contacts = [
     },
     {
         id          : '9cb0ea57-3461-4182-979b-593b0c1ec6c3',
-        avatar      : 'assets/images/avatars/male-06.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/21-640x480.jpg',
         name        : 'Tran Duke',
         emails      : [
@@ -2109,17 +2109,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'si',
+                department    : 'si',
                 phoneNumber: '837 503 2254',
                 label      : 'Mobile'
             },
             {
-                country    : 'si',
+                department    : 'si',
                 phoneNumber: '893 405 3190',
                 label      : 'Work'
             },
             {
-                country    : 'si',
+                department    : 'si',
                 phoneNumber: '931 402 3874',
                 label      : 'Home'
             }
@@ -2146,17 +2146,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'vg',
+                department    : 'vg',
                 phoneNumber: '864 459 3205',
                 label      : 'Mobile'
             },
             {
-                country    : 'vg',
+                department    : 'vg',
                 phoneNumber: '886 524 2880',
                 label      : 'Work'
             },
             {
-                country    : 'vg',
+                department    : 'vg',
                 phoneNumber: '815 484 3420',
                 label      : 'Home'
             }
@@ -2187,7 +2187,7 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'uy',
+                department    : 'uy',
                 phoneNumber: '898 554 3354',
                 label      : 'Mobile'
             }
@@ -2203,7 +2203,7 @@ export const contacts = [
     },
     {
         id          : '7585015c-ada2-4f88-998d-9646865d1ad2',
-        avatar      : 'assets/images/avatars/male-07.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/22-640x480.jpg',
         name        : 'Meyer Roach',
         emails      : [
@@ -2214,17 +2214,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'uz',
+                department    : 'uz',
                 phoneNumber: '891 543 2053',
                 label      : 'Mobile'
             },
             {
-                country    : 'uz',
+                department    : 'uz',
                 phoneNumber: '842 564 3671',
                 label      : 'Work'
             },
             {
-                country    : 'uz',
+                department    : 'uz',
                 phoneNumber: '992 491 3514',
                 label      : 'Home'
             }
@@ -2255,12 +2255,12 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'tn',
+                department    : 'tn',
                 phoneNumber: '860 472 2458',
                 label      : 'Mobile'
             },
             {
-                country    : 'tn',
+                department    : 'tn',
                 phoneNumber: '887 499 3580',
                 label      : 'Work'
             }
@@ -2276,7 +2276,7 @@ export const contacts = [
     },
     {
         id          : '114642a2-ccb7-4cb1-ad2b-5e9b6a0c1d2e',
-        avatar      : 'assets/images/avatars/male-09.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/23-640x480.jpg',
         name        : 'Barber Johnson',
         emails      : [
@@ -2287,17 +2287,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'az',
+                department    : 'az',
                 phoneNumber: '928 567 2521',
                 label      : 'Mobile'
             },
             {
-                country    : 'az',
+                department    : 'az',
                 phoneNumber: '898 515 2048',
                 label      : 'Work'
             },
             {
-                country    : 'az',
+                department    : 'az',
                 phoneNumber: '935 495 3348',
                 label      : 'Home'
             }
@@ -2313,7 +2313,7 @@ export const contacts = [
     },
     {
         id          : '310ece7d-dbb0-45d6-9e69-14c24e50fe3d',
-        avatar      : 'assets/images/avatars/male-10.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/24-640x480.jpg',
         name        : 'Cervantes Kramer',
         emails      : [
@@ -2324,12 +2324,12 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'vg',
+                department    : 'vg',
                 phoneNumber: '998 498 2507',
                 label      : 'Mobile'
             },
             {
-                country    : 'vg',
+                department    : 'vg',
                 phoneNumber: '856 477 3445',
                 label      : 'Work'
             }
@@ -2345,7 +2345,7 @@ export const contacts = [
     },
     {
         id          : 'dcc673f6-de59-4715-94ed-8f64663d449b',
-        avatar      : 'assets/images/avatars/female-19.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/25-640x480.jpg',
         name        : 'Megan Suarez',
         emails      : [
@@ -2356,17 +2356,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'bb',
+                department    : 'bb',
                 phoneNumber: '875 422 2053',
                 label      : 'Mobile'
             },
             {
-                country    : 'bb',
+                department    : 'bb',
                 phoneNumber: '861 487 2597',
                 label      : 'Work'
             },
             {
-                country    : 'bb',
+                department    : 'bb',
                 phoneNumber: '873 414 3953',
                 label      : 'Home'
             }
@@ -2382,7 +2382,7 @@ export const contacts = [
     },
     {
         id          : '3e4ca731-d39b-4ad9-b6e0-f84e67f4b74a',
-        avatar      : 'assets/images/avatars/female-20.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/26-640x480.jpg',
         name        : 'Ofelia Ratliff',
         emails      : [
@@ -2393,17 +2393,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'vu',
+                department    : 'vu',
                 phoneNumber: '978 546 3699',
                 label      : 'Mobile'
             },
             {
-                country    : 'vu',
+                department    : 'vu',
                 phoneNumber: '892 551 2229',
                 label      : 'Work'
             },
             {
-                country    : 'vu',
+                department    : 'vu',
                 phoneNumber: '949 495 3479',
                 label      : 'Home'
             }
@@ -2418,7 +2418,7 @@ export const contacts = [
     },
     {
         id          : '2012d4a5-19e4-444d-aaff-1d8b1d853650',
-        avatar      : 'assets/images/avatars/female-01.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/27-640x480.jpg',
         name        : 'Laurel Parker',
         emails      : [
@@ -2429,17 +2429,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'lu',
+                department    : 'lu',
                 phoneNumber: '805 502 3677',
                 label      : 'Mobile'
             },
             {
-                country    : 'lu',
+                department    : 'lu',
                 phoneNumber: '925 527 2973',
                 label      : 'Work'
             },
             {
-                country    : 'lu',
+                department    : 'lu',
                 phoneNumber: '975 495 2977',
                 label      : 'Home'
             }
@@ -2455,7 +2455,7 @@ export const contacts = [
     },
     {
         id          : '012b8219-74bf-447c-af2c-66904d90a956',
-        avatar      : 'assets/images/avatars/female-02.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/28-640x480.jpg',
         name        : 'Tracy Delacruz',
         emails      : [
@@ -2470,7 +2470,7 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'co',
+                department    : 'co',
                 phoneNumber: '974 428 2886',
                 label      : 'Mobile'
             }
@@ -2486,7 +2486,7 @@ export const contacts = [
     },
     {
         id          : '8b1befd2-66a7-4981-ae52-77f01b382d18',
-        avatar      : 'assets/images/avatars/female-03.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/29-640x480.jpg',
         name        : 'Jeannette Stanton',
         emails      : [
@@ -2501,17 +2501,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'dz',
+                department    : 'dz',
                 phoneNumber: '947 561 3783',
                 label      : 'Mobile'
             },
             {
-                country    : 'dz',
+                department    : 'dz',
                 phoneNumber: '917 463 3737',
                 label      : 'Work'
             },
             {
-                country    : 'dz',
+                department    : 'dz',
                 phoneNumber: '835 510 2059',
                 label      : 'Home'
             }
@@ -2527,7 +2527,7 @@ export const contacts = [
     },
     {
         id          : '844668c3-5e20-4fed-9e3a-7d274f696e61',
-        avatar      : 'assets/images/avatars/female-04.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/30-640x480.jpg',
         name        : 'Johnnie Cleveland',
         emails      : [
@@ -2542,7 +2542,7 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'au',
+                department    : 'au',
                 phoneNumber: '947 468 2942',
                 label      : 'Mobile'
             }
@@ -2558,7 +2558,7 @@ export const contacts = [
     },
     {
         id          : '5a01e870-8be1-45a5-b58a-ec09c06e8f28',
-        avatar      : 'assets/images/avatars/female-05.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/31-640x480.jpg',
         name        : 'Staci Hyde',
         emails      : [
@@ -2569,12 +2569,12 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'id',
+                department    : 'id',
                 phoneNumber: '944 525 2944',
                 label      : 'Mobile'
             },
             {
-                country    : 'id',
+                department    : 'id',
                 phoneNumber: '877 500 2506',
                 label      : 'Work'
             }
@@ -2590,7 +2590,7 @@ export const contacts = [
     },
     {
         id          : '5ac1f193-f150-45f9-bfe4-b7b4e1a83ff9',
-        avatar      : 'assets/images/avatars/female-06.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/32-640x480.jpg',
         name        : 'Angela Gallagher',
         emails      : [
@@ -2601,17 +2601,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'et',
+                department    : 'et',
                 phoneNumber: '996 514 3856',
                 label      : 'Mobile'
             },
             {
-                country    : 'et',
+                department    : 'et',
                 phoneNumber: '903 539 2049',
                 label      : 'Work'
             },
             {
-                country    : 'et',
+                department    : 'et',
                 phoneNumber: '938 463 3685',
                 label      : 'Home'
             }
@@ -2627,7 +2627,7 @@ export const contacts = [
     },
     {
         id          : '995df091-d78a-4bb7-840c-ba6a7d14a1bd',
-        avatar      : 'assets/images/avatars/male-11.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/33-640x480.jpg',
         name        : 'Hutchinson Levy',
         emails      : [
@@ -2638,12 +2638,12 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'et',
+                department    : 'et',
                 phoneNumber: '970 546 3452',
                 label      : 'Mobile'
             },
             {
-                country    : 'et',
+                department    : 'et',
                 phoneNumber: '894 438 2430',
                 label      : 'Work'
             }
@@ -2659,7 +2659,7 @@ export const contacts = [
     },
     {
         id          : '7184be71-a28f-4f2b-8c45-15f78cf2f825',
-        avatar      : 'assets/images/avatars/female-05.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/34-640x480.jpg',
         name        : 'Alissa Nelson',
         emails      : [
@@ -2670,7 +2670,7 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'lu',
+                department    : 'lu',
                 phoneNumber: '893 600 2639',
                 label      : 'Mobile'
             }
@@ -2697,7 +2697,7 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'bn',
+                department    : 'bn',
                 phoneNumber: '977 528 3294',
                 label      : 'Mobile'
             }
@@ -2713,7 +2713,7 @@ export const contacts = [
     },
     {
         id          : 'c674b6e1-b846-4bba-824b-0b4df0cdec48',
-        avatar      : 'assets/images/avatars/male-13.jpg',
+        avatar      : 'assets/images/avatars/blessing-mwale.webp',
         background  : 'assets/images/cards/35-640x480.jpg',
         name        : 'Duran Barr',
         emails      : [
@@ -2728,17 +2728,17 @@ export const contacts = [
         ],
         phoneNumbers: [
             {
-                country    : 'sr',
+                department    : 'sr',
                 phoneNumber: '857 457 2508',
                 label      : 'Mobile'
             },
             {
-                country    : 'sr',
+                department    : 'sr',
                 phoneNumber: '887 522 2146',
                 label      : 'Work'
             },
             {
-                country    : 'sr',
+                department    : 'sr',
                 phoneNumber: '947 574 3174',
                 label      : 'Home'
             }
@@ -2753,7 +2753,7 @@ export const contacts = [
         ]
     }
 ];
-export const countries = [
+export const departments = [
     {
         id          : '19430ee3-b0fe-4987-a7c8-74453ad5504d',
         iso         : 'af',
