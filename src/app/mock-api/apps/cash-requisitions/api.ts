@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { cloneDeep } from 'lodash-es';
 import { FuseMockApiService } from '@fuse/lib/mock-api/mock-api.service';
-import { categories as categoriesData, vehicleRequisitions as vehicleRequisitionsData, demoVehicleRequisitionSteps as demoVehicleRequisitionStepsData } from 'app/mock-api/apps/vehicle-requisitions/data';
+import { categories as categoriesData, cashRequisitions as cashRequisitionsData, demoCashRequisitionSteps as demoCashRequisitionStepsData } from 'app/mock-api/apps/cash-requisitions/data';
 import { FuseMockApiUtils } from '@fuse/lib/mock-api/mock-api.utils';
 
 @Injectable({
@@ -9,8 +9,8 @@ import { FuseMockApiUtils } from '@fuse/lib/mock-api/mock-api.utils';
 })
 export class AcademyMockApi {
     private _categories: any[] = categoriesData;
-    private _vehicleRequisitions: any[] = vehicleRequisitionsData;
-    private _demoVehicleRequisitionsSteps: any[] = demoVehicleRequisitionStepsData;
+    private _cashRequisitions: any[] = cashRequisitionsData;
+    private _demoCashRequisitionsSteps: any[] = demoCashRequisitionStepsData;
 
     /**
      * Constructor
@@ -32,7 +32,7 @@ export class AcademyMockApi {
         // @ Categories - GET
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onGet('api/apps/vehicle-requisitions/categories')
+            .onGet('api/apps/cash-requisitions/categories')
             .reply(() => {
                 // Clone the categories
                 const categories = cloneDeep(this._categories);
@@ -47,11 +47,11 @@ export class AcademyMockApi {
         // @ Courses - GET
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onGet('api/apps/vehicle-requisitions/vehicle-requisitions')
+            .onGet('api/apps/cash-requisitions/cash-requisitions')
             .reply(() => {
 
                 // Clone the courses
-                const courses = cloneDeep(this._vehicleRequisitions);
+                const courses = cloneDeep(this._cashRequisitions);
 
                 return [200, courses];
             });
@@ -60,15 +60,15 @@ export class AcademyMockApi {
         // @ Course - GET
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onGet('api/apps/vehicle-requisitions/vehicle-requisitions/vehicle-requisition')
+            .onGet('api/apps/cash-requisitions/cash-requisitions/cash-requisition')
             .reply(({ request }) => {
 
                 // Get the id from the params
                 const id = request.params.get('id');
 
                 // Clone the courses and steps
-                const courses = cloneDeep(this._vehicleRequisitions);
-                const steps = cloneDeep(this._demoVehicleRequisitionsSteps);
+                const courses = cloneDeep(this._cashRequisitions);
+                const steps = cloneDeep(this._demoCashRequisitionsSteps);
 
                 // Find the course and attach steps to it
                 const course = courses.find(item => item.id === id);
@@ -83,7 +83,7 @@ export class AcademyMockApi {
             });
 
         this._fuseMockApiService
-            .onPost('api/apps/vehicle-requisitions/vehicle-requisitions')
+            .onPost('api/apps/cash-requisitions/cash-requisitions')
             .reply(({ request }) => {
 
                 // console.log(request);
@@ -95,7 +95,7 @@ export class AcademyMockApi {
                 newReq.id = FuseMockApiUtils.guid();
 
                 // Unshift the new tag
-                this._vehicleRequisitions.unshift(newReq);
+                this._cashRequisitions.unshift(newReq);
 
                 return [
                     200,

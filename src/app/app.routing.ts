@@ -10,7 +10,7 @@ import { InitialDataResolver } from 'app/app.resolvers';
 export const appRoutes: Route[] = [
 
     // Redirect empty path to '/dashboards/project'
-    { path: '', pathMatch: 'full', redirectTo: 'dashboards/project' },
+    { path: '', pathMatch: 'full', redirectTo: 'sign-in' },
 
     // Redirect signed in user to the '/dashboards/project'
     //
@@ -73,8 +73,6 @@ export const appRoutes: Route[] = [
                     { path: 'admin', loadChildren: () => import('app/modules/admin/admin.module').then(m => m.AdminModule) },
                 ]
             },
-
-
             { path: '**', redirectTo: '404-not-found' }
         ]
     }

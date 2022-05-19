@@ -4,20 +4,20 @@ import { MatSelectChange } from '@angular/material/select';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Category, VehicleRequisition } from '../../models/vehicle-requisitions/vehicle-requisitions.types';
-import { VehicleRequisitionService } from '../../services/vehicle-requisitions/vehicle-requisitions.service';
+import { Category, CashRequisition } from '../../models/cash-requisitions/cash-requisitions.types';
+import { CashRequisitionService } from '../../services/cash-requisitions/cash-requisitions.service';
 import moment from 'moment';
 
 @Component({
-    selector: 'vehecle-requisition-list',
+    selector: 'cash-requisition-list',
     templateUrl: './list.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VehicleRequisitionListComponent implements OnInit, OnDestroy {
+export class CashRequisitionListComponent implements OnInit, OnDestroy {
     categories: Category[];
-    vehicleRequisitions: VehicleRequisition[];
-    filteredVehicleRequisitions: VehicleRequisition[];
+    cashRequisitions: CashRequisition[];
+    filteredCashRequisitions: CashRequisition[];
     filters: {
         categorySlug$: BehaviorSubject<string>;
         query$: BehaviorSubject<string>;
@@ -37,7 +37,7 @@ export class VehicleRequisitionListComponent implements OnInit, OnDestroy {
         private _activatedRoute: ActivatedRoute,
         private _changeDetectorRef: ChangeDetectorRef,
         private _router: Router,
-        private _vehicleRequisitionService: VehicleRequisitionService
+        private _cashRequisitionService: CashRequisitionService
     ) {
     }
 
@@ -50,7 +50,7 @@ export class VehicleRequisitionListComponent implements OnInit, OnDestroy {
      */
     ngOnInit(): void {
         // Get the categories
-        this._vehicleRequisitionService.categories$
+        this._cashRequisitionService.categories$
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((categories: Category[]) => {
                 this.categories = categories;
@@ -59,38 +59,38 @@ export class VehicleRequisitionListComponent implements OnInit, OnDestroy {
                 this._changeDetectorRef.markForCheck();
             });
 
-        // Get the vehicleRequisitions
-        this._vehicleRequisitionService.vehicleRequisitions$
+        // Get the cashRequisitions
+        this._cashRequisitionService.cashRequisitions$
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((vehicleRequisitions: VehicleRequisition[]) => {
-                this.vehicleRequisitions = this.filteredVehicleRequisitions = vehicleRequisitions;
+            .subscribe((cashRequisitions: CashRequisition[]) => {
+                this.cashRequisitions = this.filteredCashRequisitions = cashRequisitions;
 
                 // Mark for check
                 this._changeDetectorRef.markForCheck();
             });
 
-        // Filter the vehicleRequisitions
+        // Filter the cashRequisitions
         combineLatest([this.filters.categorySlug$, this.filters.query$, this.filters.hideCompleted$])
             .subscribe(([categorySlug, query, hideCompleted]) => {
 
-                // Reset the filtered vehicleRequisitions
-                this.filteredVehicleRequisitions = this.vehicleRequisitions;
+                // Reset the filtered cashRequisitions
+                this.filteredCashRequisitions = this.cashRequisitions;
 
                 // Filter by category
                 if (categorySlug !== 'all') {
-                    this.filteredVehicleRequisitions = this.filteredVehicleRequisitions.filter(vehicleRequisition => vehicleRequisition.category === categorySlug);
+                    this.filteredCashRequisitions = this.filteredCashRequisitions.filter(CashRequisition => CashRequisition.category === categorySlug);
                 }
 
                 // Filter by search query
                 if (query !== '') {
-                    this.filteredVehicleRequisitions = this.filteredVehicleRequisitions.filter(vehicleRequisition => vehicleRequisition.title.toLowerCase().includes(query.toLowerCase())
-                        || vehicleRequisition.description.toLowerCase().includes(query.toLowerCase())
-                        || vehicleRequisition.category.toLowerCase().includes(query.toLowerCase()));
+                    this.filteredCashRequisitions = this.filteredCashRequisitions.filter(CashRequisition => CashRequisition.title.toLowerCase().includes(query.toLowerCase())
+                        || CashRequisition.description.toLowerCase().includes(query.toLowerCase())
+                        || CashRequisition.category.toLowerCase().includes(query.toLowerCase()));
                 }
 
                 // Filter by completed
                 if (hideCompleted) {
-                    this.filteredVehicleRequisitions = this.filteredVehicleRequisitions.filter(vehicleRequisition => vehicleRequisition.progress.completed === 0);
+                    this.filteredCashRequisitions = this.filteredCashRequisitions.filter(CashRequisition => CashRequisition.progress.completed === 0);
                 }
             });
     }
@@ -127,7 +127,7 @@ export class VehicleRequisitionListComponent implements OnInit, OnDestroy {
     }
 
     /**
-     * Show/hide completed vehicleRequisitions
+     * Show/hide completed cashRequisitions
      *
      * @param change
      */
@@ -151,6 +151,6 @@ export class VehicleRequisitionListComponent implements OnInit, OnDestroy {
     }
 
     createReq(){
-        this._router.navigate(['axis/employee/requisitions/vehicle/create']);
+        this._router.navigate(['axis/employee/requisitions/cash/create']);
     }
 }

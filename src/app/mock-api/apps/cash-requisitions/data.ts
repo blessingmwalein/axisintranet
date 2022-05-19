@@ -21,7 +21,7 @@ export const categories = [
         slug: 'stalled'
     }
 ];
-export const vehicleRequisitions = [
+export const cashRequisitions = [
     {
         id: '694e4e5f-f25f-470b-bd0e-26b1d4f64028',
         title: 'Vehicle requested',
@@ -58,7 +58,7 @@ export const vehicleRequisitions = [
     },
 
 ];
-export const demoVehicleRequisitionsContent = `
+export const demoCashRequisitionsContent = `
 <p class="lead">
     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aperiam lab et fugiat id magnam minus nemo quam
     voluptatem. Culpa deleniti explica nisi quod soluta.
@@ -414,7 +414,7 @@ export const demoVehicleRequisitionsContent = `
     Assumenda, eum, minima! Autem consectetur fugiat iste sit! Nobis omnis quo repellendus.
 </p>
 `;
-export const demoVehicleRequisitionSteps = [
+export const demoCashRequisitionSteps = [
     {
         order: 0,
         title: 'Pending',

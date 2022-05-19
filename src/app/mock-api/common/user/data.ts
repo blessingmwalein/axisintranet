@@ -12,7 +12,7 @@ export const user = {
     email: 'bmwale@axissol.com',
     avatar: 'assets/images/avatars/blessing-mwale.webp',
     status: 'online',
-    usertype: usertypes[0]
+    usertype: usertypes[1]
 };
 
 export const user2 = {
@@ -21,7 +21,7 @@ export const user2 = {
     email: 'rchitima@axissol.com',
     avatar: 'assets/images/avatars/blessing-mwale.webp',
     status: 'online',
-    usertype: usertypes[0]
+    usertype: usertypes[1]
 };
 
 export const userSideBarLinks = {

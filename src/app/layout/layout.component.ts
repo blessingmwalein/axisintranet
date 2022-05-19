@@ -49,6 +49,9 @@ export class LayoutComponent implements OnInit, OnDestroy {
         // Get the themes
         this._fuseTailwindConfigService.tailwindConfig$.subscribe((config) => {
             this.themes = Object.entries(config.themes);
+
+            console.log(this.themes);
+
         });
 
         // Set the theme and scheme based on the configuration
@@ -77,6 +80,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
             // Store the options
             this.scheme = options.scheme;
             this.theme = options.theme;
+            console.log(this.theme);
+            this.theme = 'rose'
 
             // Update the scheme and theme
             this._updateScheme();

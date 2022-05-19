@@ -42,6 +42,16 @@ import { AnnouncementsComponent } from './announcements/announcements.component'
 import { VehicleRequisitionsComponent } from './vehicle-requisitions/vehicle-requisitions.component';
 import { VehicleRequisitionDetailsComponent } from './vehicle-requisitions/details/details.component';
 import { VehicleRequisitionListComponent } from './vehicle-requisitions/list/list.component';
+import { CreateComponent } from './vehicle-requisitions/create/create.component';
+import { MatStepperModule } from '@angular/material/stepper';
+import { FuseAlertModule } from '@fuse/components/alert';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CashRequisitionComponent } from './cash-requisition/cash-requisition.component';
+import { CashRequisitionDetailsComponent } from './cash-requisition/details/details.component';
+import { CashRequisitionListComponent } from './cash-requisition/list/list.component';
+import { CreateCashComponent } from './cash-requisition/create/create.component';
+
 
 @NgModule({
   declarations: [
@@ -53,7 +63,12 @@ import { VehicleRequisitionListComponent } from './vehicle-requisitions/list/lis
     AnnouncementsComponent,
     VehicleRequisitionsComponent,
     VehicleRequisitionDetailsComponent,
-    VehicleRequisitionListComponent
+    VehicleRequisitionListComponent,
+    CreateComponent,
+    CashRequisitionComponent,
+    CashRequisitionDetailsComponent,
+    CashRequisitionListComponent,
+    CreateCashComponent
   ],
   imports: [
     CommonModule,
@@ -90,6 +105,10 @@ import { VehicleRequisitionListComponent } from './vehicle-requisitions/list/lis
     MatRadioModule,
     FullCalendarModule,
     FuseDateRangeModule,
+    MatStepperModule,
+    FuseAlertModule,
+    MatChipsModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {
