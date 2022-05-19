@@ -7,15 +7,15 @@ export const announcements = [
         icon        : 'heroicons_solid:star',
         description : 'Your submission has been accepted',
         date        : moment().subtract(25, 'minutes').toISOString(), // 25 minutes ago
-        extraContent: `<div class="font-bold">Congratulations for your acceptance!</div><br>
-                        <div>Hi Brian,<br>Your submission has been accepted and you are ready to move into the next phase. Once you are ready, reach out to me and we will ...</div>`
+        extraContent: `<div class="font-bold">Requisition have approved</div><br>
+                        <div>Hi Blessibng Mwale,<br>Your submission has been accepted and you are ready to move into the next phase. Once you are ready, reach out to me and we will ...</div>`
     },
     {
         id           : '6e3e97e5-effc-4fb7-b730-52a151f0b641',
         image        : 'assets/images/avatars/blessing-mwale.webp',
         description  : '<strong>Leo Gill</strong> added you to <strong>Top Secret Project</strong> group and assigned you as a <strong>Project Manager</strong>',
-        extraContent: `<div class="font-bold">Congratulations for your acceptance!</div><br>
-                        <div>Hi Brian,<br>Your submission has been accepted and you are ready to move into the next phase. Once you are ready, reach out to me and we will ...</div>`,
+        extraContent: `<div class="font-bold">Requisition have approved</div><br>
+                        <div>Hi Blessibng Mwale,<br>Your vehicle requisition have been approved by the finance department for tommorow cairns visit  ...</div>`,
         date         : moment().subtract(50, 'minutes').toISOString(), // 50 minutes ago
         linkedContent: 'Top Secret Project',
         link         : '/dashboards/project',
@@ -26,8 +26,8 @@ export const announcements = [
         icon         : 'heroicons_solid:mail',
         description  : 'You have 15 unread mails across 3 mailboxes',
         date         : moment().subtract(3, 'hours').toISOString(), // 3 hours ago,
-        extraContent: `<div class="font-bold">Congratulations for your acceptance!</div><br>
-                        <div>Hi Brian,<br>Your submission has been accepted and you are ready to move into the next phase. Once you are ready, reach out to me and we will ...</div>`,
+        extraContent: `<div class="font-bold">Requisition have approved</div><br>
+                        <div>Hi Blessibng Mwale,<br>Your vehicle requisition have been approved by the finance department for tommorow Delta visit ...</div>`,
         linkedContent: 'Mailbox',
         link         : '/apps/mailbox',
         useRouter    : true
@@ -37,8 +37,8 @@ export const announcements = [
         icon         : 'heroicons_solid:refresh',
         description  : 'Your <strong>Docker container</strong> is ready to publish',
         date         : moment().subtract(5, 'hours').toISOString(), // 5 hours ago,
-        extraContent: `<div class="font-bold">Congratulations for your acceptance!</div><br>
-                        <div>Hi Brian,<br>Your submission has been accepted and you are ready to move into the next phase. Once you are ready, reach out to me and we will ...</div>`,
+        extraContent: `<div class="font-bold">Requisition have approved</div><br>
+                        <div>Hi Blessibng Mwale,<br>YYour vehicle requisition have been approved by the finance department for tommorow car repairing service ...</div>`,
         linkedContent: 'Download the container',
         link         : '.',
         useRouter    : true
