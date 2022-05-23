@@ -1,14 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, of, ReplaySubject, throwError } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 import { AuthUtils } from 'app/core/auth/auth.utils';
 import { UserService } from 'app/core/user/user.service';
+import { environment } from 'environments/environment';
+import { Role } from 'app/modules/admin/models/users/role.types';
+import { tap } from 'lodash';
+import { User } from '../user/user.types';
 
 @Injectable()
 export class AuthService {
     private _authenticated: boolean = false;
-
+    private _baseUrl: string = environment.apiBaseUrl;
+    private _roles: ReplaySubject<Role[]> = new ReplaySubject<Role[]>(1);
     /**
      * Constructor
      */
@@ -26,11 +31,11 @@ export class AuthService {
      * Setter & getter for access token
      */
     set accessToken(token: string) {
-        localStorage.setItem('accessToken', token);
+        sessionStorage.setItem('token', token);
     }
 
     get accessToken(): string {
-        return localStorage.getItem('accessToken') ?? '';
+        return sessionStorage.getItem('token') ?? '';
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -65,13 +70,14 @@ export class AuthService {
         if (this._authenticated) {
             return throwError('User is already logged in.');
         }
-
-        return this._httpClient.post('api/auth/sign-in', credentials).pipe(
+        return this._httpClient.post(`${this._baseUrl}Account/login`, credentials).pipe(
             switchMap((response: any) => {
 
                 // Store the access token in the local storage
-                this.accessToken = response.accessToken;
+                console.log(response);
 
+                this.accessToken = response.token;
+                sessionStorage.setItem('userDetails',JSON.stringify(response));
                 // Set the authenticated flag to true
                 this._authenticated = true;
 
@@ -119,7 +125,7 @@ export class AuthService {
      */
     signOut(): Observable<any> {
         // Remove the access token from the local storage
-        localStorage.removeItem('accessToken');
+        sessionStorage.clear();
 
         // Set the authenticated flag to false
         this._authenticated = false;
@@ -151,21 +157,23 @@ export class AuthService {
      */
     check(): Observable<boolean> {
         // Check if the user is logged in
-        if (this._authenticated) {
-            return of(true);
-        }
+        // if (this._authenticated) {
+        //     return of(true);
+        // }
 
         // Check the access token availability
         if (!this.accessToken) {
             return of(false);
         }
-
         // Check the access token expire date
-        if (AuthUtils.isTokenExpired(this.accessToken)) {
-            return of(false);
-        }
+        // if (AuthUtils.isTokenExpired(this.accessToken)) {
+        //     return of(false);
+        // }
 
         // If the access token exists and it didn't expire, sign in using it
-        return this.signInUsingToken();
+        // return this.signInUsingToken();
+        return of(false);
     }
+
+
 }

@@ -6,8 +6,8 @@ import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
 import { FuseNavigationService, FuseVerticalNavigationComponent } from '@fuse/components/navigation';
 import { Navigation } from 'app/core/navigation/navigation.types';
 import { NavigationService } from 'app/core/navigation/navigation.service';
-import { User } from 'app/core/user/user.types';
 import { UserService } from 'app/core/user/user.service';
+import { User } from 'app/modules/admin/models/users/users.types';
 
 @Component({
     selector: 'classy-layout',
@@ -63,6 +63,7 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
         this._userService.user$
             .pipe((takeUntil(this._unsubscribeAll)))
             .subscribe((user: User) => {
+                console.log(user);
                 this.user = user;
             });
 
@@ -76,10 +77,10 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
             });
     }
 
-    getSidebarNavigation() {
-        if (this.user.usertype.toLowerCase() === 'employee') {
+    getSidebarNavigation(): any {
+        if (this.user.roles[0].toLowerCase() === 'employee') {
             return this.navigation.default;
-        } else if(this.user.usertype.toLowerCase() === 'admin'){
+        } else if(this.user.roles[0].toLowerCase() === 'administrator'){
             return this.navigation.admin;
         }
     }
