@@ -60,12 +60,14 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
             });
 
         // Subscribe to the user service
-        this._userService.user$
-            .pipe((takeUntil(this._unsubscribeAll)))
-            .subscribe((user: User) => {
-                console.log(user);
-                this.user = user;
-            });
+
+        this.user = this._userService.getUserfromStorage();
+        // this._userService.user$
+        //     .pipe((takeUntil(this._unsubscribeAll)))
+        //     .subscribe((user: User) => {
+        //         console.log(user);
+        //         this.user = user;
+        //     });
 
         // Subscribe to media changes
         this._fuseMediaWatcherService.onMediaChange$
@@ -78,11 +80,20 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
     }
 
     getSidebarNavigation(): any {
-        if (this.user.roles[0].toLowerCase() === 'employee') {
-            return this.navigation.default;
-        } else if(this.user.roles[0].toLowerCase() === 'administrator'){
-            return this.navigation.admin;
+
+        switch (this.user.roles[0].toLowerCase()) {
+            case 'employee':
+                return this.navigation.default;
+                break;
+            case 'administrator':
+                return this.navigation.admin;
+                break;
+            case 'line manager':
+                return this.navigation.manager;
+                break;
+
         }
+
     }
 
     /**

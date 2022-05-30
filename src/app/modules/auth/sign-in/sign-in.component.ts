@@ -45,8 +45,8 @@ export class AuthSignInComponent implements OnInit {
     ngOnInit(): void {
         // Create the form
         this.signInForm = this._formBuilder.group({
-            email: ['bmwale@axissol.com', [Validators.required, Validators.email]],
-            password: ['123456789', Validators.required],
+            email: ['admin@localhost.com', [Validators.required, Validators.email]],
+            password: ['P@ssword1', Validators.required],
             rememberMe: ['']
         });
     }
@@ -73,11 +73,11 @@ export class AuthSignInComponent implements OnInit {
             .subscribe(
                 (data) => {
                     this._userService.getAllRoles().subscribe((roles: Role[]): void => {
-                        console.log(roles);
                         console.log(data);
                         this._userService.get(data.id).subscribe((user: any) => {
+                            console.log(user);
                             this._userService.setUser(user)
-                            this._router.navigateByUrl('axis/employee/dashboard');
+                            this._router.navigateByUrl(this.userRedirectCallBack(user.roles[0]));
                         });
                     });
                 },
@@ -99,5 +99,25 @@ export class AuthSignInComponent implements OnInit {
                     this.showAlert = true;
                 }
             );
+    }
+
+    userRedirectCallBack(role: string): string {
+        switch (role.toLowerCase()) {
+            case "employee":
+                return 'axis/employee/dashboard';
+                break;
+            case "administrator":
+                return 'axis/admin/dashboard';
+                break;
+            case "line manager":
+                return 'axis/manager/dashboard';
+                break;
+            case "finance manager":
+                return 'axis/finance-manager/dashboard';
+                break;
+            default:
+                return ''
+                break;
+        }
     }
 }

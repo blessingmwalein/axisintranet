@@ -4,9 +4,8 @@
 
 export const environment = {
     production: false,
+    snackBarTimeout:5000,
     apiBaseUrl : 'http://192.168.1.148:8087/api/'
-
-
 };
 
 /*

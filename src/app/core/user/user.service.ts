@@ -46,6 +46,9 @@ export class UserService {
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------
 
+    getUserfromStorage() : User {
+        return JSON.parse(sessionStorage.getItem('user'));
+    }
     /**
      * Get the current logged in user data
      */
@@ -79,6 +82,45 @@ export class UserService {
           })
         );
     }
+
+    //save user role 
+    saveRole(role:any) :Observable<any>{
+        return this._httpClient.post<any>(`${this._baseUrl}Role/Create`, role);
+    }
+
+    deleteRole(id:string){
+       return this._httpClient.delete(`${this._baseUrl}Role/Delete/${id}`);
+    }
+
+    updateRole(id:string, role:Role){
+        return this._httpClient.put(`${this._baseUrl}Role/Edit/${id}`,role)
+    }
+
+    getRole(id:string){
+        return this._httpClient.get<Role>(`${this._baseUrl}Role/${id}`);
+    }
+    //users endpoints
+    createUser(user:any){
+        return this._httpClient.post(`${this._baseUrl}User/Create`, user);
+    }
+
+    deleteUser(userId:string){
+        return this._httpClient.delete(`${this._baseUrl}User/Delete/${userId}`);
+    }
+
+    assignUserRoles(details){
+        return this._httpClient.post(`${this._baseUrl}User/AssignRoles`, details);
+    }
+
+    editUserRoles(details){
+        return this._httpClient.post(`${this._baseUrl}User/EditUserRoles`, details);
+    }
+
+    editUserProfile(id:string, user:any){
+         return this._httpClient.put(`${this._baseUrl}User/EditUserProfile/${id}`, user);
+    }
+
+
 
     getAllUsers(): Observable<User[]>{
         return this._httpClient.get<User[]>(`${this._baseUrl}User/GetAll`).pipe(

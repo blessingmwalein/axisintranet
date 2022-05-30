@@ -8,6 +8,7 @@ import { PermissionsComponent } from './Permissions/Permissions.component';
 import { RolesComponent } from './roles/roles.component';
 import { CanDeactivateUsersDetails } from './services/users/users.guards';
 import { UsersDepartmentsResolver, UsersResolver, UsersTagsResolver, UsersUserResolver } from './services/users/users.resolvers';
+import { CreateComponent } from './users/create/create.component';
 import { UsersDetailsComponent } from './users/details/details.component';
 import { UsersListComponent } from './users/list/list.component';
 import { UsersComponent } from './users/users.component';
@@ -40,6 +41,10 @@ const routes: Routes = [
     component: DepartmentsComponent
   },
   {
+    path :'create/user',
+    component:CreateComponent
+  },
+  {
     path: 'users',
     component: UsersComponent,
     resolve: {
@@ -64,7 +69,8 @@ const routes: Routes = [
             canDeactivate: [CanDeactivateUsersDetails]
           }
         ]
-      }
+      },
+     
     ]
   },
   {

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { map, switchMap, tap, take } from 'rxjs/operators';
 import { Category, VehicleRequisition } from '../../models/vehicle-requisitions/vehicle-requisitions.types';
+import { environment } from 'environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -10,8 +11,9 @@ import { Category, VehicleRequisition } from '../../models/vehicle-requisitions/
 export class VehicleRequisitionService {
     // Private
     private _categories: BehaviorSubject<Category[] | null> = new BehaviorSubject(null);
-    private _vehicleRequisition: BehaviorSubject<VehicleRequisition | null> = new BehaviorSubject(null);
-    private _vehicleRequisitions: BehaviorSubject<VehicleRequisition[] | null> = new BehaviorSubject(null);
+    private _vehicleRequisition: BehaviorSubject<any | null> = new BehaviorSubject(null);
+    private _vehicleRequisitions: BehaviorSubject<any[] | null> = new BehaviorSubject(null);
+    private _baseUrl = environment.apiBaseUrl;
 
     /**
      * Constructor
@@ -44,7 +46,7 @@ export class VehicleRequisitionService {
     /**
      * Getter for VehicleRequisition
      */
-    get vehicleRequisition$(): Observable<VehicleRequisition> {
+    get vehicleRequisition$(): Observable<any> {
         return this._vehicleRequisition.asObservable();
     }
 
@@ -66,14 +68,19 @@ export class VehicleRequisitionService {
     /**
      * Get VehicleRequisitions
      */
-    getVehicleRequisitions(): Observable<VehicleRequisition[]> {
-        return this._httpClient.get<VehicleRequisition[]>('api/apps/vehicle-requisitions/vehicle-requisitions').pipe(
+    getVehicleRequisitions(): Observable<any[]> {
+        return this._httpClient.get<any[]>(`${this._baseUrl}VehicleRequisition?isLoggedInUser=true`).pipe(
             tap((response: any) => {
                 this._vehicleRequisitions.next(response);
             })
         );
     }
 
+    getVehicles() : Observable<any[]>{
+        return this._httpClient.get<any[]>(`${this._baseUrl}Vehicles`);
+    }
+
+    
     /**
      * Get VehicleRequisition by id
      */
@@ -101,16 +108,8 @@ export class VehicleRequisitionService {
     createRequ(req: any): Observable<any> {
         return this.vehicleRequisitions$.pipe(
             take(1),
-            switchMap(vehicleRequisitions => this._httpClient.post<any>('api/apps/vehicle-requisitions/vehicle-requisitions', { req }).pipe(
+            switchMap(vehicleRequisitions => this._httpClient.post<any>(`${this._baseUrl}VehicleRequisition`, req).pipe(
                 map((newReq) => {
-
-                    console.log(this.vehicleRequisitions$);
-                    
-                    // Update the tags with the new tag
-                    this._vehicleRequisitions.next([...vehicleRequisitions, newReq]);
-
-
-                    // Return new tag from observable
                     return newReq;
                 })
             ))

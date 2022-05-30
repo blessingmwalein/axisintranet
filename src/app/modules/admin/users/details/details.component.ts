@@ -10,6 +10,9 @@ import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { Department, Tag, User } from '../../models/users/users.types';
 import { UsersService } from '../../services/users/users.service';
 import { UsersListComponent } from '../list/list.component';
+import { UserService } from 'app/core/user/user.service';
+import { Role } from '../../models/users/role.types';
+import { AlertService } from 'app/modules/alert/snackbar/alert.service';
 
 @Component({
     selector: 'users-details',
@@ -27,26 +30,38 @@ export class UsersDetailsComponent implements OnInit, OnDestroy {
     tagsEditMode: boolean = false;
     filteredTags: Tag[];
     user: User;
-    userForm: FormGroup;
+    editUserForm: FormGroup;
     users: User[];
     departments: Department[];
     private _tagsPanelOverlayRef: OverlayRef;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
-
+    loading: boolean = true;
     /**
      * Constructor
      */
+
+    selectedRoles: string[] = [];
+    @ViewChild('rolesPanel') private _rolesPanel: TemplateRef<any>;
+    @ViewChild('rolesPanelOrigin') private _rolesPanelOrigin: ElementRef;
+    private _rolesPanelOverlayRef: OverlayRef;
+
+    roles: Role[];
+    rolesEditMode: boolean = false;
+    filteredRoles: Role[];
+
     constructor(
         private _activatedRoute: ActivatedRoute,
         private _changeDetectorRef: ChangeDetectorRef,
         private _usersListComponent: UsersListComponent,
         private _usersService: UsersService,
+        private _userService: UserService,
         private _formBuilder: FormBuilder,
         private _fuseConfirmationService: FuseConfirmationService,
         private _renderer2: Renderer2,
         private _router: Router,
         private _overlay: Overlay,
-        private _viewContainerRef: ViewContainerRef
+        private _viewContainerRef: ViewContainerRef,
+        private _alertService: AlertService
     ) {
     }
 
@@ -62,18 +77,14 @@ export class UsersDetailsComponent implements OnInit, OnDestroy {
         this._usersListComponent.matDrawer.open();
 
         // Create the user form
-        this.userForm = this._formBuilder.group({
-            id: [''],
-            avatar: [null],
-            name: ['', [Validators.required]],
-            emails: this._formBuilder.array([]),
-            phoneNumbers: this._formBuilder.array([]),
-            title: [''],
-            company: [''],
-            birthday: [null],
-            address: [null],
-            notes: [null],
-            tags: [[]]
+        this.editUserForm = this._formBuilder.group({
+            firstName: ['', [Validators.required]],
+            lastName: ['', [Validators.required]],
+            userName: ['', [Validators.required]],
+            email: ['', [Validators.required, Validators.email]],
+            lineApprover: ['Philip'],
+            roles: [[]],
+            id: ['']
         });
 
         // Get the users
@@ -81,120 +92,36 @@ export class UsersDetailsComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((users: User[]) => {
                 this.users = users;
-
                 // Mark for check
                 this._changeDetectorRef.markForCheck();
             });
 
         // Get the user
-        this._usersService.user$
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((user: User) => {
+        this._userService.get(this._activatedRoute.snapshot.params['id']).subscribe((user: any) => {
+            console.log(user);
+            this.user = user
+            console.log(this.loading);
 
-                // Open the drawer in case it is closed
-                this._usersListComponent.matDrawer.open();
+            this._userService.getAllRoles().subscribe((roles: Role[]) => {
+                this.roles = roles
+                this.selectedRoles = this.user.roles;
+                this.filteredRoles = roles;
 
-                // Get the user
-                this.user = user;
+                this.editUserForm.patchValue({
+                    id: this.user.id,
+                    firstName: this.user.firstname,
+                    lastName: this.user.lastname,
+                    email: this.user.email,
+                    userName: this.user.username,
+                    roles: this.user.roles,
+                    lineApprover: this.user.lineApprover
+                })
+                this.loading = false;
+            })
+        }, error => {
+            this.loading = false
+        });
 
-                // Clear the emails and phoneNumbers form arrays
-                (this.userForm.get('emails') as FormArray).clear();
-                (this.userForm.get('phoneNumbers') as FormArray).clear();
-
-                // Patch values to the form
-                this.userForm.patchValue(user);
-
-                // Setup the emails form array
-                const emailFormGroups = [];
-
-                if (user.emails.length > 0) {
-                    // Iterate through them
-                    user.emails.forEach((email) => {
-
-                        // Create an email form group
-                        emailFormGroups.push(
-                            this._formBuilder.group({
-                                email: [email.email],
-                                label: [email.label]
-                            })
-                        );
-                    });
-                }
-                else {
-                    // Create an email form group
-                    emailFormGroups.push(
-                        this._formBuilder.group({
-                            email: [''],
-                            label: ['']
-                        })
-                    );
-                }
-
-                // Add the email form groups to the emails form array
-                emailFormGroups.forEach((emailFormGroup) => {
-                    (this.userForm.get('emails') as FormArray).push(emailFormGroup);
-                });
-
-                // Setup the phone numbers form array
-                const phoneNumbersFormGroups = [];
-
-                if (user.phoneNumbers.length > 0) {
-                    // Iterate through them
-                    user.phoneNumbers.forEach((phoneNumber) => {
-
-                        // Create an email form group
-                        phoneNumbersFormGroups.push(
-                            this._formBuilder.group({
-                                department: [phoneNumber.department],
-                                phoneNumber: [phoneNumber.phoneNumber],
-                                label: [phoneNumber.label]
-                            })
-                        );
-                    });
-                }
-                else {
-                    // Create a phone number form group
-                    phoneNumbersFormGroups.push(
-                        this._formBuilder.group({
-                            department: ['us'],
-                            phoneNumber: [''],
-                            label: ['']
-                        })
-                    );
-                }
-
-                // Add the phone numbers form groups to the phone numbers form array
-                phoneNumbersFormGroups.forEach((phoneNumbersFormGroup) => {
-                    (this.userForm.get('phoneNumbers') as FormArray).push(phoneNumbersFormGroup);
-                });
-
-                // Toggle the edit mode off
-                this.toggleEditMode(false);
-
-                // Mark for check
-                this._changeDetectorRef.markForCheck();
-            });
-
-        // Get the department telephone codes
-        this._usersService.departments$
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((codes: Department[]) => {
-                this.departments = codes;
-
-                // Mark for check
-                this._changeDetectorRef.markForCheck();
-            });
-
-        // Get the tags
-        this._usersService.tags$
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((tags: Tag[]) => {
-                this.tags = tags;
-                this.filteredTags = tags;
-
-                // Mark for check
-                this._changeDetectorRef.markForCheck();
-            });
     }
 
     /**
@@ -244,18 +171,18 @@ export class UsersDetailsComponent implements OnInit, OnDestroy {
      */
     updateUser(): void {
         // Get the user object
-        const user = this.userForm.getRawValue();
-
-        // Go through the user object and clear empty values
-        user.emails = user.emails.filter(email => email.email);
-
-        user.phoneNumbers = user.phoneNumbers.filter(phoneNumber => phoneNumber.phoneNumber);
-
+        const user = this.editUserForm.getRawValue();
         // Update the user on the server
-        this._usersService.updateUser(user.id, user).subscribe(() => {
 
-            // Toggle the edit mode off
-            this.toggleEditMode(false);
+        this._userService.editUserProfile(user.id, user).subscribe(() => {
+            this._alertService.displayMessage(`User ${this.user.username} updated`)
+            this._userService.assignUserRoles({ userName: this.user.username, roles: user.roles }).subscribe(response => {
+                this._alertService.displayMessage(`User ${this.user.username} roles updated`)
+            }, error => {
+                this._alertService.displayError("Failed to update user roles try again")
+            })
+        }, error => {
+            this._alertService.displayError("Failed to update user try again")
         });
     }
 
@@ -281,39 +208,17 @@ export class UsersDetailsComponent implements OnInit, OnDestroy {
             if (result === 'confirmed') {
                 // Get the current user's id
                 const id = this.user.id;
+                this._userService.deleteUser(id).subscribe(response => {
+                    this._alertService.displayMessage(`User ${this.user.username} deleted`);
+                    this._router.navigate(['../'], { relativeTo: this._activatedRoute });
 
-                // Get the next/previous user's id
-                const currentUserIndex = this.users.findIndex(item => item.id === id);
-                const nextUserIndex = currentUserIndex + ((currentUserIndex === (this.users.length - 1)) ? -1 : 1);
-                const nextUserId = (this.users.length === 1 && this.users[0].id === id) ? null : this.users[nextUserIndex].id;
-
-                // Delete the user
-                this._usersService.deleteUser(id)
-                    .subscribe((isDeleted) => {
-
-                        // Return if the user wasn't deleted...
-                        if (!isDeleted) {
-                            return;
-                        }
-
-                        // Navigate to the next user if available
-                        if (nextUserId) {
-                            this._router.navigate(['../', nextUserId], { relativeTo: this._activatedRoute });
-                        }
-                        // Otherwise, navigate to the parent
-                        else {
-                            this._router.navigate(['../'], { relativeTo: this._activatedRoute });
-                        }
-
-                        // Toggle the edit mode off
-                        this.toggleEditMode(false);
-                    });
-
-                // Mark for check
+                }, error => {
+                    console.log(error);
+                    this._alertService.displayError(`Failed to delete user  ${this.user.username} try again`);
+                })
                 this._changeDetectorRef.markForCheck();
             }
         });
-
     }
 
     /**
@@ -344,7 +249,7 @@ export class UsersDetailsComponent implements OnInit, OnDestroy {
      */
     removeAvatar(): void {
         // Get the form control for 'avatar'
-        const avatarFormControl = this.userForm.get('avatar');
+        const avatarFormControl = this.editUserForm.get('avatar');
 
         // Set the avatar as null
         avatarFormControl.setValue(null);
@@ -356,17 +261,20 @@ export class UsersDetailsComponent implements OnInit, OnDestroy {
         this.user.avatar = null;
     }
 
-    /**
-     * Open tags panel
-     */
-    openTagsPanel(): void {
+
+    trackByFn(index: number, item: any): any {
+        return item.id || index;
+    }
+
+
+    openRolesPanel(): void {
         // Create the overlay
-        this._tagsPanelOverlayRef = this._overlay.create({
+        this._rolesPanelOverlayRef = this._overlay.create({
             backdropClass: '',
             hasBackdrop: true,
             scrollStrategy: this._overlay.scrollStrategies.block(),
             positionStrategy: this._overlay.position()
-                .flexibleConnectedTo(this._tagsPanelOrigin.nativeElement)
+                .flexibleConnectedTo(this._rolesPanelOrigin.nativeElement)
                 .withFlexibleDimensions(true)
                 .withViewportMargin(64)
                 .withLockedPosition(true)
@@ -381,37 +289,37 @@ export class UsersDetailsComponent implements OnInit, OnDestroy {
         });
 
         // Subscribe to the attachments observable
-        this._tagsPanelOverlayRef.attachments().subscribe(() => {
+        this._rolesPanelOverlayRef.attachments().subscribe(() => {
 
             // Add a class to the origin
-            this._renderer2.addClass(this._tagsPanelOrigin.nativeElement, 'panel-opened');
+            this._renderer2.addClass(this._rolesPanelOrigin.nativeElement, 'panel-opened');
 
             // Focus to the search input once the overlay has been attached
-            this._tagsPanelOverlayRef.overlayElement.querySelector('input').focus();
+            this._rolesPanelOverlayRef.overlayElement.querySelector('input').focus();
         });
 
         // Create a portal from the template
-        const templatePortal = new TemplatePortal(this._tagsPanel, this._viewContainerRef);
+        const templatePortal = new TemplatePortal(this._rolesPanel, this._viewContainerRef);
 
         // Attach the portal to the overlay
-        this._tagsPanelOverlayRef.attach(templatePortal);
+        this._rolesPanelOverlayRef.attach(templatePortal);
 
         // Subscribe to the backdrop click
-        this._tagsPanelOverlayRef.backdropClick().subscribe(() => {
+        this._rolesPanelOverlayRef.backdropClick().subscribe(() => {
 
             // Remove the class from the origin
-            this._renderer2.removeClass(this._tagsPanelOrigin.nativeElement, 'panel-opened');
+            this._renderer2.removeClass(this._rolesPanelOrigin.nativeElement, 'panel-opened');
 
             // If overlay exists and attached...
-            if (this._tagsPanelOverlayRef && this._tagsPanelOverlayRef.hasAttached()) {
+            if (this._rolesPanelOverlayRef && this._rolesPanelOverlayRef.hasAttached()) {
                 // Detach it
-                this._tagsPanelOverlayRef.detach();
+                this._rolesPanelOverlayRef.detach();
 
-                // Reset the tag filter
-                this.filteredTags = this.tags;
+                // Reset the role filter
+                this.filteredRoles = this.roles;
 
                 // Toggle the edit mode off
-                this.tagsEditMode = false;
+                this.rolesEditMode = false;
             }
 
             // If template portal exists and attached...
@@ -423,40 +331,40 @@ export class UsersDetailsComponent implements OnInit, OnDestroy {
     }
 
     /**
-     * Toggle the tags edit mode
+     * Toggle the roles edit mode
      */
-    toggleTagsEditMode(): void {
-        this.tagsEditMode = !this.tagsEditMode;
+    toggleRolesEditMode(): void {
+        this.rolesEditMode = !this.rolesEditMode;
     }
 
     /**
-     * Filter tags
+     * Filter roles
      *
      * @param event
      */
-    filterTags(event): void {
+    filterRoles(event): void {
         // Get the value
         const value = event.target.value.toLowerCase();
 
-        // Filter the tags
-        this.filteredTags = this.tags.filter(tag => tag.title.toLowerCase().includes(value));
+        // Filter the roles
+        this.filteredRoles = this.roles.filter(role => role.roleName.toLowerCase().includes(value));
     }
 
     /**
-     * Filter tags input key down event
+     * Filter roles input key down event
      *
      * @param event
      */
-    filterTagsInputKeyDown(event): void {
+    filterRolesInputKeyDown(event): void {
         // Return if the pressed key is not 'Enter'
         if (event.key !== 'Enter') {
             return;
         }
 
-        // If there is no tag available...
-        if (this.filteredTags.length === 0) {
-            // Create the tag
-            this.createTag(event.target.value);
+        // If there is no role available...
+        if (this.filteredRoles.length === 0) {
+            // Create the role
+            this.createRole(event.target.value);
 
             // Clear the input
             event.target.value = '';
@@ -465,210 +373,124 @@ export class UsersDetailsComponent implements OnInit, OnDestroy {
             return;
         }
 
-        // If there is a tag...
-        const tag = this.filteredTags[0];
-        const isTagApplied = this.user.tags.find(id => id === tag.id);
+        // If there is a role...
+        const role = this.filteredRoles[0];
+        const isRoleApplied = this.selectedRoles.find(id => id === role.roleName);
 
-        // If the found tag is already applied to the user...
-        if (isTagApplied) {
-            // Remove the tag from the user
-            this.removeTagFromUser(tag);
+        // If the found role is already applied to the contact...
+        if (isRoleApplied) {
+            // Remove the role from the contact
+            this.removeRoleFromContact(role);
         }
         else {
-            // Otherwise add the tag to the user
-            this.addTagToUser(tag);
+            // Otherwise add the role to the contact
+            this.addRoleToContact(role);
         }
     }
 
     /**
-     * Create a new tag
+     * Create a new role
      *
-     * @param title
+     * @param roleName
      */
-    createTag(title: string): void {
-        const tag = {
-            title
+    createRole(roleName: string): void {
+        const role = {
+            roleName
         };
 
-        // Create tag on the server
-        this._usersService.createTag(tag)
-            .subscribe((response) => {
+        // this.addRoleToContact(response);
 
-                // Add the tag to the user
-                this.addTagToUser(response);
-            });
     }
 
     /**
-     * Update the tag title
+     * Update the role.roleName
      *
-     * @param tag
+     * @param role
      * @param event
      */
-    updateTagTitle(tag: Tag, event): void {
-        // Update the title on the tag
-        tag.title = event.target.value;
+    updateRoleName(role: Role, event): void {
+        // Update the roleName on the role
+        role.roleName = event.target.value;
 
-        // Update the tag on the server
-        this._usersService.updateTag(tag.id, tag)
-            .pipe(debounceTime(300))
-            .subscribe();
-
-        // Mark for check
-        this._changeDetectorRef.markForCheck();
-    }
-
-    /**
-     * Delete the tag
-     *
-     * @param tag
-     */
-    deleteTag(tag: Tag): void {
-        // Delete the tag from the server
-        this._usersService.deleteTag(tag.id).subscribe();
+        // Update the role on the server
+        // this._contactsService.updateRole(role.id, role)
+        //   .pipe(debounceTime(300))
+        //   .subscribe();
 
         // Mark for check
         this._changeDetectorRef.markForCheck();
     }
 
     /**
-     * Add tag to the user
+     * Delete the role
      *
-     * @param tag
+     * @param role
      */
-    addTagToUser(tag: Tag): void {
-        // Add the tag
-        this.user.tags.unshift(tag.id);
-
-        // Update the user form
-        this.userForm.get('tags').patchValue(this.user.tags);
+    deleteRole(role: Role): void {
+        // Delete the role from the server
+        // this._contactsService.deleteRole(role.id).subscribe();
 
         // Mark for check
         this._changeDetectorRef.markForCheck();
     }
 
     /**
-     * Remove tag from the user
+     * Add role to the contact
      *
-     * @param tag
+     * @param role
      */
-    removeTagFromUser(tag: Tag): void {
-        // Remove the tag
-        this.user.tags.splice(this.user.tags.findIndex(item => item === tag.id), 1);
+    addRoleToContact(role: Role): void {
+        // Add the role
+        this.selectedRoles.unshift(role.roleName);
 
-        // Update the user form
-        this.userForm.get('tags').patchValue(this.user.tags);
+        // Update the contact form
+        this.editUserForm.get('roles').patchValue(this.selectedRoles);
 
         // Mark for check
         this._changeDetectorRef.markForCheck();
     }
 
     /**
-     * Toggle user tag
+     * Remove role from the contact
      *
-     * @param tag
+     * @param role
      */
-    toggleUserTag(tag: Tag): void {
-        if (this.user.tags.includes(tag.id)) {
-            this.removeTagFromUser(tag);
+    removeRoleFromContact(role: Role): void {
+        // Remove the role
+        this.selectedRoles.splice(this.selectedRoles.findIndex(item => item === role.roleName), 1);
+
+        // Update the contact form
+        this.editUserForm.get('roles').patchValue(this.selectedRoles);
+
+        // Mark for check
+        this._changeDetectorRef.markForCheck();
+    }
+
+    /**
+     * Toggle contact role
+     *
+     * @param role
+     */
+    toggleContactRole(role: Role): void {
+
+        if (this.selectedRoles.includes(role.roleName)) {
+            this.removeRoleFromContact(role);
         }
         else {
-            this.addTagToUser(tag);
+            this.addRoleToContact(role);
         }
+
+        console.log(this.selectedRoles);
+
     }
 
     /**
-     * Should the create tag button be visible
+     * Should the create role button be visible
      *
      * @param inputValue
      */
-    shouldShowCreateTagButton(inputValue: string): boolean {
-        return !!!(inputValue === '' || this.tags.findIndex(tag => tag.title.toLowerCase() === inputValue.toLowerCase()) > -1);
+    shouldShowCreateRoleButton(inputValue: string): boolean {
+        return !!!(inputValue === '' || this.roles.findIndex(role => role.roleName.toLowerCase() === inputValue.toLowerCase()) > -1);
     }
 
-    /**
-     * Add the email field
-     */
-    addEmailField(): void {
-        // Create an empty email form group
-        const emailFormGroup = this._formBuilder.group({
-            email: [''],
-            label: ['']
-        });
-
-        // Add the email form group to the emails form array
-        (this.userForm.get('emails') as FormArray).push(emailFormGroup);
-
-        // Mark for check
-        this._changeDetectorRef.markForCheck();
-    }
-
-    /**
-     * Remove the email field
-     *
-     * @param index
-     */
-    removeEmailField(index: number): void {
-        // Get form array for emails
-        const emailsFormArray = this.userForm.get('emails') as FormArray;
-
-        // Remove the email field
-        emailsFormArray.removeAt(index);
-
-        // Mark for check
-        this._changeDetectorRef.markForCheck();
-    }
-
-    /**
-     * Add an empty phone number field
-     */
-    addPhoneNumberField(): void {
-        // Create an empty phone number form group
-        const phoneNumberFormGroup = this._formBuilder.group({
-            department: ['us'],
-            phoneNumber: [''],
-            label: ['']
-        });
-
-        // Add the phone number form group to the phoneNumbers form array
-        (this.userForm.get('phoneNumbers') as FormArray).push(phoneNumberFormGroup);
-
-        // Mark for check
-        this._changeDetectorRef.markForCheck();
-    }
-
-    /**
-     * Remove the phone number field
-     *
-     * @param index
-     */
-    removePhoneNumberField(index: number): void {
-        // Get form array for phone numbers
-        const phoneNumbersFormArray = this.userForm.get('phoneNumbers') as FormArray;
-
-        // Remove the phone number field
-        phoneNumbersFormArray.removeAt(index);
-
-        // Mark for check
-        this._changeDetectorRef.markForCheck();
-    }
-
-    /**
-     * Get department info by iso code
-     *
-     * @param iso
-     */
-    getDepartmentByIso(iso: string): Department {
-        return this.departments.find(department => department.iso === iso);
-    }
-
-    /**
-     * Track by function for ngFor loops
-     *
-     * @param index
-     * @param item
-     */
-    trackByFn(index: number, item: any): any {
-        return item.id || index;
-    }
 }

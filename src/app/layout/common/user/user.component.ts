@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { BooleanInput } from '@angular/cdk/coercion';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { User } from 'app/modules/admin/models/users/users.types';import { UserService } from 'app/core/user/user.service';
+import { User } from 'app/modules/admin/models/users/users.types';
+import { UserService } from 'app/core/user/user.service';
 
 @Component({
     selector       : 'user',
@@ -44,14 +45,7 @@ export class UserComponent implements OnInit, OnDestroy
     ngOnInit(): void
     {
         // Subscribe to user changes
-        this._userService.user$
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((user: User) => {
-                this.user = user;
-
-                // Mark for check
-                this._changeDetectorRef.markForCheck();
-            });
+        this.user=this._userService.getUserfromStorage();
     }
 
     /**

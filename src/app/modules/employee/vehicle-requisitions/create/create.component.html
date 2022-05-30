@@ -40,17 +40,15 @@
                     </p>
                     <div class="flex">
                         <mat-form-field class="fuse-mat-textarea flex-auto">
-                            <textarea matInput [formControlName]="'description'" [placeholder]="'About'"
+                            <textarea matInput [formControlName]="'requestComments'" [placeholder]="'About'"
                                 [rows]="3"></textarea>
                             <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:menu-alt-2'"></mat-icon>
                         </mat-form-field>
                     </div>
                     <div class="flex flex-col gt-xs:flex-row">
                         <mat-form-field class="flex-auto gt-xs:pr-3">
-                            <mat-select [formControlName]="'duration'" [placeholder]="'Duration'" required>
-                                <mat-option value="1">1 day</mat-option>
-                                <mat-option value="2">2 days</mat-option>
-                                <mat-option value="3">3 days</mat-option>
+                            <mat-select [formControlName]="'vehicleId'" [placeholder]="'Vehicle'" required>
+                                <mat-option *ngFor="let vehicle of vehicles" [value]="vehicle.id">{{vehicle.description}}</mat-option>
                             </mat-select>
                             <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:location-marker'">
                             </mat-icon>
