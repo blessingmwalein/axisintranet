@@ -1,0 +1,55 @@
+<div class="flex flex-col max-w-240 md:min-w-160 max-h-screen -m-6">
+
+  <!-- Header -->
+  <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+    <div class="text-lg font-medium">{{data.isEdit?'Edit':'Create new'}} Department</div>
+    <button mat-icon-button (click)="saveAndClose()" [tabIndex]="-1">
+      <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
+    </button>
+  </div>
+
+  <!-- Compose form -->
+  <form class="flex flex-col flex-auto p-6 sm:p-8 overflow-y-auto" [formGroup]="departmentCreateForm">
+
+    <fuse-alert class="mt-8 mb-2" *ngIf="showAlert" [appearance]="'outline'" [showIcon]="false" [type]="alert.type"
+      [@shake]="alert.type === 'error'">
+      {{alert.message}}
+    </fuse-alert>
+
+    <mat-form-field class="fuse-mat-no-subscript w-full">
+      <mat-icon matPrefix class="hidden sm:flex icon-size-5" [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+      <input matInput [formControlName]="'description'" [placeholder]="'Department Name'" [spellcheck]="false">
+      <mat-error *ngIf="departmentCreateForm.get('description').hasError('required')">
+        Department name is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="flex-auto gt-xs:pl-3 pt-2">
+      <mat-select [placeholder]="'Language'" [formControlName]="'status'">
+        <mat-option value="active">Active</mat-option>
+        <mat-option value="disabled">Disabled</mat-option>
+      </mat-select>
+      <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:translate'"></mat-icon>
+    </mat-form-field>
+    <!-- Actions -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-4 sm:mt-6">
+      <div class="-ml-2">
+        <div class="flex items-center mt-4 sm:mt-0">
+          <!-- Discard -->
+          <button class="ml-auto sm:ml-0 mr-2" mat-stroked-button (click)="saveAndClose()">
+            Cancel
+          </button>
+          <!-- Send -->
+          <button class="order-first sm:order-last" mat-flat-button [color]="'primary'"
+            [disabled]="departmentCreateForm.disabled" (click)="data.isEdit ? update() :save()">
+            <span *ngIf="!departmentCreateForm.disabled">
+              {{data.isEdit ? 'Update ':'Save'}} Changes
+            </span>
+            <mat-progress-spinner *ngIf="departmentCreateForm.disabled" [diameter]="24" [mode]="'indeterminate'">
+            </mat-progress-spinner>
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

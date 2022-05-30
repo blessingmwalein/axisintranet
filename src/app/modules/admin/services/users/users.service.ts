@@ -2,7 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { filter, map, switchMap, take, tap } from 'rxjs/operators';
-import { Department, Tag, User } from '../../models/users/users.types';
+// import { Department, Tag, User } from '../../models/users/users.types';
+import { User, Department, Tag } from 'app/modules/admin/models/users/users.types';
+import { environment } from 'environments/environment';
+
 
 @Injectable({
     providedIn: 'root'
@@ -13,6 +16,8 @@ export class UsersService {
     private _users: BehaviorSubject<User[] | null> = new BehaviorSubject(null);
     private _departments: BehaviorSubject<Department[] | null> = new BehaviorSubject(null);
     private _tags: BehaviorSubject<Tag[] | null> = new BehaviorSubject(null);
+    private _baseUrl: string = environment.apiBaseUrl;
+
 
     /**
      * Constructor
@@ -60,7 +65,7 @@ export class UsersService {
      * Get users
      */
     getUsers(): Observable<User[]> {
-        return this._httpClient.get<User[]>('api/apps/users/all').pipe(
+        return this._httpClient.get<User[]>(`${this._baseUrl}User/GetAll`).pipe(
             tap((users) => {
                 this._users.next(users);
             })
@@ -367,4 +372,6 @@ export class UsersService {
             ))
         );
     }
+
+    
 }

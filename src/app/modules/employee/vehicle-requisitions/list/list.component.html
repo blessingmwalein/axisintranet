@@ -24,12 +24,8 @@
                     Vehicle
                 </h2>
             </div>
-
-
         </div>
-
     </div>
-
     <!-- Main -->
     <div class="flex flex-auto p-6 sm:p-10">
 
@@ -70,34 +66,31 @@
                                 <div class="flex items-center justify-between">
                                     <!-- vehicleRequisition category -->
                                     <ng-container
-                                        *ngIf="(vehicleRequisition.category | fuseFindByKey:'slug':categories) as category">
+                                      >
                                         <div class="py-0.5 px-3 rounded-full text-sm font-semibold"
-                                            [ngClass]="{'text-blue-800 bg-blue-100 dark:text-blue-50 dark:bg-blue-500': category.slug === 'accepted',
-                                                        'text-green-800 bg-green-100 dark:text-green-50 dark:bg-green-500': category.slug === 'pending',
-                                                        'text-pink-800 bg-pink-100 dark:text-pink-50 dark:bg-pink-500': category.slug === 'rejected',
-                                                        'text-amber-800 bg-amber-100 dark:text-amber-50 dark:bg-amber-500': category.slug === 'stalled'}">
-                                            {{category.title}}
+                                            class="text-blue-800 bg-blue-100 dark:text-blue-50 dark:bg-blue-500">
+                                           Pending
                                         </div>
                                     </ng-container>
                                     <!-- Completed at least once -->
-                                    <div class="flex items-center">
+                                    <!-- <div class="flex items-center">
                                         <ng-container *ngIf="vehicleRequisition.progress.completed > 0">
                                             <mat-icon class="icon-size-5 text-green-600"
                                                 [svgIcon]="'heroicons_solid:badge-check'"
                                                 [matTooltip]="'You completed this vehicleRequisition at least once'">
                                             </mat-icon>
                                         </ng-container>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <!-- vehicleRequisition title & description -->
-                                <div class="mt-2 text-lg font-medium">{{vehicleRequisition.title}}</div>
-                                <div class="mt-0.5 line-clamp-2 text-secondary">{{vehicleRequisition.description}}</div>
+                                <div class="mt-2 text-lg font-medium">{{vehicleRequisition.description}}</div>
+                                <div class="mt-0.5 line-clamp-2 text-secondary">{{vehicleRequisition.requestComments}}</div>
                                 <div class="w-55 h-1 my-6 border-t-2"></div>
                                 <!-- vehicleRequisition time -->
                                 <div class="flex items-center leading-5 text-md text-secondary">
                                     <mat-icon class="icon-size-5 text-hint" [svgIcon]="'heroicons_solid:clock'">
                                     </mat-icon>
-                                    <div class="ml-1.5">{{vehicleRequisition.duration}} minutes</div>
+                                    <div class="ml-1.5">{{vehicleRequisition.vehicle.description}}</div>
                                 </div>
                                 <div class="flex">
                                     <mat-chip-list #chipList01 class="flex pt-5">
@@ -107,21 +100,20 @@
                                         <mat-chip [removable]="false" [selectable]="false">
                                             {{vehicleRequisition.endDate}}
                                         </mat-chip>
-
                                     </mat-chip-list>
                                 </div>
                             </div>
                             <!-- Footer -->
                             <div class="flex flex-col w-full mt-auto">
                                 <!-- vehicleRequisition progress -->
-                                <div class="relative h-0.5">
+                                <!-- <div class="relative h-0.5">
                                     <div class="z-10 absolute inset-x-0 h-6 -mt-3"
                                         [matTooltip]="vehicleRequisition.progress.currentStep / vehicleRequisition.totalSteps | percent"
                                         [matTooltipPosition]="'above'" [matTooltipClass]="'-mb-0.5'"></div>
                                     <mat-progress-bar class="h-0.5"
                                         [value]="(100 * vehicleRequisition.progress.currentStep) / vehicleRequisition.totalSteps">
                                     </mat-progress-bar>
-                                </div>
+                                </div> -->
 
                                 <!-- vehicleRequisition launch button -->
                                 <div class="px-6 py-4 text-right bg-gray-50 dark:bg-transparent">

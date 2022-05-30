@@ -6,23 +6,24 @@ import { MatDrawer } from '@angular/material/sidenav';
 import { fromEvent, Observable, Subject } from 'rxjs';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
 import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
-import { Department, User } from '../../models/users/users.types';
+import { User, Department, Tag } from 'app/modules/admin/models/users/users.types';
 import { UsersService } from '../../services/users/users.service';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateComponent } from '../create/create.component';
 
 @Component({
-    selector       : 'users-list',
-    templateUrl    : './list.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'users-list',
+    templateUrl: './list.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UsersListComponent implements OnInit, OnDestroy
-{
-    @ViewChild('matDrawer', {static: true}) matDrawer: MatDrawer;
+export class UsersListComponent implements OnInit, OnDestroy {
+    @ViewChild('matDrawer', { static: true }) matDrawer: MatDrawer;
 
     users$: Observable<User[]>;
 
     usersCount: number = 0;
-    usersTableColumns: string[] = ['name', 'email', 'phoneNumber', 'job'];
+    usersTableColumns: string[] = ['firstName', 'email', 'userName', 'lastName'];
     departments: Department[];
     drawerMode: 'side' | 'over';
     searchInputControl: FormControl = new FormControl();
@@ -38,9 +39,9 @@ export class UsersListComponent implements OnInit, OnDestroy
         private _usersService: UsersService,
         @Inject(DOCUMENT) private _document: any,
         private _router: Router,
-        private _fuseMediaWatcherService: FuseMediaWatcherService
-    )
-    {
+        private _fuseMediaWatcherService: FuseMediaWatcherService,
+        private _matDialog: MatDialog
+    ) {
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -50,21 +51,9 @@ export class UsersListComponent implements OnInit, OnDestroy
     /**
      * On init
      */
-    ngOnInit(): void
-    {
+    ngOnInit(): void {
         // Get the users
-        this.users$ = this._usersService.users$;
-        this._usersService.users$
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((users: User[]) => {
-
-                // Update the counts
-                this.usersCount = users.length;
-
-                // Mark for check
-                this._changeDetectorRef.markForCheck();
-            });
-
+        this.getUsers();
         // Get the user
         this._usersService.user$
             .pipe(takeUntil(this._unsubscribeAll))
@@ -77,17 +66,6 @@ export class UsersListComponent implements OnInit, OnDestroy
                 this._changeDetectorRef.markForCheck();
             });
 
-        // Get the departments
-        this._usersService.departments$
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((departments: Department[]) => {
-
-                // Update the departments
-                this.departments = departments;
-
-                // Mark for check
-                this._changeDetectorRef.markForCheck();
-            });
 
         // Subscribe to search input field value changes
         this.searchInputControl.valueChanges
@@ -103,8 +81,7 @@ export class UsersListComponent implements OnInit, OnDestroy
 
         // Subscribe to MatDrawer opened change
         this.matDrawer.openedChange.subscribe((opened) => {
-            if ( !opened )
-            {
+            if (!opened) {
                 // Remove the selected user when drawer closed
                 this.selectedUser = null;
 
@@ -116,15 +93,13 @@ export class UsersListComponent implements OnInit, OnDestroy
         // Subscribe to media changes
         this._fuseMediaWatcherService.onMediaChange$
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(({matchingAliases}) => {
+            .subscribe(({ matchingAliases }) => {
 
                 // Set the drawerMode if the given breakpoint is active
-                if ( matchingAliases.includes('lg') )
-                {
+                if (matchingAliases.includes('lg')) {
                     this.drawerMode = 'side';
                 }
-                else
-                {
+                else {
                     this.drawerMode = 'over';
                 }
 
@@ -146,11 +121,31 @@ export class UsersListComponent implements OnInit, OnDestroy
             });
     }
 
+    getUsers() {
+        this.users$ = this._usersService.users$;
+        this._usersService.users$
+            .pipe(takeUntil(this._unsubscribeAll))
+            .subscribe((users: User[]) => {
+
+                console.log(users);
+
+                // Update the counts
+                this.usersCount = users.length;
+
+                // Mark for check
+                this._changeDetectorRef.markForCheck();
+            });
+
+    }
+
+    navigateUsrDetail(id){
+        this._router.navigate(['./', id], { relativeTo: this._activatedRoute });
+
+    }
     /**
      * On destroy
      */
-    ngOnDestroy(): void
-    {
+    ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
@@ -163,10 +158,9 @@ export class UsersListComponent implements OnInit, OnDestroy
     /**
      * On backdrop clicked
      */
-    onBackdropClicked(): void
-    {
+    onBackdropClicked(): void {
         // Go back to the list
-        this._router.navigate(['./'], {relativeTo: this._activatedRoute});
+        this._router.navigate(['./'], { relativeTo: this._activatedRoute });
 
         // Mark for check
         this._changeDetectorRef.markForCheck();
@@ -175,14 +169,12 @@ export class UsersListComponent implements OnInit, OnDestroy
     /**
      * Create user
      */
-    createUser(): void
-    {
+    createUser(): void {
         // Create the user
         this._usersService.createUser().subscribe((newUser) => {
 
             // Go to the new user
-            this._router.navigate(['./', newUser.id], {relativeTo: this._activatedRoute});
-
+            this._router.navigate(['./', newUser.id], { relativeTo: this._activatedRoute });
             // Mark for check
             this._changeDetectorRef.markForCheck();
         });
@@ -194,8 +186,21 @@ export class UsersListComponent implements OnInit, OnDestroy
      * @param index
      * @param item
      */
-    trackByFn(index: number, item: any): any
-    {
+    trackByFn(index: number, item: any): any {
         return item.id || index;
+    }
+
+    openCreateUserDialog(): void {
+        // Open the dialog
+        const dialogRef = this._matDialog.open(CreateComponent, {
+            data: { isEdit: false },
+        });
+
+        dialogRef.afterClosed()
+            .subscribe((result) => {
+                console.log('Compose dialog was closed!');
+                // this();
+                this.getUsers();
+            });
     }
 }

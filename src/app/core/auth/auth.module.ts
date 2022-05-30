@@ -5,7 +5,8 @@ import { AuthInterceptor } from 'app/core/auth/auth.interceptor';
 
 @NgModule({
     imports: [
-        HttpClientModule
+        HttpClientModule,
+        // MatSnackBarModule
     ],
     providers: [
         AuthService,
@@ -14,7 +15,7 @@ import { AuthInterceptor } from 'app/core/auth/auth.interceptor';
             useClass: AuthInterceptor,
             multi: true
         }
-    ]
+        ]
 })
 export class AuthModule {
 }

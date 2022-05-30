@@ -69,6 +69,8 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
             .pipe(
                 switchMap((authenticated) => {
 
+                    console.log('Auth' + authenticated);
+                    
                     // If the user is not authenticated...
                     if (!authenticated) {
                         // Redirect to the sign-in page

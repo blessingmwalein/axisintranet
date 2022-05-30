@@ -16,8 +16,8 @@ import moment from 'moment';
 })
 export class VehicleRequisitionListComponent implements OnInit, OnDestroy {
     categories: Category[];
-    vehicleRequisitions: VehicleRequisition[];
-    filteredVehicleRequisitions: VehicleRequisition[];
+    vehicleRequisitions: any[];
+    filteredVehicleRequisitions: any[];
     filters: {
         categorySlug$: BehaviorSubject<string>;
         query$: BehaviorSubject<string>;
@@ -62,9 +62,10 @@ export class VehicleRequisitionListComponent implements OnInit, OnDestroy {
         // Get the vehicleRequisitions
         this._vehicleRequisitionService.vehicleRequisitions$
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((vehicleRequisitions: VehicleRequisition[]) => {
+            .subscribe((vehicleRequisitions: any[]) => {
+                console.log(vehicleRequisitions);
+                
                 this.vehicleRequisitions = this.filteredVehicleRequisitions = vehicleRequisitions;
-
                 // Mark for check
                 this._changeDetectorRef.markForCheck();
             });

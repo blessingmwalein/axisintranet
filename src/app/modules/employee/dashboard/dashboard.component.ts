@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'app/core/user/user.service';
-import { User } from 'app/core/user/user.types';
-import { ApexOptions } from 'ng-apexcharts';
+import { User } from 'app/modules/admin/models/users/users.types';import { ApexOptions } from 'ng-apexcharts';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -55,7 +54,7 @@ export class DashboardComponent implements OnInit {
         // Mark for check
         this._changeDetectorRef.markForCheck();
       });
-    
+
 
     // Attach SVG fill fixer to all ApexCharts
     window['Apex'] = {

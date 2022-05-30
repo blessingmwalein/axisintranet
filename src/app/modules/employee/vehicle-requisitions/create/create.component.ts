@@ -16,16 +16,20 @@ export class CreateComponent implements OnInit {
 
   horizontalStepperForm: FormGroup;
   formFieldHelpers: string[] = [''];
+  vehicles: any[];
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
   constructor(private _formBuilder: FormBuilder, private _vehicleReqService: VehicleRequisitionService, private _router: Router,) { }
 
   ngOnInit(): void {
+    this._vehicleReqService.getVehicles().subscribe(data => {
+      this.vehicles = data;
+    })
+
     this.horizontalStepperForm = this._formBuilder.group({
       step1: this._formBuilder.group({
-        id: [''],
-        description: ['', [Validators.required]],
-        duration: ['', Validators.required],
+        requestComments: ['', [Validators.required]],
+        vehicleId: ['', Validators.required],
       }),
       step2: this._formBuilder.group({
         startDate: ['', Validators.required],
@@ -49,18 +53,19 @@ export class CreateComponent implements OnInit {
 
     this.horizontalStepperForm.disable();
 
-    setTimeout(() => {
-      this._router.navigate(['axis/employee/requisitions/vehicle']);
-    }, 3000);
-    // this._vehicleReqService.createRequ({...this.horizontalStepperForm.value.step1 , ...this.horizontalStepperForm.value.step2})
-    //     .subscribe(() => {
-    //       this._router.navigate(['axis/employee/requisitions/vehicle']);
-    //   },
-    //   (response) => {
-    //       console.log(response);
-
-    //       // Re-enable the form
-    //       this.horizontalStepperForm.enable();
-    //   });
+    // setTimeout(() => {
+    //   this._router.navigate(['axis/employee/requisitions/vehicle']);
+    // }, 3000);
+     
+    
+    this._vehicleReqService.createRequ({...this.horizontalStepperForm.value.step1 , ...this.horizontalStepperForm.value.step2})
+        .subscribe(() => {
+          this._router.navigate(['axis/employee/requisitions/vehicle']);
+      },
+      (error) => {
+          console.log(error);
+          // Re-enable the form
+          this.horizontalStepperForm.enable();
+      });
   }
 }
