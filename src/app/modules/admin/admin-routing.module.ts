@@ -41,8 +41,8 @@ const routes: Routes = [
     component: DepartmentsComponent
   },
   {
-    path :'create/user',
-    component:CreateComponent
+    path: 'create/user',
+    component: CreateComponent
   },
   {
     path: 'users',
@@ -70,7 +70,7 @@ const routes: Routes = [
           }
         ]
       },
-     
+
     ]
   },
   {

@@ -16,6 +16,7 @@ import { AdminModule } from './modules/admin/admin.module';
 import { ManagerModule } from './modules/manager/manager.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FinanceManagerModule } from './modules/finance-manager/finance-manager.module';
+import { EmployeeXModule } from './modules/employee-x/employee-x.module';
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy: PreloadAllModules,
@@ -44,7 +45,8 @@ const routerConfig: ExtraOptions = {
         MarkdownModule.forRoot({}),
         AdminModule,
         ManagerModule,
-        FinanceManagerModule
+        FinanceManagerModule,
+        EmployeeXModule,
     ],
     bootstrap: [
         AppComponent

@@ -137,4 +137,8 @@ export class UserService {
     setUser(user: User) : void {
         sessionStorage.setItem('user', JSON.stringify(user));
     }
+
+    getLocalUser() : User {
+        return JSON.parse(sessionStorage.getItem('user'))
+    }
 }

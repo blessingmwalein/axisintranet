@@ -109,10 +109,10 @@ export class UsersDetailsComponent implements OnInit, OnDestroy {
 
                 this.editUserForm.patchValue({
                     id: this.user.id,
-                    firstName: this.user.firstname,
-                    lastName: this.user.lastname,
+                    firstName: this.user.firstName,
+                    lastName: this.user.lastName,
                     email: this.user.email,
-                    userName: this.user.username,
+                    userName: this.user.userName,
                     roles: this.user.roles,
                     lineApprover: this.user.lineApprover
                 })
@@ -175,9 +175,9 @@ export class UsersDetailsComponent implements OnInit, OnDestroy {
         // Update the user on the server
 
         this._userService.editUserProfile(user.id, user).subscribe(() => {
-            this._alertService.displayMessage(`User ${this.user.username} updated`)
-            this._userService.assignUserRoles({ userName: this.user.username, roles: user.roles }).subscribe(response => {
-                this._alertService.displayMessage(`User ${this.user.username} roles updated`)
+            this._alertService.displayMessage(`User ${this.user.userName} updated`)
+            this._userService.assignUserRoles({ userName: this.user.userName, roles: user.roles }).subscribe(response => {
+                this._alertService.displayMessage(`User ${this.user.userName} roles updated`)
             }, error => {
                 this._alertService.displayError("Failed to update user roles try again")
             })
@@ -209,12 +209,12 @@ export class UsersDetailsComponent implements OnInit, OnDestroy {
                 // Get the current user's id
                 const id = this.user.id;
                 this._userService.deleteUser(id).subscribe(response => {
-                    this._alertService.displayMessage(`User ${this.user.username} deleted`);
+                    this._alertService.displayMessage(`User ${this.user.userName} deleted`);
                     this._router.navigate(['../'], { relativeTo: this._activatedRoute });
 
                 }, error => {
                     console.log(error);
-                    this._alertService.displayError(`Failed to delete user  ${this.user.username} try again`);
+                    this._alertService.displayError(`Failed to delete user  ${this.user.userName} try again`);
                 })
                 this._changeDetectorRef.markForCheck();
             }

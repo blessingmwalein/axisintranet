@@ -71,14 +71,16 @@ export class AuthSignInComponent implements OnInit {
         // Sign in
         this._authService.signIn(this.signInForm.value)
             .subscribe(
-                (data) => {
+                (user) => {
                     this._userService.getAllRoles().subscribe((roles: Role[]): void => {
-                        console.log(data);
-                        this._userService.get(data.id).subscribe((user: any) => {
-                            console.log(user);
-                            this._userService.setUser(user)
+                        console.log(user);
+                        this._userService.setUser(user)
                             this._router.navigateByUrl(this.userRedirectCallBack(user.roles[0]));
-                        });
+                        // this._userService.get(data.id).subscribe((user: any) => {
+                        //     console.log(user);
+                        //     this._userService.setUser(user)
+                        //     this._router.navigateByUrl(this.userRedirectCallBack(user.roles[0]));
+                        // });
                     });
                 },
                 (error) => {

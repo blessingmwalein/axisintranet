@@ -9,7 +9,9 @@ import { UserService } from 'app/core/user/user.service';
 import { AlertService } from 'app/modules/alert/snackbar/alert.service';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { Department } from '../../models/departments/department.types';
 import { Role } from '../../models/users/role.types';
+import { DepartmentService } from '../../services/departments/department.service';
 
 @Component({
   selector: 'app-create',
@@ -29,8 +31,10 @@ export class CreateComponent implements OnInit {
   roles: Role[];
   rolesEditMode: boolean = false;
   filteredRoles: Role[];
+  departments : Department[]
 
   constructor(
+    private _departmentService:DepartmentService,
     public matDialogRef: MatDialogRef<CreateComponent>,
     private _overlay: Overlay,
     private _fuseConfirmationService: FuseConfirmationService,
@@ -47,10 +51,12 @@ export class CreateComponent implements OnInit {
       password: ['', [Validators.required]],
       confirmationPassword: [''],
       lineApprover: ['Philip'],
-      roles: [[]]
+      roles: [[]],
+      departmentId : ['', [Validators.required]]
     });
 
     this.getRoles();
+    this.getDepartments();
 
   }
 
@@ -77,6 +83,15 @@ export class CreateComponent implements OnInit {
     }, error => {
       console.log(error);
       this.alert.displayError('Failed to fetch roles')
+    })
+  }
+
+  getDepartments() {
+    this._departmentService.getDepartments().subscribe((departments: any) => {
+      this.departments = departments;
+    }, error => {
+      console.log(error);
+      this.alert.displayError('Failed to fetch departments')
     })
   }
 

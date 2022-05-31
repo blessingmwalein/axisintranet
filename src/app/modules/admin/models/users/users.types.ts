@@ -38,9 +38,9 @@ export interface Tag {
 export interface User {
     id: string;
     email: string;
-    username: string;
-    firstname: string;
-    lastname: string;
+    userName: string;
+    firstName: string;
+    lastName: string;
     departmentId: number;
     lineApprover: number;
     roles: string[];

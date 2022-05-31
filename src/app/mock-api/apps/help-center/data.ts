@@ -74,7 +74,7 @@ export const faqs = [
     {
         id: 'f55c023a-785e-4f0f-b5b7-47da75224deb',
         categoryId: '395b0d41-b9a8-4cd6-8b5c-f07855e82d62',
-        question: 'I\'ve forgotten my username or password',
+        question: 'I\'ve forgotten my userName or password',
         answer: 'In exercitation sunt ad anim commodo sunt do in sunt est officia amet ex ullamco do nisi consectetur lorem proident lorem adipisicing incididunt consequat fugiat voluptate sint est anim officia.\n\nVelit sint aliquip elit culpa amet eu mollit veniam esse deserunt ex occaecat quis lorem minim occaecat culpa esse veniam enim duis excepteur ipsum esse ut ut velit cillum adipisicing.'
     },
     {
@@ -390,8 +390,8 @@ export const guides = [
     {
         id: '60df0d4c-dda1-439c-bd44-179c57a7597d',
         categoryId: '41fdf071-aec4-49de-9dd4-b4f746596928',
-        slug: 'changing-your-username',
-        title: 'Changing your username',
+        slug: 'changing-your-userName',
+        title: 'Changing your userName',
         subtitle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt'
     },
     {

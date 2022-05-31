@@ -68,7 +68,7 @@ export const appRoutes: Route[] = [
             {
                 path: 'axis',
                 children: [
-                    { path: 'employee', loadChildren: () => import('app/modules/employee/employee.module').then(m => m.EmployeeModule) },
+                    { path: 'employee', loadChildren: () => import('app/modules/employee-x/employee-x.module').then(m => m.EmployeeXModule) },
                     { path: 'manager', loadChildren: () => import('app/modules/manager/manager.module').then(m => m.ManagerModule) },
                     { path: 'finance-manager', loadChildren: () => import('app/modules/finance-manager/finance-manager.module').then(m => m.FinanceManagerModule) },
                     { path: 'admin', loadChildren: () => import('app/modules/admin/admin.module').then(m => m.AdminModule) },
@@ -77,4 +77,5 @@ export const appRoutes: Route[] = [
             { path: '**', redirectTo: '404-not-found' }
         ]
     }
+
 ];

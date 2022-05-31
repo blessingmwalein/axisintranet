@@ -13,7 +13,7 @@
                     <mat-icon class="text-white" [svgIcon]="'heroicons_outline:x'"></mat-icon>
                 </button>
             </div>
-        </div>
+        </div>x
 
         <!-- User -->
         <div class="relative flex flex-col flex-auto items-center p-6 pt-0 sm:p-12 sm:pt-0">
@@ -27,7 +27,7 @@
 
                         <div
                             class="flex items-center justify-center w-full h-full rounded overflow-hidden uppercase text-8xl font-bold leading-none bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
-                            {{user.firstname.charAt(0)}}
+                            {{user.firstName.charAt(0)}}
                         </div>
                     </div>
                     <!-- Actions -->
@@ -40,7 +40,7 @@
                 </div>
 
                 <!-- Name -->
-                <div class="mt-3 text-4xl font-bold truncate">{{user.firstname}} {{user.lastname}}</div>
+                <div class="mt-3 text-4xl font-bold truncate">{{user.firstName}} {{user.lastName}}</div>
 
 
                 <!-- <ng-container *ngIf="user.tags.length">
@@ -59,7 +59,7 @@
                     <ng-container>
                         <div class="flex sm:items-center">
                             <mat-icon [svgIcon]="'heroicons_outline:briefcase'"></mat-icon>
-                            <div class="ml-6 leading-6">{{user.username}}</div>
+                            <div class="ml-6 leading-6">{{user.userName}}</div>
                         </div>
                     </ng-container>
 
