@@ -201,6 +201,16 @@
 
                         </mat-form-field>
                     </div>
+                    <div class="mt-8">
+                        <mat-form-field class="fuse-mat-no-subscript w-full">
+                            <mat-label>Department</mat-label>
+                            <mat-select [placeholder]="'Language'" [formControlName]="'departmentId'">
+                                <mat-option *ngFor="let department of departments" [value]="department.id">
+                                    {{department.description}}</mat-option>
+                            </mat-select>
+                            <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:translate'"></mat-icon>
+                        </mat-form-field>
+                    </div>
 
 
                     <!-- Emails -->

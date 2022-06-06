@@ -1,0 +1,151 @@
+<div class="flex flex-auto">
+
+
+    <form class="flex flex-col flex-auto m-3 p-6 pt-10 sm:p-8 sm:pt-10 overflow-y-auto bg-card shadow rounded-2xl">
+
+        <!-- Header -->
+        <div class="flex items-center justify-between -mt-3 -ml-4">
+
+            <button class="pr-4 pl-3.5" (click)="openApproveDialog()" mat-button>
+
+                <ng-container>
+                    <div class="flex items-center justify-center">
+                        <mat-icon [svgIcon]="'heroicons_outline:check-circle'"></mat-icon>
+                        <span class="ml-2 font-semibold">Approve Requisition</span>
+                    </div>
+                </ng-container>
+            </button>
+
+            <div class="flex items-center">
+                <!-- More menu -->
+                <button mat-icon-button [matMenuTriggerFor]="moreMenu">
+                    <mat-icon [svgIcon]="'heroicons_outline:dots-vertical'"></mat-icon>
+                </button>
+                <mat-menu #moreMenu="matMenu">
+                    <button mat-menu-item (click)="openDeleteDialog(vehicleRequisition.id)">
+                        <mat-icon [svgIcon]="'heroicons_outline:trash'"></mat-icon>
+                        <span>Decline Requsition</span>
+                    </button>
+                </mat-menu>
+                <!-- Close button -->
+                <button mat-icon-button [routerLink]="['../']">
+                    <mat-icon [svgIcon]="'heroicons_outline:x'"></mat-icon>
+                </button>
+            </div>
+
+        </div>
+
+        <mat-divider class="mt-6 mb-8"></mat-divider>
+
+        <!-- Title -->
+        <div>
+            <mat-form-field class="fuse-mat-textarea fuse-mat-no-subscript w-full">
+                <mat-label>Task title</mat-label>
+                <textarea disabled matInput [spellcheck]="false" [ngModelOptions]="{standalone: true}" ngModel="Title"
+                    matTextareaAutosize #titleField></textarea>
+            </mat-form-field>
+        </div>
+
+        <!-- Tags -->
+        <div class="mt-8">
+            <div class="font-medium mb-1.5">Approvals</div>
+            <div class="flex flex-wrap items-center -m-1.5">
+                <!-- Tags -->
+                <ng-container>
+                    <ng-container>
+                        <div
+                            class="flex items-center justify-center px-4 m-1.5 rounded-full leading-9 text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
+                            <span class="text-md font-medium whitespace-nowrap"> Date Requested
+                                :{{vehicleRequisition.dateRequested}}</span>
+                        </div>
+                    </ng-container>
+                    <ng-container>
+                        <div
+                            class="flex items-center justify-center px-4 m-1.5 rounded-full leading-9 text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
+                            <span class="text-md font-medium whitespace-nowrap"> Line Manager Approved On
+                                :{{vehicleRequisition.lineApproverDate}}</span>
+                        </div>
+                    </ng-container>
+                    <ng-container>
+                        <div
+                            class="flex items-center justify-center px-4 m-1.5 rounded-full leading-9 text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
+                            <span class="text-md font-medium whitespace-nowrap"> Finace Manager Approved On
+                                :{{vehicleRequisition.financeApproverDate}}</span>
+                        </div>
+                    </ng-container>
+
+                </ng-container>
+            </div>
+        </div>
+
+        <!-- Priority and Due date -->
+        <div class="flex flex-wrap items-center mt-8">
+            <!-- Due date -->
+            <div class="mr-2">
+                <div class="font-medium">Start date</div>
+                <div class="relative flex items-center mt-1.5 px-4 leading-9 rounded-full cursor-pointer text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700"
+                    (click)="dueDatePicker.open()">
+                    <mat-icon class="icon-size-5 text-current" [svgIcon]="'heroicons_solid:calendar'"></mat-icon>
+                    <span class="ml-2 text-md font-medium">
+                        <ng-container>{{vehicleRequisition.startDate}}</ng-container>
+                    </span>
+                    <mat-form-field
+                        class="fuse-mat-no-subscript fuse-mat-dense invisible absolute inset-0 -mt-2.5 opacity-0 pointer-events-none">
+                        <input disabled matInput [(ngModel)]="vehicleRequisition.startDate"
+                            [matDatepicker]="dueDatePicker">
+                        <mat-datepicker #dueDatePicker>
+                            <mat-datepicker-actions>
+                                <button mat-button matDatepickerCancel>Clear
+                                </button>
+                                <button class="" mat-flat-button [color]="'primary'" matDatepickerApply>Select
+                                </button>
+                            </mat-datepicker-actions>
+                        </mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="">
+                <div class="font-medium">End date</div>
+                <div class="relative flex items-center mt-1.5 px-4 leading-9 rounded-full cursor-pointer text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700"
+                    (click)="dueDatePicker.open()">
+                    <mat-icon class="icon-size-5 text-current" [svgIcon]="'heroicons_solid:calendar'"></mat-icon>
+                    <span class="ml-2 text-md font-medium">
+                        <ng-container>{{vehicleRequisition.endDate}}</ng-container>
+                    </span>
+                    <mat-form-field
+                        class="fuse-mat-no-subscript fuse-mat-dense invisible absolute inset-0 -mt-2.5 opacity-0 pointer-events-none">
+                        <input disabled matInput [ngModelOptions]="{standalone: true}"
+                            [(ngModel)]="vehicleRequisition.endDate" [matDatepicker]="dueDatePicker">
+                        <mat-datepicker #dueDatePicker>
+                            <mat-datepicker-actions>
+                                <button mat-button matDatepickerCancel>Clear
+                                </button>
+                                <button class="" mat-flat-button [color]="'primary'" matDatepickerApply>Select
+                                </button>
+                            </mat-datepicker-actions>
+                        </mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+            <ng-container>
+                <div
+                    class="flex items-center justify-center px-4 m-1.5 mt-8 rounded-full leading-9 text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
+                    <span class="text-md font-medium whitespace-nowrap"> Duration
+                        :{{vehicleRequisition.duration}} hours</span>
+                </div>
+            </ng-container>
+
+        </div>
+
+        <!-- Notes -->
+        <div class="mt-8">
+            <mat-form-field class="fuse-mat-textarea fuse-mat-no-subscript w-full">
+                <mat-label>Comments</mat-label>
+                <textarea matInput [spellcheck]="false" disabled
+                    matTextareaAutosize>{{vehicleRequisition.requestComments}}</textarea>
+            </mat-form-field>
+        </div>
+
+    </form>
+
+</div>

@@ -21,6 +21,9 @@ export class DeviceRequisitionService {
     getAllDeviceRequisitions(): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}DeviceRequisition?isLoggedInUser=true`);
     }
+    getAllDeviceRequisitionsLogged(): Observable<any[]> {
+        return this._httpClient.get<any[]>(`${this._baseUrl}DeviceRequisition?isLoggedInUser=false`);
+    }
 
     getDeviceRequisition(id: string): Observable<any> {
         return this._httpClient.get<any[]>(`${this._baseUrl}DeviceRequisition/${id}`);

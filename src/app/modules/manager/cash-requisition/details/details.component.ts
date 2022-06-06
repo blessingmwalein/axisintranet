@@ -4,13 +4,11 @@ import { MatTabGroup } from '@angular/material/tabs';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
-import { Category } from '../../models/cash-requisitions/cash-requisitions.types';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from 'app/modules/alert/snackbar/alert.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
-import { VehicleRequisition } from '../../models/vehicle-requisitions/vehicle-requisitions.types';
-import { VehicleRequisitionService } from '../../services/vehicle-requisitions/vehicle-requisitions.service';
+import { CashRequisitionService } from 'app/modules/employee-x/services/cash-requisitions/cash-requisitions.service';
 
 @Component({
     selector: 'academy-details',
@@ -18,21 +16,21 @@ import { VehicleRequisitionService } from '../../services/vehicle-requisitions/v
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VehicleRequisitionDetailsComponent implements OnInit {
-    @ViewChild('vehicleRequisitionSteps', { static: true }) vehicleRequisitionSteps: MatTabGroup;
-    vehicleRequisition: VehicleRequisition;
+export class CashRequisitionDetailsComponent implements OnInit {
+    @ViewChild('cashRequisitionSteps', { static: true }) cashRequisitionSteps: MatTabGroup;
+    cashRequisition: any;
     currentStep: number = 0;
     drawerMode: 'over' | 'side' = 'side';
     drawerOpened: boolean = true;
     isLoading: boolean = true;
-    vehicleReqForm: FormGroup;
+    cashReqForm: FormGroup;
 
     /**
      * Constructor
      */
     constructor(
         @Inject(DOCUMENT) private _document: Document,
-        private _vehicleRequisitionService: VehicleRequisitionService,
+        private _cashRequisitionService: CashRequisitionService,
         private _changeDetectorRef: ChangeDetectorRef,
         private _elementRef: ElementRef,
         private _fuseMediaWatcherService: FuseMediaWatcherService,
@@ -47,9 +45,9 @@ export class VehicleRequisitionDetailsComponent implements OnInit {
 
     ngOnInit(): void {
 
-        this.getVehicleReq()
+        this.getCashReq()
 
-        this.vehicleReqForm = this._formBuilder.group({
+        this.cashReqForm = this._formBuilder.group({
             title: [''],
             status: [''],
             description: [''],
@@ -65,9 +63,9 @@ export class VehicleRequisitionDetailsComponent implements OnInit {
     }
 
 
-    getVehicleReq() {
-        this._vehicleRequisitionService.getVehicelRequisition(this._activatedRoute.snapshot.params['id']).subscribe(response => {
-            this.vehicleRequisition = response;
+    getCashReq() {
+        this._cashRequisitionService.getCashRequisition(this._activatedRoute.snapshot.params['id']).subscribe(response => {
+            this.cashRequisition = response;
             this.isLoading = false
         }, error => {
             console.log(error);
@@ -81,7 +79,7 @@ export class VehicleRequisitionDetailsComponent implements OnInit {
         this.currentStep = step;
 
         // Go to the step
-        this.vehicleRequisitionSteps.selectedIndex = this.currentStep;
+        this.cashRequisitionSteps.selectedIndex = this.currentStep;
 
         // Mark for check
         this._changeDetectorRef.markForCheck();
@@ -108,7 +106,7 @@ export class VehicleRequisitionDetailsComponent implements OnInit {
      */
     goToNextStep(): void {
         // Return if we already on the last step
-        if (this.currentStep === this.vehicleRequisition.totalSteps - 1) {
+        if (this.currentStep === this.cashRequisition.totalSteps - 1) {
             return;
         }
 
@@ -159,9 +157,9 @@ export class VehicleRequisitionDetailsComponent implements OnInit {
 
     deteleVehicelReq(id: string) {
         this.isLoading = true;
-        this._vehicleRequisitionService.deleteVehicelRequisition(id).subscribe(response => {
+        this._cashRequisitionService.deleteVehicelRequisition(id).subscribe(response => {
             this._alertService.displayMessage('Requisition Deleted');
-            this._router.navigateByUrl('axis/employee/requisitions/vehicle')
+            this._router.navigateByUrl('axis/manager/requisitions/cash')
             this.isLoading = false;
         }, error => {
             this.isLoading = false;

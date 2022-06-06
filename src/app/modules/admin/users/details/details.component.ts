@@ -13,6 +13,7 @@ import { UsersListComponent } from '../list/list.component';
 import { UserService } from 'app/core/user/user.service';
 import { Role } from '../../models/users/role.types';
 import { AlertService } from 'app/modules/alert/snackbar/alert.service';
+import { DepartmentService } from '../../services/departments/department.service';
 
 @Component({
     selector: 'users-details',
@@ -61,7 +62,9 @@ export class UsersDetailsComponent implements OnInit, OnDestroy {
         private _router: Router,
         private _overlay: Overlay,
         private _viewContainerRef: ViewContainerRef,
-        private _alertService: AlertService
+        private _alertService: AlertService,
+        private _departmentService: DepartmentService,
+
     ) {
     }
 
@@ -84,9 +87,11 @@ export class UsersDetailsComponent implements OnInit, OnDestroy {
             email: ['', [Validators.required, Validators.email]],
             lineApprover: ['Philip'],
             roles: [[]],
-            id: ['']
+            id: [''],
+            departmentId: ['']
         });
 
+        this.getDepartments();
         // Get the users
         this._usersService.users$
             .pipe(takeUntil(this._unsubscribeAll))
@@ -114,6 +119,7 @@ export class UsersDetailsComponent implements OnInit, OnDestroy {
                     email: this.user.email,
                     userName: this.user.userName,
                     roles: this.user.roles,
+                    departmentId: this.user.departmentsId,
                     lineApprover: this.user.lineApprover
                 })
                 this.loading = false;
@@ -122,6 +128,14 @@ export class UsersDetailsComponent implements OnInit, OnDestroy {
             this.loading = false
         });
 
+    }
+    getDepartments() {
+        this._departmentService.getDepartments().subscribe((departments: any) => {
+            this.departments = departments;
+        }, error => {
+            console.log(error);
+            this._alertService.displayError('Failed to fetch departments')
+        })
     }
 
     /**

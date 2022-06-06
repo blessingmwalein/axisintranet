@@ -42,6 +42,7 @@ export interface User {
     firstName: string;
     lastName: string;
     departmentId: number;
+    departmentsId: number;
     lineApprover: number;
     roles: string[];
     avatar?: string | null;

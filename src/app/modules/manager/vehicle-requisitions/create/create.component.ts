@@ -3,9 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
-import { VehicleRequisition } from 'app/modules/employee-x/models/vehicle-requisitions/vehicle-requisitions.types';
 import { AlertService } from 'app/modules/alert/snackbar/alert.service';
-import { VehicleRequisitionService } from '../../services/vehicle-requisitions/vehicle-requisitions.service';
+import { VehicleRequisitionService } from 'app/modules/employee-x/services/vehicle-requisitions/vehicle-requisitions.service';
 
 
 @Component({
@@ -55,7 +54,7 @@ export class CreateComponent implements OnInit {
       .subscribe(() => {
         this.horizontalStepperForm.enable();
         this._alertService.displayMessage("Vehicle requisition submitted")
-        this._router.navigate(['axis/employee/requisitions/vehicle']);
+        this._router.navigate(['axis/manager/requisitions/vehicle']);
       },
         (error) => {
           console.log(error);

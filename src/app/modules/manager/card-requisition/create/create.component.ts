@@ -3,9 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
-import { VehicleRequisition } from 'app/modules/employee-x/models/vehicle-requisitions/vehicle-requisitions.types';
 import { AlertService } from 'app/modules/alert/snackbar/alert.service';
-import { VehicleRequisitionService } from '../../services/vehicle-requisitions/vehicle-requisitions.service';
+import { CardRequisitionService } from 'app/modules/employee-x/services/card-requisitions/card-requisitions.service';
 
 
 @Component({
@@ -13,25 +12,26 @@ import { VehicleRequisitionService } from '../../services/vehicle-requisitions/v
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.scss']
 })
-export class CreateComponent implements OnInit {
+export class CreateCardReqComponent implements OnInit {
 
   horizontalStepperForm: FormGroup;
   formFieldHelpers: string[] = [''];
-  vehicles: any[];
+  cards: any[];
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
-  constructor(private _alertService: AlertService, private _formBuilder: FormBuilder, private _vehicleReqService: VehicleRequisitionService, private _router: Router,) { }
+  constructor(private _alertService: AlertService, private _formBuilder: FormBuilder, private _cardReqService: CardRequisitionService, private _router: Router,) { }
 
   ngOnInit(): void {
-    this._vehicleReqService.getVehicles().subscribe(data => {
-      this.vehicles = data;
+    this._cardReqService.getCards().subscribe(data => {
+      this.cards = data;
     })
 
     this.horizontalStepperForm = this._formBuilder.group({
       step1: this._formBuilder.group({
         requestComments: ['', [Validators.required]],
-        vehicleId: ['', Validators.required],
-        title: ['', Validators.required]
+        cardId: ['', Validators.required],
+        title: ['', Validators.required],
+        amount: ['', Validators.required]
       }),
       step2: this._formBuilder.group({
         startDate: ['', Validators.required],
@@ -51,11 +51,11 @@ export class CreateComponent implements OnInit {
     console.log('Clicked');
 
     this.horizontalStepperForm.disable();
-    this._vehicleReqService.createVehicleReq({ ...this.horizontalStepperForm.value.step1, ...this.horizontalStepperForm.value.step2 })
+    this._cardReqService.createCardReq({ ...this.horizontalStepperForm.value.step1, ...this.horizontalStepperForm.value.step2 })
       .subscribe(() => {
         this.horizontalStepperForm.enable();
-        this._alertService.displayMessage("Vehicle requisition submitted")
-        this._router.navigate(['axis/employee/requisitions/vehicle']);
+        this._alertService.displayMessage("Card requisition submitted")
+        this._router.navigate(['axis/manager/requisitions/card']);
       },
         (error) => {
           console.log(error);

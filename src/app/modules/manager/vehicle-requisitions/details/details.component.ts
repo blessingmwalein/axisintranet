@@ -4,13 +4,14 @@ import { MatTabGroup } from '@angular/material/tabs';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
-import { Category } from '../../models/cash-requisitions/cash-requisitions.types';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from 'app/modules/alert/snackbar/alert.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
-import { VehicleRequisition } from '../../models/vehicle-requisitions/vehicle-requisitions.types';
-import { VehicleRequisitionService } from '../../services/vehicle-requisitions/vehicle-requisitions.service';
+import { ApproveReqComponent } from '../approve-req/approve-req.component';
+import { MatDialog } from '@angular/material/dialog';
+import { VehicleRequisition } from 'app/modules/employee-x/models/vehicle-requisitions/vehicle-requisitions.types';
+import { VehicleRequisitionService } from 'app/modules/employee-x/services/vehicle-requisitions/vehicle-requisitions.service';
 
 @Component({
     selector: 'academy-details',
@@ -40,8 +41,8 @@ export class VehicleRequisitionDetailsComponent implements OnInit {
         private _alertService: AlertService,
         private _formBuilder: FormBuilder,
         private _router: Router,
-        private _fuseConfirmationService: FuseConfirmationService
-
+        private _fuseConfirmationService: FuseConfirmationService,
+        private _matDialog: MatDialog,
     ) {
     }
 
@@ -61,6 +62,10 @@ export class VehicleRequisitionDetailsComponent implements OnInit {
             requestComments: [''],
             approved: [''],
             cancelled: [''],
+
+            id: [''],
+            lineApproved: [true],
+            lineApprovedDate: [""]
         });
     }
 
@@ -142,14 +147,14 @@ export class VehicleRequisitionDetailsComponent implements OnInit {
 
     openDeleteDialog(id: string) {
         const dialogRef = this._fuseConfirmationService.open({
-            message: "Are sure you want to delete this requisition ?",
+            message: "Are sure you want to decline this requisition ?",
             title: "Delete Requisition Confirmation"
         });
 
         dialogRef.afterClosed().subscribe((result) => {
             console.log(result);
             if (result == 'confirmed') {
-                this.deteleVehicelReq(id)
+                // this.deteleVehicelReq(id)
             }
             if (result == 'cancelled' || result == undefined) {
                 this._alertService.displayError('Requsition delete canceled')
@@ -157,11 +162,40 @@ export class VehicleRequisitionDetailsComponent implements OnInit {
         });
     }
 
+    openApproveDialog() {
+        const dialogRef = this._fuseConfirmationService.open({
+            message: "Are sure you want to approve this requisition ?",
+            title: "Approve  Requisition"
+        });
+
+        dialogRef.afterClosed().subscribe((result) => {
+            console.log(result);
+            if (result == 'confirmed') {
+                this.approveVehicleReq()
+            }
+            if (result == 'cancelled' || result == undefined) {
+                this._alertService.displayError('Department delete canceled')
+            }
+        });
+    }
+    approveVehicleReq() {
+
+        this.isLoading = true;
+        this._vehicleRequisitionService.lineManagerApproveReq(this.vehicleRequisition.id, { id: this.vehicleRequisition.id.toString(), lineApproved: this.vehicleReqForm.value.lineApproved, lineApprovedDate: new Date() }).subscribe(response => {
+            this._alertService.displayMessage('Requisition Approved');
+            this._router.navigateByUrl('axis/manager/requisitions/vehicle')
+            this.isLoading = false;
+        }, error => {
+            this.isLoading = false;
+            this._alertService.displayError('Try again')
+        })
+    }
+
     deteleVehicelReq(id: string) {
         this.isLoading = true;
         this._vehicleRequisitionService.deleteVehicelRequisition(id).subscribe(response => {
             this._alertService.displayMessage('Requisition Deleted');
-            this._router.navigateByUrl('axis/employee/requisitions/vehicle')
+            this._router.navigateByUrl('axis/manager/requisitions/vehicle')
             this.isLoading = false;
         }, error => {
             this.isLoading = false;

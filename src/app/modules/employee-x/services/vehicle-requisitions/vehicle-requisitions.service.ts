@@ -20,6 +20,9 @@ export class VehicleRequisitionService {
     getAllVehicleRequisitions(): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}VehicleRequisition?isLoggedInUser=true`);
     }
+    getAllVehicleRequisitionsNotLogged(): Observable<any[]> {
+        return this._httpClient.get<any[]>(`${this._baseUrl}VehicleRequisition?isLoggedInUser=false`);
+    }
 
     getVehicelRequisition(id: string): Observable<any> {
         return this._httpClient.get<any[]>(`${this._baseUrl}VehicleRequisition/${id}`);
@@ -31,6 +34,9 @@ export class VehicleRequisitionService {
 
     createVehicleReq(vehicleReq: any): Observable<any[]> {
         return this._httpClient.post<any>(`${this._baseUrl}VehicleRequisition`, vehicleReq);
+    }
+    lineManagerApproveReq(id: string, vehicleReq: any): Observable<any[]> {
+        return this._httpClient.put<any>(`${this._baseUrl}VehicleRequisition/changelineapproval/${id}`, vehicleReq);
     }
     getVehicles(): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}Vehicles`);
