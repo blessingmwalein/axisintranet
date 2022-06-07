@@ -14,8 +14,8 @@ export interface VehicleRequisition {
     startDate: string;
     endDate: string;
     requestComments: string;
-    lineApproverDate: string;
-    financeApproverDate: string;
+    lineApprovedDate: string;
+    financeApprovedDate: string;
     dateRequested: string;
     steps?: {
         order?: number;

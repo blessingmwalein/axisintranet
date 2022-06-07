@@ -54,8 +54,9 @@ export class DeviceRequisitionDetailsComponent implements OnInit {
             duration: [''],
             startDate: [''],
             endDate: [''],
-            financeApproverDate: [''],
-            lineApproverDate: [''],
+            financeApprovedDate: [''],
+            lineApprovedDate: [''],
+            lineApproved:[true],
             requestComments: [''],
             approved: [''],
             cancelled: [''],
@@ -138,6 +139,34 @@ export class DeviceRequisitionDetailsComponent implements OnInit {
         });
     }
 
+    openApproveDialog() {
+        const dialogRef = this._fuseConfirmationService.open({
+            message: "Are sure you want to approve this requisition ?",
+            title: "Approve  Requisition"
+        });
+
+        dialogRef.afterClosed().subscribe((result) => {
+            console.log(result);
+            if (result == 'confirmed') {
+                this.approveVehicleReq()
+            }
+            if (result == 'cancelled' || result == undefined) {
+                this._alertService.displayError('Department delete canceled')
+            }
+        });
+    }
+    approveVehicleReq() {
+
+        this.isLoading = true;
+        this._deviceRequisitionService.lineManagerApproveReq(this.deviceRequisition.id, { id: this.deviceRequisition.id.toString(), lineApproved: this.deviceReqForm.value.lineApproved, lineApprovedDate: new Date() }).subscribe(response => {
+            this._alertService.displayMessage('Requisition Approved');
+            this._router.navigateByUrl('axis/manager/requisitions/device')
+            this.isLoading = false;
+        }, error => {
+            this.isLoading = false;
+            this._alertService.displayError('Try again')
+        })
+    }
     openDeleteDialog(id: string) {
         const dialogRef = this._fuseConfirmationService.open({
             message: "Are sure you want to delete this requisition ?",

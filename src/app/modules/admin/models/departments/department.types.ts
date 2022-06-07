@@ -1,5 +1,7 @@
 export interface Department {
     id: number,
     description: string,
-    status: string
+    status: string,
+    name :string,
+    
 }

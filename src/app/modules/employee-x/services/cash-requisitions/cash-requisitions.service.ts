@@ -34,6 +34,12 @@ export class CashRequisitionService {
     createCashReq(vehicleReq: any): Observable<any[]> {
         return this._httpClient.post<any>(`${this._baseUrl}CashRequisition`, vehicleReq);
     }
+    lineManagerApproveReq(id: string, cashReq: any): Observable<any[]> {
+        return this._httpClient.put<any>(`${this._baseUrl}CashRequisition/changelineapproval/${id}`, cashReq);
+    }
+    getAllCashRequisitionsLogged(): Observable<any[]> {
+        return this._httpClient.get<any[]>(`${this._baseUrl}CashRequisition?isLoggedInUser=false`);
+    }
     getCashs(): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}Cash`);
     }

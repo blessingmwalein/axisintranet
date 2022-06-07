@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AssetReqListComponent } from './asset-requisition/asset-req-list/asset-req-list.component';
+import { CreateAssetReqComponent } from './asset-requisition/create/create.component';
+import { AssetRequisitionDetailsComponent } from './asset-requisition/details/details.component';
 import { CardReqListComponent } from './card-requisition/card-req-list/card-req-list.component';
 import { CreateCardReqComponent } from './card-requisition/create/create.component';
 import { CardRequisitionDetailsComponent } from './card-requisition/details/details.component';
@@ -73,6 +76,19 @@ const routes: Routes = [
     path: 'requisitions/device/:id',
     component: DeviceRequisitionDetailsComponent,
   },
+  //asset
+  {
+    path: 'requisitions/asset',
+    component: AssetReqListComponent,
+  },
+  {
+    path: 'requisitions/asset/create',
+    component: CreateAssetReqComponent,
+  },
+  {
+    path: 'requisitions/asset/:id',
+    component: AssetRequisitionDetailsComponent,
+  }
 ];
 
 @NgModule({

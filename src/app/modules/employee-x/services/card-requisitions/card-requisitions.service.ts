@@ -33,6 +33,12 @@ export class CardRequisitionService {
     createCardReq(cardReq: any): Observable<any[]> {
         return this._httpClient.post<any>(`${this._baseUrl}CardRequisition`, cardReq);
     }
+    lineManagerApproveReq(id: string, cashReq: any): Observable<any[]> {
+        return this._httpClient.put<any>(`${this._baseUrl}CardRequisition/changelineapproval/${id}`, cashReq);
+    }
+    getAllCardRequisitionsLogged(): Observable<any[]> {
+        return this._httpClient.get<any[]>(`${this._baseUrl}CardRequisition?isLoggedInUser=false`);
+    }
     getCards(): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}Cards`);
     }

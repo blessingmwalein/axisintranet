@@ -31,7 +31,8 @@ export class CreateCardReqComponent implements OnInit {
         requestComments: ['', [Validators.required]],
         cardId: ['', Validators.required],
         title: ['', Validators.required],
-        amount: ['', Validators.required]
+        amount: ['', Validators.required],
+        status: ["Created"]
       }),
       step2: this._formBuilder.group({
         startDate: ['', Validators.required],

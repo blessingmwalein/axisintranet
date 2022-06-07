@@ -59,6 +59,10 @@ import { DeviceRequisitionComponent } from './device-requisition/device-requisit
 import { DeviceReqListComponent } from './device-requisition/device-req-list/device-req-list.component';
 import { CreateDeviceReqComponent } from './device-requisition/create/create.component';
 import { DeviceRequisitionDetailsComponent } from './device-requisition/details/details.component';
+import { AssetReqListComponent } from './asset-requisition/asset-req-list/asset-req-list.component';
+import { AssetRequisitionComponent } from './asset-requisition/asset-requisition.component';
+import { CreateAssetReqComponent } from './asset-requisition/create/create.component';
+import { AssetRequisitionDetailsComponent } from './asset-requisition/details/details.component';
 
 
 @NgModule({
@@ -84,7 +88,12 @@ import { DeviceRequisitionDetailsComponent } from './device-requisition/details/
     DeviceRequisitionComponent,
     DeviceReqListComponent,
     CreateDeviceReqComponent,
-    DeviceRequisitionDetailsComponent
+    DeviceRequisitionDetailsComponent,
+
+    AssetRequisitionComponent,
+    AssetReqListComponent,
+    CreateAssetReqComponent,
+    AssetRequisitionDetailsComponent
 
   ],
   imports: [

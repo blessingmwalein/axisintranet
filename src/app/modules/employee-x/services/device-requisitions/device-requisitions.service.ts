@@ -9,6 +9,7 @@ import { environment } from 'environments/environment';
     providedIn: 'root'
 })
 export class DeviceRequisitionService {
+    
     private _baseUrl = environment.apiBaseUrl;
 
     /**
@@ -35,6 +36,9 @@ export class DeviceRequisitionService {
 
     createDeviceReq(deviceReq: any): Observable<any[]> {
         return this._httpClient.post<any>(`${this._baseUrl}DeviceRequisition`, deviceReq);
+    }
+    lineManagerApproveReq(id: string, vehicleReq: any): Observable<any[]> {
+        return this._httpClient.put<any>(`${this._baseUrl}DeviceRequisition/changelineapproval/${id}`, vehicleReq);
     }
     getDevices(): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}Devices`);

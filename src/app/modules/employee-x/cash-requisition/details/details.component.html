@@ -43,9 +43,21 @@
         <!-- Title -->
         <div>
             <mat-form-field class="fuse-mat-textarea fuse-mat-no-subscript w-full">
-                <mat-label>Task title</mat-label>
+                <mat-label>Title</mat-label>
                 <textarea matInput [spellcheck]="false" [ngModelOptions]="{standalone: true}" ngModel="Title"
                     matTextareaAutosize #titleField></textarea>
+            </mat-form-field>
+        </div>
+        <div class="mt-6">
+            <mat-form-field class="flex-auto gt-xs:pr-3 w-full">
+                <mat-label>Cash</mat-label>
+
+                <mat-select [ngModelOptions]="{standalone: true}" ngModel="cash.id" [placeholder]="'Cash'" required>
+                    <mat-option *ngFor="let cash of cashs" [value]="cash.id">
+                        {{cash.description}}</mat-option>
+                </mat-select>
+                <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:location-marker'">
+                </mat-icon>
             </mat-form-field>
         </div>
 
@@ -65,15 +77,19 @@
                     <ng-container>
                         <div
                             class="flex items-center justify-center px-4 m-1.5 rounded-full leading-9 text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
-                            <span class="text-md font-medium whitespace-nowrap"> Line Manager Approved On
-                                :{{cashRequisition.lineApproverDate}}</span>
+                            <span class="text-md font-medium whitespace-nowrap"> {{cashRequisition.lineApproved? "Line
+                                Manager Approved On : " + cashRequisition.lineApprovedDate : "Awaiting Line Manager
+                                Approval"}}
+                            </span>
                         </div>
                     </ng-container>
                     <ng-container>
                         <div
                             class="flex items-center justify-center px-4 m-1.5 rounded-full leading-9 text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
-                            <span class="text-md font-medium whitespace-nowrap"> Finace Manager Approved On
-                                :{{cashRequisition.financeApproverDate}}</span>
+                            <span class="text-md font-medium whitespace-nowrap"> {{cashRequisition.approved? "Finace
+                                Manager Approved On : " + cashRequisition.financeApprovedDate : "Awaiting Finance
+                                Manager Approval"}}
+                            </span>
                         </div>
                     </ng-container>
 
@@ -136,7 +152,20 @@
                         :{{cashRequisition.duration}} hours</span>
                 </div>
             </ng-container>
-
+            <ng-container>
+                <div
+                    class="flex items-center justify-center px-4 m-1.5 mt-8 rounded-full leading-9 text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
+                    <span class="text-md font-medium whitespace-nowrap"> Amount
+                        :{{cashRequisition.cash.currency}}{{cashRequisition.cash.amount}}</span>
+                </div>
+            </ng-container>
+            <ng-container>
+                <div
+                    class="flex items-center justify-center px-4 m-1.5 mt-8 rounded-full leading-9 text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
+                    <span class="text-md font-medium whitespace-nowrap"> Status
+                        :{{cashRequisition.status}}</span>
+                </div>
+            </ng-container>
         </div>
 
         <!-- Notes -->

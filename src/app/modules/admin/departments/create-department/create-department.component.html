@@ -15,22 +15,48 @@
       [@shake]="alert.type === 'error'">
       {{alert.message}}
     </fuse-alert>
+    <div class="mt-6">
+      <mat-form-field class="fuse-mat-no-subscript w-full">
+        <mat-label>Name</mat-label>
+        <mat-icon matPrefix class="hidden sm:flex icon-size-5" [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+        <input matInput [formControlName]="'name'" [placeholder]="'Department Name'" [spellcheck]="false">
+        <mat-error *ngIf="departmentCreateForm.get('name').hasError('required')">
+          Department name is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mt-6">
+      <mat-form-field class="fuse-mat-no-subscript w-full">
+        <mat-label>Description</mat-label>
+        <textarea matInput [formControlName]="'description'" [placeholder]="'About'" [rows]="3"></textarea>
+        <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:menu-alt-2'"></mat-icon>
 
-    <mat-form-field class="fuse-mat-no-subscript w-full">
-      <mat-icon matPrefix class="hidden sm:flex icon-size-5" [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
-      <input matInput [formControlName]="'description'" [placeholder]="'Department Name'" [spellcheck]="false">
-      <mat-error *ngIf="departmentCreateForm.get('description').hasError('required')">
-        Department name is required
-      </mat-error>
-    </mat-form-field>
+        <mat-error *ngIf="departmentCreateForm.get('description').hasError('required')">
+          Department description is required
+        </mat-error>
+      </mat-form-field>
+    </div>
 
-    <mat-form-field class="flex-auto gt-xs:pl-3 pt-2">
-      <mat-select [placeholder]="'Language'" [formControlName]="'status'">
-        <mat-option value="active">Active</mat-option>
-        <mat-option value="disabled">Disabled</mat-option>
-      </mat-select>
-      <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:translate'"></mat-icon>
-    </mat-form-field>
+    <div class="mt-6">
+      <mat-form-field class="flex-auto gt-xs:pl-3 pt-2 w-full">
+        <mat-label>Status</mat-label>
+
+        <mat-select [placeholder]="'Language'" [formControlName]="'status'">
+          <mat-option value="active">Active</mat-option>
+          <mat-option value="disabled">Disabled</mat-option>
+        </mat-select>
+        <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:translate'"></mat-icon>
+      </mat-form-field>
+    </div>
+    <div class="mt-6">
+      <mat-form-field class="flex-auto gt-xs:pl-3 pt-2 w-full">
+        <mat-label>Approver</mat-label>
+        <mat-select [placeholder]="'Status'" [formControlName]="'approverId'">
+          <mat-option *ngFor="let user of users" [value]="user.id">{{user.firstName}} {{user.lastName}}</mat-option>
+        </mat-select>
+        <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+      </mat-form-field>
+    </div>
     <!-- Actions -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-4 sm:mt-6">
       <div class="-ml-2">

@@ -36,7 +36,7 @@ export class CardReqListComponent implements OnInit {
 
   getCardReqs() {
     this.isLoading = true;
-    this._cardRequisitionService.getAllCardRequisitions().subscribe(response => {
+    this._cardRequisitionService.getAllCardRequisitionsLogged().subscribe(response => {
       this.cardReqDataSource.data = response;
       console.log(this.cardReqDataSource.data);
       this.isLoading = false

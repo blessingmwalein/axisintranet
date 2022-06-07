@@ -20,20 +20,19 @@ export class DepartmentsComponent implements OnInit {
 
 
   departmentsDataSource: MatTableDataSource<any> = new MatTableDataSource();
-  departmentsTableColumns: string[] = ["description", "status","action"];
+  departmentsTableColumns: string[] = ["description", "name", "approverName", "status", "action"];
 
   isLoading: boolean = true;
   departments: Department[];
 
-  constructor(private _userService: UserService,private _departmentService:DepartmentService, private _alertService: AlertService, private _matDialog: MatDialog, private _fuseConfirmationService: FuseConfirmationService) { }
+  constructor(private _userService: UserService, private _departmentService: DepartmentService, private _alertService: AlertService, private _matDialog: MatDialog, private _fuseConfirmationService: FuseConfirmationService) { }
 
   ngOnInit() {
-
     this.getDepartments();
   }
 
   getDepartments() {
-    this._departmentService.getDepartments().subscribe((departments :any) => {
+    this._departmentService.getDepartments().subscribe((departments: any) => {
       this.departmentsDataSource.data = departments;
       this.isLoading = false;
     }, error => {

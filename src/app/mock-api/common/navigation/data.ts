@@ -66,6 +66,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         title: 'Vehicle',
                         type: 'basic',
                         link: '/axis/employee/requisitions/vehicle'
+                    },
+                    {
+                        id: 'employee.requisitions.asset',
+                        title: 'Asset',
+                        type: 'basic',
+                        link: '/axis/employee/requisitions/asset'
                     }
                 ]
             },
@@ -131,6 +137,12 @@ export const managerNavigation: FuseNavigationItem[] = [
                         title: 'Vehicle',
                         type: 'basic',
                         link: '/axis/manager/requisitions/vehicle'
+                    },
+                    {
+                        id: 'manager.requisitions.asset',
+                        title: 'Asset',
+                        type: 'basic',
+                        link: '/axis/manager/requisitions/asset'
                     }
                 ]
             },

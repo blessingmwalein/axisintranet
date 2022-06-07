@@ -65,15 +65,19 @@
                     <ng-container>
                         <div
                             class="flex items-center justify-center px-4 m-1.5 rounded-full leading-9 text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
-                            <span class="text-md font-medium whitespace-nowrap"> Line Manager Approved On
-                                :{{vehicleRequisition.lineApproverDate}}</span>
+                            <span class="text-md font-medium whitespace-nowrap"> {{vehicleRequisition.lineApproved? "Line
+                                Manager Approved On : " + vehicleRequisition.lineApprovedDate : "Awaiting Line Manager
+                                Approval"}}
+                            </span>
                         </div>
                     </ng-container>
                     <ng-container>
                         <div
                             class="flex items-center justify-center px-4 m-1.5 rounded-full leading-9 text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
-                            <span class="text-md font-medium whitespace-nowrap"> Finace Manager Approved On
-                                :{{vehicleRequisition.financeApproverDate}}</span>
+                            <span class="text-md font-medium whitespace-nowrap"> {{vehicleRequisition.approved? "Finace
+                                Manager Approved On : " + vehicleRequisition.financeApprovedDate : "Awaiting Finance
+                                Manager Approval"}}
+                            </span>
                         </div>
                     </ng-container>
 
@@ -137,6 +141,13 @@
                 </div>
             </ng-container>
 
+            <ng-container>
+                <div
+                    class="flex items-center justify-center px-4 m-1.5 mt-8 rounded-full leading-9 text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
+                    <span class="text-md font-medium whitespace-nowrap"> Status
+                        :{{vehicleRequisition.status}}</span>
+                </div>
+            </ng-container>
         </div>
 
         <!-- Notes -->

@@ -54,11 +54,12 @@ export class CardRequisitionDetailsComponent implements OnInit {
             duration: [''],
             startDate: [''],
             endDate: [''],
-            financeApproverDate: [''],
-            lineApproverDate: [''],
+            financeApprovedDate: [''],
+            lineApprovedDate: [''],
             requestComments: [''],
             approved: [''],
             cancelled: [''],
+            lineApproved: [true]
         });
     }
 
@@ -153,6 +154,34 @@ export class CardRequisitionDetailsComponent implements OnInit {
                 this._alertService.displayError('Requsition delete canceled')
             }
         });
+    }
+    openApproveDialog() {
+        const dialogRef = this._fuseConfirmationService.open({
+            message: "Are sure you want to approve this requisition ?",
+            title: "Approve  Requisition"
+        });
+
+        dialogRef.afterClosed().subscribe((result) => {
+            console.log(result);
+            if (result == 'confirmed') {
+                this.approveCashReq()
+            }
+            if (result == 'cancelled' || result == undefined) {
+                this._alertService.displayError('Department delete canceled')
+            }
+        });
+    }
+    approveCashReq() {
+
+        this.isLoading = true;
+        this._cardRequisitionService.lineManagerApproveReq(this.cardRequisition.id, { id: this.cardRequisition.id.toString(), lineApproved: this.cardReqForm.value.lineApproved, lineApprovedDate: new Date() }).subscribe(response => {
+            this._alertService.displayMessage('Requisition Approved');
+            this._router.navigateByUrl('axis/manager/requisitions/card')
+            this.isLoading = false;
+        }, error => {
+            this.isLoading = false;
+            this._alertService.displayError('Try again')
+        })
     }
 
     deteleVehicelReq(id: string) {

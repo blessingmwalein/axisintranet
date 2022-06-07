@@ -1,22 +1,19 @@
 <div class="flex flex-auto">
 
 
-    <form class="flex flex-col flex-auto m-3 p-6 pt-10 sm:p-8 sm:pt-10 overflow-y-auto bg-device shadow rounded-2xl">
+    <form class="flex flex-col flex-auto m-3 p-6 pt-10 sm:p-8 sm:pt-10 overflow-y-auto bg-card shadow rounded-2xl">
 
         <!-- Header -->
         <div class="flex items-center justify-between -mt-3 -ml-4">
 
             <!-- Mark as ... button -->
-            <button class="pr-4 pl-3.5" mat-button>
-
-                <!-- Mark as complete -->
+            <button class="pr-4 pl-3.5" (click)="openApproveDialog()" mat-button>
                 <ng-container>
                     <div class="flex items-center justify-center">
                         <mat-icon [svgIcon]="'heroicons_outline:check-circle'"></mat-icon>
-                        <span class="ml-2 font-semibold">Cancel Requisition</span>
+                        <span class="ml-2 font-semibold">Approve Requisition</span>
                     </div>
                 </ng-container>
-
             </button>
 
             <div class="flex items-center">
@@ -44,7 +41,7 @@
         <div>
             <mat-form-field class="fuse-mat-textarea fuse-mat-no-subscript w-full">
                 <mat-label>Task title</mat-label>
-                <textarea matInput [spellcheck]="false" [ngModelOptions]="{standalone: true}" ngModel="Title"
+                <textarea matInput [spellcheck]="false" [ngModelOptions]="{standalone: true}" [(ngModel)]="deviceRequisition.title"
                     matTextareaAutosize #titleField></textarea>
             </mat-form-field>
         </div>
@@ -65,15 +62,19 @@
                     <ng-container>
                         <div
                             class="flex items-center justify-center px-4 m-1.5 rounded-full leading-9 text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
-                            <span class="text-md font-medium whitespace-nowrap"> Line Manager Approved On
-                                :{{deviceRequisition.lineApproverDate}}</span>
+                            <span class="text-md font-medium whitespace-nowrap"> {{deviceRequisition.lineApproved? "Line
+                                Manager Approved On : " + deviceRequisition.lineApprovedDate : "Awaiting Line Manager
+                                Approval"}}
+                            </span>
                         </div>
                     </ng-container>
                     <ng-container>
                         <div
                             class="flex items-center justify-center px-4 m-1.5 rounded-full leading-9 text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
-                            <span class="text-md font-medium whitespace-nowrap"> Finace Manager Approved On
-                                :{{deviceRequisition.financeApproverDate}}</span>
+                            <span class="text-md font-medium whitespace-nowrap"> {{deviceRequisition.approved? "Finace
+                                Manager Approved On : " + deviceRequisition.financeApprovedDate : "Awaiting Finance
+                                Manager Approval"}}
+                            </span>
                         </div>
                     </ng-container>
 
@@ -136,6 +137,13 @@
                         :{{deviceRequisition.duration}} hours</span>
                 </div>
             </ng-container>
+            <ng-container>
+                <div
+                    class="flex items-center justify-center px-4 m-1.5 mt-8 rounded-full leading-9 text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
+                    <span class="text-md font-medium whitespace-nowrap"> Status
+                        :{{deviceRequisition.status}}</span>
+                </div>
+            </ng-container>
 
         </div>
 
@@ -148,20 +156,7 @@
             </mat-form-field>
         </div>
 
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-4 sm:mt-6">
-            <div class="-ml-2">
-                <div class="flex items-center mt-4 sm:mt-0">
-                    <!-- Disdevice -->
-                    <button class="ml-auto sm:ml-0 mr-2" mat-stroked-button>
-                        Back
-                    </button>
-                    <!-- Send -->
-                    <button class="order-first sm:order-last" mat-flat-button [color]="'primary'">
-                        Save Changes
-                    </button>
-                </div>
-            </div>
-        </div>
+
     </form>
 
 </div>

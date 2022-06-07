@@ -5,6 +5,7 @@ import { FuseAlertType } from '@fuse/components/alert';
 import { UserService } from 'app/core/user/user.service';
 import { AlertService } from 'app/modules/alert/snackbar/alert.service';
 import { Department } from '../../models/departments/department.types';
+import { User } from '../../models/users/users.types';
 import { DepartmentService } from '../../services/departments/department.service';
 
 @Component({
@@ -21,6 +22,7 @@ export class CreateDepartmentComponent implements OnInit {
   };
   showAlert: boolean = false;
   department: Department;
+  users: User[]
 
   /**
    * Constructor
@@ -30,7 +32,7 @@ export class CreateDepartmentComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _userService: UserService,
     private _alertService: AlertService,
-    private _departmentService :DepartmentService,
+    private _departmentService: DepartmentService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
   }
@@ -44,10 +46,15 @@ export class CreateDepartmentComponent implements OnInit {
    */
   ngOnInit(): void {
     // Create the form
+    this.getUsers();
     this.departmentCreateForm = this._formBuilder.group({
       description: ['', [Validators.required]],
+      name: ['', [Validators.required]],
       status: ['', [Validators.required]],
-      id: ['']
+      id: [''],
+      approverId: ['', [Validators.required]],
+      approverName: [''],
+      approverEmail: ['', [Validators.required]],
     });
     if (this.data.isEdit) {
       this.getDepartment();
@@ -55,18 +62,29 @@ export class CreateDepartmentComponent implements OnInit {
   }
 
   getDepartment() {
-    this._departmentService.getDepartment(this.data.id).subscribe((department :any) => {
+    this._departmentService.getDepartment(this.data.id).subscribe((department: any) => {
       this.department = department;
       this.departmentCreateForm.patchValue({
         description: this.department.description,
+        name: this.department.name,
         status: this.department.status,
-        id: this.data.id
+        id: this.data.id,
+        approverId: this.data.approverId,
+        approverName: this.data.approverName,
+        approverEmail: this.data.approverEmail
       })
     }, error => {
       this._alertService.displayError('Could not fetch department')
     })
   }
 
+  getUsers() {
+    this._userService.getAllUsers().subscribe(users => {
+      this.users = users
+    }, error => {
+      this._alertService.displayError("Failed to fetch users")
+    })
+  }
   // -----------------------------------------------------------------------------------------------------
   // @ Public methods
   // -----------------------------------------------------------------------------------------------------

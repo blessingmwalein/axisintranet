@@ -37,7 +37,7 @@ export class CashReqListComponent implements OnInit {
 
   getCashReqs() {
     this.isLoading = true;
-    this._cashRequisitionService.getAllCashRequisitions().subscribe(response => {
+    this._cashRequisitionService.getAllCashRequisitionsLogged().subscribe(response => {
       this.cashReqDataSource.data = response;
       console.log(this.cashReqDataSource.data);
       this.isLoading = false

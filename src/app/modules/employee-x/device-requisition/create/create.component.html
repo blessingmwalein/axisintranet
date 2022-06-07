@@ -2,7 +2,7 @@
 
     <!-- Header -->
     <div
-        class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-device dark:bg-transparent">
+        class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
         <div class="flex-1 min-w-0">
             <!-- Breadcrumbs -->
             <div class="flex flex-wrap items-center font-medium">
@@ -30,7 +30,7 @@
 
     <!-- Main -->
     <div class="p-5">
-        <form class="p-4 bg-device shadow rounded overflow-hidden max-w-full" [formGroup]="horizontalStepperForm">
+        <form class="p-4 bg-card shadow rounded overflow-hidden max-w-full" [formGroup]="horizontalStepperForm">
             <mat-horizontal-stepper [linear]="true" #horizontalStepper>
                 <mat-step [formGroupName]="'step1'" [stepControl]="horizontalStepperForm.get('step1')"
                     #horizontalStepperStep1>

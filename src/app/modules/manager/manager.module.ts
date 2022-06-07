@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-
+import { AssetReqListComponent } from './asset-requisition/asset-req-list/asset-req-list.component';
+import { CreateAssetReqComponent } from './asset-requisition/create/create.component';
+import { AssetRequisitionDetailsComponent } from './asset-requisition/details/details.component';
 import { ManagerRoutingModule } from './manager-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatButtonModule } from '@angular/material/button';
@@ -42,6 +44,7 @@ import { CashRequisitionComponent } from './cash-requisition/cash-requisition.co
 import { DeviceRequisitionComponent } from './device-requisition/device-requisition.component';
 import { VehicleRequisitionsComponent } from './vehicle-requisitions/vehicle-requisitions.component';
 import { ApproveReqComponent } from './vehicle-requisitions/approve-req/approve-req.component';
+import { AssetRequisitionComponent } from './asset-requisition/asset-requisition.component';
 
 
 @NgModule({
@@ -64,7 +67,12 @@ import { ApproveReqComponent } from './vehicle-requisitions/approve-req/approve-
     VehicleReqListComponent,
     VehicleRequisitionDetailsComponent,
     CreateComponent,
-    ApproveReqComponent
+    ApproveReqComponent,
+
+    AssetRequisitionComponent,
+    AssetReqListComponent,
+    CreateAssetReqComponent,
+    AssetRequisitionDetailsComponent
   ],
   imports: [
     CommonModule,

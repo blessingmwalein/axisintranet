@@ -65,15 +65,19 @@
                     <ng-container>
                         <div
                             class="flex items-center justify-center px-4 m-1.5 rounded-full leading-9 text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
-                            <span class="text-md font-medium whitespace-nowrap"> Line Manager Approved On
-                                :{{cardRequisition.lineApproverDate}}</span>
+                            <span class="text-md font-medium whitespace-nowrap"> {{cardRequisition.lineApproved? "Line
+                                Manager Approved On : " + cardRequisition.lineApprovedDate : "Awaiting Line Manager
+                                Approval"}}
+                            </span>
                         </div>
                     </ng-container>
                     <ng-container>
                         <div
                             class="flex items-center justify-center px-4 m-1.5 rounded-full leading-9 text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
-                            <span class="text-md font-medium whitespace-nowrap"> Finace Manager Approved On
-                                :{{cardRequisition.financeApproverDate}}</span>
+                            <span class="text-md font-medium whitespace-nowrap"> {{cardRequisition.approved? "Finace
+                                Manager Approved On : " + cardRequisition.financeApprovedDate : "Awaiting Finance
+                                Manager Approval"}}
+                            </span>
                         </div>
                     </ng-container>
 
@@ -134,6 +138,20 @@
                     class="flex items-center justify-center px-4 m-1.5 mt-8 rounded-full leading-9 text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
                     <span class="text-md font-medium whitespace-nowrap"> Duration
                         :{{cardRequisition.duration}} hours</span>
+                </div>
+            </ng-container>
+            <ng-container>
+                <div
+                    class="flex items-center justify-center px-4 m-1.5 mt-8 rounded-full leading-9 text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
+                    <span class="text-md font-medium whitespace-nowrap"> Amount
+                        :{{cardRequisition.card.currency}}{{cardRequisition.card.amount}}</span>
+                </div>
+            </ng-container>
+            <ng-container>
+                <div
+                    class="flex items-center justify-center px-4 m-1.5 mt-8 rounded-full leading-9 text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
+                    <span class="text-md font-medium whitespace-nowrap"> Status
+                        :{{cardRequisition.status}}</span>
                 </div>
             </ng-container>
 

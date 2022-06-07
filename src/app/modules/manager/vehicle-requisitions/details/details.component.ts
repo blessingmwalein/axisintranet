@@ -21,7 +21,7 @@ import { VehicleRequisitionService } from 'app/modules/employee-x/services/vehic
 })
 export class VehicleRequisitionDetailsComponent implements OnInit {
     @ViewChild('vehicleRequisitionSteps', { static: true }) vehicleRequisitionSteps: MatTabGroup;
-    vehicleRequisition: VehicleRequisition;
+    vehicleRequisition: any;
     currentStep: number = 0;
     drawerMode: 'over' | 'side' = 'side';
     drawerOpened: boolean = true;
@@ -57,15 +57,13 @@ export class VehicleRequisitionDetailsComponent implements OnInit {
             duration: [''],
             startDate: [''],
             endDate: [''],
-            financeApproverDate: [''],
-            lineApproverDate: [''],
+            financeApprovedDate: [''],
+            lineApprovedDate: [''],
             requestComments: [''],
             approved: [''],
             cancelled: [''],
-
             id: [''],
             lineApproved: [true],
-            lineApprovedDate: [""]
         });
     }
 

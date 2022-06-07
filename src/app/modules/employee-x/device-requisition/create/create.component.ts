@@ -31,7 +31,8 @@ export class CreateDeviceReqComponent implements OnInit {
         requestComments: ['', [Validators.required]],
         deviceId: ['', Validators.required],
         title: ['', Validators.required],
-        amount: ['', Validators.required]
+        amount: ['', Validators.required],
+        status: [""]
       }),
       step2: this._formBuilder.group({
         startDate: ['', Validators.required],

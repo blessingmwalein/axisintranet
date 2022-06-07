@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AnnouncementsComponent } from './announcements/announcements.component';
+import { AssetReqListComponent } from './asset-requisition/asset-req-list/asset-req-list.component';
+import { CreateAssetReqComponent } from './asset-requisition/create/create.component';
+import { AssetRequisitionDetailsComponent } from './asset-requisition/details/details.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { CalendarSettingsComponent } from './calendar/settings/settings.component';
 import { CardReqListComponent } from './card-requisition/card-req-list/card-req-list.component';
@@ -79,6 +82,19 @@ const routes: Routes = [
   {
     path: 'requisitions/cash/:id',
     component: CashRequisitionDetailsComponent,
+  },
+  //asset
+  {
+    path: 'requisitions/asset',
+    component: AssetReqListComponent,
+  },
+  {
+    path: 'requisitions/asset/create',
+    component: CreateAssetReqComponent,
+  },
+  {
+    path: 'requisitions/asset/:id',
+    component: AssetRequisitionDetailsComponent,
   },
 
   //card

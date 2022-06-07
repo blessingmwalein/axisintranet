@@ -25,7 +25,7 @@ export class CashRequisitionDetailsComponent implements OnInit {
     drawerOpened: boolean = true;
     isLoading: boolean = true;
     cashReqForm: FormGroup;
-
+    cashs: any[];
     /**
      * Constructor
      */
@@ -47,6 +47,9 @@ export class CashRequisitionDetailsComponent implements OnInit {
     ngOnInit(): void {
 
         this.getCashReq()
+        this._cashRequisitionService.getCashs().subscribe(data => {
+            this.cashs = data;
+        })
 
         this.cashReqForm = this._formBuilder.group({
             title: [''],
@@ -55,11 +58,12 @@ export class CashRequisitionDetailsComponent implements OnInit {
             duration: [''],
             startDate: [''],
             endDate: [''],
-            financeApproverDate: [''],
-            lineApproverDate: [''],
+            financeApprovedDate: [''],
+            lineApprovedDate: [''],
             requestComments: [''],
             approved: [''],
             cancelled: [''],
+            cashId: ['']
         });
     }
 
@@ -74,6 +78,7 @@ export class CashRequisitionDetailsComponent implements OnInit {
             this._alertService.displayError("Failed to load requisition reload the page")
         })
     }
+
 
     goToStep(step: number): void {
         // Set the current step

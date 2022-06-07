@@ -31,7 +31,8 @@ export class CreateComponent implements OnInit {
       step1: this._formBuilder.group({
         requestComments: ['', [Validators.required]],
         vehicleId: ['', Validators.required],
-        title: ['', Validators.required]
+        title: ['', Validators.required],
+        status:['Created']
       }),
       step2: this._formBuilder.group({
         startDate: ['', Validators.required],

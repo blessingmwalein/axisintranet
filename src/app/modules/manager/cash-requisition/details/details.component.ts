@@ -24,7 +24,7 @@ export class CashRequisitionDetailsComponent implements OnInit {
     drawerOpened: boolean = true;
     isLoading: boolean = true;
     cashReqForm: FormGroup;
-
+    cashs: any[];
     /**
      * Constructor
      */
@@ -46,7 +46,9 @@ export class CashRequisitionDetailsComponent implements OnInit {
     ngOnInit(): void {
 
         this.getCashReq()
-
+        this._cashRequisitionService.getCashs().subscribe(data => {
+            this.cashs = data;
+        })
         this.cashReqForm = this._formBuilder.group({
             title: [''],
             status: [''],
@@ -54,11 +56,13 @@ export class CashRequisitionDetailsComponent implements OnInit {
             duration: [''],
             startDate: [''],
             endDate: [''],
-            financeApproverDate: [''],
-            lineApproverDate: [''],
+            financeApprovedDate: [''],
+            lineApprovedDate: [''],
+            lineApproved: [true],
             requestComments: [''],
             approved: [''],
             cancelled: [''],
+            cashId: ['']
         });
     }
 
@@ -154,7 +158,34 @@ export class CashRequisitionDetailsComponent implements OnInit {
             }
         });
     }
+    openApproveDialog() {
+        const dialogRef = this._fuseConfirmationService.open({
+            message: "Are sure you want to approve this requisition ?",
+            title: "Approve  Requisition"
+        });
 
+        dialogRef.afterClosed().subscribe((result) => {
+            console.log(result);
+            if (result == 'confirmed') {
+                this.approveCashReq()
+            }
+            if (result == 'cancelled' || result == undefined) {
+                this._alertService.displayError('Department delete canceled')
+            }
+        });
+    }
+    approveCashReq() {
+
+        this.isLoading = true;
+        this._cashRequisitionService.lineManagerApproveReq(this.cashRequisition.id, { id: this.cashRequisition.id.toString(), lineApproved: this.cashReqForm.value.lineApproved, lineApprovedDate: new Date() }).subscribe(response => {
+            this._alertService.displayMessage('Requisition Approved');
+            this._router.navigateByUrl('axis/manager/requisitions/device')
+            this.isLoading = false;
+        }, error => {
+            this.isLoading = false;
+            this._alertService.displayError('Try again')
+        })
+    }
     deteleVehicelReq(id: string) {
         this.isLoading = true;
         this._cashRequisitionService.deleteVehicelRequisition(id).subscribe(response => {
