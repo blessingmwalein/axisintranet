@@ -39,6 +39,9 @@ export class AssetRequisitionService {
     lineManagerApproveReq(id: string, cashReq: any): Observable<any[]> {
         return this._httpClient.put<any>(`${this._baseUrl}AssetRequisition/changelineapproval/${id}`, cashReq);
     }
+    financeManagerApproveReq(id: string, cashReq: any): Observable<any[]> {
+        return this._httpClient.put<any>(`${this._baseUrl}AssetRequisition/changeapproval/${id}`, cashReq);
+    }
     getAssets(): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}Assets`);
     }

@@ -91,7 +91,8 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
             case 'line manager':
                 return this.navigation.manager;
                 break;
-
+            case 'finance manager':
+                return this.navigation.financemanager
         }
 
     }

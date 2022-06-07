@@ -150,7 +150,77 @@ export const managerNavigation: FuseNavigationItem[] = [
     },
 
 ];
+export const financeManagerNavigation: FuseNavigationItem[] = [
+    {
+        id: 'finance-manager',
+        title: 'Finance Manager',
+        subtitle: 'Finance Manager Pages',
+        type: 'group',
+        icon: 'heroicons_outline:home',
+        children: [
+            {
+                id: 'finance-manager.dashboard',
+                title: 'Dashboard',
+                type: 'basic',
+                icon: 'heroicons_outline:clipboard-check',
+                link: '/axis/finance-manager/dashboard'
+            },
+            {
+                id: 'finance-manager.calendar',
+                title: 'Calendar',
+                type: 'basic',
+                icon: 'heroicons_outline:calendar',
+                link: '/axis/finance-manager/calendar'
+            },
+            {
+                id: 'finance-manager.announcements',
+                title: 'Announcements',
+                type: 'basic',
+                icon: 'heroicons_outline:cash',
+                link: '/axis/finance-manager/announcements'
+            },
+            {
+                id: 'finance-manager.requisitions',
+                title: 'Requisitions',
+                type: 'collapsable',
+                icon: 'heroicons_outline:support',
+                children: [
+                    {
+                        id: 'finance-manager.requisitions.cash',
+                        title: 'Cash',
+                        type: 'basic',
+                        link: '/axis/finance-manager/requisitions/cash'
+                    },
+                    {
+                        id: 'finance-manager.requisitions.card',
+                        title: 'Card',
+                        type: 'basic',
+                        link: '/axis/finance-manager/requisitions/card'
+                    },
+                    {
+                        id: 'finance-manager.requisitions.device',
+                        title: 'Device',
+                        type: 'basic',
+                        link: '/axis/finance-manager/requisitions/device'
+                    },
+                    {
+                        id: 'finance-manager.requisitions.vehicle',
+                        title: 'Vehicle',
+                        type: 'basic',
+                        link: '/axis/finance-manager/requisitions/vehicle'
+                    },
+                    {
+                        id: 'finance-manager.requisitions.asset',
+                        title: 'Asset',
+                        type: 'basic',
+                        link: '/axis/finance-manager/requisitions/asset'
+                    }
+                ]
+            },
+        ]
+    },
 
+];
 export const adminNavigation: FuseNavigationItem[] = [
     {
         id: 'admin',

@@ -38,6 +38,9 @@ export class VehicleRequisitionService {
     lineManagerApproveReq(id: string, vehicleReq: any): Observable<any[]> {
         return this._httpClient.put<any>(`${this._baseUrl}VehicleRequisition/changelineapproval/${id}`, vehicleReq);
     }
+    financeManagerApproveReq(id: string, cashReq: any): Observable<any[]> {
+        return this._httpClient.put<any>(`${this._baseUrl}VehicleRequisition/changeapproval/${id}`, cashReq);
+    }
     getVehicles(): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}Vehicles`);
     }

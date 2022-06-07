@@ -1,0 +1,144 @@
+<div class="absolute inset-0 flex flex-col min-w-0 overflow-y-auto" cdkScrollable>
+
+    <!-- Header -->
+    <div
+        class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-asset dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">Axis</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon class="icon-size-5 text-secondary" [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <a class="ml-1 text-primary-500">Employee</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon class="icon-size-5 text-secondary" [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <span class="ml-1 text-secondary">Requisitions</span>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Create Asset Requisition
+                </h2>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Main -->
+    <div class="p-5">
+        <form class="p-4 bg-asset shadow rounded overflow-hidden max-w-full" [formGroup]="horizontalStepperForm">
+            <mat-horizontal-stepper [linear]="true" #horizontalStepper>
+                <mat-step [formGroupName]="'step1'" [stepControl]="horizontalStepperForm.get('step1')"
+                    #horizontalStepperStep1>
+                    <ng-template matStepLabel>Basic information</ng-template>
+                    <div class="flex">
+                        <mat-form-field class="fuse-mat-no-subscript w-full">
+                            <mat-label>Title</mat-label>
+                            <mat-icon matPrefix class="hidden sm:flex icon-size-5"
+                                [svgIcon]="'heroicons_solid:briefcase'"></mat-icon>
+                            <input matInput [formControlName]="'title'" [placeholder]="'Title'">
+                        </mat-form-field>
+                    </div>
+                    <div class="flex">
+                        <mat-form-field class="fuse-mat-no-subscript w-full">
+                            <mat-label>Amount</mat-label>
+                            <mat-icon matPrefix class="hidden sm:flex icon-size-5"
+                                [svgIcon]="'heroicons_solid:briefcase'"></mat-icon>
+                            <input matInput [formControlName]="'amount'" [placeholder]="'Amount'">
+                        </mat-form-field>
+                    </div>
+                    <div class="flex pt-1">
+                        <mat-form-field class="fuse-mat-textarea flex-auto">
+                            <mat-label>Comments</mat-label>
+                            <textarea matInput [formControlName]="'requestComments'" [placeholder]="'About'"
+                                [rows]="3"></textarea>
+                            <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:menu-alt-2'"></mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div class="flex flex-col gt-xs:flex-row">
+                        <mat-form-field class="flex-auto gt-xs:pr-3">
+                            <mat-label>Select Asset</mat-label>
+
+                            <mat-select [formControlName]="'assetId'" [placeholder]="'Asset'" required>
+                                <mat-option *ngFor="let asset of assets" [value]="asset.id">
+                                    {{asset.itemCode}}{{asset.description}}</mat-option>
+                            </mat-select>
+                            <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:location-marker'">
+                            </mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div class="flex justify-end">
+                        <button class="px-8" mat-flat-button [color]="'primary'"
+                            [disabled]="horizontalStepperStep1.stepControl.pristine || horizontalStepperStep1.stepControl.invalid"
+                            type="button" matStepperNext>
+                            Next
+                        </button>
+                    </div>
+                </mat-step>
+
+                <mat-step [formGroupName]="'step2'" [stepControl]="horizontalStepperForm.get('step2')"
+                    #horizontalStepperStep2>
+                    <ng-template matStepLabel>Date Details</ng-template>
+                    <div class="flex flex-col gt-xs:flex-row">
+                        <mat-form-field [ngClass]="formFieldHelpers" class="flex-auto">
+                            <mat-label>Start date</mat-label>
+                            <input matInput [matDatepicker]="picker2" [placeholder]="'Start date'"
+                                [formControlName]="'startDate'">
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                        </mat-form-field>
+                        <mat-form-field [ngClass]="formFieldHelpers" class="flex-auto">
+                            <mat-label>End date</mat-label>
+                            <input matInput [matDatepicker]="picker3" [placeholder]="'End date'"
+                                [formControlName]="'endDate'">
+                            <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                            <mat-datepicker #picker3></mat-datepicker>
+                        </mat-form-field>
+                        <div class="flex">
+                            <mat-form-field class="fuse-mat-no-subscript w-full">
+                                <mat-label>Duration(hours)</mat-label>
+                                <mat-icon matPrefix class="hidden sm:flex icon-size-5"
+                                    [svgIcon]="'heroicons_solid:briefcase'"></mat-icon>
+                                <input matInput [formControlName]="'duration'" [placeholder]="'Duration(hours)'">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end pt-2">
+                        <button class="px-8 mr-2" mat-flat-button [color]="'accent'" type="button" matStepperPrevious>
+                            Back
+                        </button>
+                        <button class="px-8" mat-flat-button [color]="'primary'"
+                            [disabled]="horizontalStepperStep2.stepControl.pristine || horizontalStepperStep2.stepControl.invalid"
+                            type="button" matStepperNext>
+                            Next
+                        </button>
+                    </div>
+                </mat-step>
+
+                <mat-step>
+                    <ng-template matStepLabel>Done</ng-template>
+                    <fuse-alert [type]="'wairning'">
+                        <span fuseAlertTitle>Requsition Ready to be send</span>
+                        Are you sure you want to send this requisition
+                    </fuse-alert>
+                    <div class="flex justify-end mt-8">
+                        <button class="px-8 mr-2" mat-flat-button [color]="'accent'" type="button" matStepperPrevious>
+                            Back
+                        </button>
+                        <button class="px-8" mat-flat-button [color]="'primary'" type="reset"
+                            [disabled]="horizontalStepperForm.disabled" (click)="createReq()">
+                            Save
+                            <mat-progress-spinner *ngIf="horizontalStepperForm.disabled" [diameter]="24"
+                                [mode]="'indeterminate'"></mat-progress-spinner>
+                        </button>
+                    </div>
+                </mat-step>
+            </mat-horizontal-stepper>
+        </form>
+    </div>
+</div>

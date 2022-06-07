@@ -54,7 +54,7 @@ export class CreateDepartmentComponent implements OnInit {
       id: [''],
       approverId: ['', [Validators.required]],
       approverName: [''],
-      approverEmail: ['', [Validators.required]],
+      approverEmail: [''],
     });
     if (this.data.isEdit) {
       this.getDepartment();

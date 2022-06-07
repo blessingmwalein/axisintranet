@@ -7,7 +7,7 @@
         <div class="flex items-center justify-between -mt-3 -ml-4">
 
             <!-- Mark as ... button -->
-            <button class="pr-4 pl-3.5" (click)="openApproveDialog()" mat-button>
+            <button class="pr-4 pl-3.5" [disabled]="deviceRequisition.approved" (click)="openApproveDialog()" mat-button>
                 <ng-container>
                     <div class="flex items-center justify-center">
                         <mat-icon [svgIcon]="'heroicons_outline:check-circle'"></mat-icon>
