@@ -236,20 +236,20 @@ export const adminNavigation: FuseNavigationItem[] = [
                 icon: 'heroicons_outline:clipboard-check',
                 link: '/axis/admin/dashboard'
             },
-            {
-                id: 'admin.calendar',
-                title: 'Calendar',
-                type: 'basic',
-                icon: 'heroicons_outline:calendar',
-                link: '/axis/admin/calendar'
-            },
-            {
-                id: 'admin.announcements',
-                title: 'Announcements',
-                type: 'basic',
-                icon: 'heroicons_outline:cash',
-                link: '/axis/admin/announcements'
-            },
+            // {
+            //     id: 'admin.calendar',
+            //     title: 'Calendar',
+            //     type: 'basic',
+            //     icon: 'heroicons_outline:calendar',
+            //     link: '/axis/admin/calendar'
+            // },
+            // {
+            //     id: 'admin.announcements',
+            //     title: 'Announcements',
+            //     type: 'basic',
+            //     icon: 'heroicons_outline:cash',
+            //     link: '/axis/admin/announcements'
+            // },
             {
                 id: 'admin.departments',
                 title: 'Departments',
@@ -264,38 +264,38 @@ export const adminNavigation: FuseNavigationItem[] = [
                 icon: 'heroicons_outline:user-circle',
                 link: '/axis/admin/users'
             },
-            {
-                id: 'admin.requisitions',
-                title: 'Requisitions',
-                type: 'collapsable',
-                icon: 'heroicons_outline:support',
-                children: [
-                    {
-                        id: 'admin.requisitions.cash',
-                        title: 'Cash',
-                        type: 'basic',
-                        link: '/axis/admin/requisitions/cash'
-                    },
-                    {
-                        id: 'admin.requisitions.card',
-                        title: 'Card',
-                        type: 'basic',
-                        link: '/axis/admin/requisitions/card'
-                    },
-                    {
-                        id: 'admin.requisitions.device',
-                        title: 'Device',
-                        type: 'basic',
-                        link: '/axis/admin/requisitions/device'
-                    },
-                    {
-                        id: 'admin.requisitions.vehicle',
-                        title: 'Vehicle',
-                        type: 'basic',
-                        link: '/axis/admin/requisitions/vehicle'
-                    }
-                ]
-            },
+            // {
+            //     id: 'admin.requisitions',
+            //     title: 'Requisitions',
+            //     type: 'collapsable',
+            //     icon: 'heroicons_outline:support',
+            //     children: [
+            //         {
+            //             id: 'admin.requisitions.cash',
+            //             title: 'Cash',
+            //             type: 'basic',
+            //             link: '/axis/admin/requisitions/cash'
+            //         },
+            //         {
+            //             id: 'admin.requisitions.card',
+            //             title: 'Card',
+            //             type: 'basic',
+            //             link: '/axis/admin/requisitions/card'
+            //         },
+            //         {
+            //             id: 'admin.requisitions.device',
+            //             title: 'Device',
+            //             type: 'basic',
+            //             link: '/axis/admin/requisitions/device'
+            //         },
+            //         {
+            //             id: 'admin.requisitions.vehicle',
+            //             title: 'Vehicle',
+            //             type: 'basic',
+            //             link: '/axis/admin/requisitions/vehicle'
+            //         }
+            //     ]
+            // },
             {
                 id: 'admin.security',
                 title: 'Security',

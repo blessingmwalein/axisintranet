@@ -75,7 +75,7 @@ export class AuthSignInComponent implements OnInit {
                     this._userService.getAllRoles().subscribe((roles: Role[]): void => {
                         console.log(user);
                         this._userService.setUser(user)
-                            // this._router.navigateByUrl(this.userRedirectCallBack(user.roles[0]));
+                        this._router.navigateByUrl(this.userRedirectCallBack(user.roles[0]));
                         // this._userService.get(data.id).subscribe((user: any) => {
                         //     console.log(user);
                         //     this._userService.setUser(user)
