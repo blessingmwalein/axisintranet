@@ -6,6 +6,8 @@ import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
 import { VehicleRequisition } from 'app/modules/employee-x/models/vehicle-requisitions/vehicle-requisitions.types';
 import { AlertService } from 'app/modules/alert/snackbar/alert.service';
 import { VehicleRequisitionService } from '../../services/vehicle-requisitions/vehicle-requisitions.service';
+import { UsersService } from 'app/modules/admin/services/users/users.service';
+import { UserService } from 'app/core/user/user.service';
 
 
 @Component({
@@ -20,7 +22,7 @@ export class CreateComponent implements OnInit {
   vehicles: any[];
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
-  constructor(private _alertService: AlertService, private _formBuilder: FormBuilder, private _vehicleReqService: VehicleRequisitionService, private _router: Router,) { }
+  constructor(private _alertService: AlertService, private _userService:UserService,private _formBuilder: FormBuilder, private _vehicleReqService: VehicleRequisitionService, private _router: Router,) { }
 
   ngOnInit(): void {
     this._vehicleReqService.getVehicles().subscribe(data => {
@@ -32,7 +34,8 @@ export class CreateComponent implements OnInit {
         requestComments: ['', [Validators.required]],
         vehicleId: ['', Validators.required],
         title: ['', Validators.required],
-        status:['Created']
+        status:['Created'],
+        lineApproverId:[this._userService.getLocalUser().lineApproverId]
       }),
       step2: this._formBuilder.group({
         startDate: ['', Validators.required],

@@ -49,6 +49,7 @@ export interface User {
     background?: string | null;
     status?: string;
     tags: string[];
+    lineApproverId: string;
     phoneNumbers?: {
         department: string;
         phoneNumber: string;

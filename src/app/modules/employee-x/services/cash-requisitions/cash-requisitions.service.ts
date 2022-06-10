@@ -22,6 +22,9 @@ export class CashRequisitionService {
     getAllCashRequisitions(): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}CashRequisition?isLoggedInUser=true`);
     }
+    getFilteredCashRequisitions(status:boolean): Observable<any[]> {
+        return this._httpClient.get<any[]>(`${this._baseUrl}CashRequisition/GetFiltered?isLoggedInUser=${status}`);
+    }
 
     getCashRequisition(id: string): Observable<any> {
         return this._httpClient.get<any[]>(`${this._baseUrl}CashRequisition/${id}`);

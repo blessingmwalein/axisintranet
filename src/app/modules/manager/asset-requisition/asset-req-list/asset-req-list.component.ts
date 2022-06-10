@@ -15,8 +15,9 @@ export class AssetReqListComponent implements OnInit {
 
   assetRequisitions: any[];
   assetReqDataSource: MatTableDataSource<any> = new MatTableDataSource();
-  assetReqTableColumns: string[] = ["title", "status", "duration", 'startDate',"asset" ,"endDate", "action"];
+  assetReqTableColumns: string[] = ["title", "status", "duration", 'startDate', "asset", "endDate", "action"];
   isLoading: boolean = true;
+  status = false;
 
   /**
    * Constructor
@@ -36,7 +37,7 @@ export class AssetReqListComponent implements OnInit {
 
   getAssetReqs() {
     this.isLoading = true;
-    this._assetRequisitionService.getAllAssetRequisitionsLogged().subscribe(response => {
+    this._assetRequisitionService.getFilteredAssetRequisitionsLogged(this.status).subscribe(response => {
       this.assetReqDataSource.data = response;
       console.log(this.assetReqDataSource.data);
       this.isLoading = false
@@ -58,6 +59,11 @@ export class AssetReqListComponent implements OnInit {
 
   viewReqVehilce(id: string) {
     this._router.navigateByUrl(`axis/manager/requisitions/asset/${id}`)
+  }
+  setStatus(value) {
+    // this.status = value;
+    console.log(this.status);
+    this.getAssetReqs();
   }
 
   openDeleteDialog(id: string) {

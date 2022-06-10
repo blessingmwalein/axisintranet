@@ -21,6 +21,9 @@ export class CardRequisitionService {
     getAllCardRequisitions(): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}CardRequisition?isLoggedInUser=true`);
     }
+    getFilteredCardRequisitions(status:boolean): Observable<any[]> {
+        return this._httpClient.get<any[]>(`${this._baseUrl}CardRequisition/GetFiltered?isLoggedInUser=${status}`);
+    }
 
     getCardRequisition(id: string): Observable<any> {
         return this._httpClient.get<any[]>(`${this._baseUrl}CardRequisition/${id}`);

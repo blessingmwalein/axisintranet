@@ -52,7 +52,7 @@ export class CreateDepartmentComponent implements OnInit {
       name: ['', [Validators.required]],
       status: ['', [Validators.required]],
       id: [''],
-      approverId: ['', [Validators.required]],
+      approverId: ['',],
       approverName: [''],
       approverEmail: [''],
     });

@@ -5,6 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
 import { CashRequisitionService } from '../../services/cash-requisitions/cash-requisitions.service';
 import { AlertService } from 'app/modules/alert/snackbar/alert.service';
+import { UserService } from 'app/core/user/user.service';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class CreateCashReqComponent implements OnInit {
   cashs: any[];
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
-  constructor(private _alertService: AlertService, private _formBuilder: FormBuilder, private _cashReqService: CashRequisitionService, private _router: Router,) { }
+  constructor(private _alertService: AlertService, private _formBuilder: FormBuilder, private _cashReqService: CashRequisitionService, private _router: Router,private _userService:UserService) { }
 
   ngOnInit(): void {
     this._cashReqService.getCashs().subscribe(data => {
@@ -32,7 +33,9 @@ export class CreateCashReqComponent implements OnInit {
         cashId: ['', Validators.required],
         title: ['', Validators.required],
         amount: ['', Validators.required],
-        status:"Created"
+        status:"Created",
+        lineApproverId:[this._userService.getLocalUser().lineApproverId]
+
       }),
       step2: this._formBuilder.group({
         startDate: ['', Validators.required],

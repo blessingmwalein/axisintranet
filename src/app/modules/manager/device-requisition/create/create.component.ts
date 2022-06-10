@@ -5,6 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
 import { DeviceRequisitionService } from 'app/modules/employee-x/services/device-requisitions/device-requisitions.service';
 import { AlertService } from 'app/modules/alert/snackbar/alert.service';
+import { UserService } from 'app/core/user/user.service';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class CreateDeviceReqComponent implements OnInit {
   devices: any[];
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
-  constructor(private _alertService: AlertService, private _formBuilder: FormBuilder, private _deviceReqService: DeviceRequisitionService, private _router: Router,) { }
+  constructor(private _userService:UserService,private _alertService: AlertService, private _formBuilder: FormBuilder, private _deviceReqService: DeviceRequisitionService, private _router: Router,) { }
 
   ngOnInit(): void {
     this._deviceReqService.getDevices().subscribe(data => {
@@ -31,7 +32,8 @@ export class CreateDeviceReqComponent implements OnInit {
         requestComments: ['', [Validators.required]],
         deviceId: ['', Validators.required],
         title: ['', Validators.required],
-        amount: ['', Validators.required]
+        amount: ['', Validators.required],
+        lineApproverId:[this._userService.getLocalUser().lineApproverId]
       }),
       step2: this._formBuilder.group({
         startDate: ['', Validators.required],

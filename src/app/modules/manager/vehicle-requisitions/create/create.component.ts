@@ -5,6 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
 import { AlertService } from 'app/modules/alert/snackbar/alert.service';
 import { VehicleRequisitionService } from 'app/modules/employee-x/services/vehicle-requisitions/vehicle-requisitions.service';
+import { UserService } from 'app/core/user/user.service';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class CreateComponent implements OnInit {
   vehicles: any[];
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
-  constructor(private _alertService: AlertService, private _formBuilder: FormBuilder, private _vehicleReqService: VehicleRequisitionService, private _router: Router,) { }
+  constructor(private _userService:UserService, private _alertService: AlertService, private _formBuilder: FormBuilder, private _vehicleReqService: VehicleRequisitionService, private _router: Router,) { }
 
   ngOnInit(): void {
     this._vehicleReqService.getVehicles().subscribe(data => {
@@ -30,7 +31,8 @@ export class CreateComponent implements OnInit {
       step1: this._formBuilder.group({
         requestComments: ['', [Validators.required]],
         vehicleId: ['', Validators.required],
-        title: ['', Validators.required]
+        title: ['', Validators.required],
+        lineApproverId:[this._userService.getLocalUser().lineApproverId]
       }),
       step2: this._formBuilder.group({
         startDate: ['', Validators.required],

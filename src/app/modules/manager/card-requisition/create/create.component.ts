@@ -5,6 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
 import { AlertService } from 'app/modules/alert/snackbar/alert.service';
 import { CardRequisitionService } from 'app/modules/employee-x/services/card-requisitions/card-requisitions.service';
+import { UserService } from 'app/core/user/user.service';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class CreateCardReqComponent implements OnInit {
   cards: any[];
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
-  constructor(private _alertService: AlertService, private _formBuilder: FormBuilder, private _cardReqService: CardRequisitionService, private _router: Router,) { }
+  constructor(private _userService:UserService,private _alertService: AlertService, private _formBuilder: FormBuilder, private _cardReqService: CardRequisitionService, private _router: Router,) { }
 
   ngOnInit(): void {
     this._cardReqService.getCards().subscribe(data => {
@@ -31,7 +32,8 @@ export class CreateCardReqComponent implements OnInit {
         requestComments: ['', [Validators.required]],
         cardId: ['', Validators.required],
         title: ['', Validators.required],
-        amount: ['', Validators.required]
+        amount: ['', Validators.required],
+        lineApproverId:[this._userService.getLocalUser().lineApproverId]
       }),
       step2: this._formBuilder.group({
         startDate: ['', Validators.required],

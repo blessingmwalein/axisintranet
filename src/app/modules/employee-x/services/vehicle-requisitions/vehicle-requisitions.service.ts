@@ -23,6 +23,9 @@ export class VehicleRequisitionService {
     getAllVehicleRequisitionsNotLogged(): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}VehicleRequisition?isLoggedInUser=false`);
     }
+    getFilteredVehicleRequisitionsNotLogged(status:boolean): Observable<any[]> {
+        return this._httpClient.get<any[]>(`${this._baseUrl}VehicleRequisition/GetFiltered?isLoggedInUser=${status}`);
+    }
 
     getVehicelRequisition(id: string): Observable<any> {
         return this._httpClient.get<any[]>(`${this._baseUrl}VehicleRequisition/${id}`);

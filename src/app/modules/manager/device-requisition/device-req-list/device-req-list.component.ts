@@ -17,6 +17,7 @@ export class DeviceReqListComponent implements OnInit {
   deviceReqDataSource: MatTableDataSource<any> = new MatTableDataSource();
   deviceReqTableColumns: string[] = ["title", "status", "duration", 'startDate',"device" ,"endDate", "action"];
   isLoading: boolean = true;
+  status = false;
 
 
   /**
@@ -37,7 +38,7 @@ export class DeviceReqListComponent implements OnInit {
 
   getDeviceReqs() {
     this.isLoading = true;
-    this._deviceRequisitionService.getAllDeviceRequisitionsLogged().subscribe(response => {
+    this._deviceRequisitionService.getFilteredDeviceRequisitionsLogged(this.status).subscribe(response => {
       this.deviceReqDataSource.data = response;
       console.log(this.deviceReqDataSource.data);
       this.isLoading = false
@@ -48,6 +49,11 @@ export class DeviceReqListComponent implements OnInit {
     })
   }
 
+  setStatus() {
+    // this.status = value;
+    console.log(this.status);
+    this.getDeviceReqs();
+  }
 
   trackByFn(index: number, item: any): any {
     return item.id || index;
