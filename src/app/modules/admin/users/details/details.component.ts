@@ -9,11 +9,11 @@ import { debounceTime, takeUntil } from 'rxjs/operators';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { Department, Tag, User } from '../../models/users/users.types';
 import { UsersService } from '../../services/users/users.service';
-import { UsersListComponent } from '../list/list.component';
 import { UserService } from 'app/core/user/user.service';
 import { Role } from '../../models/users/role.types';
 import { AlertService } from 'app/modules/alert/snackbar/alert.service';
 import { DepartmentService } from '../../services/departments/department.service';
+import { UserListComponent } from '../user-list.component';
 
 @Component({
     selector: 'users-details',
@@ -53,7 +53,7 @@ export class UsersDetailsComponent implements OnInit, OnDestroy {
     constructor(
         private _activatedRoute: ActivatedRoute,
         private _changeDetectorRef: ChangeDetectorRef,
-        private _usersListComponent: UsersListComponent,
+        private _usersListComponent: UserListComponent,
         private _usersService: UsersService,
         private _userService: UserService,
         private _formBuilder: FormBuilder,

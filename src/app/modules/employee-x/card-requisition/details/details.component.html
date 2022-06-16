@@ -42,10 +42,11 @@
 
         <!-- Title -->
         <div>
-            <mat-form-field class="fuse-mat-textarea fuse-mat-no-subscript w-full">
-                <mat-label>Task title</mat-label>
-                <textarea matInput [spellcheck]="false" [ngModelOptions]="{standalone: true}" ngModel="Title"
-                    matTextareaAutosize #titleField></textarea>
+            <mat-form-field class="fuse-mat-textarea  w-full">
+                <mat-label>Requisition Title</mat-label>
+                <textarea matInput [spellcheck]="false" 
+                    matTextareaAutosize #titleField>
+                {{cardRequisition.title}}</textarea>
             </mat-form-field>
         </div>
 
@@ -91,15 +92,15 @@
             <div class="mr-2">
                 <div class="font-medium">Start date</div>
                 <div class="relative flex items-center mt-1.5 px-4 leading-9 rounded-full cursor-pointer text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700"
-                    (click)="dueDatePicker.open()">
+                    (click)="startDatePicker.open()">
                     <mat-icon class="icon-size-5 text-current" [svgIcon]="'heroicons_solid:calendar'"></mat-icon>
                     <span class="ml-2 text-md font-medium">
                         <ng-container>{{cardRequisition.startDate}}</ng-container>
                     </span>
                     <mat-form-field
-                        class="fuse-mat-no-subscript fuse-mat-dense invisible absolute inset-0 -mt-2.5 opacity-0 pointer-events-none">
-                        <input matInput [(ngModel)]="cardRequisition.startDate" [matDatepicker]="dueDatePicker">
-                        <mat-datepicker #dueDatePicker>
+                        class=" fuse-mat-dense invisible absolute inset-0 -mt-2.5 opacity-0 pointer-events-none">
+                        <input matInput [(ngModel)]="cardRequisition.startDate" [matDatepicker]="startDatePicker">
+                        <mat-datepicker #startDatePicker>
                             <mat-datepicker-actions>
                                 <button mat-button matDatepickerCancel>Clear
                                 </button>
@@ -113,16 +114,16 @@
             <div class="">
                 <div class="font-medium">End date</div>
                 <div class="relative flex items-center mt-1.5 px-4 leading-9 rounded-full cursor-pointer text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700"
-                    (click)="dueDatePicker.open()">
+                    (click)="endDatePicker.open()">
                     <mat-icon class="icon-size-5 text-current" [svgIcon]="'heroicons_solid:calendar'"></mat-icon>
                     <span class="ml-2 text-md font-medium">
                         <ng-container>{{cardRequisition.endDate}}</ng-container>
                     </span>
                     <mat-form-field
-                        class="fuse-mat-no-subscript fuse-mat-dense invisible absolute inset-0 -mt-2.5 opacity-0 pointer-events-none">
+                        class=" fuse-mat-dense invisible absolute inset-0 -mt-2.5 opacity-0 pointer-events-none">
                         <input matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="cardRequisition.endDate"
-                            [matDatepicker]="dueDatePicker">
-                        <mat-datepicker #dueDatePicker>
+                            [matDatepicker]="endDatePicker">
+                        <mat-datepicker #endDatePicker>
                             <mat-datepicker-actions>
                                 <button mat-button matDatepickerCancel>Clear
                                 </button>
@@ -159,7 +160,7 @@
 
         <!-- Notes -->
         <div class="mt-8">
-            <mat-form-field class="fuse-mat-textarea fuse-mat-no-subscript w-full">
+            <mat-form-field class="fuse-mat-textarea  w-full">
                 <mat-label>Comments</mat-label>
                 <textarea matInput [spellcheck]="false"
                     matTextareaAutosize>{{cardRequisition.requestComments}}</textarea>

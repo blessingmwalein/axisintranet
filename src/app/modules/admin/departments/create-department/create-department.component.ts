@@ -21,7 +21,7 @@ export class CreateDepartmentComponent implements OnInit {
     message: ''
   };
   showAlert: boolean = false;
-  department: Department;
+  department: any;
   users: User[]
 
   /**
@@ -52,7 +52,7 @@ export class CreateDepartmentComponent implements OnInit {
       name: ['', [Validators.required]],
       status: ['', [Validators.required]],
       id: [''],
-      approverId: ['',],
+      approverId: ['',[Validators.required]],
       approverName: [''],
       approverEmail: [''],
     });
@@ -68,10 +68,10 @@ export class CreateDepartmentComponent implements OnInit {
         description: this.department.description,
         name: this.department.name,
         status: this.department.status,
-        id: this.data.id,
-        approverId: this.data.approverId,
-        approverName: this.data.approverName,
-        approverEmail: this.data.approverEmail
+        id: this.department.id,
+        approverId: this.department.approverId,
+        approverName: this.department.approverName,
+        approverEmail: this.department.approverEmail
       })
     }, error => {
       this._alertService.displayError('Could not fetch department')

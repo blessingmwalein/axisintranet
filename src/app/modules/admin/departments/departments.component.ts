@@ -74,8 +74,8 @@ export class DepartmentsComponent implements OnInit {
 
   openDeleteDialog(id: string) {
     const dialogRef = this._fuseConfirmationService.open({
-      message: "Are sure you want to delete this role ?",
-      title: "Delete Department Confirmation"
+      message: "Are sure you want to delete this department ?",
+      title: "Delete deepartment confirmation"
     });
 
     dialogRef.afterClosed().subscribe((result) => {

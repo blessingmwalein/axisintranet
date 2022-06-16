@@ -75,7 +75,7 @@ export class RolesComponent implements OnInit {
 
   openDeleteDialog(id: string) {
     const dialogRef = this._fuseConfirmationService.open({
-      message: "Are sure you want to delete this role ?",
+      message: "Are sure you want to delete this item ?",
       title: "Delete Role Confirmation"
     });
 

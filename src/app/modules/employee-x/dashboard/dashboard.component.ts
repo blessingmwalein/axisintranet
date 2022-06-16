@@ -1,9 +1,16 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'app/core/user/user.service';
-import { User } from 'app/modules/admin/models/users/users.types';import { ApexOptions } from 'ng-apexcharts';
+import { User } from 'app/modules/admin/models/users/users.types';import { VehicleService } from 'app/modules/admin/services/vehicles/vehicle.service';
+import { AlertService } from 'app/modules/alert/snackbar/alert.service';
+import { ApexOptions } from 'ng-apexcharts';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { AssetRequisitionService } from '../services/asset-requisitions/asset-requisitions.service';
+import { CardRequisitionService } from '../services/card-requisitions/card-requisitions.service';
+import { CashRequisitionService } from '../services/cash-requisitions/cash-requisitions.service';
+import { DeviceRequisitionService } from '../services/device-requisitions/device-requisitions.service';
+import { VehicleRequisitionService } from '../services/vehicle-requisitions/vehicle-requisitions.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,17 +29,27 @@ export class DashboardComponent implements OnInit {
   chartYearlyExpenses: ApexOptions = {};
   data: any;
   user: User;
-  selectedProject: string = 'ACME Corp. Backend App';
+  selectedProject: string = 'Employe Dashboard';
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
+  cashReqs:any[] = [];
+  vehicleReq:any[] =[];
+  deviceReqs:any[]=[];
+  cardReqs:any[]=[];
+  assetsReqs:any[]=[];
   /**
    * Constructor
    */
   constructor(
     private _router: Router,
     private _userService: UserService,
+    private _alertService:AlertService,
     private _changeDetectorRef: ChangeDetectorRef,
-    
+    private _vehicleService:VehicleRequisitionService,
+    private _cashReqService:CashRequisitionService,
+    private _cardReqservice:CardRequisitionService,
+    private _assetReqService:AssetRequisitionService,
+    private _deviceReqService:DeviceRequisitionService,
   ) {
   }
 
@@ -73,6 +90,32 @@ export class DashboardComponent implements OnInit {
         }
       }
     };
+
+    this._vehicleService.getAllVehicleRequisitions().subscribe(vehicleReqs=>{
+      this.vehicleReq = vehicleReqs
+      this._cashReqService.getAllCashRequisitions().subscribe(cashReqs=>{
+        this.cashReqs = cashReqs;
+        this._cardReqservice.getAllCardRequisitions().subscribe(cardReqs=>{
+          this.cardReqs = cardReqs;
+          this._assetReqService.getAllAssetRequisitions().subscribe(assetReqs=>{
+            this.assetsReqs = assetReqs;
+            this._deviceReqService.getAllDeviceRequisitions().subscribe(deviceReqs=>{
+              this.deviceReqs = deviceReqs
+            }, error=>{
+             this._alertService.displayError('Failed to load device requisitions')
+            })
+          }, error=>{
+            this._alertService.displayError('Failed to load asset requisitions')
+          })
+        }, error=>{
+          this._alertService.displayError('Failed to load card requisitions')
+        })
+      }, error=>{
+       this._alertService.displayError('Failed to load cash requisitions')
+      })
+    }, error=> {
+      this._alertService.displayError('Failed to load vehicle requisitions');
+    });
   }
 
   /**

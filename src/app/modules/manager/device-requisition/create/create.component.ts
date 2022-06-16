@@ -20,7 +20,7 @@ export class CreateDeviceReqComponent implements OnInit {
   devices: any[];
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
-  constructor(private _userService:UserService,private _alertService: AlertService, private _formBuilder: FormBuilder, private _deviceReqService: DeviceRequisitionService, private _router: Router,) { }
+  constructor(private _userService: UserService, private _alertService: AlertService, private _formBuilder: FormBuilder, private _deviceReqService: DeviceRequisitionService, private _router: Router,) { }
 
   ngOnInit(): void {
     this._deviceReqService.getDevices().subscribe(data => {
@@ -33,7 +33,9 @@ export class CreateDeviceReqComponent implements OnInit {
         deviceId: ['', Validators.required],
         title: ['', Validators.required],
         amount: ['', Validators.required],
-        lineApproverId:[this._userService.getLocalUser().lineApproverId]
+        status: [""],
+        lineApproverId: [this._userService.getLocalUser().lineApproverId]
+
       }),
       step2: this._formBuilder.group({
         startDate: ['', Validators.required],

@@ -6,14 +6,14 @@
       <div class="flex flex-col sm:flex-row flex-auto sm:items-center min-w-0 my-8 sm:my-12">
         <!-- Avatar and name -->
         <div class="flex flex-auto items-center min-w-0">
-          <div class="flex-0 w-16 h-16 rounded-full overflow-hidden">
-            <img class="w-full h-full object-cover" src="./assets/images/avatars/blessing-mwale.webp">
-        
+          <div class=" w-16 h-16 rounded-full overflow-hidden">
+            <!-- <img class="w-full h-full object-cover" src="./assets/images/avatars/blessing-mwale.webp"> -->
+            <mat-icon class="mt-5 ml-5" style="transform: scale(3);" [svgIcon]="'heroicons_outline:user-circle'"></mat-icon>
           </div>
           <div class="flex flex-col min-w-0 ml-4">
             <ng-container *transloco="let t">
               <div class="text-2xl md:text-5xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
-                {{t('welcome-back')}}, {{user.name}}!</div>
+                Welcome-back, {{user.userName}}!</div>
             </ng-container>
           </div>
         </div>
@@ -39,49 +39,50 @@
               <!-- Summary -->
               <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
                 <div class="flex items-start justify-between">
-                  <div class="text-lg font-medium tracking-tight leading-6 truncate">Requisitions</div>
+                  <div class="text-lg font-medium tracking-tight leading-6 truncate">Items</div>
                   <div class="ml-2 -mt-2 -mr-3">
-                    <button mat-icon-button [matMenuTriggerFor]="summaryMenu">
+                    <!-- <button mat-icon-button [matMenuTriggerFor]="issuesMenu">
                       <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
                     </button>
-                    <mat-menu #summaryMenu="matMenu">
+                    <mat-menu #issuesMenu="matMenu">
                       <button mat-menu-item>Yesterday</button>
                       <button mat-menu-item>2 days ago</button>
                       <button mat-menu-item>3 days ago</button>
-                    </mat-menu>
+                    </mat-menu> -->
                   </div>
                 </div>
                 <div class="flex flex-col items-center mt-2">
-                  <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500">21</div>
-                  <div class="text-lg font-medium text-blue-600 dark:text-blue-500">Pending</div>
-                  <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
-                    <div class="text-md font-medium truncate">Approved:</div>
-                    <div class="ml-1.5 text-lg font-semibold">13</div>
-                  </div>
+                  <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-amber-500">5</div>
+                  <div class="text-lg font-medium text-amber-600 dark:text-amber-500">Available</div>
+                  <!-- <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                    <div class="text-md font-medium truncate">Used:</div>
+                    <div class="ml-1.5 text-lg font-semibold">10</div>
+                  </div> -->
                 </div>
               </div>
               <!-- Overdue -->
               <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
                 <div class="flex items-start justify-between">
-                  <div class="text-lg font-medium tracking-tight leading-6 truncate">Announcements</div>
+                  <div class="text-lg font-medium tracking-tight leading-6 truncate">Roles</div>
                   <div class="ml-2 -mt-2 -mr-3">
-                    <button mat-icon-button [matMenuTriggerFor]="overdueMenu">
+                    <!-- <button mat-icon-button [matMenuTriggerFor]="issuesMenu">
                       <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
                     </button>
-                    <mat-menu #overdueMenu="matMenu">
+                    <mat-menu #issuesMenu="matMenu">
                       <button mat-menu-item>Yesterday</button>
                       <button mat-menu-item>2 days ago</button>
                       <button mat-menu-item>3 days ago</button>
-                    </mat-menu>
+                    </mat-menu> -->
                   </div>
                 </div>
                 <div class="flex flex-col items-center mt-2">
-                  <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-red-500">17</div>
-                  <div class="text-lg font-medium text-red-600 dark:text-red-500">Announcements</div>
-                  <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
-                    <div class="text-md font-medium truncate">From yesterday:</div>
-                    <div class="ml-1.5 text-lg font-semibold">9</div>
-                  </div>
+                  <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-amber-500">
+                    {{roles.length}}</div>
+                  <div class="text-lg font-medium text-amber-600 dark:text-amber-500">Available</div>
+                  <!-- <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                    <div class="text-md font-medium truncate">Used:</div>
+                    <div class="ml-1.5 text-lg font-semibold">10</div>
+                  </div> -->
                 </div>
               </div>
               <!-- Issues -->
@@ -89,47 +90,49 @@
                 <div class="flex items-start justify-between">
                   <div class="text-lg font-medium tracking-tight leading-6 truncate">Users</div>
                   <div class="ml-2 -mt-2 -mr-3">
-                    <button mat-icon-button [matMenuTriggerFor]="issuesMenu">
+                    <!-- <button mat-icon-button [matMenuTriggerFor]="issuesMenu">
                       <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
                     </button>
                     <mat-menu #issuesMenu="matMenu">
                       <button mat-menu-item>Yesterday</button>
                       <button mat-menu-item>2 days ago</button>
                       <button mat-menu-item>3 days ago</button>
-                    </mat-menu>
+                    </mat-menu> -->
                   </div>
                 </div>
                 <div class="flex flex-col items-center mt-2">
-                  <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-amber-500">5</div>
+                  <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-amber-500">
+                    {{users.length}}</div>
                   <div class="text-lg font-medium text-amber-600 dark:text-amber-500">Available</div>
-                  <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                  <!-- <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
                     <div class="text-md font-medium truncate">Used:</div>
                     <div class="ml-1.5 text-lg font-semibold">10</div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
               <!-- Features -->
               <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
                 <div class="flex items-start justify-between">
-                  <div class="text-lg font-medium tracking-tight leading-6 truncate">Departments</div>
+                  <div class="text-lg font-medium tracking-tight leading-6 truncate">Department</div>
                   <div class="ml-2 -mt-2 -mr-3">
-                    <button mat-icon-button [matMenuTriggerFor]="featuresMenu">
+                    <!-- <button mat-icon-button [matMenuTriggerFor]="issuesMenu">
                       <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
                     </button>
-                    <mat-menu #featuresMenu="matMenu">
+                    <mat-menu #issuesMenu="matMenu">
                       <button mat-menu-item>Yesterday</button>
                       <button mat-menu-item>2 days ago</button>
                       <button mat-menu-item>3 days ago</button>
-                    </mat-menu>
+                    </mat-menu> -->
                   </div>
                 </div>
                 <div class="flex flex-col items-center mt-2">
-                  <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-green-500">38</div>
-                  <div class="text-lg font-medium text-green-600 dark:text-green-500">Proposals</div>
-                  <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
-                    <div class="text-md font-medium truncate">Implemented:</div>
-                    <div class="ml-1.5 text-lg font-semibold">16</div>
-                  </div>
+                  <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-amber-500">
+                    {{departments.length}}</div>
+                  <div class="text-lg font-medium text-amber-600 dark:text-amber-500">Available</div>
+                  <!-- <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                    <div class="text-md font-medium truncate">Used:</div>
+                    <div class="ml-1.5 text-lg font-semibold">10</div>
+                  </div> -->
                 </div>
               </div>
 

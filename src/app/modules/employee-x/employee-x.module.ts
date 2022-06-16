@@ -89,11 +89,11 @@ import { AssetRequisitionDetailsComponent } from './asset-requisition/details/de
     DeviceReqListComponent,
     CreateDeviceReqComponent,
     DeviceRequisitionDetailsComponent,
-
     AssetRequisitionComponent,
     AssetReqListComponent,
     CreateAssetReqComponent,
-    AssetRequisitionDetailsComponent
+    AssetRequisitionDetailsComponent,
+    
 
   ],
   imports: [

@@ -5,7 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
 import { AlertService } from 'app/modules/alert/snackbar/alert.service';
 import { AssetRequisitionService } from 'app/modules/employee-x/services/asset-requisitions/asset-requisitions.service';
-
+import { UserService } from 'app/core/user/user.service';
 
 @Component({
   selector: 'app-create',
@@ -19,7 +19,7 @@ export class CreateAssetReqComponent implements OnInit {
   assets: any[];
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
-  constructor(private _alertService: AlertService, private _formBuilder: FormBuilder, private _assetReqService: AssetRequisitionService, private _router: Router,) { }
+  constructor(private _alertService: AlertService, private _formBuilder: FormBuilder, private _assetReqService: AssetRequisitionService, private _router: Router, private _userService: UserService) { }
 
   ngOnInit(): void {
     this._assetReqService.getAssets().subscribe(data => {
@@ -32,7 +32,9 @@ export class CreateAssetReqComponent implements OnInit {
         assetId: ['', Validators.required],
         title: ['', Validators.required],
         amount: ['', Validators.required],
-        status: [""]
+        status: [""],
+        lineApproverId: [this._userService.getLocalUser().lineApproverId]
+
       }),
       step2: this._formBuilder.group({
         startDate: ['', Validators.required],

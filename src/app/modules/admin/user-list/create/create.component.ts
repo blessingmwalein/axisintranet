@@ -50,7 +50,7 @@ export class CreateComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
       confirmationPassword: [''],
-      lineApprover: ['Philip'],
+      lineApprover: [''],
       roles: [[]],
       departmentId : ['', [Validators.required]]
     });

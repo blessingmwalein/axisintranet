@@ -7,16 +7,16 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { Shortcut } from 'app/layout/common/shortcuts/shortcuts.types';
 import { ShortcutsService } from 'app/layout/common/shortcuts/shortcuts.service';
+import { UserService } from 'app/core/user/user.service';
 
 @Component({
-    selector       : 'shortcuts',
-    templateUrl    : './shortcuts.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'shortcuts',
+    templateUrl: './shortcuts.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    exportAs       : 'shortcuts'
+    exportAs: 'shortcuts'
 })
-export class ShortcutsComponent implements OnInit, OnDestroy
-{
+export class ShortcutsComponent implements OnInit, OnDestroy {
     @ViewChild('shortcutsOrigin') private _shortcutsOrigin: MatButton;
     @ViewChild('shortcutsPanel') private _shortcutsPanel: TemplateRef<any>;
 
@@ -25,7 +25,8 @@ export class ShortcutsComponent implements OnInit, OnDestroy
     shortcuts: Shortcut[];
     private _overlayRef: OverlayRef;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
-
+    user: any;
+    preLink = '';
     /**
      * Constructor
      */
@@ -34,9 +35,9 @@ export class ShortcutsComponent implements OnInit, OnDestroy
         private _formBuilder: FormBuilder,
         private _shortcutsService: ShortcutsService,
         private _overlay: Overlay,
-        private _viewContainerRef: ViewContainerRef
-    )
-    {
+        private _viewContainerRef: ViewContainerRef,
+        private _userService: UserService
+    ) {
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -46,16 +47,27 @@ export class ShortcutsComponent implements OnInit, OnDestroy
     /**
      * On init
      */
-    ngOnInit(): void
-    {
+    ngOnInit(): void {
+        this.user = this._userService.getLocalUser()
+        if (this.user.roles[0].toLocaleLowerCase() == 'administrator') {
+            this.preLink = 'axis/admin/'
+        } else if (this.user.roles[0].toLocaleLowerCase() == 'employee') {
+            this.preLink = 'axis/employee/'
+
+        } else if (this.user.roles[0].toLocaleLowerCase() == 'Line Manager') {
+            this.preLink = 'axis/manager/'
+
+        } else if (this.user.roles[0].toLocaleLowerCase() == 'finance manager') {
+            this.preLink = 'axis/finance-manager/'
+        }
         // Initialize the form
         this.shortcutForm = this._formBuilder.group({
-            id         : [null],
-            label      : ['', Validators.required],
+            id: [null],
+            label: ['', Validators.required],
             description: [''],
-            icon       : ['', Validators.required],
-            link       : ['', Validators.required],
-            useRouter  : ['', Validators.required]
+            icon: ['', Validators.required],
+            link: ['', Validators.required],
+            useRouter: ['', Validators.required]
         });
 
         // Get the shortcuts
@@ -70,19 +82,19 @@ export class ShortcutsComponent implements OnInit, OnDestroy
                 this._changeDetectorRef.markForCheck();
             });
     }
-
+    getLink(link: string) {
+        return this.preLink + link
+    }
     /**
      * On destroy
      */
-    ngOnDestroy(): void
-    {
+    ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
 
         // Dispose the overlay
-        if ( this._overlayRef )
-        {
+        if (this._overlayRef) {
             this._overlayRef.dispose();
         }
     }
@@ -94,11 +106,9 @@ export class ShortcutsComponent implements OnInit, OnDestroy
     /**
      * Open the shortcuts panel
      */
-    openPanel(): void
-    {
+    openPanel(): void {
         // Return if the shortcuts panel or its origin is not defined
-        if ( !this._shortcutsPanel || !this._shortcutsOrigin )
-        {
+        if (!this._shortcutsPanel || !this._shortcutsOrigin) {
             return;
         }
 
@@ -106,8 +116,7 @@ export class ShortcutsComponent implements OnInit, OnDestroy
         this.mode = 'view';
 
         // Create the overlay if it doesn't exist
-        if ( !this._overlayRef )
-        {
+        if (!this._overlayRef) {
             this._createOverlay();
         }
 
@@ -118,16 +127,14 @@ export class ShortcutsComponent implements OnInit, OnDestroy
     /**
      * Close the messages panel
      */
-    closePanel(): void
-    {
+    closePanel(): void {
         this._overlayRef.detach();
     }
 
     /**
      * Change the mode
      */
-    changeMode(mode: 'view' | 'modify' | 'add' | 'edit'): void
-    {
+    changeMode(mode: 'view' | 'modify' | 'add' | 'edit'): void {
         // Change the mode
         this.mode = mode;
     }
@@ -135,8 +142,7 @@ export class ShortcutsComponent implements OnInit, OnDestroy
     /**
      * Prepare for a new shortcut
      */
-    newShortcut(): void
-    {
+    newShortcut(): void {
         // Reset the form
         this.shortcutForm.reset();
 
@@ -147,8 +153,7 @@ export class ShortcutsComponent implements OnInit, OnDestroy
     /**
      * Edit a shortcut
      */
-    editShortcut(shortcut: Shortcut): void
-    {
+    editShortcut(shortcut: Shortcut): void {
         // Reset the form with the shortcut
         this.shortcutForm.reset(shortcut);
 
@@ -159,19 +164,16 @@ export class ShortcutsComponent implements OnInit, OnDestroy
     /**
      * Save shortcut
      */
-    save(): void
-    {
+    save(): void {
         // Get the data from the form
         const shortcut = this.shortcutForm.value;
 
         // If there is an id, update it...
-        if ( shortcut.id )
-        {
+        if (shortcut.id) {
             this._shortcutsService.update(shortcut.id, shortcut).subscribe();
         }
         // Otherwise, create a new shortcut...
-        else
-        {
+        else {
             this._shortcutsService.create(shortcut).subscribe();
         }
 
@@ -182,8 +184,7 @@ export class ShortcutsComponent implements OnInit, OnDestroy
     /**
      * Delete shortcut
      */
-    delete(): void
-    {
+    delete(): void {
         // Get the data from the form
         const shortcut = this.shortcutForm.value;
 
@@ -200,8 +201,7 @@ export class ShortcutsComponent implements OnInit, OnDestroy
      * @param index
      * @param item
      */
-    trackByFn(index: number, item: any): any
-    {
+    trackByFn(index: number, item: any): any {
         return item.id || index;
     }
 
@@ -212,43 +212,42 @@ export class ShortcutsComponent implements OnInit, OnDestroy
     /**
      * Create the overlay
      */
-    private _createOverlay(): void
-    {
+    private _createOverlay(): void {
         // Create the overlay
         this._overlayRef = this._overlay.create({
-            hasBackdrop     : true,
-            backdropClass   : 'fuse-backdrop-on-mobile',
-            scrollStrategy  : this._overlay.scrollStrategies.block(),
+            hasBackdrop: true,
+            backdropClass: 'fuse-backdrop-on-mobile',
+            scrollStrategy: this._overlay.scrollStrategies.block(),
             positionStrategy: this._overlay.position()
-                                  .flexibleConnectedTo(this._shortcutsOrigin._elementRef.nativeElement)
-                                  .withLockedPosition(true)
-                                  .withPush(true)
-                                  .withPositions([
-                                      {
-                                          originX : 'start',
-                                          originY : 'bottom',
-                                          overlayX: 'start',
-                                          overlayY: 'top'
-                                      },
-                                      {
-                                          originX : 'start',
-                                          originY : 'top',
-                                          overlayX: 'start',
-                                          overlayY: 'bottom'
-                                      },
-                                      {
-                                          originX : 'end',
-                                          originY : 'bottom',
-                                          overlayX: 'end',
-                                          overlayY: 'top'
-                                      },
-                                      {
-                                          originX : 'end',
-                                          originY : 'top',
-                                          overlayX: 'end',
-                                          overlayY: 'bottom'
-                                      }
-                                  ])
+                .flexibleConnectedTo(this._shortcutsOrigin._elementRef.nativeElement)
+                .withLockedPosition(true)
+                .withPush(true)
+                .withPositions([
+                    {
+                        originX: 'start',
+                        originY: 'bottom',
+                        overlayX: 'start',
+                        overlayY: 'top'
+                    },
+                    {
+                        originX: 'start',
+                        originY: 'top',
+                        overlayX: 'start',
+                        overlayY: 'bottom'
+                    },
+                    {
+                        originX: 'end',
+                        originY: 'bottom',
+                        overlayX: 'end',
+                        overlayY: 'top'
+                    },
+                    {
+                        originX: 'end',
+                        originY: 'top',
+                        overlayX: 'end',
+                        overlayY: 'bottom'
+                    }
+                ])
         });
 
         // Detach the overlay from the portal on backdrop click

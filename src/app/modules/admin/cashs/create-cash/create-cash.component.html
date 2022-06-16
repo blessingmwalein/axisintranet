@@ -1,0 +1,92 @@
+<div class="flex flex-col max-w-240 md:min-w-160 max-h-screen -m-6">
+
+  <!-- Header -->
+  <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+    <div class="text-lg font-medium">{{data.isEdit?'Edit':'Create new'}} cash</div>
+    <button mat-icon-button (click)="saveAndClose()" [tabIndex]="-1">
+      <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
+    </button>
+  </div>
+
+  <!-- Compose form -->
+  <form class="flex flex-col flex-auto p-6 sm:p-8 overflow-y-auto" [formGroup]="cashCreateForm">
+    <fuse-alert class="mt-8 mb-2" *ngIf="showAlert" [appearance]="'outline'" [showIcon]="false" [type]="alert.type"
+      [@shake]="alert.type === 'error'">
+      {{alert.message}}
+    </fuse-alert>
+    <div class="mt-6">
+      <mat-form-field class=" w-full">
+        <mat-label>Currency Code</mat-label>
+        <mat-icon matPrefix class="hidden sm:flex icon-size-5" [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+        <input matInput [formControlName]="'currencyCode'" [placeholder]="'Currecy Code'" [spellcheck]="false">
+        <mat-error *ngIf="cashCreateForm.get('currencyCode').hasError('required')">
+          Currency code is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mt-6">
+      <mat-form-field class=" w-full">
+        <mat-label>Description</mat-label>
+        <textarea matInput [formControlName]="'description'" [placeholder]="'Description'" [rows]="3"></textarea>
+        <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:menu-alt-2'"></mat-icon>
+        <mat-error *ngIf="cashCreateForm.get('description').hasError('required')">
+          Cash description is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="mt-6">
+      <mat-form-field class="flex-auto gt-xs:pl-3 pt-2 w-full">
+        <mat-label>Status</mat-label>
+        <mat-select [placeholder]="'Status'" [formControlName]="'status'">
+          <mat-option value="active">Active</mat-option>
+          <mat-option value="disabled">Disabled</mat-option>
+        </mat-select>
+        <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:translate'"></mat-icon>
+        <mat-error *ngIf="cashCreateForm.get('status').hasError('required')">
+          Status is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mt-6">
+      <mat-form-field class=" w-full">
+        <mat-label>Currency</mat-label>
+        <mat-icon matPrefix class="hidden sm:flex icon-size-5" [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+        <input matInput [formControlName]="'currency'" [placeholder]="'Currency'" [spellcheck]="false">
+        <mat-error *ngIf="cashCreateForm.get('currency').hasError('required')">
+          Currency is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mt-6">
+      <mat-form-field class=" w-full">
+        <mat-label>Amount</mat-label>
+        <mat-icon matPrefix class="hidden sm:flex icon-size-5" [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+        <input matInput [formControlName]="'amount'" [placeholder]="'Amount'" [spellcheck]="false" type="number">
+        <mat-error *ngIf="cashCreateForm.get('amount').hasError('required')">
+          Amount is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <!-- Actions -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-4 sm:mt-6">
+      <div class="-ml-2">
+        <div class="flex items-center mt-4 sm:mt-0">
+          <!-- Discash -->
+          <button class="ml-auto sm:ml-0 mr-2" mat-stroked-button (click)="saveAndClose()">
+            Cancel
+          </button>
+          <!-- Send -->
+          <button class="order-first sm:order-last" mat-flat-button [color]="'primary'"
+            [disabled]="cashCreateForm.disabled" (click)="data.isEdit ? update() :save()">
+            <span *ngIf="!cashCreateForm.disabled">
+              {{data.isEdit ? 'Update ':'Save'}} Changes
+            </span>
+            <mat-progress-spinner *ngIf="cashCreateForm.disabled" [diameter]="24" [mode]="'indeterminate'">
+            </mat-progress-spinner>
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

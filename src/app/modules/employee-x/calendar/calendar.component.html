@@ -58,7 +58,7 @@
                   </button>
 
                   <div class="hidden md:block ml-auto">
-                      <mat-form-field class="fuse-mat-dense fuse-mat-no-subscript w-30 ml-2">
+                      <mat-form-field class="fuse-mat-dense  w-30 ml-2">
                           <mat-select
                               (selectionChange)="changeView(viewChanger.value)"
                               [value]="view"
@@ -263,7 +263,7 @@
                               <mat-icon
                                   class="hidden sm:inline-flex mr-6"
                                   [svgIcon]="'heroicons_outline:pencil-alt'"></mat-icon>
-                              <mat-form-field class="fuse-mat-no-subscript flex-auto">
+                              <mat-form-field class=" flex-auto">
                                   <input
                                       matInput
                                       [formControlName]="'title'"
@@ -312,7 +312,7 @@
                               <mat-icon
                                   class="hidden sm:inline-flex mr-6"
                                   [svgIcon]="'heroicons_outline:tag'"></mat-icon>
-                              <mat-form-field class="fuse-mat-no-subscript flex-auto">
+                              <mat-form-field class=" flex-auto">
                                   <mat-select
                                       [formControlName]="'calendarId'"
                                       (change)="$event.stopImmediatePropagation()">
@@ -341,7 +341,7 @@
                               <mat-icon
                                   class="hidden sm:inline-flex mr-6 mt-3"
                                   [svgIcon]="'heroicons_outline:menu-alt-2'"></mat-icon>
-                              <mat-form-field class="fuse-mat-textarea fuse-mat-no-subscript flex-auto">
+                              <mat-form-field class="fuse-mat-textarea  flex-auto">
                                   <textarea
                                       matInput
                                       matTextareaAutosize

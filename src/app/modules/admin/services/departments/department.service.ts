@@ -35,6 +35,6 @@ export class DepartmentService {
     return this._httpClient.get<Department>(`${this._baseUrl}Departments/${id}`);
   }
   getDepartments() {
-    return this._httpClient.get<Department>(`${this._baseUrl}Departments`);
+    return this._httpClient.get<any>(`${this._baseUrl}Departments`);
   }
 }

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { MantainanceComponent } from '../admin/mantainance/mantainance.component';
 import { AnnouncementsComponent } from './announcements/announcements.component';
 import { AssetReqListComponent } from './asset-requisition/asset-req-list/asset-req-list.component';
 import { CreateAssetReqComponent } from './asset-requisition/create/create.component';
@@ -30,22 +31,22 @@ const routes: Routes = [
   },
   {
     path: 'announcements',
-    component: AnnouncementsComponent,
-    resolve: {
-      announcements: AnnouncementsResolver
-    }
+    component: MantainanceComponent,
+    // resolve: {
+    //   announcements: AnnouncementsResolver
+    // }
   },
   {
     path: 'calendar',
     children: [
       {
         path: '',
-        component: CalendarComponent,
-        resolve: {
-          calendars: CalendarCalendarsResolver,
-          settings: CalendarSettingsResolver,
-          weekdays: CalendarWeekdaysResolver
-        }
+        component: MantainanceComponent,
+        // resolve: {
+        //   calendars: CalendarCalendarsResolver,
+        //   settings: CalendarSettingsResolver,
+        //   weekdays: CalendarWeekdaysResolver
+        // }
       },
       {
         path: 'settings',

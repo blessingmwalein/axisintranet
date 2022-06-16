@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanDeactivate, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { UsersDetailsComponent } from '../../users/details/details.component';
+import { UserDetailComponent } from '../../user-list/user-detail/user-detail.component';
 
 @Injectable({
     providedIn: 'root'
 })
-export class CanDeactivateUsersDetails implements CanDeactivate<UsersDetailsComponent>
+export class CanDeactivateUsersDetails implements CanDeactivate<UserDetailComponent>
 {
     canDeactivate(
-        component: UsersDetailsComponent,
+        component: UserDetailComponent,
         currentRoute: ActivatedRouteSnapshot,
         currentState: RouterStateSnapshot,
         nextState: RouterStateSnapshot
@@ -41,7 +41,7 @@ export class CanDeactivateUsersDetails implements CanDeactivate<UsersDetailsComp
         else
         {
             // Close the drawer first, and then navigate
-            return component.closeDrawer().then(() => true);
+            // return component.closeDrawer().then(() => true);
         }
     }
 }

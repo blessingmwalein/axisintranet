@@ -20,7 +20,7 @@ export class CreateCardReqComponent implements OnInit {
   cards: any[];
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
-  constructor(private _userService:UserService,private _alertService: AlertService, private _formBuilder: FormBuilder, private _cardReqService: CardRequisitionService, private _router: Router,) { }
+  constructor(private _alertService: AlertService, private _formBuilder: FormBuilder, private _cardReqService: CardRequisitionService, private _router: Router,private _userService:UserService) { }
 
   ngOnInit(): void {
     this._cardReqService.getCards().subscribe(data => {
@@ -33,7 +33,9 @@ export class CreateCardReqComponent implements OnInit {
         cardId: ['', Validators.required],
         title: ['', Validators.required],
         amount: ['', Validators.required],
+        status: ["Created"],
         lineApproverId:[this._userService.getLocalUser().lineApproverId]
+
       }),
       step2: this._formBuilder.group({
         startDate: ['', Validators.required],

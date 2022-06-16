@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
-import { CashRequisitionService } from 'app/modules/employee-x/services/cash-requisitions/cash-requisitions.service';
 import { AlertService } from 'app/modules/alert/snackbar/alert.service';
+import { UserService } from 'app/core/user/user.service';
+import moment from 'moment';
+import { CashRequisitionService } from 'app/modules/employee-x/services/cash-requisitions/cash-requisitions.service';
 
 
 @Component({
@@ -18,10 +20,17 @@ export class CreateCashReqComponent implements OnInit {
   formFieldHelpers: string[] = [''];
   cashs: any[];
   private _unsubscribeAll: Subject<any> = new Subject<any>();
+  minDate = new Date();
+  isPastStartDate = false;
+  constructor(private _alertService: AlertService, private _formBuilder: FormBuilder, private _cashReqService: CashRequisitionService, private _router: Router, private _userService: UserService) { }
 
-  constructor(private _alertService: AlertService, private _formBuilder: FormBuilder, private _cashReqService: CashRequisitionService, private _router: Router,) { }
 
   ngOnInit(): void {
+    // const currentYear = moment().year();
+    // this.minDate = moment([currentYear - 1, 0, 1]);
+    // this.maxDate = moment([currentYear + 1, 11, 31]);
+    this.setMinDates();
+
     this._cashReqService.getCashs().subscribe(data => {
       this.cashs = data;
     })
@@ -31,7 +40,10 @@ export class CreateCashReqComponent implements OnInit {
         requestComments: ['', [Validators.required]],
         cashId: ['', Validators.required],
         title: ['', Validators.required],
-        amount: ['', Validators.required]
+        amount: ['', Validators.required],
+        status: "Created",
+        lineApproverId: [this._userService.getLocalUser().lineApproverId]
+
       }),
       step2: this._formBuilder.group({
         startDate: ['', Validators.required],
@@ -42,6 +54,16 @@ export class CreateCashReqComponent implements OnInit {
 
   }
 
+  setMinDates() {
+    var today = new Date().toISOString().slice(0, 16);
+    // document.getElementById("startDate").setAttribute("min", today);
+
+  }
+
+  isPresentDate() {
+
+  }
+
   getFormFieldHelpersAsString(): string {
     return this.formFieldHelpers.join(' ');
   }
@@ -49,7 +71,9 @@ export class CreateCashReqComponent implements OnInit {
 
   createReq(): void {
     console.log('Clicked');
+    this.horizontalStepperForm.patchValue({
 
+    })
     this.horizontalStepperForm.disable();
     this._cashReqService.createCashReq({ ...this.horizontalStepperForm.value.step1, ...this.horizontalStepperForm.value.step2 })
       .subscribe(() => {
@@ -62,5 +86,17 @@ export class CreateCashReqComponent implements OnInit {
           this._alertService.displayError("Failed to  submitt please try again")
           this.horizontalStepperForm.enable();
         });
+  }
+
+  isInThePast(date) {
+    const today = new Date();
+
+    // 👇️ OPTIONAL!
+    // This line sets the hour of the current date to midnight
+    // so the comparison only returns `true` if the passed in date
+    // is at least yesterday
+    today.setHours(0, 0, 0, 0);
+    this.isPastStartDate ?? date < today
+    // return date < today;
   }
 }

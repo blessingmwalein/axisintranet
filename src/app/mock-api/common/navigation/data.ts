@@ -264,38 +264,44 @@ export const adminNavigation: FuseNavigationItem[] = [
                 icon: 'heroicons_outline:user-circle',
                 link: '/axis/admin/users'
             },
-            // {
-            //     id: 'admin.requisitions',
-            //     title: 'Requisitions',
-            //     type: 'collapsable',
-            //     icon: 'heroicons_outline:support',
-            //     children: [
-            //         {
-            //             id: 'admin.requisitions.cash',
-            //             title: 'Cash',
-            //             type: 'basic',
-            //             link: '/axis/admin/requisitions/cash'
-            //         },
-            //         {
-            //             id: 'admin.requisitions.card',
-            //             title: 'Card',
-            //             type: 'basic',
-            //             link: '/axis/admin/requisitions/card'
-            //         },
-            //         {
-            //             id: 'admin.requisitions.device',
-            //             title: 'Device',
-            //             type: 'basic',
-            //             link: '/axis/admin/requisitions/device'
-            //         },
-            //         {
-            //             id: 'admin.requisitions.vehicle',
-            //             title: 'Vehicle',
-            //             type: 'basic',
-            //             link: '/axis/admin/requisitions/vehicle'
-            //         }
-            //     ]
-            // },
+            {
+                id: 'admin.requisitions-items',
+                title: 'Requisitions Items',
+                type: 'collapsable',
+                icon: 'heroicons_outline:support',
+                children: [
+                    {
+                        id: 'admin.requisitions-items.cash',
+                        title: 'Cash',
+                        type: 'basic',
+                        link: '/axis/admin/requisitions-items/cash'
+                    },
+                    {
+                        id: 'admin.requisitions-items.asset',
+                        title: 'Asset',
+                        type: 'basic',
+                        link: '/axis/admin/requisitions-items/asset'
+                    },
+                    {
+                        id: 'admin.requisitions-items.card',
+                        title: 'Card',
+                        type: 'basic',
+                        link: '/axis/admin/requisitions-items/card'
+                    },
+                    {
+                        id: 'admin.requisitions-items.device',
+                        title: 'Device',
+                        type: 'basic',
+                        link: '/axis/admin/requisitions-items/device'
+                    },
+                    {
+                        id: 'admin.requisitions-items.vehicle',
+                        title: 'Vehicle',
+                        type: 'basic',
+                        link: '/axis/admin/requisitions-items/vehicle'
+                    }
+                ]
+            },
             {
                 id: 'admin.security',
                 title: 'Security',

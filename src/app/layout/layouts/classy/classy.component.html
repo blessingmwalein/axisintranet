@@ -1,6 +1,7 @@
 <!-- Navigation -->
 <fuse-vertical-navigation class="dark bg-gray-900 print:hidden" [mode]="isScreenSmall ? 'over' : 'side'"
-    [name]="'mainNavigation'" [navigation]="getSidebarNavigation()" [usertype]="user.roles[0]" [opened]="!isScreenSmall">
+    [name]="'mainNavigation'" [navigation]="getSidebarNavigation()" [usertype]="user.roles[0]"
+    [opened]="!isScreenSmall">
     <!-- Navigation header hook -->
     <ng-container fuseVerticalNavigationContentHeader>
         <div class="flex items-center w-full p-4 pl-6">
@@ -55,7 +56,7 @@
         <div class="flex items-center pl-2 ml-auto space-x-1 sm:space-x-2">
             <search [appearance]="'bar'"></search>
             <shortcuts></shortcuts>
-            <messages></messages>
+            <!-- <messages></messages> -->
         </div>
     </div>
 

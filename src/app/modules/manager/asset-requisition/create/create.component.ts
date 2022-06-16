@@ -7,7 +7,6 @@ import { AlertService } from 'app/modules/alert/snackbar/alert.service';
 import { AssetRequisitionService } from 'app/modules/employee-x/services/asset-requisitions/asset-requisitions.service';
 import { UserService } from 'app/core/user/user.service';
 
-
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
@@ -20,7 +19,7 @@ export class CreateAssetReqComponent implements OnInit {
   assets: any[];
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
-  constructor(private _userService:UserService,private _alertService: AlertService, private _formBuilder: FormBuilder, private _assetReqService: AssetRequisitionService, private _router: Router,) { }
+  constructor(private _alertService: AlertService, private _formBuilder: FormBuilder, private _assetReqService: AssetRequisitionService, private _router: Router,private _userService:UserService) { }
 
   ngOnInit(): void {
     this._assetReqService.getAssets().subscribe(data => {
@@ -35,6 +34,7 @@ export class CreateAssetReqComponent implements OnInit {
         amount: ['', Validators.required],
         status: [""],
         lineApproverId:[this._userService.getLocalUser().lineApproverId]
+
       }),
       step2: this._formBuilder.group({
         startDate: ['', Validators.required],

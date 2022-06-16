@@ -14,7 +14,7 @@
       {{alert.message}}
     </fuse-alert>
 
-    <mat-form-field class="fuse-mat-no-subscript w-full">
+    <mat-form-field class=" w-full">
       <mat-icon matPrefix class="hidden sm:flex icon-size-5" [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
       <input matInput [formControlName]="'description'" [placeholder]="'Department Name'" [spellcheck]="false">
       <mat-error *ngIf="departmentCreateForm.get('description').hasError('required')">

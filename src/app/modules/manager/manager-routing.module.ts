@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { MantainanceComponent } from '../admin/mantainance/mantainance.component';
 import { AssetReqListComponent } from './asset-requisition/asset-req-list/asset-req-list.component';
 import { CreateAssetReqComponent } from './asset-requisition/create/create.component';
 import { AssetRequisitionDetailsComponent } from './asset-requisition/details/details.component';
@@ -19,8 +20,8 @@ import { VehicleReqListComponent } from './vehicle-requisitions/vehicle-req-list
 
 const routes: Routes = [
   {
-      path:"dashboard",
-      component:DashboardComponent
+    path: "dashboard",
+    component: DashboardComponent
   },
   {
     path: 'requisitions/vehicle',
@@ -88,6 +89,14 @@ const routes: Routes = [
   {
     path: 'requisitions/asset/:id',
     component: AssetRequisitionDetailsComponent,
+  },
+  {
+    path: 'announcements',
+    component: MantainanceComponent,
+  },
+  {
+    path: 'calendar',
+    component: MantainanceComponent,
   }
 ];
 

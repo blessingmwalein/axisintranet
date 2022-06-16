@@ -2,7 +2,7 @@
 
   <!-- Header -->
   <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
-    <div class="text-lg font-medium">{{data.isEdit?'Edit':'Create new'}} Department</div>
+    <div class="text-lg font-medium">{{data.isEdit?'Edit':'Create new'}} department</div>
     <button mat-icon-button (click)="saveAndClose()" [tabIndex]="-1">
       <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
     </button>
@@ -16,7 +16,7 @@
       {{alert.message}}
     </fuse-alert>
     <div class="mt-6">
-      <mat-form-field class="fuse-mat-no-subscript w-full">
+      <mat-form-field class=" w-full">
         <mat-label>Name</mat-label>
         <mat-icon matPrefix class="hidden sm:flex icon-size-5" [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
         <input matInput [formControlName]="'name'" [placeholder]="'Department Name'" [spellcheck]="false">
@@ -26,11 +26,10 @@
       </mat-form-field>
     </div>
     <div class="mt-6">
-      <mat-form-field class="fuse-mat-no-subscript w-full">
+      <mat-form-field class=" w-full">
         <mat-label>Description</mat-label>
-        <textarea matInput [formControlName]="'description'" [placeholder]="'About'" [rows]="3"></textarea>
+        <textarea matInput [formControlName]="'description'" [placeholder]="'Description'" [rows]="3"></textarea>
         <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:menu-alt-2'"></mat-icon>
-
         <mat-error *ngIf="departmentCreateForm.get('description').hasError('required')">
           Department description is required
         </mat-error>
@@ -41,20 +40,26 @@
       <mat-form-field class="flex-auto gt-xs:pl-3 pt-2 w-full">
         <mat-label>Status</mat-label>
 
-        <mat-select [placeholder]="'Language'" [formControlName]="'status'">
+        <mat-select [placeholder]="'Status'" [formControlName]="'status'">
           <mat-option value="active">Active</mat-option>
           <mat-option value="disabled">Disabled</mat-option>
         </mat-select>
         <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:translate'"></mat-icon>
+        <mat-error *ngIf="departmentCreateForm.get('status').hasError('required')">
+          Status is required
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="mt-6">
       <mat-form-field class="flex-auto gt-xs:pl-3 pt-2 w-full">
         <mat-label>Approver</mat-label>
-        <mat-select [placeholder]="'Status'" [formControlName]="'approverId'">
+        <mat-select [placeholder]="'Approver'" [formControlName]="'approverId'">
           <mat-option *ngFor="let user of users" [value]="user.id">{{user.firstName}} {{user.lastName}}</mat-option>
         </mat-select>
         <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+        <mat-error *ngIf="departmentCreateForm.get('approverId').hasError('required')">
+          Please select department approver
+        </mat-error>
       </mat-form-field>
     </div>
     <!-- Actions -->
