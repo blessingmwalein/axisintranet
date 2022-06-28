@@ -38,10 +38,10 @@
 
       <div class="flex flex-col sm:flex-row items-center justify-between w-full max-w-xs sm:max-w-none">
         <mat-form-field class=" w-full sm:w-36">
-          <mat-select [(ngModel)]="status" [value]="'false'" (valueChange)="setStatus()">
+          <mat-select [(value)]="status" >
             <ng-container>
-              <mat-option value="false">My Requision</mat-option>
-              <mat-option value="true">Employee Requisitions</mat-option>
+              <mat-option value="mine" (click)="setStatus('mine')">My Requision</mat-option>
+              <mat-option value="employee" (click)="setStatus('employee')" >Employee Requisitions</mat-option>
             </ng-container>
           </mat-select>
         </mat-form-field>
@@ -144,8 +144,7 @@
                   </button>
                   <mat-menu #budgetMenu="matMenu">
                     <button mat-menu-item (click)="viewReqVehilce(deviceReq.id)">View</button>
-                    <button mat-menu-item>Cancel</button>
-                    <button mat-menu-item (click)="openDeleteDialog(deviceReq.id)">Delete</button>
+                    
                   </mat-menu>
                 </td>
               </ng-container>

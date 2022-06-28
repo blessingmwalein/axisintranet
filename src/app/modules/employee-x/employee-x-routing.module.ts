@@ -17,6 +17,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CreateDeviceReqComponent } from './device-requisition/create/create.component';
 import { DeviceRequisitionDetailsComponent } from './device-requisition/details/details.component';
 import { DeviceReqListComponent } from './device-requisition/device-req-list/device-req-list.component';
+import { EmployeeDashComponent } from './employee-dash/employee-dash.component';
 import { AnnouncementsResolver } from './services/announcements/announcements.resolvers';
 import { CalendarCalendarsResolver, CalendarSettingsResolver, CalendarWeekdaysResolver } from './services/calendar/calendar.resolvers';
 import { CreateComponent } from './vehicle-requisitions/create/create.component';
@@ -27,7 +28,7 @@ import { VehicleRequisitionsComponent } from './vehicle-requisitions/vehicle-req
 const routes: Routes = [
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: EmployeeDashComponent
   },
   {
     path: 'announcements',

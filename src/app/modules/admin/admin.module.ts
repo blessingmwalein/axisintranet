@@ -46,6 +46,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserDetailComponent } from './user-list/user-detail/user-detail.component';
 import { MantainanceComponent } from './mantainance/mantainance.component';
+import { AdminDashComponent } from './admin-dash/admin-dash.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { MantainanceComponent } from './mantainance/mantainance.component';
     CreateVehicleComponent,
     UserListComponent,
     UserDetailComponent,
-    MantainanceComponent
+    MantainanceComponent,
+    AdminDashComponent
   ],
   imports: [
     CommonModule,

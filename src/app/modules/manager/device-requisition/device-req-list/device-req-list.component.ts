@@ -17,7 +17,7 @@ export class DeviceReqListComponent implements OnInit {
   deviceReqDataSource: MatTableDataSource<any> = new MatTableDataSource();
   deviceReqTableColumns: string[] = ["title", "status", "duration", 'startDate',"device" ,"endDate", "action"];
   isLoading: boolean = true;
-  status = false;
+  status = "employee";
 
 
   /**
@@ -38,7 +38,7 @@ export class DeviceReqListComponent implements OnInit {
 
   getDeviceReqs() {
     this.isLoading = true;
-    this._deviceRequisitionService.getFilteredDeviceRequisitionsLogged(this.status).subscribe(response => {
+    this._deviceRequisitionService.getFilteredDeviceRequisitionsLogged(this.status == "employee" ? false :true).subscribe(response => {
       this.deviceReqDataSource.data = response;
       console.log(this.deviceReqDataSource.data);
       this.isLoading = false
@@ -49,9 +49,9 @@ export class DeviceReqListComponent implements OnInit {
     })
   }
 
-  setStatus() {
-    // this.status = value;
-    console.log(this.status);
+  setStatus(value) {
+    this.status = value;
+    console.log(this.status == "employee" ? false :true);
     this.getDeviceReqs();
   }
 

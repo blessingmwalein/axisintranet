@@ -45,6 +45,7 @@ import { DeviceRequisitionComponent } from './device-requisition/device-requisit
 import { VehicleRequisitionsComponent } from './vehicle-requisitions/vehicle-requisitions.component';
 import { ApproveReqComponent } from './vehicle-requisitions/approve-req/approve-req.component';
 import { AssetRequisitionComponent } from './asset-requisition/asset-requisition.component';
+import { ManagerDashComponent } from './manager-dash/manager-dash.component';
 
 
 @NgModule({
@@ -68,7 +69,7 @@ import { AssetRequisitionComponent } from './asset-requisition/asset-requisition
     VehicleRequisitionDetailsComponent,
     CreateComponent,
     ApproveReqComponent,
-
+    ManagerDashComponent,
     AssetRequisitionComponent,
     AssetReqListComponent,
     CreateAssetReqComponent,

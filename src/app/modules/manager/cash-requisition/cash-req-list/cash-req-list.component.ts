@@ -17,7 +17,7 @@ export class CashReqListComponent implements OnInit {
   cashReqDataSource: MatTableDataSource<any> = new MatTableDataSource();
   cashReqTableColumns: string[] = ["title", "status", "duration", 'startDate', "endDate", "amount", "action"];
   isLoading: boolean = true;
-  status = false;
+  status = "employee";
 
 
   /**
@@ -38,7 +38,7 @@ export class CashReqListComponent implements OnInit {
 
   getCashReqs() {
     this.isLoading = true;
-    this._cashRequisitionService.getFilteredCashRequisitions(this.status).subscribe(response => {
+    this._cashRequisitionService.getFilteredCashRequisitions(this.status == "employee" ? false :true).subscribe(response => {
       this.cashReqDataSource.data = response;
       console.log(this.cashReqDataSource.data);
       this.isLoading = false
@@ -48,9 +48,9 @@ export class CashReqListComponent implements OnInit {
       this.isLoading = false
     })
   }
-  setStatus() {
-    // this.status = value;
-    console.log(this.status);
+  setStatus(value) {
+    this.status = value;
+    console.log(this.status == "employee" ? false :true);
     this.getCashReqs();
   }
 

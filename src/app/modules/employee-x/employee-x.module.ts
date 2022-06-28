@@ -63,6 +63,7 @@ import { AssetReqListComponent } from './asset-requisition/asset-req-list/asset-
 import { AssetRequisitionComponent } from './asset-requisition/asset-requisition.component';
 import { CreateAssetReqComponent } from './asset-requisition/create/create.component';
 import { AssetRequisitionDetailsComponent } from './asset-requisition/details/details.component';
+import { EmployeeDashComponent } from './employee-dash/employee-dash.component';
 
 
 @NgModule({
@@ -93,7 +94,7 @@ import { AssetRequisitionDetailsComponent } from './asset-requisition/details/de
     AssetReqListComponent,
     CreateAssetReqComponent,
     AssetRequisitionDetailsComponent,
-    
+    EmployeeDashComponent
 
   ],
   imports: [

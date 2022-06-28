@@ -15,11 +15,12 @@ import { CreateComponent } from './user-list/create/create.component';
 import { VehiclesComponent } from './vehicles/vehicles.component';
 import { UserDetailComponent } from './user-list/user-detail/user-detail.component';
 import { MantainanceComponent } from './mantainance/mantainance.component';
+import { AdminDashComponent } from './admin-dash/admin-dash.component';
 
 const routes: Routes = [
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: AdminDashComponent
   },
   {
     path: 'calendar',

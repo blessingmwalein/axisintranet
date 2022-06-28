@@ -46,6 +46,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { FuseAlertModule } from '@fuse/components/alert';
 import { FuseFindByKeyPipeModule } from '@fuse/pipes/find-by-key';
 import { SharedModule } from 'app/shared/shared.module';
+import { ManagerDashComponent } from './manager-dash/manager-dash.component';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { SharedModule } from 'app/shared/shared.module';
     AssetRequisitionComponent,
     AssetReqListComponent,
     CreateAssetReqComponent,
-    AssetRequisitionDetailsComponent
+    AssetRequisitionDetailsComponent,
+    ManagerDashComponent
   ],
   imports: [
     CommonModule,

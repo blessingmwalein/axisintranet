@@ -17,7 +17,7 @@ export class AssetReqListComponent implements OnInit {
   assetReqDataSource: MatTableDataSource<any> = new MatTableDataSource();
   assetReqTableColumns: string[] = ["title", "status", "duration", 'startDate', "asset", "endDate", "action"];
   isLoading: boolean = true;
-  status = false;
+  status = "employee";
 
   /**
    * Constructor
@@ -37,7 +37,7 @@ export class AssetReqListComponent implements OnInit {
 
   getAssetReqs() {
     this.isLoading = true;
-    this._assetRequisitionService.getFilteredAssetRequisitionsLogged(this.status).subscribe(response => {
+    this._assetRequisitionService.getFilteredAssetRequisitionsLogged(this.status == "employee" ? false :true).subscribe(response => {
       this.assetReqDataSource.data = response;
       console.log(this.assetReqDataSource.data);
       this.isLoading = false
@@ -61,8 +61,8 @@ export class AssetReqListComponent implements OnInit {
     this._router.navigateByUrl(`axis/manager/requisitions/asset/${id}`)
   }
   setStatus(value) {
-    // this.status = value;
-    console.log(this.status);
+    this.status = value;
+    console.log(this.status == "employee" ? false :true);
     this.getAssetReqs();
   }
 

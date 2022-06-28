@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit {
   user: User;
   selectedProject: string = 'Employe Dashboard';
   private _unsubscribeAll: Subject<any> = new Subject<any>();
-
+  loading = true;
   cashReqs:any[] = [];
   vehicleReq:any[] =[];
   deviceReqs:any[]=[];
@@ -101,6 +101,7 @@ export class DashboardComponent implements OnInit {
             this.assetsReqs = assetReqs;
             this._deviceReqService.getAllDeviceRequisitions().subscribe(deviceReqs=>{
               this.deviceReqs = deviceReqs
+              this.loading = false;
             }, error=>{
              this._alertService.displayError('Failed to load device requisitions')
             })

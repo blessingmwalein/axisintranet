@@ -14,6 +14,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CreateDeviceReqComponent } from './device-requisition/create/create.component';
 import { DeviceRequisitionDetailsComponent } from './device-requisition/details/details.component';
 import { DeviceReqListComponent } from './device-requisition/device-req-list/device-req-list.component';
+import { ManagerDashComponent } from './manager-dash/manager-dash.component';
 import { CreateComponent } from './vehicle-requisitions/create/create.component';
 import { VehicleRequisitionDetailsComponent } from './vehicle-requisitions/details/details.component';
 import { VehicleReqListComponent } from './vehicle-requisitions/vehicle-req-list/vehicle-req-list.component';
@@ -21,7 +22,7 @@ import { VehicleReqListComponent } from './vehicle-requisitions/vehicle-req-list
 const routes: Routes = [
   {
     path: "dashboard",
-    component: DashboardComponent
+    component: ManagerDashComponent
   },
   {
     path: 'requisitions/vehicle',
