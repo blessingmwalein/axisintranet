@@ -108,6 +108,25 @@
                             </div>
                         </div>
                     </ng-container>
+                    <ng-container>
+                        <div class="flex">
+                            <mat-icon [svgIcon]="'heroicons_outline:phone'"></mat-icon>
+                            <div class="min-w-0 ml-6 space-y-1">
+                                <ng-container>
+                                    <div class="flex items-center leading-6">
+                                        <a class="hover:underline text-primary-500"
+                                            target="_blank">
+                                            {{user.phoneNumber}}
+                                        </a>
+                                        <div class="text-md truncate text-secondary">
+                                            <span class="mx-2">&bull;</span>
+                                            <span class="font-medium">Work</span>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </ng-container>
 
                     <!-- Phone -->
                     <!-- <ng-container *ngIf="user.phoneNumbers.length">
@@ -233,6 +252,14 @@
                                 [svgIcon]="'heroicons_solid:briefcase'"></mat-icon>
                             <input matInput [formControlName]="'userName'" [placeholder]="'User name'">
 
+                        </mat-form-field>
+                    </div>
+                    <div class="mt-8">
+                        <mat-form-field class=" w-full">
+                            <mat-label>Phone number</mat-label>
+                            <mat-icon matPrefix class="hidden sm:flex icon-size-5"
+                                [svgIcon]="'heroicons_solid:phone'"></mat-icon>
+                            <input matInput [formControlName]="'phoneNumber'" [placeholder]="'Phone number'">
                         </mat-form-field>
                     </div>
                     <div class="mt-8">

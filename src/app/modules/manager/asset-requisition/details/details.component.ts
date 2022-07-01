@@ -24,6 +24,7 @@ export class AssetRequisitionDetailsComponent implements OnInit {
     drawerOpened: boolean = true;
     isLoading: boolean = true;
     assetReqForm: FormGroup;
+    verticalStepperForm: FormGroup;
 
     /**
      * Constructor
@@ -49,7 +50,7 @@ export class AssetRequisitionDetailsComponent implements OnInit {
 
         this.assetReqForm = this._formBuilder.group({
             title: [''],
-            status: [''],
+            status: ['Line Approved'],
             description: [''],
             duration: [''],
             startDate: [''],
@@ -61,12 +62,93 @@ export class AssetRequisitionDetailsComponent implements OnInit {
             approved: [''],
             cancelled: [''],
         });
+
+        this.verticalStepperForm = this._formBuilder.group({
+            step1: this._formBuilder.group({
+                startDate: [""],
+                endDate: [""],
+                requisitionCol: [""],
+                requestingEmployeeId: [""],
+                financeApprovedDate: [""],
+                financeApproverId: [""],
+                lineApproverId: [""],
+                lineApproved: [""],
+                lineApprovedDate: [""],
+                dateRequested: [""],
+                requestComments: [""],
+                dateActioned: [""],
+                approved: [""],
+                cancelled: [],
+                duration: [],
+                title: [],
+                id: [],
+                description: [],
+                status: []
+            }),
+            step2: this._formBuilder.group({
+                serialNumber: [''],
+                assetCode: [''],
+                id: [],
+                description: [''],
+                status: []
+            }),
+            step3: this._formBuilder.group({
+                id: [''],
+                email: [''],
+                userName: [''],
+                firstName: [''],
+                lastName: [''],
+                departmentsId: [''],
+                phoneNumber: [''],
+                roles: ['']
+            })
+        });
     }
 
 
     getAssetReq() {
         this._assetRequisitionService.getAssetRequisition(this._activatedRoute.snapshot.params['id']).subscribe(response => {
             this.assetRequisition = response;
+            this.verticalStepperForm.patchValue({
+                step1: {
+                    startDate: this.assetRequisition.startDate,
+                    endDate: this.assetRequisition.endDate,
+                    requisitionCol: this.assetRequisition.requisitionCol,
+                    requestingEmployeeId: this.assetRequisition.requestingEmployeeId,
+                    financeApprovedDate: this.assetRequisition.financeApprovedDate,
+                    financeApproverId: this.assetRequisition.financeApproverId,
+                    lineApproverId: this.assetRequisition.lineApproverId,
+                    lineApproved: this.assetRequisition.lineApproved,
+                    lineApprovedDate: this.assetRequisition.lineApprovedDate,
+                    dateRequested: this.assetRequisition.dateRequested,
+                    requestComments: this.assetRequisition.requestComments,
+                    dateActioned: this.assetRequisition.dateActioned,
+                    approved: this.assetRequisition.approved,
+                    cancelled: this.assetRequisition.cancelled,
+                    duration: this.assetRequisition.duration,
+                    title: this.assetRequisition.title,
+                    id: this.assetRequisition.id,
+                    description: this.assetRequisition.description,
+                    status: this.assetRequisition.status
+                },
+                step2: {
+                    serialNumber: this.assetRequisition.asset.serialNumber,
+                    assetCode: this.assetRequisition.asset.assetCode,
+                    id: this.assetRequisition.asset.id,
+                    description: this.assetRequisition.asset.description,
+                    status: this.assetRequisition.asset.status
+                },
+                step3: {
+                    id: this.assetRequisition.employee.id,
+                    email: this.assetRequisition.employee.email,
+                    userName: this.assetRequisition.employee.userName,
+                    firstName: this.assetRequisition.employee.firstName,
+                    lastName: this.assetRequisition.employee.lastName,
+                    departmentsId: this.assetRequisition.employee.departmentsId,
+                    phoneNumber: this.assetRequisition.employee.phoneNumber,
+                    roles: this.assetRequisition.employee.roles
+                }
+            })
             this.isLoading = false
         }, error => {
             console.log(error);
@@ -158,7 +240,7 @@ export class AssetRequisitionDetailsComponent implements OnInit {
     approveCashReq() {
 
         this.isLoading = true;
-        this._assetRequisitionService.lineManagerApproveReq(this.assetRequisition.id, { id: this.assetRequisition.id.toString(), lineApproved: this.assetReqForm.value.lineApproved, lineApprovedDate: new Date() }).subscribe(response => {
+        this._assetRequisitionService.lineManagerApproveReq(this.assetRequisition.id, { id: this.assetRequisition.id.toString(), lineApproved: this.assetReqForm.value.lineApproved,status:this.assetReqForm.value.status, lineApprovedDate: new Date() }).subscribe(response => {
             this._alertService.displayMessage('Requisition Approved');
             this._router.navigateByUrl('axis/manager/requisitions/asset')
             this.isLoading = false;

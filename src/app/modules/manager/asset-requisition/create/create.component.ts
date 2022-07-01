@@ -32,7 +32,7 @@ export class CreateAssetReqComponent implements OnInit {
         assetId: ['', Validators.required],
         title: ['', Validators.required],
         amount: ['', Validators.required],
-        status: [""],
+        status: ["Created"],
         lineApproverId:[this._userService.getLocalUser().lineApproverId]
 
       }),

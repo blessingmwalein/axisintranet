@@ -40,6 +40,7 @@ export interface User {
     email: string;
     userName: string;
     firstName: string;
+    phoneNumber: string;
     lastName: string;
     departmentId: number;
     departmentsId: number;

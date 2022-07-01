@@ -103,7 +103,7 @@
                   Start Date
                 </th>
                 <td mat-cell *matCellDef="let deviceReq">
-                  {{deviceReq.startDate}}
+                  {{deviceReq.startDate | date:'medium'}}
                 </td>
               </ng-container>
 
@@ -113,7 +113,7 @@
                   End Date
                 </th>
                 <td mat-cell *matCellDef="let deviceReq">
-                  {{deviceReq.endDate}}
+                  {{deviceReq.endDate | date:'medium'}}
                 </td>
               </ng-container>
               <ng-container matColumnDef="device">

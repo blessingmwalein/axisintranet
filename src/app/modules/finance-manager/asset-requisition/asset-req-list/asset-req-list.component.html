@@ -45,6 +45,13 @@
               <mat-option value="Active">Cancelled</mat-option>
             </ng-container>
           </mat-select>
+          <mat-select [(value)]="status" >
+            <ng-container>
+              <mat-option value="mine" (click)="setStatus('All')">All</mat-option>
+              <mat-option value="employee" (click)="setStatus('employee')" >Line manager approved</mat-option>
+              <mat-option value="employee" (click)="setStatus('employee')" >Finance manager approved</mat-option>
+            </ng-container>
+          </mat-select>
         </mat-form-field>
         <mat-form-field class=" w-full sm:w-72 mt-4 sm:mt-0 sm:ml-4" [floatLabel]="'always'">
           <mat-icon matPrefix class="icon-size-5" [svgIcon]="'heroicons_solid:search'"></mat-icon>
@@ -103,7 +110,7 @@
                   Start Date
                 </th>
                 <td mat-cell *matCellDef="let assetReq">
-                  {{assetReq.startDate}}
+                  {{assetReq.startDate | date:'medium'}}
                 </td>
               </ng-container>
 
@@ -113,7 +120,7 @@
                   End Date
                 </th>
                 <td mat-cell *matCellDef="let assetReq">
-                  {{assetReq.endDate}}
+                  {{assetReq.endDate | date:'medium'}}
                 </td>
               </ng-container>
               <ng-container matColumnDef="asset">

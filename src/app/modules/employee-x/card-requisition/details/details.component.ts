@@ -24,6 +24,7 @@ export class CardRequisitionDetailsComponent implements OnInit {
     drawerOpened: boolean = true;
     isLoading: boolean = true;
     cardReqForm: FormGroup;
+    verticalStepperForm: FormGroup;
 
     /**
      * Constructor
@@ -60,12 +61,98 @@ export class CardRequisitionDetailsComponent implements OnInit {
             approved: [''],
             cancelled: [''],
         });
+
+        this.verticalStepperForm = this._formBuilder.group({
+            step1: this._formBuilder.group({
+                startDate: [""],
+                endDate: [""],
+                requisitionCol: [""],
+                requestingEmployeeId: [""],
+                financeApprovedDate: [""],
+                financeApproverId: [""],
+                lineApproverId: [""],
+                lineApproved: [""],
+                lineApprovedDate: [""],
+                dateRequested: [""],
+                requestComments: [""],
+                dateActioned: [""],
+                approved: [""],
+                cancelled: [],
+                duration: [],
+                title: [],
+                id: [],
+                description: [],
+                status: [],
+                amount:[]
+            }),
+            step2: this._formBuilder.group({
+                id: [],
+                description: [''],
+                status: [''],
+                cardNumber: [''],
+                currency: [''],
+                amount: []
+            }),
+            step3: this._formBuilder.group({
+                id: [''],
+                email: [''],
+                userName: [''],
+                firstName: [''],
+                lastName: [''],
+                departmentsId: [''],
+                phoneNumber: [''],
+                roles: ['']
+            })
+        });
     }
 
 
     getCardReq() {
         this._cardRequisitionService.getCardRequisition(this._activatedRoute.snapshot.params['id']).subscribe(response => {
             this.cardRequisition = response;
+            this.verticalStepperForm.patchValue({
+                step1: {
+                    startDate: this.cardRequisition.startDate,
+                    endDate: this.cardRequisition.endDate,
+                    requisitionCol: this.cardRequisition.requisitionCol,
+                    requestingEmployeeId: this.cardRequisition.requestingEmployeeId,
+                    financeApprovedDate: this.cardRequisition.financeApprovedDate,
+                    financeApproverId: this.cardRequisition.financeApproverId,
+                    lineApproverId: this.cardRequisition.lineApproverId,
+                    lineApproved: this.cardRequisition.lineApproved,
+                    lineApprovedDate: this.cardRequisition.lineApprovedDate,
+                    dateRequested: this.cardRequisition.dateRequested,
+                    requestComments: this.cardRequisition.requestComments,
+                    dateActioned: this.cardRequisition.dateActioned,
+                    approved: this.cardRequisition.approved,
+                    cancelled: this.cardRequisition.cancelled,
+                    duration: this.cardRequisition.duration,
+                    title: this.cardRequisition.title,
+                    id: this.cardRequisition.id,
+                    description: this.cardRequisition.description,
+                    status: this.cardRequisition.status,
+                    amount: this.cardRequisition.amount
+                },
+                step2: {
+                    id: this.cardRequisition.card.id,
+                    description: this.cardRequisition.card.description,
+                    status: this.cardRequisition.card.status,
+                    cardNumber: this.cardRequisition.card.cardNumber,
+                    currency: this.cardRequisition.card.currency,
+                    amount: this.cardRequisition.card.amount
+                },
+                step3: {
+                    id: this.cardRequisition.employee.id,
+                    email: this.cardRequisition.employee.email,
+                    userName: this.cardRequisition.employee.userName,
+                    firstName: this.cardRequisition.employee.firstName,
+                    lastName: this.cardRequisition.employee.lastName,
+                    departmentsId: this.cardRequisition.employee.departmentsId,
+                    phoneNumber: this.cardRequisition.employee.phoneNumber,
+                    roles: this.cardRequisition.employee.roles
+                }
+            })
+            // this.verticalStepperForm.disable()
             this.isLoading = false
         }, error => {
             console.log(error);

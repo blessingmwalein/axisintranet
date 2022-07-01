@@ -47,6 +47,7 @@ export class CreateComponent implements OnInit {
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       userName: ['', [Validators.required]],
+      phoneNumber: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
       confirmationPassword: [''],
@@ -101,7 +102,6 @@ export class CreateComponent implements OnInit {
 
   saveUser() {
 
-    
     if(this.createUserForm.invalid){
       return;
     }

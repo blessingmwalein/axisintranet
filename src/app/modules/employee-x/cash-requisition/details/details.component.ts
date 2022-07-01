@@ -25,6 +25,7 @@ export class CashRequisitionDetailsComponent implements OnInit {
     drawerOpened: boolean = true;
     isLoading: boolean = true;
     cashReqForm: FormGroup;
+    verticalStepperForm: FormGroup;
     cashs: any[];
     /**
      * Constructor
@@ -65,12 +66,96 @@ export class CashRequisitionDetailsComponent implements OnInit {
             cancelled: [''],
             cashId: ['']
         });
+        this.verticalStepperForm = this._formBuilder.group({
+            step1: this._formBuilder.group({
+                startDate: [""],
+                endDate: [""],
+                requisitionCol: [""],
+                requestingEmployeeId: [""],
+                financeApprovedDate: [""],
+                financeApproverId: [""],
+                lineApproverId: [""],
+                lineApproved: [""],
+                lineApprovedDate: [""],
+                dateRequested: [""],
+                requestComments: [""],
+                dateActioned: [""],
+                approved: [""],
+                cancelled: [],
+                duration: [],
+                title: [],
+                id: [],
+                description: [],
+                status: [],
+                amount:[]
+            }),
+            step2: this._formBuilder.group({
+                id: [],
+                description: [''],
+                status: [''],
+                currencyCode: [''],
+                currency: [''],
+                amount: []
+            }),
+            step3: this._formBuilder.group({
+                id: [''],
+                email: [''],
+                userName: [''],
+                firstName: [''],
+                lastName: [''],
+                departmentsId: [''],
+                phoneNumber: [''],
+                roles: ['']
+            })
+        });
     }
 
 
     getCashReq() {
         this._cashRequisitionService.getCashRequisition(this._activatedRoute.snapshot.params['id']).subscribe(response => {
             this.cashRequisition = response;
+            this.verticalStepperForm.patchValue({
+                step1: {
+                    startDate: this.cashRequisition.startDate,
+                    endDate: this.cashRequisition.endDate,
+                    requisitionCol: this.cashRequisition.requisitionCol,
+                    requestingEmployeeId: this.cashRequisition.requestingEmployeeId,
+                    financeApprovedDate: this.cashRequisition.financeApprovedDate,
+                    financeApproverId: this.cashRequisition.financeApproverId,
+                    lineApproverId: this.cashRequisition.lineApproverId,
+                    lineApproved: this.cashRequisition.lineApproved,
+                    lineApprovedDate: this.cashRequisition.lineApprovedDate,
+                    dateRequested: this.cashRequisition.dateRequested,
+                    requestComments: this.cashRequisition.requestComments,
+                    dateActioned: this.cashRequisition.dateActioned,
+                    approved: this.cashRequisition.approved,
+                    cancelled: this.cashRequisition.cancelled,
+                    duration: this.cashRequisition.duration,
+                    title: this.cashRequisition.title,
+                    id: this.cashRequisition.id,
+                    description: this.cashRequisition.description,
+                    status: this.cashRequisition.status,
+                    amount: this.cashRequisition.amount
+                },
+                step2: {
+                    id: this.cashRequisition.cash.id,
+                    description: this.cashRequisition.cash.description,
+                    status: this.cashRequisition.cash.status,
+                    currencyCode: this.cashRequisition.cash.currencyCode,
+                    currency: this.cashRequisition.cash.currency,
+                    amount: this.cashRequisition.cash.amount
+                },
+                step3: {
+                    id: this.cashRequisition.employee.id,
+                    email: this.cashRequisition.employee.email,
+                    userName: this.cashRequisition.employee.userName,
+                    firstName: this.cashRequisition.employee.firstName,
+                    lastName: this.cashRequisition.employee.lastName,
+                    departmentsId: this.cashRequisition.employee.departmentsId,
+                    phoneNumber: this.cashRequisition.employee.phoneNumber,
+                    roles: this.cashRequisition.employee.roles
+                }
+            })
             this.isLoading = false
         }, error => {
             console.log(error);

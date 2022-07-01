@@ -17,7 +17,7 @@ export class AssetReqListComponent implements OnInit {
   assetReqDataSource: MatTableDataSource<any> = new MatTableDataSource();
   assetReqTableColumns: string[] = ["title", "status", "duration", 'startDate',"asset" ,"endDate", "action"];
   isLoading: boolean = true;
-
+  status="All";
   /**
    * Constructor
    */
@@ -87,5 +87,11 @@ export class AssetReqListComponent implements OnInit {
       this.isLoading = false;
       this._alertService.displayError('Try again')
     })
+  }
+
+  setStatus(value) {
+    this.status = value;
+    console.log(this.status == "employee" ? false :true);
+    this.getAssetReqs();
   }
 }

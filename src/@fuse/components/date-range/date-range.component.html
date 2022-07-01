@@ -4,7 +4,7 @@
     #pickerPanelOrigin>
 
     <div class="start">
-        <div class="date">{{range.startDate}}</div>
+        <div class="date">{{range.startDate | date:'medium'}}</div>
         <div
             class="time"
             *ngIf="range.startTime">{{range.startTime}}</div>
@@ -13,7 +13,7 @@
     <div class="separator">-</div>
 
     <div class="end">
-        <div class="date">{{range.endDate}}</div>
+        <div class="date">{{range.endDate | date:'medium'}}</div>
         <div
             class="time"
             *ngIf="range.endTime">{{range.endTime}}</div>

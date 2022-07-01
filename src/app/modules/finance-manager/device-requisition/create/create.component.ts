@@ -33,7 +33,7 @@ export class CreateDeviceReqComponent implements OnInit {
         deviceId: ['', Validators.required],
         title: ['', Validators.required],
         amount: ['', Validators.required],
-        status: [""],
+        status: ["Created"],
         lineApproverId: [this._userService.getLocalUser().lineApproverId]
 
       }),

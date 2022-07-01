@@ -35,6 +35,7 @@ export class AssetReqListComponent implements OnInit {
   }
 
   getAssetReqs() {
+    
     this.isLoading = true;
     this._assetRequisitionService.getAllAssetRequisitions().subscribe(response => {
       this.assetReqDataSource.data = response;
@@ -45,6 +46,8 @@ export class AssetReqListComponent implements OnInit {
       this._alertService.displayError("Could not fetch asset requisitions reload!")
       this.isLoading = false
     })
+
+
   }
 
 

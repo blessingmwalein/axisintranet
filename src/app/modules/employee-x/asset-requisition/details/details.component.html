@@ -1,18 +1,14 @@
 <div class="flex flex-auto">
-
-
-    <form class="flex flex-col flex-auto m-3 p-6 pt-10 sm:p-8 sm:pt-10 overflow-y-auto bg-card shadow rounded-2xl">
-
-        <!-- Header -->
+    <form class="flex flex-col flex-auto m-3 p-6 pt-10 sm:p-8 sm:pt-10 overflow-y-auto bg-card shadow rounded-2xl"
+        [formGroup]="verticalStepperForm">
         <div class="flex items-center justify-between -mt-3 -ml-4">
-
             <!-- Mark as ... button -->
             <button class="pr-4 pl-3.5" mat-button>
 
                 <!-- Mark as complete -->
                 <ng-container>
                     <div class="flex items-center justify-center">
-                        <mat-icon [svgIcon]="'heroicons_outline:check-circle'"></mat-icon>
+                        <mat-icon [svgIcon]="'heroicons_outline:x'"></mat-icon>
                         <span class="ml-2 font-semibold">Cancel Requisition</span>
                     </div>
                 </ng-container>
@@ -28,6 +24,10 @@
                         <mat-icon [svgIcon]="'heroicons_outline:trash'"></mat-icon>
                         <span>Delete Requsition</span>
                     </button>
+                    <button mat-menu-item (click)="downloadAsPDF()">
+                        <mat-icon [svgIcon]="'heroicons_outline:printer'"></mat-icon>
+                        <span>Print Requisition</span>
+                    </button>
                 </mat-menu>
                 <!-- Close button -->
                 <button mat-icon-button [routerLink]="['../']">
@@ -37,195 +37,234 @@
         </div>
 
         <mat-divider class="mt-6 mb-8"></mat-divider>
+        <mat-vertical-stepper id="verticalStepper" [linear]="true" #verticalStepper>
+            <mat-step [formGroupName]="'step1'" [stepControl]="verticalStepperForm.get('step1')" #verticalStepperStep1>
+                <ng-template matStepLabel>Requisition Details</ng-template>
 
-        <div class="grid grid-cols-6 gap-6">
-            <div class="col-span-6 sm:col-span-3">
-                <label for="first-name" class="block text-sm font-medium text-gray-700">First name</label>
-                <input type="text" name="first-name" id="first-name" autocomplete="given-name"
-                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-            </div>
 
-            <div class="col-span-6 sm:col-span-3">
-                <label for="last-name" class="block text-sm font-medium text-gray-700">Last name</label>
-                <input type="text" name="last-name" id="last-name" autocomplete="family-name"
-                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-            </div>
-
-            <div class="col-span-6 sm:col-span-4">
-                <label for="email-address" class="block text-sm font-medium text-gray-700">Email address</label>
-                <input type="text" name="email-address" id="email-address" autocomplete="email"
-                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-            </div>
-
-            <div class="col-span-6 sm:col-span-3">
-                <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
-                <select id="country" name="country" autocomplete="country-name"
-                    class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                    <option>United States</option>
-                    <option>Canada</option>
-                    <option>Mexico</option>
-                </select>
-            </div>
-
-            <div class="col-span-6">
-                <label for="street-address" class="block text-sm font-medium text-gray-700">Street address</label>
-                <input type="text" name="street-address" id="street-address" autocomplete="street-address"
-                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-            </div>
-
-            <div class="col-span-6 sm:col-span-6 lg:col-span-2">
-                <label for="city" class="block text-sm font-medium text-gray-700">City</label>
-                <input type="text" name="city" id="city" autocomplete="address-level2"
-                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-            </div>
-
-            <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                <label for="region" class="block text-sm font-medium text-gray-700">State / Province</label>
-                <input type="text" name="region" id="region" autocomplete="address-level1"
-                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-            </div>
-
-            <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                <label for="postal-code" class="block text-sm font-medium text-gray-700">ZIP / Postal code</label>
-                <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code"
-                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-            </div>
-        </div>
-        <!-- Title -->
-        <div>
-            <mat-form-field class="fuse-mat-textarea  w-full">
-                <mat-label>Requisition Title</mat-label>
-                <textarea matInput [spellcheck]="false" matTextareaAutosize #titleField>
-                    {{assetRequisition.title}}
-                </textarea>
-            </mat-form-field>
-        </div>
-
-        <!-- Tags -->
-        <div class="mt-8">
-            <div class="font-medium mb-1.5">Approvals</div>
-            <div class="flex flex-wrap items-center -m-1.5">
-                <!-- Tags -->
-                <ng-container>
-                    <ng-container>
-                        <div
-                            class="flex items-center justify-center px-4 m-1.5 rounded-full leading-9 text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
-                            <span class="text-md font-medium whitespace-nowrap"> Date Requested
-                                :{{assetRequisition.dateRequested}}</span>
+                <div class="grid grid-cols-6 gap-6">
+                    <div class="col-span-6 sm:col-span-3">
+                        <mat-form-field class="flex-auto w-full">
+                            <mat-label>Title</mat-label>
+                            <input matInput [formControlName]="'title'">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <mat-form-field class="flex-auto w-full">
+                            <mat-label>Status</mat-label>
+                            <input matInput [formControlName]="'status'">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-span-12 sm:col-span-6">
+                        <mat-form-field class=" flex-auto w-full">
+                            <mat-label>Comments</mat-label>
+                            <textarea matInput [formControlName]="'requestComments'" [rows]="3"></textarea>
+                            <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:menu-alt-2'"></mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <div class="mr-2">
+                            <div class="font-medium">Start date</div>
+                            <div class="relative flex items-center mt-1.5 px-4 leading-9 rounded-full cursor-pointer text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700"
+                                (click)="startDatePicker.open()">
+                                <mat-icon class="icon-size-5 text-current" [svgIcon]="'heroicons_solid:calendar'">
+                                </mat-icon>
+                                <span class="ml-2 text-md font-medium">
+                                    <ng-container>{{assetRequisition.startDate | date:'medium'}}</ng-container>
+                                </span>
+                                <mat-form-field
+                                    class=" fuse-mat-dense invisible absolute inset-0 -mt-2.5 opacity-0 pointer-events-none">
+                                    <input matInput formControlName="startDate" [matDatepicker]="startDatePicker">
+                                    <mat-datepicker #startDatePicker>
+                                        <mat-datepicker-actions>
+                                            <button mat-button matDatepickerCancel>Clear
+                                            </button>
+                                            <button class="" mat-flat-button [color]="'primary'"
+                                                matDatepickerApply>Select
+                                            </button>
+                                        </mat-datepicker-actions>
+                                    </mat-datepicker>
+                                </mat-form-field>
+                            </div>
                         </div>
-                    </ng-container>
-                    <ng-container>
-                        <div
-                            class="flex items-center justify-center px-4 m-1.5 rounded-full leading-9 text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
-                            <span class="text-md font-medium whitespace-nowrap"> {{assetRequisition.lineApproved? "Line
-                                Manager Approved On : " + assetRequisition.lineApprovedDate : "Awaiting Line Manager
-                                Approval"}}
-                            </span>
-                        </div>
-                    </ng-container>
-                    <ng-container>
-                        <div
-                            class="flex items-center justify-center px-4 m-1.5 rounded-full leading-9 text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
-                            <span class="text-md font-medium whitespace-nowrap"> {{assetRequisition.approved? "Finace
-                                Manager Approved On : " + assetRequisition.financeApprovedDate : "Awaiting Finance
-                                Manager Approval"}}
-                            </span>
-                        </div>
-                    </ng-container>
 
-                </ng-container>
-            </div>
-        </div>
+                    </div>
+                    <div class="col-span-6 sm:col-span-3 mb-3">
+                        <div class="">
+                            <div class="font-medium">End date</div>
+                            <div class="relative flex items-center mt-1.5 px-4 leading-9 rounded-full cursor-pointer text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700"
+                                (click)="endDatePicker.open()">
+                                <mat-icon class="icon-size-5 text-current" [svgIcon]="'heroicons_solid:calendar'">
+                                </mat-icon>
+                                <span class="ml-2 text-md font-medium">
+                                    <ng-container>{{assetRequisition.endDate | date:'medium'}}</ng-container>
+                                </span>
+                                <mat-form-field
+                                    class=" fuse-mat-dense invisible absolute inset-0 -mt-2.5 opacity-0 pointer-events-none">
+                                    <input matInput formControlName="endDate" [matDatepicker]="endDatePicker">
+                                    <mat-datepicker #endDatePicker>
+                                        <mat-datepicker-actions>
+                                            <button mat-button matDatepickerCancel>Clear
+                                            </button>
+                                            <button class="" mat-flat-button [color]="'primary'"
+                                                matDatepickerApply>Select
+                                            </button>
+                                        </mat-datepicker-actions>
+                                    </mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                        </div>
 
-        <!-- Priority and Due date -->
-        <div class="flex flex-wrap items-center mt-8">
-            <!-- Due date -->
-            <div class="mr-2">
-                <div class="font-medium">Start date</div>
-                <div class="relative flex items-center mt-1.5 px-4 leading-9 rounded-full cursor-pointer text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700"
-                    (click)="startDatePicker.open()">
-                    <mat-icon class="icon-size-5 text-current" [svgIcon]="'heroicons_solid:calendar'"></mat-icon>
-                    <span class="ml-2 text-md font-medium">
-                        <ng-container>{{assetRequisition.startDate}}</ng-container>
-                    </span>
-                    <mat-form-field
-                        class=" fuse-mat-dense invisible absolute inset-0 -mt-2.5 opacity-0 pointer-events-none">
-                        <input matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="assetRequisition.startDate"
-                            [matDatepicker]="startDatePicker">
-                        <mat-datepicker #startDatePicker>
-                            <mat-datepicker-actions>
-                                <button mat-button matDatepickerCancel>Clear
-                                </button>
-                                <button class="" mat-flat-button [color]="'primary'" matDatepickerApply>Select
-                                </button>
-                            </mat-datepicker-actions>
-                        </mat-datepicker>
+                    </div>
+                </div>
+                <div class="mt-8">
+                    <div class="font-medium mb-1.5">Approvals</div>
+                    <div class="flex flex-wrap items-center -m-1.5">
+                        <!-- Tags -->
+                        <ng-container>
+                            <ng-container>
+                                <div
+                                    class="flex items-center justify-center px-4 m-1.5 rounded-full leading-9 text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
+                                    <span class="text-md font-medium whitespace-nowrap"> Date Requested
+                                        :{{assetRequisition.dateRequested | date:'medium'}}</span>
+                                </div>
+                            </ng-container>
+                            <ng-container>
+                                <div
+                                    class="flex items-center justify-center px-4 m-1.5 rounded-full leading-9 text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
+                                    <span class="text-md font-medium whitespace-nowrap">
+                                        {{assetRequisition.lineApproved? "Line
+                                        Manager Approved On : " + assetRequisition.lineApprovedDate : "Awaiting Line
+                                        Manager
+                                        Approval"}}
+                                    </span>
+                                </div>
+                            </ng-container>
+                            <ng-container>
+                                <div
+                                    class="flex items-center justify-center px-4 m-1.5 rounded-full leading-9 text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
+                                    <span class="text-md font-medium whitespace-nowrap"> {{assetRequisition.approved?
+                                        "Finace Manager Approved On : " + assetRequisition.financeApprovedDate :
+                                        "Awaiting Finance
+                                        Manager Approval"}}
+                                    </span>
+                                </div>
+                            </ng-container>
+
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="grid grid-cols-6 gap-6 mt-8">
+                    <div class="col-span-6 sm:col-span-3">
+                        <mat-form-field class="flex-auto w-full">
+                            <mat-label>Duration</mat-label>
+                            <input matInput [formControlName]="'duration'">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <!-- <div class="flex">
+                    <mat-form-field class="flex-auto">
+                        <input matInput [formControlName]="'email'" [placeholder]="'Email Address'" required>
+                        <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:mail'"></mat-icon>
                     </mat-form-field>
                 </div>
-            </div>
-            <div class="">
-                <div class="font-medium">End date</div>
-                <div class="relative flex items-center mt-1.5 px-4 leading-9 rounded-full cursor-pointer text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700"
-                    (click)="endDatePicker.open()">
-                    <mat-icon class="icon-size-5 text-current" [svgIcon]="'heroicons_solid:calendar'"></mat-icon>
-                    <span class="ml-2 text-md font-medium">
-                        <ng-container>{{assetRequisition.endDate}}</ng-container>
-                    </span>
-                    <mat-form-field
-                        class=" fuse-mat-dense invisible absolute inset-0 -mt-2.5 opacity-0 pointer-events-none">
-                        <input matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="assetRequisition.endDate"
-                            [matDatepicker]="endDatePicker">
-                        <mat-datepicker #endDatePicker>
-                            <mat-datepicker-actions>
-                                <button mat-button matDatepickerCancel>Clear
-                                </button>
-                                <button class="" mat-flat-button [color]="'primary'" matDatepickerApply>Select
-                                </button>
-                            </mat-datepicker-actions>
-                        </mat-datepicker>
+                <div class="flex flex-col gt-xs:flex-row">
+                    <mat-form-field class="flex-auto gt-xs:pr-3">
+                        <mat-select [formControlName]="'country'" [placeholder]="'Country / Region'" required>
+                            <mat-option value="country-1">Country 1</mat-option>
+                            <mat-option value="country-2">Country 2</mat-option>
+                            <mat-option value="country-3">Country 3</mat-option>
+                        </mat-select>
+                        <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:location-marker'">
+                        </mat-icon>
+                    </mat-form-field>
+                    <mat-form-field class="flex-auto gt-xs:pl-3">
+                        <mat-select [formControlName]="'language'" [placeholder]="'Language'" required>
+                            <mat-option value="language-1">Language 1</mat-option>
+                            <mat-option value="language-2">Language 2</mat-option>
+                            <mat-option value="language-3">Language 3</mat-option>
+                        </mat-select>
+                        <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:translate'"></mat-icon>
                     </mat-form-field>
                 </div>
-            </div>
-            <ng-container>
-                <div
-                    class="flex items-center justify-center px-4 m-1.5 mt-8 rounded-full leading-9 text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
-                    <span class="text-md font-medium whitespace-nowrap"> Duration
-                        :{{assetRequisition.duration}} hours</span>
-                </div>
-            </ng-container>
-            <ng-container>
-                <div
-                    class="flex items-center justify-center px-4 m-1.5 mt-8 rounded-full leading-9 text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
-                    <span class="text-md font-medium whitespace-nowrap"> Status
-                        :{{assetRequisition.status}}</span>
-                </div>
-            </ng-container>
-
-        </div>
-
-        <!-- Notes -->
-        <div class="mt-8">
-            <mat-form-field class="fuse-mat-textarea  w-full">
-                <mat-label>Comments</mat-label>
-                <textarea matInput [spellcheck]="false"
-                    matTextareaAutosize>{{assetRequisition.requestComments}}</textarea>
-            </mat-form-field>
-        </div>
-
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-4 sm:mt-6">
-            <div class="-ml-2">
-                <div class="flex items-center mt-4 sm:mt-0">
-                    <!-- Disasset -->
-                    <button class="ml-auto sm:ml-0 mr-2" mat-stroked-button>
-                        Back
+                <div class="flex justify-end">
+                    <button class="px-8" mat-flat-button [color]="'primary'"
+                        [disabled]="verticalStepperStep1.stepControl.pristine || verticalStepperStep1.stepControl.invalid"
+                        type="button" matStepperNext>
+                        Next
                     </button>
-                    <!-- Send -->
-                    <button class="order-first sm:order-last" mat-flat-button [color]="'primary'">
-                        Save Changes
+                </div> -->
+            </mat-step>
+
+            <mat-step [formGroupName]="'step2'" [stepControl]="verticalStepperForm.get('step2')" #verticalStepperStep2>
+                <ng-template matStepLabel>Asset Details</ng-template>
+
+                <div class="grid grid-cols-6 gap-6">
+                    <div class="col-span-4 sm:col-span-2">
+                        <mat-form-field class="flex-auto w-full">
+                            <mat-label>Serial Number</mat-label>
+                            <input matInput [formControlName]="'serialNumber'" disabled="true">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-span-4 sm:col-span-2">
+                        <mat-form-field class="flex-auto w-full">
+                            <mat-label>Asset Code</mat-label>
+                            <input matInput [formControlName]="'assetCode'" disabled>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-span-4 sm:col-span-2">
+                        <mat-form-field class="flex-auto w-full">
+                            <mat-label>Status</mat-label>
+                            <input matInput [formControlName]="'status'" disabled>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-span-12 sm:col-span-6">
+                        <mat-form-field class=" flex-auto w-full">
+                            <mat-label>Description</mat-label>
+                            <textarea matInput [formControlName]="'description'" [rows]="3" disabled></textarea>
+                            <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:menu-alt-2'"></mat-icon>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+                <div class="flex justify-end mt-8">
+
+                    <button class="px-8" mat-flat-button [color]="'primary'" type="button">
+                        Change Asset
                     </button>
                 </div>
-            </div>
-        </div>
+            </mat-step>
+
+            <mat-step [formGroupName]="'step3'" [stepControl]="verticalStepperForm.get('step3')">
+                <ng-template matStepLabel>Employee Details</ng-template>
+                <div class="grid grid-cols-6 gap-6">
+                    <div class="col-span-4 sm:col-span-2">
+                        <mat-form-field class="flex-auto w-full">
+                            <mat-label>First Name</mat-label>
+                            <input matInput [formControlName]="'firstName'" disabled="true">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-span-4 sm:col-span-2">
+                        <mat-form-field class="flex-auto w-full">
+                            <mat-label>Last Name</mat-label>
+                            <input matInput [formControlName]="'lastName'" disabled>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-span-4 sm:col-span-2">
+                        <mat-form-field class="flex-auto w-full">
+                            <mat-label>Phone Number</mat-label>
+                            <input matInput [formControlName]="'phoneNumber'" disabled>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-span-12 sm:col-span-6">
+                        <mat-form-field class=" flex-auto w-full">
+                            <mat-label>Email</mat-label>
+                            <textarea matInput [formControlName]="'email'" [rows]="3" disabled></textarea>
+                            <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:menu-alt-2'"></mat-icon>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </mat-step>
+        </mat-vertical-stepper>
     </form>
-
 </div>

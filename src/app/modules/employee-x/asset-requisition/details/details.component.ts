@@ -9,6 +9,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from 'app/modules/alert/snackbar/alert.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
+// import * as pdfMake from "pdfmake/build/pdfmake";
+// import * as pdfFonts from "pdfmake/build/vfs_fonts";
+// // const htmlToPdfmake = require("html-to-pdfmake");
+// import htmlToPdfmake from "html-to-pdfmake"
+
+
+import jsPDF from 'jspdf';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+import htmlToPdfmake from 'html-to-pdfmake';
+(pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
     selector: 'academy-details',
@@ -24,7 +36,11 @@ export class AssetRequisitionDetailsComponent implements OnInit {
     drawerOpened: boolean = true;
     isLoading: boolean = true;
     assetReqForm: FormGroup;
+    verticalStepperForm: FormGroup;
 
+    @ViewChild('verticalStepper') pdfTable: ElementRef;
+
+    
     /**
      * Constructor
      */
@@ -59,13 +75,95 @@ export class AssetRequisitionDetailsComponent implements OnInit {
             requestComments: [''],
             approved: [''],
             cancelled: [''],
+            assetId: ['']
         });
+        this.verticalStepperForm = this._formBuilder.group({
+            step1: this._formBuilder.group({
+                startDate: [""],
+                endDate: [""],
+                requisitionCol: [""],
+                requestingEmployeeId: [""],
+                financeApprovedDate: [""],
+                financeApproverId: [""],
+                lineApproverId: [""],
+                lineApproved: [""],
+                lineApprovedDate: [""],
+                dateRequested: [""],
+                requestComments: [""],
+                dateActioned: [""],
+                approved: [""],
+                cancelled: [],
+                duration: [],
+                title: [],
+                id: [],
+                description: [],
+                status: []
+            }),
+            step2: this._formBuilder.group({
+                serialNumber: [''],
+                assetCode: [''],
+                id: [],
+                description: [''],
+                status: []
+            }),
+            step3: this._formBuilder.group({
+                id: [''],
+                email: [''],
+                userName: [''],
+                firstName: [''],
+                lastName: [''],
+                departmentsId: [''],
+                phoneNumber: [''],
+                roles: ['']
+            })
+        });
+
     }
 
 
     getAssetReq() {
         this._assetRequisitionService.getAssetRequisition(this._activatedRoute.snapshot.params['id']).subscribe(response => {
             this.assetRequisition = response;
+            this.verticalStepperForm.patchValue({
+                step1: {
+                    startDate: this.assetRequisition.startDate,
+                    endDate: this.assetRequisition.endDate,
+                    requisitionCol: this.assetRequisition.requisitionCol,
+                    requestingEmployeeId: this.assetRequisition.requestingEmployeeId,
+                    financeApprovedDate: this.assetRequisition.financeApprovedDate,
+                    financeApproverId: this.assetRequisition.financeApproverId,
+                    lineApproverId: this.assetRequisition.lineApproverId,
+                    lineApproved: this.assetRequisition.lineApproved,
+                    lineApprovedDate: this.assetRequisition.lineApprovedDate,
+                    dateRequested: this.assetRequisition.dateRequested,
+                    requestComments: this.assetRequisition.requestComments,
+                    dateActioned: this.assetRequisition.dateActioned,
+                    approved: this.assetRequisition.approved,
+                    cancelled: this.assetRequisition.cancelled,
+                    duration: this.assetRequisition.duration,
+                    title: this.assetRequisition.title,
+                    id: this.assetRequisition.id,
+                    description: this.assetRequisition.description,
+                    status: this.assetRequisition.status
+                },
+                step2: {
+                    serialNumber: this.assetRequisition.asset.serialNumber,
+                    assetCode: this.assetRequisition.asset.assetCode,
+                    id: this.assetRequisition.asset.id,
+                    description: this.assetRequisition.asset.description,
+                    status: this.assetRequisition.asset.status
+                },
+                step3: {
+                    id: this.assetRequisition.employee.id,
+                    email: this.assetRequisition.employee.email,
+                    userName: this.assetRequisition.employee.userName,
+                    firstName: this.assetRequisition.employee.firstName,
+                    lastName: this.assetRequisition.employee.lastName,
+                    departmentsId: this.assetRequisition.employee.departmentsId,
+                    phoneNumber: this.assetRequisition.employee.phoneNumber,
+                    roles: this.assetRequisition.employee.roles
+                }
+            })
             this.isLoading = false
         }, error => {
             console.log(error);
@@ -84,6 +182,26 @@ export class AssetRequisitionDetailsComponent implements OnInit {
         // Mark for check
         this._changeDetectorRef.markForCheck();
     }
+
+    // downloadAsPDF() {
+    //     const pdfTable = this.pdfTable.nativeElement;
+    //     var html = htmlToPdfmake(document.getElementById('verticalStepper').innerHTML);
+    //     const documentDefinition = { content: html };
+    //     pdfMake.createPdf(documentDefinition).download();
+
+    // }
+
+    downloadAsPDF() {
+        const doc = new jsPDF();
+        
+        const pdfTable = this.pdfTable.nativeElement;
+        
+        var html = htmlToPdfmake(document.getElementById('verticalStepper').innerHTML);
+          
+        const documentDefinition = { content: html };
+        pdfMake.createPdf(documentDefinition).open(); 
+          
+      }
 
     /**
      * Go to previous step

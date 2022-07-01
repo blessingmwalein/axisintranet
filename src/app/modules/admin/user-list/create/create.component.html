@@ -45,6 +45,16 @@
     </div>
     <div class="mt-8">
       <mat-form-field class=" w-full">
+        <mat-label>Phone number</mat-label>
+        <mat-icon matPrefix class="hidden sm:flex icon-size-5" [svgIcon]="'heroicons_solid:briefcase'"></mat-icon>
+        <input matInput type="tel" [formControlName]="'phoneNumber'" [placeholder]="'Phone number'">
+        <mat-error *ngIf="createUserForm.get('phoneNumber').hasError('required')">
+         Phone number is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mt-8">
+      <mat-form-field class=" w-full">
         <mat-label>Department</mat-label>
         <mat-select [placeholder]="'Language'" [formControlName]="'departmentId'">
           <mat-option *ngFor="let department of departments" [value]="department.id">{{department.description}}</mat-option>

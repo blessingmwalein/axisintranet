@@ -84,6 +84,7 @@ export class UserDetailComponent implements OnInit {
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       userName: ['', [Validators.required]],
+      phoneNumber: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       lineApprover: ['Philip'],
       roles: [[]],
@@ -118,6 +119,7 @@ export class UserDetailComponent implements OnInit {
           lastName: this.user.lastName,
           email: this.user.email,
           userName: this.user.userName,
+          phoneNumber: this.user.phoneNumber,
           roles: this.user.roles,
           departmentId: this.user.departmentsId,
           lineApprover: this.user.lineApprover

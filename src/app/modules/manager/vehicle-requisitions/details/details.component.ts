@@ -27,6 +27,7 @@ export class VehicleRequisitionDetailsComponent implements OnInit {
     drawerOpened: boolean = true;
     isLoading: boolean = true;
     vehicleReqForm: FormGroup;
+    verticalStepperForm: FormGroup;
 
     /**
      * Constructor
@@ -52,7 +53,7 @@ export class VehicleRequisitionDetailsComponent implements OnInit {
 
         this.vehicleReqForm = this._formBuilder.group({
             title: [''],
-            status: [''],
+            status: ['Line Approved'],
             description: [''],
             duration: [''],
             startDate: [''],
@@ -65,12 +66,93 @@ export class VehicleRequisitionDetailsComponent implements OnInit {
             id: [''],
             lineApproved: [true],
         });
+
+        this.verticalStepperForm = this._formBuilder.group({
+            step1: this._formBuilder.group({
+                startDate: [""],
+                endDate: [""],
+                requisitionCol: [""],
+                requestingEmployeeId: [""],
+                financeApprovedDate: [""],
+                financeApproverId: [""],
+                lineApproverId: [""],
+                lineApproved: [""],
+                lineApprovedDate: [""],
+                dateRequested: [""],
+                requestComments: [""],
+                dateActioned: [""],
+                approved: [""],
+                cancelled: [],
+                duration: [],
+                title: [],
+                id: [],
+                description: [],
+                status: []
+            }),
+            step2: this._formBuilder.group({
+                regNumber: [''],
+                lastServiceDate: [''],
+                id: [],
+                description: [''],
+                status: []
+            }),
+            step3: this._formBuilder.group({
+                id: [''],
+                email: [''],
+                userName: [''],
+                firstName: [''],
+                lastName: [''],
+                departmentsId: [''],
+                phoneNumber: [''],
+                roles: ['']
+            })
+        });
     }
 
 
     getVehicleReq() {
         this._vehicleRequisitionService.getVehicelRequisition(this._activatedRoute.snapshot.params['id']).subscribe(response => {
             this.vehicleRequisition = response;
+            this.verticalStepperForm.patchValue({
+                step1: {
+                    startDate: this.vehicleRequisition.startDate,
+                    endDate: this.vehicleRequisition.endDate,
+                    requisitionCol: this.vehicleRequisition.requisitionCol,
+                    requestingEmployeeId: this.vehicleRequisition.requestingEmployeeId,
+                    financeApprovedDate: this.vehicleRequisition.financeApprovedDate,
+                    financeApproverId: this.vehicleRequisition.financeApproverId,
+                    lineApproverId: this.vehicleRequisition.lineApproverId,
+                    lineApproved: this.vehicleRequisition.lineApproved,
+                    lineApprovedDate: this.vehicleRequisition.lineApprovedDate,
+                    dateRequested: this.vehicleRequisition.dateRequested,
+                    requestComments: this.vehicleRequisition.requestComments,
+                    dateActioned: this.vehicleRequisition.dateActioned,
+                    approved: this.vehicleRequisition.approved,
+                    cancelled: this.vehicleRequisition.cancelled,
+                    duration: this.vehicleRequisition.duration,
+                    title: this.vehicleRequisition.title,
+                    id: this.vehicleRequisition.id,
+                    description: this.vehicleRequisition.description,
+                    status: this.vehicleRequisition.status
+                },
+                step2: {
+                    regNumber: this.vehicleRequisition.vehicle.regNumber,
+                    lastServiceDate: this.vehicleRequisition.vehicle.lastServiceDate,
+                    id: this.vehicleRequisition.vehicle.id,
+                    description: this.vehicleRequisition.vehicle.description,
+                    status: this.vehicleRequisition.vehicle.status
+                },
+                step3: {
+                    id: this.vehicleRequisition.employee.id,
+                    email: this.vehicleRequisition.employee.email,
+                    userName: this.vehicleRequisition.employee.userName,
+                    firstName: this.vehicleRequisition.employee.firstName,
+                    lastName: this.vehicleRequisition.employee.lastName,
+                    departmentsId: this.vehicleRequisition.employee.departmentsId,
+                    phoneNumber: this.vehicleRequisition.employee.phoneNumber,
+                    roles: this.vehicleRequisition.employee.roles
+                }
+            })
             this.isLoading = false
         }, error => {
             console.log(error);

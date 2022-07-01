@@ -24,6 +24,7 @@ export class DeviceRequisitionDetailsComponent implements OnInit {
     drawerOpened: boolean = true;
     isLoading: boolean = true;
     deviceReqForm: FormGroup;
+    verticalStepperForm: FormGroup;
 
     /**
      * Constructor
@@ -60,12 +61,93 @@ export class DeviceRequisitionDetailsComponent implements OnInit {
             approved: [''],
             cancelled: [''],
         });
+
+        this.verticalStepperForm = this._formBuilder.group({
+            step1: this._formBuilder.group({
+                startDate: [""],
+                endDate: [""],
+                requisitionCol: [""],
+                requestingEmployeeId: [""],
+                financeApprovedDate: [""],
+                financeApproverId: [""],
+                lineApproverId: [""],
+                lineApproved: [""],
+                lineApprovedDate: [""],
+                dateRequested: [""],
+                requestComments: [""],
+                dateActioned: [""],
+                approved: [""],
+                cancelled: [],
+                duration: [],
+                title: [],
+                id: [],
+                description: [],
+                status: []
+            }),
+            step2: this._formBuilder.group({
+                serialNumber: [''],
+                itemCode: [''],
+                id: [],
+                description: [''],
+                status: []
+            }),
+            step3: this._formBuilder.group({
+                id: [''],
+                email: [''],
+                userName: [''],
+                firstName: [''],
+                lastName: [''],
+                departmentsId: [''],
+                phoneNumber: [''],
+                roles: ['']
+            })
+        });
     }
 
 
     getDeviceReq() {
         this._deviceRequisitionService.getDeviceRequisition(this._activatedRoute.snapshot.params['id']).subscribe(response => {
             this.deviceRequisition = response;
+            this.verticalStepperForm.patchValue({
+                step1: {
+                    startDate: this.deviceRequisition.startDate,
+                    endDate: this.deviceRequisition.endDate,
+                    requisitionCol: this.deviceRequisition.requisitionCol,
+                    requestingEmployeeId: this.deviceRequisition.requestingEmployeeId,
+                    financeApprovedDate: this.deviceRequisition.financeApprovedDate,
+                    financeApproverId: this.deviceRequisition.financeApproverId,
+                    lineApproverId: this.deviceRequisition.lineApproverId,
+                    lineApproved: this.deviceRequisition.lineApproved,
+                    lineApprovedDate: this.deviceRequisition.lineApprovedDate,
+                    dateRequested: this.deviceRequisition.dateRequested,
+                    requestComments: this.deviceRequisition.requestComments,
+                    dateActioned: this.deviceRequisition.dateActioned,
+                    approved: this.deviceRequisition.approved,
+                    cancelled: this.deviceRequisition.cancelled,
+                    duration: this.deviceRequisition.duration,
+                    title: this.deviceRequisition.title,
+                    id: this.deviceRequisition.id,
+                    description: this.deviceRequisition.description,
+                    status: this.deviceRequisition.status
+                },
+                step2: {
+                    serialNumber: this.deviceRequisition.device.serialNumber,
+                    itemCode: this.deviceRequisition.device.itemCode,
+                    id: this.deviceRequisition.device.id,
+                    description: this.deviceRequisition.device.description,
+                    status: this.deviceRequisition.device.status
+                },
+                step3: {
+                    id: this.deviceRequisition.employee.id,
+                    email: this.deviceRequisition.employee.email,
+                    userName: this.deviceRequisition.employee.userName,
+                    firstName: this.deviceRequisition.employee.firstName,
+                    lastName: this.deviceRequisition.employee.lastName,
+                    departmentsId: this.deviceRequisition.employee.departmentsId,
+                    phoneNumber: this.deviceRequisition.employee.phoneNumber,
+                    roles: this.deviceRequisition.employee.roles
+                }
+            })
             this.isLoading = false
         }, error => {
             console.log(error);
