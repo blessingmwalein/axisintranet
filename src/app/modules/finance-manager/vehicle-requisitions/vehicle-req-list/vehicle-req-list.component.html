@@ -38,11 +38,11 @@
 
       <div class="flex flex-col sm:flex-row items-center justify-between w-full max-w-xs sm:max-w-none">
         <mat-form-field class=" w-full sm:w-36">
-          <mat-select [value]="'all'">
-            <mat-option [value]="'all'">All</mat-option>
+          <mat-select [(value)]="status" >
             <ng-container>
-              <mat-option value="Active">Active</mat-option>
-              <mat-option value="Active">Cancelled</mat-option>
+              <mat-option value="Created" (click)="setStatus('Created')">All</mat-option>
+              <mat-option value="Line Approved" (click)="setStatus('Line Approved')" >Line manager approved</mat-option>
+              <mat-option value="Finance Approved" (click)="setStatus('Finance Approved')" >Finance manager approved</mat-option>
             </ng-container>
           </mat-select>
         </mat-form-field>

@@ -17,7 +17,7 @@ export class CardReqListComponent implements OnInit {
   cardReqDataSource: MatTableDataSource<any> = new MatTableDataSource();
   cardReqTableColumns: string[] = ["title", "status", "duration", 'startDate', "endDate", "amount", "action"];
   isLoading: boolean = true;
-
+  status= "Created"
   /**
    * Constructor
    */
@@ -37,6 +37,18 @@ export class CardReqListComponent implements OnInit {
   getCardReqs() {
     this.isLoading = true;
     this._cardRequisitionService.getAllCardRequisitionsLogged().subscribe(response => {
+      this.cardReqDataSource.data = response;
+      console.log(this.cardReqDataSource.data);
+      this.isLoading = false
+    }, error => {
+      console.log(error);
+      this._alertService.displayError("Could not fetch card requisitions reload!")
+      this.isLoading = false
+    })
+  }
+  getCardReqsByStatus() {
+    this.isLoading = true;
+    this._cardRequisitionService.getCardRequsitionByStatus(this.status).subscribe(response => {
       this.cardReqDataSource.data = response;
       console.log(this.cardReqDataSource.data);
       this.isLoading = false
@@ -87,5 +99,10 @@ export class CardReqListComponent implements OnInit {
       this.isLoading = false;
       this._alertService.displayError('Try again')
     })
+  }
+
+  setStatus(value) {
+    this.status = value;
+    this.getCardReqsByStatus();
   }
 }

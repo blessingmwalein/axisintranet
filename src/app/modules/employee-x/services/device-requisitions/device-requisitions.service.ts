@@ -49,4 +49,7 @@ export class DeviceRequisitionService {
     getDevices(): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}Devices`);
     }
+    getDeviceRequsitionByStatus(status:string): Observable<any[]> {
+        return this._httpClient.get<any[]>(`${this._baseUrl}DeviceRequisition/GetByStatus?status=${status}&isLoggedInUser=false`);
+    }
 }

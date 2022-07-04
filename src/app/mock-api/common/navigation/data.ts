@@ -27,7 +27,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 id: 'employee.announcements',
                 title: 'Announcements',
                 type: 'basic',
-                icon: 'heroicons_outline:cash',
+                icon: 'heroicons_outline:bell',
                 link: '/axis/employee/announcements'
             },
             // {
@@ -95,18 +95,18 @@ export const managerNavigation: FuseNavigationItem[] = [
                 link: '/axis/manager/dashboard'
             },
             {
+                id: 'manager.announcements',
+                title: 'Announcements',
+                type: 'basic',
+                icon: 'heroicons_outline:bell',
+                link: '/axis/manager/announcements'
+            },
+            {
                 id: 'manager.calendar',
                 title: 'Calendar',
                 type: 'basic',
                 icon: 'heroicons_outline:calendar',
                 link: '/axis/manager/calendar'
-            },
-            {
-                id: 'manager.announcements',
-                title: 'Announcements',
-                type: 'basic',
-                icon: 'heroicons_outline:cash',
-                link: '/axis/manager/announcements'
             },
             {
                 id: 'manager.requisitions',
@@ -166,18 +166,18 @@ export const financeManagerNavigation: FuseNavigationItem[] = [
                 link: '/axis/finance-manager/dashboard'
             },
             {
+                id: 'finance-manager.announcements',
+                title: 'Announcements',
+                type: 'basic',
+                icon: 'heroicons_outline:bell',
+                link: '/axis/finance-manager/announcements'
+            },
+            {
                 id: 'finance-manager.calendar',
                 title: 'Calendar',
                 type: 'basic',
                 icon: 'heroicons_outline:calendar',
                 link: '/axis/finance-manager/calendar'
-            },
-            {
-                id: 'finance-manager.announcements',
-                title: 'Announcements',
-                type: 'basic',
-                icon: 'heroicons_outline:cash',
-                link: '/axis/finance-manager/announcements'
             },
             {
                 id: 'finance-manager.requisitions',
@@ -243,13 +243,13 @@ export const adminNavigation: FuseNavigationItem[] = [
             //     icon: 'heroicons_outline:calendar',
             //     link: '/axis/admin/calendar'
             // },
-            // {
-            //     id: 'admin.announcements',
-            //     title: 'Announcements',
-            //     type: 'basic',
-            //     icon: 'heroicons_outline:cash',
-            //     link: '/axis/admin/announcements'
-            // },
+            {
+                id: 'admin.announcements',
+                title: 'Announcements',
+                type: 'basic',
+                icon: 'heroicons_outline:cash',
+                link: '/axis/admin/announcements'
+            },
             {
                 id: 'admin.departments',
                 title: 'Departments',

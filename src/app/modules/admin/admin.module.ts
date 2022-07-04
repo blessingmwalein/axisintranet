@@ -47,6 +47,7 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserDetailComponent } from './user-list/user-detail/user-detail.component';
 import { MantainanceComponent } from './mantainance/mantainance.component';
 import { AdminDashComponent } from './admin-dash/admin-dash.component';
+import { CreateAnnouncementComponent } from './announcements/create-announce/create-announcement.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { AdminDashComponent } from './admin-dash/admin-dash.component';
     UserListComponent,
     UserDetailComponent,
     MantainanceComponent,
-    AdminDashComponent
+    AdminDashComponent,
+    CreateAnnouncementComponent
   ],
   imports: [
     CommonModule,

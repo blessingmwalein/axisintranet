@@ -17,7 +17,7 @@ export class CashReqListComponent implements OnInit {
   cashReqDataSource: MatTableDataSource<any> = new MatTableDataSource();
   cashReqTableColumns: string[] = ["title", "status", "duration", 'startDate', "endDate", "amount", "action"];
   isLoading: boolean = true;
-
+  status="Created";
 
   /**
    * Constructor
@@ -38,6 +38,19 @@ export class CashReqListComponent implements OnInit {
   getCashReqs() {
     this.isLoading = true;
     this._cashRequisitionService.getAllCashRequisitionsLogged().subscribe(response => {
+      this.cashReqDataSource.data = response;
+      console.log(this.cashReqDataSource.data);
+      this.isLoading = false
+    }, error => {
+      console.log(error);
+      this._alertService.displayError("Could not fetch cash requisitions reload!")
+      this.isLoading = false
+    })
+  }
+
+  getCashReqsByStatus() {
+    this.isLoading = true;
+    this._cashRequisitionService.getCashRequsitionByStatus(this.status).subscribe(response => {
       this.cashReqDataSource.data = response;
       console.log(this.cashReqDataSource.data);
       this.isLoading = false
@@ -88,5 +101,11 @@ export class CashReqListComponent implements OnInit {
       this.isLoading = false;
       this._alertService.displayError('Try again')
     })
+  }
+
+  setStatus(value) {
+    this.status = value;
+    console.log(this.status == "employee" ? false :true);
+    this.getCashReqsByStatus();
   }
 }

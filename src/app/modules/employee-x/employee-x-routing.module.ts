@@ -32,7 +32,7 @@ const routes: Routes = [
   },
   {
     path: 'announcements',
-    component: MantainanceComponent,
+    component: AnnouncementsComponent,
     // resolve: {
     //   announcements: AnnouncementsResolver
     // }

@@ -49,4 +49,7 @@ export class CashRequisitionService {
     getCashs(): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}Cash`);
     }
+    getCashRequsitionByStatus(status:string): Observable<any[]> {
+        return this._httpClient.get<any[]>(`${this._baseUrl}CashRequisition/GetByStatus?status=${status}&isLoggedInUser=false`);
+    }
 }

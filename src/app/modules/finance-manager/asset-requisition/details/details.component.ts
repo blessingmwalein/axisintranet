@@ -51,7 +51,7 @@ export class AssetRequisitionDetailsComponent implements OnInit {
 
         this.assetReqForm = this._formBuilder.group({
             title: [''],
-            status: [''],
+            status: ['Finance Approved'],
             description: [''],
             duration: [''],
             startDate: [''],
@@ -241,7 +241,7 @@ export class AssetRequisitionDetailsComponent implements OnInit {
     approveCashReq() {
 
         this.isLoading = true;
-        this._assetRequisitionService.financeManagerApproveReq(this.assetRequisition.id, { id: this.assetRequisition.id.toString(), approved: true, financeApprovedDate: new Date(),financeApproverId:this._userService.getLocalUser().id }).subscribe(response => {
+        this._assetRequisitionService.financeManagerApproveReq(this.assetRequisition.id, { id: this.assetRequisition.id.toString(), approved: true, financeApprovedDate: new Date(),status:this.assetReqForm.value.status,financeApproverId:this._userService.getLocalUser().id }).subscribe(response => {
             this._alertService.displayMessage('Requisition Approved');
             this._router.navigateByUrl('axis/finance-manager/requisitions/asset')
             this.isLoading = false;

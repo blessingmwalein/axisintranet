@@ -260,9 +260,8 @@ export class VehicleRequisitionDetailsComponent implements OnInit {
         });
     }
     approveVehicleReq() {
-
         this.isLoading = true;
-        this._vehicleRequisitionService.financeManagerApproveReq(this.vehicleRequisition.id, { id: this.vehicleRequisition.id.toString(), approved: true, financeApprovedDate: new Date(), financeApproverId: this._userService.getLocalUser().id }).subscribe(response => {
+        this._vehicleRequisitionService.financeManagerApproveReq(this.vehicleRequisition.id, { id: this.vehicleRequisition.id.toString(), approved: true,status:this.vehicleReqForm.value.status, financeApprovedDate: new Date(), financeApproverId: this._userService.getLocalUser().id }).subscribe(response => {
             this._alertService.displayMessage('Requisition Approved');
             this._router.navigateByUrl('axis/finance-manager/requisitions/vehicle')
             this.isLoading = false;

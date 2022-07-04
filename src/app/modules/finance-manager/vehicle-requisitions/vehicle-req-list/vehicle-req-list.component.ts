@@ -17,7 +17,7 @@ export class VehicleReqListComponent implements OnInit {
   vehicleReqDataSource: MatTableDataSource<any> = new MatTableDataSource();
   vehicleReqTableColumns: string[] = ["title", "status", "duration", 'startDate', "endDate", "action"];
   isLoading: boolean = true;
-
+  status="Created"
 
   /**
    * Constructor
@@ -40,6 +40,19 @@ export class VehicleReqListComponent implements OnInit {
   getVehicleReqs() {
     this.isLoading = true;
     this._vehicleRequisitionService.getAllVehicleRequisitionsNotLogged().subscribe(response => {
+      this.vehicleReqDataSource.data = response;
+      console.log(this.vehicleReqDataSource.data);
+      this.isLoading = false
+    }, error => {
+      console.log(error);
+      this._alertService.displayError("Could not fetch vehicle requisitions reload!")
+      this.isLoading = false
+    })
+  }
+
+  getVehicleReqsByStatus() {
+    this.isLoading = true;
+    this._vehicleRequisitionService.getVehicleRequsitionByStatus(this.status).subscribe(response => {
       this.vehicleReqDataSource.data = response;
       console.log(this.vehicleReqDataSource.data);
       this.isLoading = false
@@ -90,5 +103,11 @@ export class VehicleReqListComponent implements OnInit {
       this.isLoading = false;
       this._alertService.displayError('Try again')
     })
+  }
+
+  setStatus(value) {
+    this.status = value;
+    console.log(this.status == "employee" ? false :true);
+    this.getVehicleReqsByStatus();
   }
 }

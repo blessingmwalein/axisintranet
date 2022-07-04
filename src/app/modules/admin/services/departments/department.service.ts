@@ -37,4 +37,28 @@ export class DepartmentService {
   getDepartments() {
     return this._httpClient.get<any>(`${this._baseUrl}Departments`);
   }
+
+  //announcements
+
+  saveAnnouncement(announcement: any): Observable<any> {
+    return this._httpClient.post<any>(`${this._baseUrl}Announcements`, announcement);
+  }
+
+  deleteAnnouncement(id: string) {
+    return this._httpClient.delete(`${this._baseUrl}Announcements/${id}`);
+  }
+
+  updateAnnouncement(id: string, announcement: any) {
+    return this._httpClient.put(`${this._baseUrl}Announcements/${id}`, announcement)
+  }
+
+  getAnnouncement(id: string) {
+    return this._httpClient.get<any>(`${this._baseUrl}Announcements/${id}`);
+  }
+  getAnnouncements() {
+    return this._httpClient.get<any>(`${this._baseUrl}Announcements`);
+  }
+  getAnnouncementsPaginated(count:number) {
+    return this._httpClient.get<any>(`${this._baseUrl}Announcements/last10?take=${count}`);
+  }
 }

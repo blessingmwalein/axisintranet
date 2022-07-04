@@ -17,7 +17,8 @@ export class AssetReqListComponent implements OnInit {
   assetReqDataSource: MatTableDataSource<any> = new MatTableDataSource();
   assetReqTableColumns: string[] = ["title", "status", "duration", 'startDate',"asset" ,"endDate", "action"];
   isLoading: boolean = true;
-  status="All";
+  status="Created";
+  
   /**
    * Constructor
    */
@@ -37,6 +38,18 @@ export class AssetReqListComponent implements OnInit {
   getAssetReqs() {
     this.isLoading = true;
     this._assetRequisitionService.getAllAssetRequisitionsLogged().subscribe(response => {
+      this.assetReqDataSource.data = response;
+      console.log(this.assetReqDataSource.data);
+      this.isLoading = false
+    }, error => {
+      console.log(error);
+      this._alertService.displayError("Could not fetch asset requisitions reload!")
+      this.isLoading = false
+    })
+  }
+  getAssetReqsByStatus() {
+    this.isLoading = true;
+    this._assetRequisitionService.getAssetRequsitionByStatus(this.status).subscribe(response => {
       this.assetReqDataSource.data = response;
       console.log(this.assetReqDataSource.data);
       this.isLoading = false
@@ -92,6 +105,6 @@ export class AssetReqListComponent implements OnInit {
   setStatus(value) {
     this.status = value;
     console.log(this.status == "employee" ? false :true);
-    this.getAssetReqs();
+    this.getAssetReqsByStatus();
   }
 }

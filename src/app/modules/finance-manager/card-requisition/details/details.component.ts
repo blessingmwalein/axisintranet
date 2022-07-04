@@ -52,7 +52,7 @@ export class CardRequisitionDetailsComponent implements OnInit {
 
         this.cardReqForm = this._formBuilder.group({
             title: [''],
-            status: [''],
+            status: ['Finance Approved'],
             description: [''],
             duration: [''],
             startDate: [''],
@@ -262,7 +262,7 @@ export class CardRequisitionDetailsComponent implements OnInit {
     approveCashReq() {
 
         this.isLoading = true;
-        this._cardRequisitionService.financeManagerApproveReq(this.cardRequisition.id, { id: this.cardRequisition.id.toString(), approved: true, financeApprovedDate: new Date(),financeApproverId:this._userService.getLocalUser().id }).subscribe(response => {
+        this._cardRequisitionService.financeManagerApproveReq(this.cardRequisition.id, { id: this.cardRequisition.id.toString(), approved: true, financeApprovedDate: new Date(),status:this.cardReqForm.value.status,financeApproverId:this._userService.getLocalUser().id }).subscribe(response => {
             this._alertService.displayMessage('Requisition Approved');
             this._router.navigateByUrl('axis/finance-manager/requisitions/card')
             this.isLoading = false;

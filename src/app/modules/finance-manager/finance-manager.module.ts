@@ -47,6 +47,7 @@ import { FuseAlertModule } from '@fuse/components/alert';
 import { FuseFindByKeyPipeModule } from '@fuse/pipes/find-by-key';
 import { SharedModule } from 'app/shared/shared.module';
 import { ManagerDashComponent } from './manager-dash/manager-dash.component';
+import { AnnouncementsComponent } from './announcements/announcements.component';
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import { ManagerDashComponent } from './manager-dash/manager-dash.component';
     AssetReqListComponent,
     CreateAssetReqComponent,
     AssetRequisitionDetailsComponent,
-    ManagerDashComponent
+    ManagerDashComponent,
+    AnnouncementsComponent
   ],
   imports: [
     CommonModule,

@@ -48,4 +48,7 @@ export class CardRequisitionService {
     getCards(): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}Cards`);
     }
+    getCardRequsitionByStatus(status:string): Observable<any[]> {
+        return this._httpClient.get<any[]>(`${this._baseUrl}CardRequisition/GetByStatus?status=${status}&isLoggedInUser=false`);
+    }
 }

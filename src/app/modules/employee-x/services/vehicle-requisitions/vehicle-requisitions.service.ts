@@ -47,5 +47,8 @@ export class VehicleRequisitionService {
     getVehicles(): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}Vehicles`);
     }
+    getVehicleRequsitionByStatus(status:string): Observable<any[]> {
+        return this._httpClient.get<any[]>(`${this._baseUrl}VehicleRequisition/GetByStatus?status=${status}&isLoggedInUser=false`);
+    }
 
 }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MantainanceComponent } from '../admin/mantainance/mantainance.component';
+import { AnnouncementsComponent } from './announcements/announcements.component';
 import { AssetReqListComponent } from './asset-requisition/asset-req-list/asset-req-list.component';
 import { CreateAssetReqComponent } from './asset-requisition/create/create.component';
 import { AssetRequisitionDetailsComponent } from './asset-requisition/details/details.component';
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
     path: "dashboard",
     component: ManagerDashComponent
+  },
+  {
+    path: "announcements",
+    component: AnnouncementsComponent
   },
   {
     path: 'requisitions/vehicle',

@@ -52,7 +52,7 @@ export class DeviceRequisitionDetailsComponent implements OnInit {
 
         this.deviceReqForm = this._formBuilder.group({
             title: [''],
-            status: [''],
+            status: ['Finance Approved'],
             description: [''],
             duration: [''],
             startDate: [''],
@@ -241,7 +241,7 @@ export class DeviceRequisitionDetailsComponent implements OnInit {
     approveVehicleReq() {
 
         this.isLoading = true;
-        this._deviceRequisitionService.financeManagerApproveReq(this.deviceRequisition.id, { id: this.deviceRequisition.id.toString(), approved: true, financeApprovedDate: new Date(),financeApproverId:this._userService.getLocalUser().id}).subscribe(response => {
+        this._deviceRequisitionService.financeManagerApproveReq(this.deviceRequisition.id, { id: this.deviceRequisition.id.toString(), approved: true, financeApprovedDate: new Date(),status:this.deviceReqForm.value.status,financeApproverId:this._userService.getLocalUser().id}).subscribe(response => {
             this._alertService.displayMessage('Requisition Approved');
             this._router.navigateByUrl('axis/finance-manager/requisitions/device')
             this.isLoading = false;

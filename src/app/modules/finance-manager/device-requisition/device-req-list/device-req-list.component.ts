@@ -17,7 +17,7 @@ export class DeviceReqListComponent implements OnInit {
   deviceReqDataSource: MatTableDataSource<any> = new MatTableDataSource();
   deviceReqTableColumns: string[] = ["title", "status", "duration", 'startDate',"device" ,"endDate", "action"];
   isLoading: boolean = true;
-
+  status = "Created"
 
   /**
    * Constructor
@@ -47,7 +47,18 @@ export class DeviceReqListComponent implements OnInit {
       this.isLoading = false
     })
   }
-
+  getCashReqsByStatus() {
+    this.isLoading = true;
+    this._deviceRequisitionService.getDeviceRequsitionByStatus(this.status).subscribe(response => {
+      this.deviceReqDataSource.data = response;
+      console.log(this.deviceReqDataSource.data);
+      this.isLoading = false
+    }, error => {
+      console.log(error);
+      this._alertService.displayError("Could not fetch device requisitions reload!")
+      this.isLoading = false
+    })
+  }
 
   trackByFn(index: number, item: any): any {
     return item.id || index;
@@ -88,5 +99,11 @@ export class DeviceReqListComponent implements OnInit {
       this.isLoading = false;
       this._alertService.displayError('Try again')
     })
+  }
+
+  setStatus(value) {
+    this.status = value;
+    console.log(this.status == "employee" ? false :true);
+    this.getCashReqsByStatus();
   }
 }

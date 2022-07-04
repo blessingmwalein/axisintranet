@@ -238,7 +238,6 @@ export class AssetRequisitionDetailsComponent implements OnInit {
         });
     }
     approveCashReq() {
-
         this.isLoading = true;
         this._assetRequisitionService.lineManagerApproveReq(this.assetRequisition.id, { id: this.assetRequisition.id.toString(), lineApproved: this.assetReqForm.value.lineApproved,status:this.assetReqForm.value.status, lineApprovedDate: new Date() }).subscribe(response => {
             this._alertService.displayMessage('Requisition Approved');
@@ -249,6 +248,7 @@ export class AssetRequisitionDetailsComponent implements OnInit {
             this._alertService.displayError('Try again')
         })
     }
+    
     openDeleteDialog(id: string) {
         const dialogRef = this._fuseConfirmationService.open({
             message: "Are sure you want to delete this requisition ?",

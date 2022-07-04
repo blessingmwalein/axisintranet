@@ -6,6 +6,8 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Message } from 'app/layout/common/messages/messages.types';
 import { MessagesService } from 'app/layout/common/messages/messages.service';
+import { DepartmentService } from 'app/modules/admin/services/departments/department.service';
+import { AlertService } from 'app/modules/alert/snackbar/alert.service';
 
 @Component({
     selector       : 'messages',
@@ -18,8 +20,9 @@ export class MessagesComponent implements OnInit, OnDestroy
 {
     @ViewChild('messagesOrigin') private _messagesOrigin: MatButton;
     @ViewChild('messagesPanel') private _messagesPanel: TemplateRef<any>;
-
+    count =20; 
     messages: Message[];
+    announcemnts:any[];
     unreadCount: number = 0;
     private _overlayRef: OverlayRef;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
@@ -31,7 +34,9 @@ export class MessagesComponent implements OnInit, OnDestroy
         private _changeDetectorRef: ChangeDetectorRef,
         private _messagesService: MessagesService,
         private _overlay: Overlay,
-        private _viewContainerRef: ViewContainerRef
+        private _viewContainerRef: ViewContainerRef,
+        private departmentService:DepartmentService,
+        private alertService:AlertService
     )
     {
     }
@@ -46,19 +51,20 @@ export class MessagesComponent implements OnInit, OnDestroy
     ngOnInit(): void
     {
         // Subscribe to message changes
-        this._messagesService.messages$
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((messages: Message[]) => {
+        // this._messagesService.messages$
+        //     .pipe(takeUntil(this._unsubscribeAll))
+        //     .subscribe((messages: Message[]) => {
 
-                // Load the messages
-                this.messages = messages;
+        //         // Load the messages
+        //         this.messages = messages;
 
-                // Calculate the unread count
-                this._calculateUnreadCount();
+        //         // Calculate the unread count
+        //         this._calculateUnreadCount();
 
-                // Mark for check
-                this._changeDetectorRef.markForCheck();
-            });
+        //         // Mark for check
+        //         this._changeDetectorRef.markForCheck();
+        //     });
+        this.getAnnouncements()
     }
 
     /**
@@ -75,6 +81,14 @@ export class MessagesComponent implements OnInit, OnDestroy
         {
             this._overlayRef.dispose();
         }
+    }
+
+    getAnnouncements(){
+        this.departmentService.getAnnouncementsPaginated(this.count).subscribe(announcemnts=>{
+            this.announcemnts = announcemnts;
+        }, error=>{
+            this.alertService.displayError('Failed to load announcements reload')
+        })
     }
 
     // -----------------------------------------------------------------------------------------------------
