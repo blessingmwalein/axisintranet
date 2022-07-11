@@ -40,7 +40,8 @@
         <mat-form-field class=" w-full sm:w-36">
           <mat-select [(value)]="status" >
             <ng-container>
-              <mat-option value="Created" (click)="setStatus('Created')">All</mat-option>
+              <mat-option value="All" (click)="getDeviceReqs()">All</mat-option>
+              <mat-option value="Created" (click)="setStatus('Created')">Created</mat-option>
               <mat-option value="Line Approved" (click)="setStatus('Line Approved')" >Line manager approved</mat-option>
               <mat-option value="Finance Approved" (click)="setStatus('Finance Approved')" >Finance manager approved</mat-option>
             </ng-container>

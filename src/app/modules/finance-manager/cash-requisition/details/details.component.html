@@ -1,12 +1,10 @@
 <div class="flex flex-auto">
-
-
     <form class="flex flex-col flex-auto m-3 p-6 pt-10 sm:p-8 sm:pt-10 overflow-y-auto bg-card shadow rounded-2xl"
         [formGroup]="verticalStepperForm">
         <div class="flex items-center justify-between -mt-3 -ml-4">
 
             <!-- Mark as ... button -->
-            <button class="pr-4 pl-3.5" [disabled]="cashRequisition.approved" (click)="openApproveDialog()" mat-button>
+            <button class="pr-4 pl-3.5" [disabled]="getDisableButton()" (click)="openApproveDialog()" mat-button>
                 <ng-container>
                     <div class="flex items-center justify-center">
                         <mat-icon [svgIcon]="'heroicons_outline:check-circle'"></mat-icon>
@@ -21,9 +19,9 @@
                     <mat-icon [svgIcon]="'heroicons_outline:dots-vertical'"></mat-icon>
                 </button>
                 <mat-menu #moreMenu="matMenu">
-                    <button mat-menu-item (click)="openDeleteDialog(cashRequisition.id)">
-                        <mat-icon [svgIcon]="'heroicons_outline:trash'"></mat-icon>
-                        <span>Delete Requsition</span>
+                    <button mat-menu-item (click)="openPrintDialog()">
+                        <mat-icon [svgIcon]="'heroicons_outline:printer'"></mat-icon>
+                        <span>Print Requisition</span>
                     </button>
                 </mat-menu>
                 <!-- Close button -->
@@ -148,6 +146,16 @@
                                 </div>
                             </ng-container>
 
+                            <ng-container>
+                                <div
+                                    class="flex items-center justify-center px-4 m-1.5 rounded-full leading-9 text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
+                                    <span class="text-md font-medium whitespace-nowrap"> {{cashRequisition.generalManagerApproved?
+                                        "General Manager Approved On : " + cashRequisition.generalManagerApprovedDate :
+                                        "Awaiting General
+                                        Manager Approval"}}
+                                    </span>
+                                </div>
+                            </ng-container>
                         </ng-container>
                     </div>
                 </div>
@@ -246,5 +254,4 @@
             </mat-step>
         </mat-vertical-stepper>
     </form>
-
 </div>

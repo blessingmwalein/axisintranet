@@ -45,6 +45,9 @@ export class CardRequisitionService {
     financeManagerApproveReq(id: string, cashReq: any): Observable<any[]> {
         return this._httpClient.put<any>(`${this._baseUrl}CardRequisition/changeapproval/${id}`, cashReq);
     }
+    generalManagerApproveReq(id: string, cashReq: any): Observable<any[]> {
+        return this._httpClient.put<any>(`${this._baseUrl}CardRequisition/changegmapproval/${id}`, cashReq);
+    }
     getCards(): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}Cards`);
     }

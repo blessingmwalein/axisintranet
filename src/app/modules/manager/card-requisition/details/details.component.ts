@@ -260,7 +260,7 @@ export class CardRequisitionDetailsComponent implements OnInit {
     approveCashReq() {
 
         this.isLoading = true;
-        this._cardRequisitionService.lineManagerApproveReq(this.cardRequisition.id, { id: this.cardRequisition.id.toString(), lineApproved: this.cardReqForm.value.lineApproved, lineApprovedDate: new Date() }).subscribe(response => {
+        this._cardRequisitionService.lineManagerApproveReq(this.cardRequisition.id, { id: this.cardRequisition.id.toString(), lineApproved: this.cardReqForm.value.lineApproved, status:this.cardReqForm.value.status,lineApprovedDate: new Date() }).subscribe(response => {
             this._alertService.displayMessage('Requisition Approved');
             this._router.navigateByUrl('axis/manager/requisitions/card')
             this.isLoading = false;

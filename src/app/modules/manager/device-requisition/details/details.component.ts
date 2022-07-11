@@ -239,7 +239,7 @@ export class DeviceRequisitionDetailsComponent implements OnInit {
     approveVehicleReq() {
 
         this.isLoading = true;
-        this._deviceRequisitionService.lineManagerApproveReq(this.deviceRequisition.id, { id: this.deviceRequisition.id.toString(), lineApproved: this.deviceReqForm.value.lineApproved, lineApprovedDate: new Date() }).subscribe(response => {
+        this._deviceRequisitionService.lineManagerApproveReq(this.deviceRequisition.id, { id: this.deviceRequisition.id.toString(), lineApproved: this.deviceReqForm.value.lineApproved,status:this.deviceReqForm.value.status, lineApprovedDate: new Date() }).subscribe(response => {
             this._alertService.displayMessage('Requisition Approved');
             this._router.navigateByUrl('axis/manager/requisitions/device')
             this.isLoading = false;

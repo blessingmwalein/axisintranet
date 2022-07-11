@@ -77,10 +77,7 @@
                       [ngClass]="{
                                                       'bg-green-500': cashReq.approved !== null || cashReq.approved,
                                                       'bg-red-500': cashReq.approved === null || cashReq.approved }"></span>
-                    <span class="ml-3 leading-4"> {{!cashReq.lineApproved ? "Pending Line Manager Approval" : "" }}{{
-                      cashReq.lineApproved && !cashReq.approved ? "Pending
-                      Finance Manager Approval" :''}}{{cashReq.lineApproved && cashReq.approved ? "Approved" :
-                      ""}}</span>
+                    <span class="ml-3 leading-4"> {{cashReq.status}}</span>
                   </span>
                 </td>
               </ng-container>
@@ -145,7 +142,7 @@
                   </button>
                   <mat-menu #budgetMenu="matMenu">
                     <button mat-menu-item (click)="viewReqVehilce(cashReq.id)">View</button>
-                    
+
                   </mat-menu>
                 </td>
               </ng-container>

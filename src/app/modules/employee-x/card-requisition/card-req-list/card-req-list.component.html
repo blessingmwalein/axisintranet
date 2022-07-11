@@ -77,10 +77,7 @@
                       [ngClass]="{
                                                       'bg-green-500': cardReq.approved !== null || cardReq.approved,
                                                       'bg-red-500': cardReq.approved === null || cardReq.approved }"></span>
-                    <span class="ml-3 leading-4"> {{!cardReq.lineApproved ? "Pending Line Manager Approval" : "" }}{{
-                      cardReq.lineApproved && !cardReq.approved ? "Pending
-                      Finance Manager Approval" :''}}{{cardReq.lineApproved && cardReq.approved ? "Approved" :
-                      ""}}</span>
+                    <span class="ml-3 leading-4"> {{cardReq.status}}</span>
                   </span>
                 </td>
               </ng-container>
@@ -145,7 +142,7 @@
                   </button>
                   <mat-menu #budgetMenu="matMenu">
                     <button mat-menu-item (click)="viewReqVehilce(cardReq.id)">View</button>
-                    
+
                   </mat-menu>
                 </td>
               </ng-container>

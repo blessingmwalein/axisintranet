@@ -63,7 +63,6 @@ export const appRoutes: Route[] = [
             initialData: InitialDataResolver,
         },
         children: [
-
             //employees 
             {
                 path: 'axis',
@@ -71,6 +70,7 @@ export const appRoutes: Route[] = [
                     { path: 'employee', loadChildren: () => import('app/modules/employee-x/employee-x.module').then(m => m.EmployeeXModule) },
                     { path: 'manager', loadChildren: () => import('app/modules/manager/manager.module').then(m => m.ManagerModule) },
                     { path: 'finance-manager', loadChildren: () => import('app/modules/finance-manager/finance-manager.module').then(m => m.FinanceManagerModule) },
+                    { path: 'g-m', loadChildren: () => import('app/modules/gm/general-manager.module').then(m => m.GeneralManagerModule) },
                     { path: 'admin', loadChildren: () => import('app/modules/admin/admin.module').then(m => m.AdminModule) },
                 ]
             },

@@ -48,6 +48,11 @@ import { FuseFindByKeyPipeModule } from '@fuse/pipes/find-by-key';
 import { SharedModule } from 'app/shared/shared.module';
 import { ManagerDashComponent } from './manager-dash/manager-dash.component';
 import { AnnouncementsComponent } from './announcements/announcements.component';
+import { PrintReqPrevComponent } from './asset-requisition/print-req-prev/print-req-prev.component';
+import { PrintReqPrevComponent as PrintReqPrevCardComponent  } from './card-requisition/print-req-prev/print-req-prev.component';
+import { PrintReqPrevComponent as PrintReqPrevCashComponent  } from './cash-requisition/print-req-prev/print-req-prev.component';
+import { PrintReqPrevComponent as PrintReqPrevDeviceComponent  } from './device-requisition/print-req-prev/print-req-prev.component';
+import { PrintReqPrevComponent as PrintReqPrevVehilceComponent  } from './vehicle-requisitions/print-req-prev/print-req-prev.component';
 
 
 @NgModule({
@@ -76,7 +81,12 @@ import { AnnouncementsComponent } from './announcements/announcements.component'
     CreateAssetReqComponent,
     AssetRequisitionDetailsComponent,
     ManagerDashComponent,
-    AnnouncementsComponent
+    AnnouncementsComponent,
+    PrintReqPrevComponent,
+    PrintReqPrevCardComponent,
+    PrintReqPrevCashComponent,
+    PrintReqPrevDeviceComponent,
+    PrintReqPrevVehilceComponent
   ],
   imports: [
     CommonModule,

@@ -10,6 +10,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { CashRequisitionService } from 'app/modules/employee-x/services/cash-requisitions/cash-requisitions.service';
 import { UserService } from 'app/core/user/user.service';
+import { PrintReqPrevComponent } from '../print-req-prev/print-req-prev.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector: 'academy-details',
@@ -41,7 +43,8 @@ export class CashRequisitionDetailsComponent implements OnInit {
         private _formBuilder: FormBuilder,
         private _router: Router,
         private _fuseConfirmationService: FuseConfirmationService,
-        private _userService: UserService
+        private _userService: UserService,
+        private _matDialog: MatDialog,
     ) {
     }
 
@@ -282,5 +285,35 @@ export class CashRequisitionDetailsComponent implements OnInit {
             this.isLoading = false;
             this._alertService.displayError('Try again')
         })
+    }
+    
+    openPrintDialog(): void {
+        // Open the dialog
+        const dialogRef = this._matDialog.open(PrintReqPrevComponent, {
+            data: { isEdit: false, cashRequisition: this.cashRequisition },
+        });
+
+        dialogRef.afterClosed()
+            .subscribe((result) => {
+                console.log('Compose dialog was closed!');
+                // this();
+            });
+    }
+    getDisableButton() {
+        if (this.cashRequisition.amount > this.cashRequisition.cash.amount) {
+            if (this.cashRequisition.generalManagerApproved) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        } else {
+            if (this.cashRequisition.lineApproved) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
     }
 }

@@ -221,6 +221,77 @@ export const financeManagerNavigation: FuseNavigationItem[] = [
     },
 
 ];
+export const gMNavigation: FuseNavigationItem[] = [
+    {
+        id: 'g-m',
+        title: 'General Manager',
+        subtitle: 'General Manager Pages',
+        type: 'group',
+        icon: 'heroicons_outline:home',
+        children: [
+            {
+                id: 'g-m.dashboard',
+                title: 'Dashboard',
+                type: 'basic',
+                icon: 'heroicons_outline:clipboard-check',
+                link: '/axis/g-m/dashboard'
+            },
+            {
+                id: 'g-m.announcements',
+                title: 'Announcements',
+                type: 'basic',
+                icon: 'heroicons_outline:bell',
+                link: '/axis/g-m/announcements'
+            },
+            {
+                id: 'g-m.calendar',
+                title: 'Calendar',
+                type: 'basic',
+                icon: 'heroicons_outline:calendar',
+                link: '/axis/g-m/calendar'
+            },
+            {
+                id: 'g-m.requisitions',
+                title: 'Requisitions',
+                type: 'collapsable',
+                icon: 'heroicons_outline:support',
+                children: [
+                    {
+                        id: 'g-m.requisitions.cash',
+                        title: 'Cash',
+                        type: 'basic',
+                        link: '/axis/g-m/requisitions/cash'
+                    },
+                    {
+                        id: 'g-m.requisitions.card',
+                        title: 'Card',
+                        type: 'basic',
+                        link: '/axis/g-m/requisitions/card'
+                    },
+                    {
+                        id: 'g-m.requisitions.device',
+                        title: 'Device',
+                        type: 'basic',
+                        link: '/axis/g-m/requisitions/device'
+                    },
+                    {
+                        id: 'g-m.requisitions.vehicle',
+                        title: 'Vehicle',
+                        type: 'basic',
+                        link: '/axis/g-m/requisitions/vehicle'
+                    },
+                    {
+                        id: 'g-m.requisitions.asset',
+                        title: 'Asset',
+                        type: 'basic',
+                        link: '/axis/g-m/requisitions/asset'
+                    }
+                ]
+            },
+        ]
+    },
+
+];
 export const adminNavigation: FuseNavigationItem[] = [
     {
         id: 'admin',

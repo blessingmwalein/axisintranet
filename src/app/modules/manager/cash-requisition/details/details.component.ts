@@ -262,9 +262,9 @@ export class CashRequisitionDetailsComponent implements OnInit {
     approveCashReq() {
 
         this.isLoading = true;
-        this._cashRequisitionService.lineManagerApproveReq(this.cashRequisition.id, { id: this.cashRequisition.id.toString(), lineApproved: this.cashReqForm.value.lineApproved, lineApprovedDate: new Date() }).subscribe(response => {
+        this._cashRequisitionService.lineManagerApproveReq(this.cashRequisition.id, { id: this.cashRequisition.id.toString(), lineApproved: this.cashReqForm.value.lineApproved,status:this.cashReqForm.value.status, lineApprovedDate: new Date() }).subscribe(response => {
             this._alertService.displayMessage('Requisition Approved');
-            this._router.navigateByUrl('axis/manager/requisitions/device')
+            this._router.navigateByUrl('axis/manager/requisitions/cash')
             this.isLoading = false;
         }, error => {
             this.isLoading = false;

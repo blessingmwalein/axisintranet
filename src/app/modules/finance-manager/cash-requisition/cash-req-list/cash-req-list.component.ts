@@ -17,7 +17,7 @@ export class CashReqListComponent implements OnInit {
   cashReqDataSource: MatTableDataSource<any> = new MatTableDataSource();
   cashReqTableColumns: string[] = ["title", "status", "duration", 'startDate', "endDate", "amount", "action"];
   isLoading: boolean = true;
-  status="Created";
+  status="All";
 
   /**
    * Constructor

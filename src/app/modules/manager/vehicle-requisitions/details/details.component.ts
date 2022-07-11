@@ -261,7 +261,7 @@ export class VehicleRequisitionDetailsComponent implements OnInit {
     approveVehicleReq() {
 
         this.isLoading = true;
-        this._vehicleRequisitionService.lineManagerApproveReq(this.vehicleRequisition.id, { id: this.vehicleRequisition.id.toString(), lineApproved: this.vehicleReqForm.value.lineApproved, lineApprovedDate: new Date() }).subscribe(response => {
+        this._vehicleRequisitionService.lineManagerApproveReq(this.vehicleRequisition.id, { id: this.vehicleRequisition.id.toString(), lineApproved: this.vehicleReqForm.value.lineApproved, status:this.vehicleReqForm.value.status,lineApprovedDate: new Date() }).subscribe(response => {
             this._alertService.displayMessage('Requisition Approved');
             this._router.navigateByUrl('axis/manager/requisitions/vehicle')
             this.isLoading = false;

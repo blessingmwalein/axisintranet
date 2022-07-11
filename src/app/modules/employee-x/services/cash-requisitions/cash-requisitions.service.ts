@@ -43,6 +43,9 @@ export class CashRequisitionService {
     financeManagerApproveReq(id: string, cashReq: any): Observable<any[]> {
         return this._httpClient.put<any>(`${this._baseUrl}CashRequisition/changeapproval/${id}`, cashReq);
     }
+    generalManagerApproveReq(id: string, cashReq: any): Observable<any[]> {
+        return this._httpClient.put<any>(`${this._baseUrl}CashRequisition/changegmapproval/${id}`, cashReq);
+    }
     getAllCashRequisitionsLogged(): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}CashRequisition?isLoggedInUser=false`);
     }

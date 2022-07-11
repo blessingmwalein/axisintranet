@@ -1,0 +1,114 @@
+
+<div class="absolute inset-0 flex flex-col min-w-0 overflow-y-auto">
+
+  <!-- Header -->
+  <div
+    class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+    <div class="flex-1 min-w-0">
+      <!-- Breadcrumbs -->
+      <div class="flex flex-wrap items-center font-medium">
+        <div>
+          <a class="whitespace-nowrap text-primary-500">Axis</a>
+        </div>
+        <div class="flex items-center ml-1 whitespace-nowrap">
+          <mat-icon class="icon-size-5 text-secondary" [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+          <a class="ml-1 text-primary-500">Employee</a>
+        </div>
+        <div class="flex items-center ml-1 whitespace-nowrap">
+          <mat-icon class="icon-size-5 text-secondary" [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+          <span class="ml-1 text-secondary">Announcements</span>
+        </div>
+      </div>
+      <!-- Title -->
+      <div class="mt-2">
+        <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+          Announcements
+        </h2>
+      </div>
+    </div>
+  </div>
+  <!-- Main -->
+  <div class="flex flex-auto p-6 sm:p-10">
+    <ng-container *ngIf="loading">
+      <div class="absolute inset-x-0 bottom-0">
+        <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
+      </div>
+    </ng-container>
+    <div class="flex flex-col flex-auto w-full max-w-xs sm:max-w-5xl mx-auto">
+      <!-- Filters -->
+      <ng-container *ngIf="announcements.length; else noAnnouncement">
+        <div class="mt-8">
+          <ol>
+            <!-- announcements -->
+            <ng-container
+              *ngFor="let announcement of announcements; let i = index; let first = first; let last = last; trackBy: trackByFn">
+
+              <!-- Date separator -->
+              <ng-container *ngIf="first || !isSameDay(announcement.dateCreated, announcements[i - 1].dateCreated)">
+                <li class="relative flex py-7">
+                  <div
+                    class="relative py-2 px-8 text-md font-medium leading-5 rounded-full bg-primary text-on-primary">
+                    {{getRelativeFormat(announcement.dateCreated)}}
+                  </div>
+                </li>
+              </ng-container>
+
+              <!-- announcement -->
+              <li class="relative flex py-7">
+                <!-- Line -->
+                <ng-container *ngIf="!last && isSameDay(announcement.dateCreated, announcements[i + 1].dateCreated)">
+                  <div class="absolute top-7 left-5 w-0.5 h-full -ml-px bg-gray-300 dark:bg-gray-600"></div>
+                </ng-container>
+
+                <div class="relative flex flex-auto">
+                  <!-- Icon -->
+                  <ng-container >
+                    <div
+                      class="flex flex-shrink-0 items-center justify-center w-10 h-10 mr-4 rounded-full bg-gray-400">
+                      <mat-icon class="icon-size-5 text-white" svgIcon="heroicons_solid:bell">
+                      </mat-icon>
+                    </div>
+                  </ng-container>
+
+
+                  <!-- Content -->
+                  <div class="flex flex-col flex-auto items-start">
+                    <!-- Description -->
+                    <ng-container *ngIf="announcement.description">
+                      <div [innerHTML]="announcement.description"></div>
+                    </ng-container>
+                    <div
+                      class="flex flex-col sm:flex-row sm:items-center mt-2 sm:mt-1 sm:space-x-2 text-md leading-5">
+                      <!-- Date -->
+                      <div class="text-secondary">
+                        {{announcement.dateCreated | date:'MMM dd, h:mm a'}}
+                      </div>
+                      <!-- Linked content -->
+                     
+                    </div>
+                    <!-- Extra content -->
+                    <ng-container >
+                      <div class="mt-4 py-4 px-5 rounded-lg bg-gray-200 dark:bg-gray-800"
+                        [innerHTML]="announcement.announcementHeading"></div>
+                    </ng-container>
+                  </div>
+                </div>
+              </li>
+            </ng-container>
+          </ol>
+        </div>
+      </ng-container>
+
+      <!-- No cardRequisitions -->
+      <ng-template #noAnnouncement>
+        <div class="flex flex-auto flex-col items-center justify-center bg-gray-100 dark:bg-transparent">
+          <mat-icon class="icon-size-20" [svgIcon]="'iconsmind:file_search'"></mat-icon>
+          <div class="mt-6 text-2xl font-semibold tracking-tight text-secondary">No announcements found!
+          </div>
+        </div>
+      </ng-template>
+    </div>
+
+  </div>
+
+</div>

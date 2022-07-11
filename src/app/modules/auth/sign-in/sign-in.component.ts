@@ -117,6 +117,9 @@ export class AuthSignInComponent implements OnInit {
             case "finance manager":
                 return 'axis/finance-manager/dashboard';
                 break;
+            case "general manager":
+                return 'axis/g-m/dashboard';
+                break;
             default:
                 return ''
                 break;

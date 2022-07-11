@@ -10,6 +10,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { CardRequisitionService } from 'app/modules/employee-x/services/card-requisitions/card-requisitions.service';
 import { UserService } from 'app/core/user/user.service';
+import { PrintReqPrevComponent } from '../print-req-prev/print-req-prev.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector: 'academy-details',
@@ -41,8 +43,8 @@ export class CardRequisitionDetailsComponent implements OnInit {
         private _formBuilder: FormBuilder,
         private _router: Router,
         private _fuseConfirmationService: FuseConfirmationService,
-        private _userService:UserService
-
+        private _userService: UserService,
+        private _matDialog: MatDialog,
     ) {
     }
 
@@ -86,7 +88,7 @@ export class CardRequisitionDetailsComponent implements OnInit {
                 id: [],
                 description: [],
                 status: [],
-                amount:[]
+                amount: []
             }),
             step2: this._formBuilder.group({
                 id: [],
@@ -262,7 +264,7 @@ export class CardRequisitionDetailsComponent implements OnInit {
     approveCashReq() {
 
         this.isLoading = true;
-        this._cardRequisitionService.financeManagerApproveReq(this.cardRequisition.id, { id: this.cardRequisition.id.toString(), approved: true, financeApprovedDate: new Date(),status:this.cardReqForm.value.status,financeApproverId:this._userService.getLocalUser().id }).subscribe(response => {
+        this._cardRequisitionService.financeManagerApproveReq(this.cardRequisition.id, { id: this.cardRequisition.id.toString(), approved: true, financeApprovedDate: new Date(), status: this.cardReqForm.value.status, financeApproverId: this._userService.getLocalUser().id }).subscribe(response => {
             this._alertService.displayMessage('Requisition Approved');
             this._router.navigateByUrl('axis/finance-manager/requisitions/card')
             this.isLoading = false;
@@ -282,5 +284,37 @@ export class CardRequisitionDetailsComponent implements OnInit {
             this.isLoading = false;
             this._alertService.displayError('Try again')
         })
+    }
+
+    openPrintDialog(): void {
+        // Open the dialog
+        const dialogRef = this._matDialog.open(PrintReqPrevComponent, {
+            data: { isEdit: false, cardRequisition: this.cardRequisition },
+        });
+
+        dialogRef.afterClosed()
+            .subscribe((result) => {
+                console.log('Compose dialog was closed!');
+                // this();
+            });
+    }
+
+
+    getDisableButton() {
+        if (this.cardRequisition.amount > this.cardRequisition.card.amount) {
+            if (this.cardRequisition.generalManagerApproved) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        } else {
+            if (this.cardRequisition.lineApproved) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
     }
 }

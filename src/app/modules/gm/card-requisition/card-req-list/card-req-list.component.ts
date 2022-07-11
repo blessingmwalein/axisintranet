@@ -3,28 +3,27 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { AlertService } from 'app/modules/alert/snackbar/alert.service';
-import { AssetRequisitionService } from 'app/modules/employee-x/services/asset-requisitions/asset-requisitions.service';
+import { CardRequisitionService } from 'app/modules/employee-x/services/card-requisitions/card-requisitions.service';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'app-asset-req-list',
-  templateUrl: './asset-req-list.component.html',
-  styleUrls: ['./asset-req-list.component.scss']
+  selector: 'app-card-req-list',
+  templateUrl: './card-req-list.component.html',
+  styleUrls: ['./card-req-list.component.scss']
 })
-export class AssetReqListComponent implements OnInit {
+export class CardReqListComponent implements OnInit {
 
-  assetRequisitions: any[];
-  assetReqDataSource: MatTableDataSource<any> = new MatTableDataSource();
-  assetReqTableColumns: string[] = ["title", "status", "duration", 'startDate', "asset", "endDate", "action"];
+  cardRequisitions: any[];
+  cardReqDataSource: MatTableDataSource<any> = new MatTableDataSource();
+  cardReqTableColumns: string[] = ["title", "status", "duration", 'startDate', "endDate", "amount", "action"];
   isLoading: boolean = true;
-  status = "employee";
-
+  status = "Created"
   /**
    * Constructor
    */
   constructor(
     private _router: Router,
-    private _assetRequisitionService: AssetRequisitionService,
+    private _cardRequisitionService: CardRequisitionService,
     private _alertService: AlertService,
     private _fuseConfirmationService: FuseConfirmationService
   ) {
@@ -32,18 +31,30 @@ export class AssetReqListComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getAssetReqs()
+    this.getCardReqs()
   }
 
-  getAssetReqs() {
+  getCardReqs() {
     this.isLoading = true;
-    this._assetRequisitionService.getFilteredAssetRequisitionsLogged(this.status == "employee" ? false :true).subscribe(response => {
-      this.assetReqDataSource.data = response;
-      console.log(this.assetReqDataSource.data);
+    this._cardRequisitionService.getAllCardRequisitionsLogged().subscribe(response => {
+      this.cardReqDataSource.data = response;
+      console.log(this.cardReqDataSource.data);
       this.isLoading = false
     }, error => {
       console.log(error);
-      this._alertService.displayError("Could not fetch asset requisitions reload!")
+      this._alertService.displayError("Could not fetch card requisitions reload!")
+      this.isLoading = false
+    })
+  }
+  getCardReqsByStatus() {
+    this.isLoading = true;
+    this._cardRequisitionService.getCardRequsitionByStatus(this.status).subscribe(response => {
+      this.cardReqDataSource.data = response;
+      console.log(this.cardReqDataSource.data);
+      this.isLoading = false
+    }, error => {
+      console.log(error);
+      this._alertService.displayError("Could not fetch card requisitions reload!")
       this.isLoading = false
     })
   }
@@ -54,16 +65,11 @@ export class AssetReqListComponent implements OnInit {
   }
 
   createReq() {
-    this._router.navigate(['axis/finance-manager/requisitions/asset/create']);
+    this._router.navigate(['axis/g-m/requisitions/card/create']);
   }
 
   viewReqVehilce(id: string) {
-    this._router.navigateByUrl(`axis/finance-manager/requisitions/asset/${id}`)
-  }
-  setStatus(value) {
-    this.status = value;
-    console.log(this.status == "employee" ? false :true);
-    this.getAssetReqs();
+    this._router.navigateByUrl(`axis/g-m/requisitions/card/${id}`)
   }
 
   openDeleteDialog(id: string) {
@@ -85,13 +91,18 @@ export class AssetReqListComponent implements OnInit {
 
   deteleVehicelReq(id: string) {
     this.isLoading = true;
-    this._assetRequisitionService.deleteAssetRequisition(id).subscribe(response => {
+    this._cardRequisitionService.deleteVehicelRequisition(id).subscribe(response => {
       this._alertService.displayMessage('Requisition Deleted');
-      this.getAssetReqs();
+      this.getCardReqs();
       this.isLoading = false;
     }, error => {
       this.isLoading = false;
       this._alertService.displayError('Try again')
     })
+  }
+
+  setStatus(value) {
+    this.status = value;
+    this.getCardReqsByStatus();
   }
 }
