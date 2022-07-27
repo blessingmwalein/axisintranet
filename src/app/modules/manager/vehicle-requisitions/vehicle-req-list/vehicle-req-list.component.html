@@ -38,10 +38,10 @@
 
       <div class="flex flex-col sm:flex-row items-center justify-between w-full max-w-xs sm:max-w-none">
         <mat-form-field class=" w-full sm:w-36">
-          <mat-select [(value)]="status" >
+          <mat-select [(value)]="status">
             <ng-container>
               <mat-option value="mine" (click)="setStatus('mine')">My Requision</mat-option>
-              <mat-option value="employee" (click)="setStatus('employee')" >Employee Requisitions</mat-option>
+              <mat-option value="employee" (click)="setStatus('employee')">Employee Requisitions</mat-option>
             </ng-container>
           </mat-select>
         </mat-form-field>
@@ -76,10 +76,7 @@
                       [ngClass]="{
                                                       'bg-green-500': vehicleReq.approved !== null || vehicleReq.approved,
                                                       'bg-red-500': vehicleReq.approved === null || vehicleReq.approved }"> </span>
-                    <span class="ml-3 leading-4"> {{!vehicleReq.lineApproved ? "Pending Line Manager Approval" : "" }}{{
-                      vehicleReq.lineApproved && !vehicleReq.approved ? "Pending
-                      Finance Manager Approval" :''}}{{vehicleReq.lineApproved && vehicleReq.approved ? "Approved" :
-                      ""}}</span>
+                    <span class="ml-3 leading-4"> {{vehicleReq.status }}</span>
                   </span>
                 </td>
               </ng-container>
@@ -136,7 +133,7 @@
                   </button>
                   <mat-menu #budgetMenu="matMenu">
                     <button mat-menu-item (click)="viewReqVehilce(vehicleReq.id)">View</button>
-                    
+
                   </mat-menu>
                 </td>
               </ng-container>

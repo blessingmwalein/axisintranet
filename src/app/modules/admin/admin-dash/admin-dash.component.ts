@@ -85,4 +85,9 @@ export class AdminDashComponent implements OnInit {
     // this.users$ = this._usersService.users$;
   }
 
+
+  navigateTo(path: string) {
+    this._router.navigate([path]);
+  }
+
 }

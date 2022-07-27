@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'app/core/user/user.service';
-import { User } from 'app/modules/admin/models/users/users.types';import { VehicleService } from 'app/modules/admin/services/vehicles/vehicle.service';
+import { User } from 'app/modules/admin/models/users/users.types'; import { VehicleService } from 'app/modules/admin/services/vehicles/vehicle.service';
 import { AlertService } from 'app/modules/alert/snackbar/alert.service';
 import { ApexOptions } from 'ng-apexcharts';
 import { Subject } from 'rxjs';
@@ -30,24 +30,24 @@ export class EmployeeDashComponent implements OnInit {
   selectedProject: string = 'Employe Dashboard';
   private _unsubscribeAll: Subject<any> = new Subject<any>();
   loading = true;
-  cashReqs:any[] = [];
-  vehicleReq:any[] =[];
-  deviceReqs:any[]=[];
-  cardReqs:any[]=[];
-  assetsReqs:any[]=[];
+  cashReqs: any[] = [];
+  vehicleReq: any[] = [];
+  deviceReqs: any[] = [];
+  cardReqs: any[] = [];
+  assetsReqs: any[] = [];
   /**
    * Constructor
    */
   constructor(
     private _router: Router,
     private _userService: UserService,
-    private _alertService:AlertService,
+    private _alertService: AlertService,
     private _changeDetectorRef: ChangeDetectorRef,
-    private _vehicleService:VehicleRequisitionService,
-    private _cashReqService:CashRequisitionService,
-    private _cardReqservice:CardRequisitionService,
-    private _assetReqService:AssetRequisitionService,
-    private _deviceReqService:DeviceRequisitionService,
+    private _vehicleService: VehicleRequisitionService,
+    private _cashReqService: CashRequisitionService,
+    private _cardReqservice: CardRequisitionService,
+    private _assetReqService: AssetRequisitionService,
+    private _deviceReqService: DeviceRequisitionService,
   ) {
   }
 
@@ -67,7 +67,7 @@ export class EmployeeDashComponent implements OnInit {
     //   .pipe(takeUntil(this._unsubscribeAll))
     //   .subscribe((user: User) => {
     //     console.log(user);
-        
+
     //     this.user = user;
 
     //     // Mark for check
@@ -89,30 +89,30 @@ export class EmployeeDashComponent implements OnInit {
       }
     };
 
-    this._vehicleService.getAllVehicleRequisitions().subscribe(vehicleReqs=>{
+    this._vehicleService.getAllVehicleRequisitions().subscribe(vehicleReqs => {
       this.vehicleReq = vehicleReqs
-      this._cashReqService.getAllCashRequisitions().subscribe(cashReqs=>{
+      this._cashReqService.getAllCashRequisitions().subscribe(cashReqs => {
         this.cashReqs = cashReqs;
-        this._cardReqservice.getAllCardRequisitions().subscribe(cardReqs=>{
+        this._cardReqservice.getAllCardRequisitions().subscribe(cardReqs => {
           this.cardReqs = cardReqs;
-          this._assetReqService.getAllAssetRequisitions().subscribe(assetReqs=>{
+          this._assetReqService.getAllAssetRequisitions().subscribe(assetReqs => {
             this.assetsReqs = assetReqs;
-            this._deviceReqService.getAllDeviceRequisitions().subscribe(deviceReqs=>{
+            this._deviceReqService.getAllDeviceRequisitions().subscribe(deviceReqs => {
               this.deviceReqs = deviceReqs
               this.loading = false;
-            }, error=>{
-             this._alertService.displayError('Failed to load device requisitions')
+            }, error => {
+              this._alertService.displayError('Failed to load device requisitions')
             })
-          }, error=>{
+          }, error => {
             this._alertService.displayError('Failed to load asset requisitions')
           })
-        }, error=>{
+        }, error => {
           this._alertService.displayError('Failed to load card requisitions')
         })
-      }, error=>{
-       this._alertService.displayError('Failed to load cash requisitions')
+      }, error => {
+        this._alertService.displayError('Failed to load cash requisitions')
       })
-    }, error=> {
+    }, error => {
       this._alertService.displayError('Failed to load vehicle requisitions');
     });
   }
@@ -167,6 +167,10 @@ export class EmployeeDashComponent implements OnInit {
         const attrVal = el.getAttribute('fill');
         el.setAttribute('fill', `url(${currentURL}${attrVal.slice(attrVal.indexOf('#'))}`);
       });
+  }
+
+  navigateTo(path: string) {
+    this._router.navigate([path]);
   }
 
   /**

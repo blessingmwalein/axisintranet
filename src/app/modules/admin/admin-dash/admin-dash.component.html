@@ -14,10 +14,10 @@
             </mat-icon>
           </div>
           <div class="flex flex-col min-w-0 ml-4">
-            
-            <ng-container >
+
+            <ng-container>
               <div class="text-2xl md:text-5xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
-              Welcome Back  {{user.firstname}} {{user.lastname}}</div>
+                Welcome Back {{user.firstname}} {{user.lastname}}</div>
             </ng-container>
           </div>
         </div>
@@ -41,7 +41,7 @@
           <ng-template matTabContent>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full min-w-0">
               <!-- Summary -->
-              <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+              <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden" style="cursor:pointer">
                 <div class="flex items-start justify-between">
                   <div class="text-lg font-medium tracking-tight leading-6 truncate">Items</div>
                   <div class="ml-2 -mt-2 -mr-3">
@@ -65,7 +65,8 @@
                 </div>
               </div>
               <!-- Overdue -->
-              <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+              <div (click)="navigateTo('axis/admin/security/roles')"
+                class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden" style="cursor:pointer">
                 <div class="flex items-start justify-between">
                   <div class="text-lg font-medium tracking-tight leading-6 truncate">Roles</div>
                   <div class="ml-2 -mt-2 -mr-3">
@@ -90,7 +91,8 @@
                 </div>
               </div>
               <!-- Issues -->
-              <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+              <div (click)="navigateTo('axis/admin/users')"
+                class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden" style="cursor:pointer">
                 <div class="flex items-start justify-between">
                   <div class="text-lg font-medium tracking-tight leading-6 truncate">Users</div>
                   <div class="ml-2 -mt-2 -mr-3">
@@ -115,7 +117,8 @@
                 </div>
               </div>
               <!-- Features -->
-              <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+              <div (click)="navigateTo('axis/admin/departments')"
+                class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden" style="cursor:pointer">
                 <div class="flex items-start justify-between">
                   <div class="text-lg font-medium tracking-tight leading-6 truncate">Department</div>
                   <div class="ml-2 -mt-2 -mr-3">
@@ -147,6 +150,6 @@
     </div>
   </div>
 
- 
-  
+
+
 </div>

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'app/core/user/user.service';
-import { User } from 'app/modules/admin/models/users/users.types';import { VehicleService } from 'app/modules/admin/services/vehicles/vehicle.service';
+import { User } from 'app/modules/admin/models/users/users.types'; import { VehicleService } from 'app/modules/admin/services/vehicles/vehicle.service';
 import { AlertService } from 'app/modules/alert/snackbar/alert.service';
 import { AssetRequisitionService } from 'app/modules/employee-x/services/asset-requisitions/asset-requisitions.service';
 import { CardRequisitionService } from 'app/modules/employee-x/services/card-requisitions/card-requisitions.service';
@@ -31,24 +31,24 @@ export class ManagerDashComponent implements OnInit {
   selectedProject: string = 'Manager Dashboard';
   private _unsubscribeAll: Subject<any> = new Subject<any>();
   loading = true;
-  cashReqs:any[] = [];
-  vehicleReq:any[] =[];
-  deviceReqs:any[]=[];
-  cardReqs:any[]=[];
-  assetsReqs:any[]=[];
+  cashReqs: any[] = [];
+  vehicleReq: any[] = [];
+  deviceReqs: any[] = [];
+  cardReqs: any[] = [];
+  assetsReqs: any[] = [];
   /**
    * Constructor
    */
   constructor(
     private _router: Router,
     private _userService: UserService,
-    private _alertService:AlertService,
+    private _alertService: AlertService,
     private _changeDetectorRef: ChangeDetectorRef,
-    private _vehicleService:VehicleRequisitionService,
-    private _cashReqService:CashRequisitionService,
-    private _cardReqservice:CardRequisitionService,
-    private _assetReqService:AssetRequisitionService,
-    private _deviceReqService:DeviceRequisitionService,
+    private _vehicleService: VehicleRequisitionService,
+    private _cashReqService: CashRequisitionService,
+    private _cardReqservice: CardRequisitionService,
+    private _assetReqService: AssetRequisitionService,
+    private _deviceReqService: DeviceRequisitionService,
   ) {
   }
 
@@ -68,7 +68,7 @@ export class ManagerDashComponent implements OnInit {
     //   .pipe(takeUntil(this._unsubscribeAll))
     //   .subscribe((user: User) => {
     //     console.log(user);
-        
+
     //     this.user = user;
 
     //     // Mark for check
@@ -90,34 +90,37 @@ export class ManagerDashComponent implements OnInit {
       }
     };
 
-    this._vehicleService.getAllVehicleRequisitions().subscribe(vehicleReqs=>{
+    this._vehicleService.getAllVehicleRequisitionsNotLogged().subscribe(vehicleReqs => {
       this.vehicleReq = vehicleReqs
-      this._cashReqService.getAllCashRequisitions().subscribe(cashReqs=>{
+      this._cashReqService.getAllCashRequisitionsLogged().subscribe(cashReqs => {
         this.cashReqs = cashReqs;
-        this._cardReqservice.getAllCardRequisitions().subscribe(cardReqs=>{
+        this._cardReqservice.getAllCardRequisitionsLogged().subscribe(cardReqs => {
           this.cardReqs = cardReqs;
-          this._assetReqService.getAllAssetRequisitions().subscribe(assetReqs=>{
+          this._assetReqService.getAllAssetRequisitionsLogged().subscribe(assetReqs => {
             this.assetsReqs = assetReqs;
-            this._deviceReqService.getAllDeviceRequisitions().subscribe(deviceReqs=>{
+            this._deviceReqService.getAllDeviceRequisitionsLogged().subscribe(deviceReqs => {
               this.deviceReqs = deviceReqs
               this.loading = false;
-            }, error=>{
-             this._alertService.displayError('Failed to load device requisitions')
+            }, error => {
+              this._alertService.displayError('Failed to load device requisitions')
             })
-          }, error=>{
+          }, error => {
             this._alertService.displayError('Failed to load asset requisitions')
           })
-        }, error=>{
+        }, error => {
           this._alertService.displayError('Failed to load card requisitions')
         })
-      }, error=>{
-       this._alertService.displayError('Failed to load cash requisitions')
+      }, error => {
+        this._alertService.displayError('Failed to load cash requisitions')
       })
-    }, error=> {
+    }, error => {
       this._alertService.displayError('Failed to load vehicle requisitions');
     });
   }
 
+  navigateTo(path: string) {
+    this._router.navigate([path]);
+  }
   /**
    * On destroy
    */

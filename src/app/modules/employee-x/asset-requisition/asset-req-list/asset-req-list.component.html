@@ -76,10 +76,7 @@
                       [ngClass]="{
                                                       'bg-green-500': assetReq.approved !== null || assetReq.approved,
                                                       'bg-red-500': assetReq.approved === null || assetReq.approved }"></span>
-                    <span class="ml-3 leading-4"> {{!assetReq.lineApproved ? "Pending Line Manager Approval" : "" }}{{
-                      assetReq.lineApproved && !assetReq.approved ? "Pending
-                      Finance Manager Approval" :''}}{{assetReq.lineApproved && assetReq.approved ? "Approved" :
-                      ""}}</span>
+                    <span class="ml-3 leading-4"> {{assetReq.status }}</span>
                   </span>
                 </td>
               </ng-container>

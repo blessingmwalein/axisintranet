@@ -260,9 +260,8 @@ export class CashRequisitionDetailsComponent implements OnInit {
         });
     }
     approveCashReq() {
-
         this.isLoading = true;
-        this._cashRequisitionService.lineManagerApproveReq(this.cashRequisition.id, { id: this.cashRequisition.id.toString(), lineApproved: this.cashReqForm.value.lineApproved,status:this.cashReqForm.value.status, lineApprovedDate: new Date() }).subscribe(response => {
+        this._cashRequisitionService.lineManagerApproveReq(this.cashRequisition.id, { id: this.cashRequisition.id.toString(), lineApproved: this.cashReqForm.value.lineApproved, status: this.cashReqForm.value.status, lineApprovedDate: new Date() }).subscribe(response => {
             this._alertService.displayMessage('Requisition Approved');
             this._router.navigateByUrl('axis/manager/requisitions/cash')
             this.isLoading = false;
@@ -270,6 +269,34 @@ export class CashRequisitionDetailsComponent implements OnInit {
             this.isLoading = false;
             this._alertService.displayError('Try again')
         })
+    }
+
+    rejectReqVehilce(id: string) {
+        this.isLoading = true;
+        this._cashRequisitionService.lineManagerApproveReq(this.cashRequisition.id, { id: this.cashRequisition.id.toString(), lineApproved: !this.cashReqForm.value.lineApproved, status: "Line manager rejected", lineApprovedDate: new Date() }).subscribe(response => {
+            this._alertService.displayMessage('Requisition Rejected');
+            this._router.navigateByUrl('axis/manager/requisitions/cash')
+            this.isLoading = false;
+        }, error => {
+            this.isLoading = false;
+            this._alertService.displayError('Try again')
+        })
+    }
+    openRejectDialog(id: string) {
+        const dialogRef = this._fuseConfirmationService.open({
+            message: "Are sure you want to reject this requisition ?",
+            title: "Reject Requisition Confirmation"
+        });
+
+        dialogRef.afterClosed().subscribe((result) => {
+            console.log(result);
+            if (result == 'confirmed') {
+                this.rejectReqVehilce(id)
+            }
+            if (result == 'cancelled' || result == undefined) {
+                this._alertService.displayError('Requsition reject canceled')
+            }
+        });
     }
     deteleVehicelReq(id: string) {
         this.isLoading = true;

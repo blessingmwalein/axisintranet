@@ -37,12 +37,13 @@
       <!-- Filters -->
       <div class="flex flex-col sm:flex-row items-center justify-between w-full max-w-xs sm:max-w-none">
         <mat-form-field class=" w-full sm:w-36">
-          <mat-select [(value)]="status" >
+          <mat-select [(value)]="status">
             <ng-container>
               <mat-option value="All" (click)="getAssetReqs()">All</mat-option>
               <mat-option value="Created" (click)="setStatus('Created')">Created</mat-option>
-              <mat-option value="Line Approved" (click)="setStatus('Line Approved')" >Line manager approved</mat-option>
-              <mat-option value="Finance Approved" (click)="setStatus('Finance Approved')" >Finance manager approved</mat-option>
+              <mat-option value="Line Approved" (click)="setStatus('Line Approved')">Line manager approved</mat-option>
+              <mat-option value="Finance Approved" (click)="setStatus('Finance Approved')">Finance manager approved
+              </mat-option>
             </ng-container>
           </mat-select>
         </mat-form-field>
@@ -77,10 +78,7 @@
                       [ngClass]="{
                                                       'bg-green-500': assetReq.approved !== null || assetReq.approved,
                                                       'bg-red-500': assetReq.approved === null || assetReq.approved }"></span>
-                    <span class="ml-3 leading-4"> {{!assetReq.lineApproved ? "Pending Line Manager Approval" : "" }}{{
-                      assetReq.lineApproved && !assetReq.approved ? "Pending
-                      Finance Manager Approval" :''}}{{assetReq.lineApproved && assetReq.approved ? "Approved" :
-                      ""}}</span>
+                    <span class="ml-3 leading-4"> {{assetReq.status}}</span>
                   </span>
                 </td>
               </ng-container>
@@ -145,7 +143,7 @@
                   </button>
                   <mat-menu #budgetMenu="matMenu">
                     <button mat-menu-item (click)="viewReqVehilce(assetReq.id)">View</button>
-                    
+
                   </mat-menu>
                 </td>
               </ng-container>

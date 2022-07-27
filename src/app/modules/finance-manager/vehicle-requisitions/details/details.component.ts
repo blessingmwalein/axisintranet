@@ -55,7 +55,7 @@ export class VehicleRequisitionDetailsComponent implements OnInit {
 
         this.vehicleReqForm = this._formBuilder.group({
             title: [''],
-            status: [''],
+            status: ['Finance manager approved'],
             description: [''],
             duration: [''],
             startDate: [''],
@@ -262,7 +262,7 @@ export class VehicleRequisitionDetailsComponent implements OnInit {
     }
     approveVehicleReq() {
         this.isLoading = true;
-        this._vehicleRequisitionService.financeManagerApproveReq(this.vehicleRequisition.id, { id: this.vehicleRequisition.id.toString(), approved: true,status:this.vehicleReqForm.value.status, financeApprovedDate: new Date(), financeApproverId: this._userService.getLocalUser().id }).subscribe(response => {
+        this._vehicleRequisitionService.financeManagerApproveReq(this.vehicleRequisition.id, { id: this.vehicleRequisition.id.toString(), approved: true, status: this.vehicleReqForm.value.status, financeApprovedDate: new Date(), financeApproverId: this._userService.getLocalUser().id }).subscribe(response => {
             this._alertService.displayMessage('Requisition Approved');
             this._router.navigateByUrl('axis/finance-manager/requisitions/vehicle')
             this.isLoading = false;
@@ -282,6 +282,34 @@ export class VehicleRequisitionDetailsComponent implements OnInit {
             this.isLoading = false;
             this._alertService.displayError('Try again')
         })
+    }
+    rejectReqVehilce(id: string) {
+        this.isLoading = true;
+        this._vehicleRequisitionService.financeManagerApproveReq(this.vehicleRequisition.id, { id: this.vehicleRequisition.id.toString(), approved: false, status: "Finace Manager rejected", financeApprovedDate: new Date(), financeApproverId: this._userService.getLocalUser().id }).subscribe(response => {
+            this._alertService.displayMessage('Requisition Rejected');
+            this._router.navigateByUrl('axis/finance-manager/requisitions/vehicle')
+            this.isLoading = false;
+        }, error => {
+            this.isLoading = false;
+            this._alertService.displayError('Try again')
+        })
+    }
+
+    openRejectDialog(id: string) {
+        const dialogRef = this._fuseConfirmationService.open({
+            message: "Are sure you want to reject this requisition ?",
+            title: "Reject Requisition Confirmation"
+        });
+
+        dialogRef.afterClosed().subscribe((result) => {
+            console.log(result);
+            if (result == 'confirmed') {
+                this.rejectReqVehilce(id)
+            }
+            if (result == 'cancelled' || result == undefined) {
+                this._alertService.displayError('Requsition reject canceled')
+            }
+        });
     }
 
     openPrintDialog(): void {

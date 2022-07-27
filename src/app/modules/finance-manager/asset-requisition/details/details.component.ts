@@ -49,7 +49,7 @@ export class AssetRequisitionDetailsComponent implements OnInit {
         private _fuseConfirmationService: FuseConfirmationService,
         private _userService: UserService,
         private _matDialog: MatDialog,
-      
+
     ) {
     }
 
@@ -246,7 +246,6 @@ export class AssetRequisitionDetailsComponent implements OnInit {
         });
     }
     approveCashReq() {
-
         this.isLoading = true;
         this._assetRequisitionService.financeManagerApproveReq(this.assetRequisition.id, { id: this.assetRequisition.id.toString(), approved: true, financeApprovedDate: new Date(), status: this.assetReqForm.value.status, financeApproverId: this._userService.getLocalUser().id }).subscribe(response => {
             this._alertService.displayMessage('Requisition Approved');
@@ -275,6 +274,34 @@ export class AssetRequisitionDetailsComponent implements OnInit {
         });
     }
 
+    rejectReqVehilce(id: string) {
+        this.isLoading = true;
+        this._assetRequisitionService.financeManagerApproveReq(this.assetRequisition.id, { id: this.assetRequisition.id.toString(), approved: false, financeApprovedDate: new Date(), status: "Fiance manager rejected", financeApproverId: this._userService.getLocalUser().id }).subscribe(response => {
+            this._alertService.displayMessage('Requisition Rejected');
+            this._router.navigateByUrl('axis/finance-manager/requisitions/asset')
+            this.isLoading = false;
+        }, error => {
+            this.isLoading = false;
+            this._alertService.displayError('Try again')
+        })
+    }
+
+    openRejectDialog(id: string) {
+        const dialogRef = this._fuseConfirmationService.open({
+            message: "Are sure you want to reject this requisition ?",
+            title: "Reject Requisition Confirmation"
+        });
+
+        dialogRef.afterClosed().subscribe((result) => {
+            console.log(result);
+            if (result == 'confirmed') {
+                this.rejectReqVehilce(id)
+            }
+            if (result == 'cancelled' || result == undefined) {
+                this._alertService.displayError('Requsition reject canceled')
+            }
+        });
+    }
 
     deteleVehicelReq(id: string) {
         this.isLoading = true;
@@ -291,7 +318,7 @@ export class AssetRequisitionDetailsComponent implements OnInit {
     openPrintDialog(): void {
         // Open the dialog
         const dialogRef = this._matDialog.open(PrintReqPrevComponent, {
-            data: { isEdit: false, assetRequisition:this.assetRequisition },
+            data: { isEdit: false, assetRequisition: this.assetRequisition },
         });
 
         dialogRef.afterClosed()

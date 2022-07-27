@@ -77,10 +77,7 @@
                       [ngClass]="{
                                                       'bg-green-500': vehicleReq.approved !== null || vehicleReq.approved,
                                                       'bg-red-500': vehicleReq.approved === null || vehicleReq.approved }"> </span>
-                    <span class="ml-3 leading-4"> {{!vehicleReq.lineApproved ? "Pending Line Manager Approval" : "" }}{{
-                      vehicleReq.lineApproved && !vehicleReq.approved ? "Pending
-                      Finance Manager Approval" :''}}{{vehicleReq.lineApproved && vehicleReq.approved ? "Approved" :
-                      ""}}</span>
+                    <span class="ml-3 leading-4"> {{vehicleReq.status}}</span>
                   </span>
                 </td>
               </ng-container>
@@ -137,7 +134,7 @@
                   </button>
                   <mat-menu #budgetMenu="matMenu">
                     <button mat-menu-item (click)="viewReqVehilce(vehicleReq.id)">View</button>
-                    
+
                   </mat-menu>
                 </td>
               </ng-container>

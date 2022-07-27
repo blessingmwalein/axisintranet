@@ -273,6 +273,34 @@ export class CardRequisitionDetailsComponent implements OnInit {
             this._alertService.displayError('Try again')
         })
     }
+    rejectReqVehilce(id: string) {
+        this.isLoading = true;
+        this._cardRequisitionService.financeManagerApproveReq(this.cardRequisition.id, { id: this.cardRequisition.id.toString(), approved: false, financeApprovedDate: new Date(), status: "Finance manager rejected", financeApproverId: this._userService.getLocalUser().id }).subscribe(response => {
+            this._alertService.displayMessage('Requisition Rejected');
+            this._router.navigateByUrl('axis/finance-manager/requisitions/card')
+            this.isLoading = false;
+        }, error => {
+            this.isLoading = false;
+            this._alertService.displayError('Try again')
+        })
+    }
+
+    openRejectDialog(id: string) {
+        const dialogRef = this._fuseConfirmationService.open({
+            message: "Are sure you want to reject this requisition ?",
+            title: "Reject Requisition Confirmation"
+        });
+
+        dialogRef.afterClosed().subscribe((result) => {
+            console.log(result);
+            if (result == 'confirmed') {
+                this.rejectReqVehilce(id)
+            }
+            if (result == 'cancelled' || result == undefined) {
+                this._alertService.displayError('Requsition reject canceled')
+            }
+        });
+    }
 
     deteleVehicelReq(id: string) {
         this.isLoading = true;

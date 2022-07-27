@@ -239,7 +239,7 @@ export class AssetRequisitionDetailsComponent implements OnInit {
     }
     approveCashReq() {
         this.isLoading = true;
-        this._assetRequisitionService.lineManagerApproveReq(this.assetRequisition.id, { id: this.assetRequisition.id.toString(), lineApproved: this.assetReqForm.value.lineApproved,status:this.assetReqForm.value.status, lineApprovedDate: new Date() }).subscribe(response => {
+        this._assetRequisitionService.lineManagerApproveReq(this.assetRequisition.id, { id: this.assetRequisition.id.toString(), lineApproved: this.assetReqForm.value.lineApproved, status: this.assetReqForm.value.status, lineApprovedDate: new Date() }).subscribe(response => {
             this._alertService.displayMessage('Requisition Approved');
             this._router.navigateByUrl('axis/manager/requisitions/asset')
             this.isLoading = false;
@@ -248,7 +248,35 @@ export class AssetRequisitionDetailsComponent implements OnInit {
             this._alertService.displayError('Try again')
         })
     }
-    
+    rejectReqVehilce(id: string) {
+        this.isLoading = true;
+        this._assetRequisitionService.lineManagerApproveReq(this.assetRequisition.id, { id: this.assetRequisition.id.toString(), lineApproved: false, status: "Line manager Rejected", lineApprovedDate: new Date() }).subscribe(response => {
+            this._alertService.displayMessage('Requisition Rejected');
+            this._router.navigateByUrl('axis/manager/requisitions/asset')
+            this.isLoading = false;
+        }, error => {
+            this.isLoading = false;
+            this._alertService.displayError('Try again')
+        })
+    }
+
+    openRejectDialog(id:string) {
+        const dialogRef = this._fuseConfirmationService.open({
+            message: "Are sure you want to reject this requisition ?",
+            title: "Reject Requisition Confirmation"
+        });
+
+        dialogRef.afterClosed().subscribe((result) => {
+            console.log(result);
+            if (result == 'confirmed') {
+                this.rejectReqVehilce(id)
+            }
+            if (result == 'cancelled' || result == undefined) {
+                this._alertService.displayError('Requsition reject canceled')
+            }
+        });
+    }
+
     openDeleteDialog(id: string) {
         const dialogRef = this._fuseConfirmationService.open({
             message: "Are sure you want to delete this requisition ?",

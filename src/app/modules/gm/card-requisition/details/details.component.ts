@@ -262,9 +262,8 @@ export class CardRequisitionDetailsComponent implements OnInit {
         });
     }
     approveCashReq() {
-
         this.isLoading = true;
-        this._cardRequisitionService.generalManagerApproveReq(this.cardRequisition.id, { id: this.cardRequisition.id.toString(), approved: true, financeApprovedDate: new Date(), status: this.cardReqForm.value.status, financeApproverId: this._userService.getLocalUser().id }).subscribe(response => {
+        this._cardRequisitionService.generalManagerApproveReq(this.cardRequisition.id, { id: this.cardRequisition.id.toString(), approved: true, generalManagerApprovedDate: new Date(), status: this.cardReqForm.value.status, generalManagerApproverId: this._userService.getLocalUser().id }).subscribe(response => {
             this._alertService.displayMessage('Requisition Approved');
             this._router.navigateByUrl('axis/g-m/requisitions/card')
             this.isLoading = false;
@@ -272,6 +271,34 @@ export class CardRequisitionDetailsComponent implements OnInit {
             this.isLoading = false;
             this._alertService.displayError('Try again')
         })
+    }
+    rejectReqVehilce(id: string) {
+        this.isLoading = true;
+        this._cardRequisitionService.generalManagerApproveReq(this.cardRequisition.id, { id: this.cardRequisition.id.toString(), approved: false, generalManagerApprovedDate: new Date(), status: "General manager rejected", generalManagerApproverId: this._userService.getLocalUser().id }).subscribe(response => {
+            this._alertService.displayMessage('Requisition Rejected');
+            this._router.navigateByUrl('axis/g-m/requisitions/card')
+            this.isLoading = false;
+        }, error => {
+            this.isLoading = false;
+            this._alertService.displayError('Try again')
+        })
+    }
+
+    openRejectDialog(id: string) {
+        const dialogRef = this._fuseConfirmationService.open({
+            message: "Are sure you want to reject this requisition ?",
+            title: "Reject Requisition Confirmation"
+        });
+
+        dialogRef.afterClosed().subscribe((result) => {
+            console.log(result);
+            if (result == 'confirmed') {
+                this.rejectReqVehilce(id)
+            }
+            if (result == 'cancelled' || result == undefined) {
+                this._alertService.displayError('Requsition reject canceled')
+            }
+        });
     }
 
     deteleVehicelReq(id: string) {
@@ -299,15 +326,15 @@ export class CardRequisitionDetailsComponent implements OnInit {
             });
     }
 
-    getDisableButton(){
-        if(this.cardRequisition.amount > this.cardRequisition.card.amount){
-             if(this.cardRequisition.lineApproved){
+    getDisableButton() {
+        if (this.cardRequisition.amount > this.cardRequisition.card.amount) {
+            if (this.cardRequisition.lineApproved) {
                 return false;
-             }
-             else {
+            }
+            else {
                 return true;
-             }
-        }else{
+            }
+        } else {
             return true;
         }
     }

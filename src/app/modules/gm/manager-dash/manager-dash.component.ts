@@ -90,34 +90,37 @@ export class ManagerDashComponent implements OnInit {
       }
     };
 
-    this._vehicleService.getAllVehicleRequisitions().subscribe(vehicleReqs=>{
+    this._vehicleService.getAllVehicleRequisitionsNotLogged().subscribe(vehicleReqs => {
       this.vehicleReq = vehicleReqs
-      this._cashReqService.getAllCashRequisitions().subscribe(cashReqs=>{
+      this._cashReqService.getAllCashRequisitionsLogged().subscribe(cashReqs => {
         this.cashReqs = cashReqs;
-        this._cardReqservice.getAllCardRequisitions().subscribe(cardReqs=>{
+        this._cardReqservice.getAllCardRequisitionsLogged().subscribe(cardReqs => {
           this.cardReqs = cardReqs;
-          this._assetReqService.getAllAssetRequisitions().subscribe(assetReqs=>{
+          this._assetReqService.getAllAssetRequisitionsLogged().subscribe(assetReqs => {
             this.assetsReqs = assetReqs;
-            this._deviceReqService.getAllDeviceRequisitions().subscribe(deviceReqs=>{
+            this._deviceReqService.getAllDeviceRequisitionsLogged().subscribe(deviceReqs => {
               this.deviceReqs = deviceReqs
               this.loading = false;
-            }, error=>{
-             this._alertService.displayError('Failed to load device requisitions')
+            }, error => {
+              this._alertService.displayError('Failed to load device requisitions')
             })
-          }, error=>{
+          }, error => {
             this._alertService.displayError('Failed to load asset requisitions')
           })
-        }, error=>{
+        }, error => {
           this._alertService.displayError('Failed to load card requisitions')
         })
-      }, error=>{
-       this._alertService.displayError('Failed to load cash requisitions')
+      }, error => {
+        this._alertService.displayError('Failed to load cash requisitions')
       })
-    }, error=> {
+    }, error => {
       this._alertService.displayError('Failed to load vehicle requisitions');
     });
   }
 
+  navigateTo(path: string) {
+    this._router.navigate([path]);
+  }
   /**
    * On destroy
    */

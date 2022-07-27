@@ -43,8 +43,8 @@ export class DeviceRequisitionDetailsComponent implements OnInit {
         private _formBuilder: FormBuilder,
         private _router: Router,
         private _fuseConfirmationService: FuseConfirmationService,
-        private _userService :UserService,
-        private _matDialog :MatDialog
+        private _userService: UserService,
+        private _matDialog: MatDialog
 
     ) {
     }
@@ -244,7 +244,7 @@ export class DeviceRequisitionDetailsComponent implements OnInit {
     approveVehicleReq() {
 
         this.isLoading = true;
-        this._deviceRequisitionService.financeManagerApproveReq(this.deviceRequisition.id, { id: this.deviceRequisition.id.toString(), approved: true, financeApprovedDate: new Date(),status:this.deviceReqForm.value.status,financeApproverId:this._userService.getLocalUser().id}).subscribe(response => {
+        this._deviceRequisitionService.financeManagerApproveReq(this.deviceRequisition.id, { id: this.deviceRequisition.id.toString(), approved: true, financeApprovedDate: new Date(), status: this.deviceReqForm.value.status, financeApproverId: this._userService.getLocalUser().id }).subscribe(response => {
             this._alertService.displayMessage('Requisition Approved');
             this._router.navigateByUrl('axis/finance-manager/requisitions/device')
             this.isLoading = false;
@@ -252,6 +252,34 @@ export class DeviceRequisitionDetailsComponent implements OnInit {
             this.isLoading = false;
             this._alertService.displayError('Try again')
         })
+    }
+    rejectReqVehilce(id: string) {
+        this.isLoading = true;
+        this._deviceRequisitionService.financeManagerApproveReq(this.deviceRequisition.id, { id: this.deviceRequisition.id.toString(), approved: false, financeApprovedDate: new Date(), status: "Finance manager rejected", financeApproverId: this._userService.getLocalUser().id }).subscribe(response => {
+            this._alertService.displayMessage('Requisition Rejected');
+            this._router.navigateByUrl('axis/finance-manager/requisitions/device')
+            this.isLoading = false;
+        }, error => {
+            this.isLoading = false;
+            this._alertService.displayError('Try again')
+        })
+    }
+
+    openRejectDialog(id: string) {
+        const dialogRef = this._fuseConfirmationService.open({
+            message: "Are sure you want to reject this requisition ?",
+            title: "Reject Requisition Confirmation"
+        });
+
+        dialogRef.afterClosed().subscribe((result) => {
+            console.log(result);
+            if (result == 'confirmed') {
+                this.rejectReqVehilce(id)
+            }
+            if (result == 'cancelled' || result == undefined) {
+                this._alertService.displayError('Requsition reject canceled')
+            }
+        });
     }
     openDeleteDialog(id: string) {
         const dialogRef = this._fuseConfirmationService.open({

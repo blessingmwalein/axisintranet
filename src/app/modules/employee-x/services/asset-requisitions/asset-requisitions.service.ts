@@ -24,10 +24,10 @@ export class AssetRequisitionService {
     getAllAssetRequisitionsLogged(): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}AssetRequisition?isLoggedInUser=false`);
     }
-    getFilteredAssetRequisitionsLogged(status:boolean): Observable<any[]> {
+    getFilteredAssetRequisitionsLogged(status: boolean): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}AssetRequisition/GetFiltered?isLoggedInUser=${status}`);
     }
-    getAssetRequsitionByStatus(status:string): Observable<any[]> {
+    getAssetRequsitionByStatus(status: string): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}AssetRequisition/GetByStatus?status=${status}&isLoggedInUser=false`);
     }
 

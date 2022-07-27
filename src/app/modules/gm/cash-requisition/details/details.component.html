@@ -23,13 +23,16 @@
                         <mat-icon [svgIcon]="'heroicons_outline:printer'"></mat-icon>
                         <span>Print Requisition</span>
                     </button>
+                    <button mat-menu-item (click)="openRejectDialog(cashRequisition.id)">
+                        <mat-icon [svgIcon]="'heroicons_outline:trash'"></mat-icon>
+                        <span>Reject Requisition</span>
+                    </button>
                 </mat-menu>
                 <!-- Close button -->
                 <button mat-icon-button [routerLink]="['../']">
                     <mat-icon [svgIcon]="'heroicons_outline:x'"></mat-icon>
                 </button>
             </div>
-
         </div>
         <mat-divider class="mt-6 mb-8"></mat-divider>
         <mat-vertical-stepper id="verticalStepper" [linear]="true" #verticalStepper>

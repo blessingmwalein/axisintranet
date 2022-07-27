@@ -22,9 +22,9 @@
                     <mat-icon [svgIcon]="'heroicons_outline:dots-vertical'"></mat-icon>
                 </button>
                 <mat-menu #moreMenu="matMenu">
-                    <button mat-menu-item (click)="openDeleteDialog(vehicleRequisition.id)">
+                    <button mat-menu-item (click)="openRejectDialog(vehicleRequisition.id)">
                         <mat-icon [svgIcon]="'heroicons_outline:trash'"></mat-icon>
-                        <span>Decline Requsition</span>
+                        <span>Reject Requsition</span>
                     </button>
                 </mat-menu>
                 <!-- Close button -->

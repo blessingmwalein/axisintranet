@@ -23,6 +23,10 @@
                         <mat-icon [svgIcon]="'heroicons_outline:printer'"></mat-icon>
                         <span>Print Requisition</span>
                     </button>
+                    <button mat-menu-item (click)="openRejectDialog(cashRequisition.id)">
+                        <mat-icon [svgIcon]="'heroicons_outline:trash'"></mat-icon>
+                        <span>Reject Requsition</span>
+                    </button>
                 </mat-menu>
                 <!-- Close button -->
                 <button mat-icon-button [routerLink]="['../']">
@@ -149,7 +153,8 @@
                             <ng-container>
                                 <div
                                     class="flex items-center justify-center px-4 m-1.5 rounded-full leading-9 text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
-                                    <span class="text-md font-medium whitespace-nowrap"> {{cashRequisition.generalManagerApproved?
+                                    <span class="text-md font-medium whitespace-nowrap">
+                                        {{cashRequisition.generalManagerApproved?
                                         "General Manager Approved On : " + cashRequisition.generalManagerApprovedDate :
                                         "Awaiting General
                                         Manager Approval"}}
