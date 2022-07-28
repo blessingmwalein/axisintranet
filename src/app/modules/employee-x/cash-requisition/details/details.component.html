@@ -18,7 +18,19 @@
 
             <div class="flex items-center">
                 <!-- More menu -->
-               
+                <button mat-icon-button [matMenuTriggerFor]="moreMenu">
+                    <mat-icon [svgIcon]="'heroicons_outline:dots-vertical'"></mat-icon>
+                </button>
+                <mat-menu #moreMenu="matMenu">
+                    <button mat-menu-item (click)="openCreateDepartmentDialog()">
+                        <mat-icon [svgIcon]="'heroicons_outline:trash'"></mat-icon>
+                        <span>Update Used Funds</span>
+                    </button>
+                    <button mat-menu-item (click)="openUpdateCashReceuvedDialog()">
+                        <mat-icon [svgIcon]="'heroicons_outline:trash'"></mat-icon>
+                        <span>Update received Funds</span>
+                    </button>
+                </mat-menu>
                 <!-- Close button -->
                 <button mat-icon-button [routerLink]="['../']">
                     <mat-icon [svgIcon]="'heroicons_outline:x'"></mat-icon>
@@ -30,8 +42,6 @@
         <mat-vertical-stepper id="verticalStepper" [linear]="true" #verticalStepper>
             <mat-step [formGroupName]="'step1'" [stepControl]="verticalStepperForm.get('step1')" #verticalStepperStep1>
                 <ng-template matStepLabel>Requisition Details</ng-template>
-
-
                 <div class="grid grid-cols-6 gap-6">
                     <div class="col-span-6 sm:col-span-3">
                         <mat-form-field class="flex-auto w-full">
@@ -144,7 +154,8 @@
                             <ng-container>
                                 <div
                                     class="flex items-center justify-center px-4 m-1.5 rounded-full leading-9 text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
-                                    <span class="text-md font-medium whitespace-nowrap"> {{cashRequisition.generalManagerApproved?
+                                    <span class="text-md font-medium whitespace-nowrap">
+                                        {{cashRequisition.generalManagerApproved?
                                         "General Manager Approved On : " + cashRequisition.generalManagerApprovedDate :
                                         "Awaiting General
                                         Manager Approval"}}
@@ -166,6 +177,26 @@
                         <mat-form-field class="flex-auto w-full">
                             <mat-label>Amount</mat-label>
                             <input matInput [formControlName]="'amount'">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="grid grid-cols-6 gap-6 mt-8">
+                    <div class="col-span-3 sm:col-span-3">
+                        <mat-form-field class="flex-auto w-full">
+                            <mat-label>Released Funds</mat-label>
+                            <input matInput [formControlName]="'releasedFunds'" disabled>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-span-3 sm:col-span-3">
+                        <mat-form-field class="flex-auto w-full">
+                            <mat-label>Received Funds</mat-label>
+                            <input matInput [formControlName]="'receivedFunds'" disabled>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-span-3 sm:col-span-3">
+                        <mat-form-field class="flex-auto w-full">
+                            <mat-label>Used Funds</mat-label>
+                            <input matInput [formControlName]="'actualUsedAmount'" disabled>
                         </mat-form-field>
                     </div>
                 </div>

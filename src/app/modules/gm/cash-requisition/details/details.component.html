@@ -177,6 +177,26 @@
                         </mat-form-field>
                     </div>
                 </div>
+                <div class="grid grid-cols-6 gap-6 mt-8">
+                    <div class="col-span-3 sm:col-span-3">
+                        <mat-form-field class="flex-auto w-full">
+                            <mat-label>Released Funds</mat-label>
+                            <input matInput [formControlName]="'releasedFunds'" disabled>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-span-3 sm:col-span-3">
+                        <mat-form-field class="flex-auto w-full">
+                            <mat-label>Received Funds</mat-label>
+                            <input matInput [formControlName]="'receivedFunds'" disabled>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-span-3 sm:col-span-3">
+                        <mat-form-field class="flex-auto w-full">
+                            <mat-label>Used Funds</mat-label>
+                            <input matInput [formControlName]="'actualUsedAmount'" disabled>
+                        </mat-form-field>
+                    </div>
+                </div>
 
 
             </mat-step>

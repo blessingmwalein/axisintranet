@@ -64,6 +64,8 @@ import { AssetRequisitionComponent } from './asset-requisition/asset-requisition
 import { CreateAssetReqComponent } from './asset-requisition/create/create.component';
 import { AssetRequisitionDetailsComponent } from './asset-requisition/details/details.component';
 import { EmployeeDashComponent } from './employee-dash/employee-dash.component';
+import { UpdateReceivedFundsComponent } from './cash-requisition/update-received-funds/update-received-funds.component';
+import { UpdateUsedFundsComponent } from './cash-requisition/update-used-funds/update-used-funds.component';
 
 
 @NgModule({
@@ -94,7 +96,9 @@ import { EmployeeDashComponent } from './employee-dash/employee-dash.component';
     AssetReqListComponent,
     CreateAssetReqComponent,
     AssetRequisitionDetailsComponent,
-    EmployeeDashComponent
+    EmployeeDashComponent,
+    UpdateUsedFundsComponent,
+    UpdateReceivedFundsComponent
 
   ],
   imports: [

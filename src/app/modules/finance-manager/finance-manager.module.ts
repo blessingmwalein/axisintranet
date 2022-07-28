@@ -53,6 +53,7 @@ import { PrintReqPrevComponent as PrintReqPrevCardComponent  } from './card-requ
 import { PrintReqPrevComponent as PrintReqPrevCashComponent  } from './cash-requisition/print-req-prev/print-req-prev.component';
 import { PrintReqPrevComponent as PrintReqPrevDeviceComponent  } from './device-requisition/print-req-prev/print-req-prev.component';
 import { PrintReqPrevComponent as PrintReqPrevVehilceComponent  } from './vehicle-requisitions/print-req-prev/print-req-prev.component';
+import { UpdateReleasedFundsComponent } from './cash-requisition/update-released-funds/update-released-funds.component';
 
 
 @NgModule({
@@ -86,7 +87,8 @@ import { PrintReqPrevComponent as PrintReqPrevVehilceComponent  } from './vehicl
     PrintReqPrevCardComponent,
     PrintReqPrevCashComponent,
     PrintReqPrevDeviceComponent,
-    PrintReqPrevVehilceComponent
+    PrintReqPrevVehilceComponent,
+    UpdateReleasedFundsComponent
   ],
   imports: [
     CommonModule,

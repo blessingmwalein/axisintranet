@@ -55,4 +55,13 @@ export class CashRequisitionService {
     getCashRequsitionByStatus(status:string): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}CashRequisition/GetByStatus?status=${status}&isLoggedInUser=false`);
     }
+    updateReleasedFunds(data:any): Observable<any[]>{
+        return this._httpClient.put<any>(`${this._baseUrl}CashRequisition/updatereleasedfunds/${data.id}`, data);
+    }
+    updateReceivedFunds(data:any): Observable<any[]>{
+        return this._httpClient.put<any>(`${this._baseUrl}CashRequisition/updatereceivedfunds/${data.id}`, data);
+    }
+    updateUsedFunds(data:any): Observable<any[]>{
+        return this._httpClient.put<any>(`${this._baseUrl}CashRequisition/updateactualusedfunds/${data.id}`, data);
+    }
 }

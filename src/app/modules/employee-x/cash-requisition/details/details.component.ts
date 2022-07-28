@@ -10,6 +10,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from 'app/modules/alert/snackbar/alert.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
+import { UpdateUsedFundsComponent } from '../update-used-funds/update-used-funds.component';
+import { UpdateReceivedFundsComponent } from '../update-received-funds/update-received-funds.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector: 'academy-details',
@@ -40,8 +43,8 @@ export class CashRequisitionDetailsComponent implements OnInit {
         private _alertService: AlertService,
         private _formBuilder: FormBuilder,
         private _router: Router,
-        private _fuseConfirmationService: FuseConfirmationService
-
+        private _fuseConfirmationService: FuseConfirmationService,
+        private _matDialog: MatDialog,
     ) {
     }
 
@@ -87,7 +90,10 @@ export class CashRequisitionDetailsComponent implements OnInit {
                 id: [],
                 description: [],
                 status: [],
-                amount:[]
+                amount: [],
+                releasedFunds: [],
+                receivedFunds: [],
+                actualUsedAmount: [],
             }),
             step2: this._formBuilder.group({
                 id: [],
@@ -135,7 +141,10 @@ export class CashRequisitionDetailsComponent implements OnInit {
                     id: this.cashRequisition.id,
                     description: this.cashRequisition.description,
                     status: this.cashRequisition.status,
-                    amount: this.cashRequisition.amount
+                    amount: this.cashRequisition.amount,
+                    releasedFunds: this.cashRequisition.releasedFunds,
+                    receivedFunds: this.cashRequisition.receivedFunds,
+                    actualUsedAmount: this.cashRequisition.actualUsedAmount
                 },
                 step2: {
                     id: this.cashRequisition.cash.id,
@@ -256,5 +265,30 @@ export class CashRequisitionDetailsComponent implements OnInit {
             this.isLoading = false;
             this._alertService.displayError('Try again')
         })
+    }
+
+    openCreateDepartmentDialog(): void {
+        // Open the dialog
+        const dialogRef = this._matDialog.open(UpdateUsedFundsComponent, {
+            data: { cashReq: this.cashRequisition },
+        });
+
+        dialogRef.afterClosed()
+            .subscribe((result) => {
+                console.log('Compose dialog was closed!');
+                this.getCashReq();
+            });
+    }
+    openUpdateCashReceuvedDialog(): void {
+        // Open the dialog
+        const dialogRef = this._matDialog.open(UpdateReceivedFundsComponent, {
+            data: { cashReq: this.cashRequisition },
+        });
+
+        dialogRef.afterClosed()
+            .subscribe((result) => {
+                console.log('Compose dialog was closed!');
+                this.getCashReq();
+            });
     }
 }

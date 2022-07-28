@@ -12,6 +12,7 @@ import { CashRequisitionService } from 'app/modules/employee-x/services/cash-req
 import { UserService } from 'app/core/user/user.service';
 import { PrintReqPrevComponent } from '../print-req-prev/print-req-prev.component';
 import { MatDialog } from '@angular/material/dialog';
+import { UpdateReleasedFundsComponent } from '../update-released-funds/update-released-funds.component';
 
 @Component({
     selector: 'academy-details',
@@ -90,7 +91,10 @@ export class CashRequisitionDetailsComponent implements OnInit {
                 id: [],
                 description: [],
                 status: [],
-                amount: []
+                amount: [],
+                releasedFunds: [],
+                receivedFunds: [],
+                actualUsedAmount: [],
             }),
             step2: this._formBuilder.group({
                 id: [],
@@ -138,7 +142,10 @@ export class CashRequisitionDetailsComponent implements OnInit {
                     id: this.cashRequisition.id,
                     description: this.cashRequisition.description,
                     status: this.cashRequisition.status,
-                    amount: this.cashRequisition.amount
+                    amount: this.cashRequisition.amount,
+                    releasedFunds: this.cashRequisition.releasedFunds,
+                    receivedFunds: this.cashRequisition.receivedFunds,
+                    actualUsedAmount: this.cashRequisition.actualUsedAmount
                 },
                 step2: {
                     id: this.cashRequisition.cash.id,
@@ -342,5 +349,17 @@ export class CashRequisitionDetailsComponent implements OnInit {
                 return true;
             }
         }
+    }
+    openCreateDepartmentDialog(): void {
+        // Open the dialog
+        const dialogRef = this._matDialog.open(UpdateReleasedFundsComponent, {
+            data: { cashReq: this.cashRequisition },
+        });
+
+        dialogRef.afterClosed()
+            .subscribe((result) => {
+                console.log('Compose dialog was closed!');
+                this.getCashReq();
+            });
     }
 }
