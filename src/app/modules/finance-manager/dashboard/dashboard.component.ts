@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
 
   data: any;
   user: User;
-  selectedProject: string = 'ACME Corp. Backend App';
+  selectedProject: string = 'Dashboard';
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
   cashReqs: any[] = [];

@@ -1,7 +1,7 @@
 <div class="flex flex-auto">
 
 
-   
+
     <form class="flex flex-col flex-auto m-3 p-6 pt-10 sm:p-8 sm:pt-10 overflow-y-auto bg-card shadow rounded-2xl"
         [formGroup]="verticalStepperForm">
         <div class="flex items-center justify-between -mt-3 -ml-4">
@@ -151,7 +151,8 @@
                             <ng-container>
                                 <div
                                     class="flex items-center justify-center px-4 m-1.5 rounded-full leading-9 text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
-                                    <span class="text-md font-medium whitespace-nowrap"> {{cardRequisition.generalManagerApproved?
+                                    <span class="text-md font-medium whitespace-nowrap">
+                                        {{cardRequisition.generalManagerApproved?
                                         "General Manager Approved On : " + cardRequisition.generalManagerApprovedDate :
                                         "Awaiting General
                                         Manager Approval"}}
@@ -172,6 +173,26 @@
                         <mat-form-field class="flex-auto w-full">
                             <mat-label>Amount</mat-label>
                             <input matInput [formControlName]="'amount'">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="grid grid-cols-6 gap-6 mt-8">
+                    <div class="col-span-3 sm:col-span-3">
+                        <mat-form-field class="flex-auto w-full">
+                            <mat-label>Released Funds</mat-label>
+                            <input matInput [formControlName]="'releasedFunds'" disabled>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-span-3 sm:col-span-3">
+                        <mat-form-field class="flex-auto w-full">
+                            <mat-label>Received Funds</mat-label>
+                            <input matInput [formControlName]="'receivedFunds'" disabled>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-span-3 sm:col-span-3">
+                        <mat-form-field class="flex-auto w-full">
+                            <mat-label>Used Funds</mat-label>
+                            <input matInput [formControlName]="'actualUsedAmount'" disabled>
                         </mat-form-field>
                     </div>
                 </div>

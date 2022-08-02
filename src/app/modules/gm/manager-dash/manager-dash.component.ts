@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'app/core/user/user.service';
-import { User } from 'app/modules/admin/models/users/users.types';import { VehicleService } from 'app/modules/admin/services/vehicles/vehicle.service';
+import { User } from 'app/modules/admin/models/users/users.types'; import { VehicleService } from 'app/modules/admin/services/vehicles/vehicle.service';
 import { AlertService } from 'app/modules/alert/snackbar/alert.service';
 import { AssetRequisitionService } from 'app/modules/employee-x/services/asset-requisitions/asset-requisitions.service';
 import { CardRequisitionService } from 'app/modules/employee-x/services/card-requisitions/card-requisitions.service';
@@ -28,27 +28,38 @@ export class ManagerDashComponent implements OnInit {
   chartYearlyExpenses: ApexOptions = {};
   data: any;
   user: any;
-  selectedProject: string = 'Manager Dashboard';
+  selectedProject: string = 'Dashboard';
   private _unsubscribeAll: Subject<any> = new Subject<any>();
   loading = true;
-  cashReqs:any[] = [];
-  vehicleReq:any[] =[];
-  deviceReqs:any[]=[];
-  cardReqs:any[]=[];
-  assetsReqs:any[]=[];
+  cashReqs: any[] = [];
+  vehicleReq: any[] = [];
+  deviceReqs: any[] = [];
+  cardReqs: any[] = [];
+  assetsReqs: any[] = [];
+  cashs: any[] = [];
+  status = "Created";
+  currencySelected = "RTGS"
+  cash = 1;
+  card = 1;
+  cards: any[] = [];
+  cashMonthToMonth: any[] = [];
+  cashDayToDay: any[] = [];
+  cardMonthToMonth: any[] = [];
+  cardDayToDay: any[] = [];
+
   /**
    * Constructor
    */
   constructor(
     private _router: Router,
     private _userService: UserService,
-    private _alertService:AlertService,
+    private _alertService: AlertService,
     private _changeDetectorRef: ChangeDetectorRef,
-    private _vehicleService:VehicleRequisitionService,
-    private _cashReqService:CashRequisitionService,
-    private _cardReqservice:CardRequisitionService,
-    private _assetReqService:AssetRequisitionService,
-    private _deviceReqService:DeviceRequisitionService,
+    private _vehicleService: VehicleRequisitionService,
+    private _cashReqService: CashRequisitionService,
+    private _cardReqservice: CardRequisitionService,
+    private _assetReqService: AssetRequisitionService,
+    private _deviceReqService: DeviceRequisitionService,
   ) {
   }
 
@@ -68,7 +79,7 @@ export class ManagerDashComponent implements OnInit {
     //   .pipe(takeUntil(this._unsubscribeAll))
     //   .subscribe((user: User) => {
     //     console.log(user);
-        
+
     //     this.user = user;
 
     //     // Mark for check
@@ -100,7 +111,7 @@ export class ManagerDashComponent implements OnInit {
             this.assetsReqs = assetReqs;
             this._deviceReqService.getAllDeviceRequisitionsLogged().subscribe(deviceReqs => {
               this.deviceReqs = deviceReqs
-              this.loading = false;
+              this.getCash()
             }, error => {
               this._alertService.displayError('Failed to load device requisitions')
             })
@@ -118,9 +129,6 @@ export class ManagerDashComponent implements OnInit {
     });
   }
 
-  navigateTo(path: string) {
-    this._router.navigate([path]);
-  }
   /**
    * On destroy
    */
@@ -130,6 +138,59 @@ export class ManagerDashComponent implements OnInit {
     this._unsubscribeAll.complete();
   }
 
+  navigateTo(path: string) {
+    this._router.navigate([path]);
+  }
+  setStatus(value,) {
+    this.status = value;
+    this.getCashMonthToMonthReporty()
+    this.getCashDayToDayReporty()
+  }
+  setCash(value) {
+    this.cash = value.id;
+    this.currencySelected = value.currency;
+    this.getCashMonthToMonthReporty()
+    this.getCashDayToDayReporty();
+  }
+  setCard(value) {
+    this.card = value.id;
+    this.currencySelected = value.currency;
+    this.getCashMonthToMonthReporty()
+    this.getCashDayToDayReporty();
+  }
+
+  getCashMonthToMonthReporty() {
+    this._cashReqService.getMonthToMonthReport({ id: this.cash, status: this.status }).subscribe(data => {
+      console.log(data);
+      this.cashMonthToMonth = data[0]
+    }, error => {
+      console.log(error);
+    })
+  }
+  getCashDayToDayReporty() {
+    this._cashReqService.getDayToDayReport({ id: this.cash, status: this.status }).subscribe(data => {
+      console.log(data);
+      this.cashDayToDay = data[0]
+    }, error => {
+      console.log(error);
+    })
+  }
+  getCardMonthToMonthReporty() {
+    this._cardReqservice.getMonthToMonthReport({ id: this.cash, status: this.status }).subscribe(data => {
+      console.log(data);
+      this.cardMonthToMonth = data[0]
+    }, error => {
+      console.log(error);
+    })
+  }
+  getCardDayToDayReporty() {
+    this._cardReqservice.getDayToDayReport({ id: this.card, status: this.status }).subscribe(data => {
+      console.log(data);
+      this.cardDayToDay = data[0]
+    }, error => {
+      console.log(error);
+    })
+  }
   // -----------------------------------------------------------------------------------------------------
   // @ Public methods
   // -----------------------------------------------------------------------------------------------------
@@ -144,6 +205,22 @@ export class ManagerDashComponent implements OnInit {
     return item.id || index;
   }
 
+  getCash() {
+    this._cashReqService.getCashs().subscribe(response => {
+      this.cashs = response
+      this._cardReqservice.getCards().subscribe(response => {
+        this.cards = response
+        this.loading = false;
+      }, error => {
+        this._alertService.displayError('Failed to load cards')
+        this.loading = false;
+      })
+    }, error => {
+      console.log(error);
+      this.loading = false;
+
+    })
+  }
   // -----------------------------------------------------------------------------------------------------
   // @ Private methods
   // -----------------------------------------------------------------------------------------------------

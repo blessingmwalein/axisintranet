@@ -88,7 +88,10 @@ export class CardRequisitionDetailsComponent implements OnInit {
                 id: [],
                 description: [],
                 status: [],
-                amount: []
+                amount: [],
+                releasedFunds: [],
+                receivedFunds: [],
+                actualUsedAmount: [],
             }),
             step2: this._formBuilder.group({
                 id: [],
@@ -136,7 +139,10 @@ export class CardRequisitionDetailsComponent implements OnInit {
                     id: this.cardRequisition.id,
                     description: this.cardRequisition.description,
                     status: this.cardRequisition.status,
-                    amount: this.cardRequisition.amount
+                    amount: this.cardRequisition.amount,
+                    releasedFunds: this.cardRequisition.releasedFunds,
+                    receivedFunds: this.cardRequisition.receivedFunds,
+                    actualUsedAmount: this.cardRequisition.actualUsedAmount
                 },
                 step2: {
                     id: this.cardRequisition.card.id,

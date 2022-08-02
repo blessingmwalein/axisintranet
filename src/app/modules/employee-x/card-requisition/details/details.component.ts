@@ -9,6 +9,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from 'app/modules/alert/snackbar/alert.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
+import { MatDialog } from '@angular/material/dialog';
+import { UpdateUsedFundsComponent } from '../update-used-funds/update-used-funds.component';
+import { UpdateReceivedFundsComponent } from '../update-received-funds/update-received-funds.component';
 
 @Component({
     selector: 'academy-details',
@@ -39,7 +42,8 @@ export class CardRequisitionDetailsComponent implements OnInit {
         private _alertService: AlertService,
         private _formBuilder: FormBuilder,
         private _router: Router,
-        private _fuseConfirmationService: FuseConfirmationService
+        private _fuseConfirmationService: FuseConfirmationService,
+        private _matDialog: MatDialog,
 
     ) {
     }
@@ -83,7 +87,10 @@ export class CardRequisitionDetailsComponent implements OnInit {
                 id: [],
                 description: [],
                 status: [],
-                amount:[]
+                amount: [],
+                releasedFunds: [],
+                receivedFunds: [],
+                actualUsedAmount: [],
             }),
             step2: this._formBuilder.group({
                 id: [],
@@ -131,7 +138,10 @@ export class CardRequisitionDetailsComponent implements OnInit {
                     id: this.cardRequisition.id,
                     description: this.cardRequisition.description,
                     status: this.cardRequisition.status,
-                    amount: this.cardRequisition.amount
+                    amount: this.cardRequisition.amount,
+                    releasedFunds: this.cardRequisition.releasedFunds,
+                    receivedFunds: this.cardRequisition.receivedFunds,
+                    actualUsedAmount: this.cardRequisition.actualUsedAmount
                 },
                 step2: {
                     id: this.cardRequisition.card.id,
@@ -252,5 +262,29 @@ export class CardRequisitionDetailsComponent implements OnInit {
             this.isLoading = false;
             this._alertService.displayError('Try again')
         })
+    }
+    openUpdateCashUsed(): void {
+        // Open the dialog
+        const dialogRef = this._matDialog.open(UpdateUsedFundsComponent, {
+            data: { cardReq: this.cardRequisition },
+        });
+
+        dialogRef.afterClosed()
+            .subscribe((result) => {
+                console.log('Compose dialog was closed!');
+                this.getCardReq();
+            });
+    }
+    openUpdateCashReceuvedDialog(): void {
+        // Open the dialog
+        const dialogRef = this._matDialog.open(UpdateReceivedFundsComponent, {
+            data: { cardReq: this.cardRequisition },
+        });
+
+        dialogRef.afterClosed()
+            .subscribe((result) => {
+                console.log('Compose dialog was closed!');
+                this.getCardReq();
+            });
     }
 }

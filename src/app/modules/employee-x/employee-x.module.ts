@@ -67,9 +67,13 @@ import { EmployeeDashComponent } from './employee-dash/employee-dash.component';
 import { UpdateReceivedFundsComponent } from './cash-requisition/update-received-funds/update-received-funds.component';
 import { UpdateUsedFundsComponent } from './cash-requisition/update-used-funds/update-used-funds.component';
 
+import { UpdateReceivedFundsComponent as UpdateReceivedFundsComponentCard } from './card-requisition/update-received-funds/update-received-funds.component';
+import { UpdateUsedFundsComponent as UpdateUsedFundsComponentCard } from './card-requisition/update-used-funds/update-used-funds.component';
 
 @NgModule({
   declarations: [
+    UpdateReceivedFundsComponentCard,
+    UpdateUsedFundsComponentCard,
     VehicleReqListComponent,
     CreateComponent,
     VehicleRequisitionDetailsComponent,

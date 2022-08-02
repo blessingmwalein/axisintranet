@@ -12,6 +12,7 @@ import { CardRequisitionService } from 'app/modules/employee-x/services/card-req
 import { UserService } from 'app/core/user/user.service';
 import { PrintReqPrevComponent } from '../print-req-prev/print-req-prev.component';
 import { MatDialog } from '@angular/material/dialog';
+import { UpdateReleasedFundsComponent } from '../update-released-funds/update-released-funds.component';
 
 @Component({
     selector: 'academy-details',
@@ -88,7 +89,10 @@ export class CardRequisitionDetailsComponent implements OnInit {
                 id: [],
                 description: [],
                 status: [],
-                amount: []
+                amount: [],
+                releasedFunds: [],
+                receivedFunds: [],
+                actualUsedAmount: [],
             }),
             step2: this._formBuilder.group({
                 id: [],
@@ -136,7 +140,10 @@ export class CardRequisitionDetailsComponent implements OnInit {
                     id: this.cardRequisition.id,
                     description: this.cardRequisition.description,
                     status: this.cardRequisition.status,
-                    amount: this.cardRequisition.amount
+                    amount: this.cardRequisition.amount,
+                    releasedFunds: this.cardRequisition.releasedFunds,
+                    receivedFunds: this.cardRequisition.receivedFunds,
+                    actualUsedAmount: this.cardRequisition.actualUsedAmount
                 },
                 step2: {
                     id: this.cardRequisition.card.id,
@@ -344,5 +351,18 @@ export class CardRequisitionDetailsComponent implements OnInit {
                 return true;
             }
         }
+    }
+
+    openUpdateReleasedFundsDialog(): void {
+        // Open the dialog
+        const dialogRef = this._matDialog.open(UpdateReleasedFundsComponent, {
+            data: { cardReq: this.cardRequisition },
+        });
+
+        dialogRef.afterClosed()
+            .subscribe((result) => {
+                console.log('Compose dialog was closed!');
+                this.getCardReq();
+            });
     }
 }

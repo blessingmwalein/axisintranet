@@ -21,7 +21,7 @@ export class CardRequisitionService {
     getAllCardRequisitions(): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}CardRequisition?isLoggedInUser=true`);
     }
-    getFilteredCardRequisitions(status:boolean): Observable<any[]> {
+    getFilteredCardRequisitions(status: boolean): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}CardRequisition/GetFiltered?isLoggedInUser=${status}`);
     }
 
@@ -51,7 +51,29 @@ export class CardRequisitionService {
     getCards(): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}Cards`);
     }
-    getCardRequsitionByStatus(status:string): Observable<any[]> {
+    getCardRequsitionByStatus(status: string): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}CardRequisition/GetByStatus?status=${status}&isLoggedInUser=false`);
+    }
+    updateReleasedFunds(data: any): Observable<any[]> {
+        return this._httpClient.put<any>(`${this._baseUrl}CardRequisition/updatereleasedfunds/${data.id}`, data);
+    }
+    updateReceivedFunds(data: any): Observable<any[]> {
+        return this._httpClient.put<any>(`${this._baseUrl}CardRequisition/updatereceivedfunds/${data.id}`, data);
+    }
+    updateUsedFunds(data: any): Observable<any[]> {
+        return this._httpClient.put<any>(`${this._baseUrl}CardRequisition/updateactualusedfunds/${data.id}`, data);
+    }
+
+    getMonthToMonthReport(data:any): Observable<any[]> {
+        return this._httpClient.get<any[]>(`${this._baseUrl}CardRequisition/MonthToMonthReport/${data.id}/${data.status}`);
+    }
+    getMonthToMonthDetail(data:any): Observable<any[]> {
+        return this._httpClient.get<any[]>(`${this._baseUrl}CardRequisition/MonthToMonthReport/${data.id}/${data.status}`);
+    }
+    getDayToDayReport(data:any): Observable<any[]> {
+        return this._httpClient.get<any[]>(`${this._baseUrl}CardRequisition/DayToDayReport/${data.id}/${data.status}`);
+    }
+    getDayToDayReportDetail(data:any): Observable<any[]> {
+        return this._httpClient.get<any[]>(`${this._baseUrl}CardRequisition/DayToDayReport/${data.id}/${data.status}`);
     }
 }
