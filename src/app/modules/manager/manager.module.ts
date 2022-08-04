@@ -47,6 +47,13 @@ import { ApproveReqComponent } from './vehicle-requisitions/approve-req/approve-
 import { AssetRequisitionComponent } from './asset-requisition/asset-requisition.component';
 import { ManagerDashComponent } from './manager-dash/manager-dash.component';
 import { AnnouncementsComponent } from './announcements/announcements.component';
+import { UpdateReceivedFundsComponent } from './cash-requisition/update-received-funds/update-received-funds.component';
+import { UpdateUsedFundsComponent } from './cash-requisition/update-used-funds/update-used-funds.component';
+import { UpdateReleasedFundsComponent } from './cash-requisition/update-released-funds/update-released-funds.component';
+
+import { UpdateReceivedFundsComponent as UpdateReceivedFundsComponentCard } from './card-requisition/update-received-funds/update-received-funds.component';
+import { UpdateUsedFundsComponent as UpdateUsedFundsComponentCard } from './card-requisition/update-used-funds/update-used-funds.component';
+import { UpdateReleasedFundsComponent as UpdateReleasedFundsComponentCard } from './card-requisition/update-released-funds/update-released-funds.component';
 
 
 @NgModule({
@@ -75,7 +82,13 @@ import { AnnouncementsComponent } from './announcements/announcements.component'
     AssetReqListComponent,
     CreateAssetReqComponent,
     AssetRequisitionDetailsComponent,
-    AnnouncementsComponent
+    AnnouncementsComponent,
+    UpdateReceivedFundsComponent,
+    UpdateUsedFundsComponent,
+    UpdateReleasedFundsComponent,
+    UpdateReceivedFundsComponentCard,
+    UpdateUsedFundsComponentCard,
+    UpdateReleasedFundsComponentCard
   ],
   imports: [
     CommonModule,

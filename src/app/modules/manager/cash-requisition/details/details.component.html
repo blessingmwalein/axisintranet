@@ -25,6 +25,18 @@
                         <mat-icon [svgIcon]="'heroicons_outline:trash'"></mat-icon>
                         <span>Reject Requsition</span>
                     </button>
+                    <button mat-menu-item (click)="openCreateDepartmentDialog()">
+                        <mat-icon [svgIcon]="'heroicons_outline:trash'"></mat-icon>
+                        <span>Update Used Funds</span>
+                    </button>
+                    <button mat-menu-item (click)="openUpdateCashReceuvedDialog()">
+                        <mat-icon [svgIcon]="'heroicons_outline:trash'"></mat-icon>
+                        <span>Update received Funds</span>
+                    </button>
+                    <button mat-menu-item (click)="openUpdateReleasedFunds()">
+                        <mat-icon [svgIcon]="'heroicons_outline:trash'"></mat-icon>
+                        <span>Update Released Funds</span>
+                    </button>
                 </mat-menu>
                 <!-- Close button -->
                 <button mat-icon-button [routerLink]="['../']">

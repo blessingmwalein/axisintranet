@@ -280,7 +280,7 @@ export class CardRequisitionDetailsComponent implements OnInit {
     }
     rejectReqVehilce(id: string) {
         this.isLoading = true;
-        this._cardRequisitionService.generalManagerApproveReq(this.cardRequisition.id, { id: this.cardRequisition.id.toString(), approved: false, generalManagerApprovedDate: new Date(), status: "General manager rejected", generalManagerApproverId: this._userService.getLocalUser().id }).subscribe(response => {
+        this._cardRequisitionService.generalManagerApproveReq(this.cardRequisition.id, { id: this.cardRequisition.id.toString(), approved: false, generalManagerApprovedDate: new Date(), status: "General Manager Rejected", generalManagerApproverId: this._userService.getLocalUser().id }).subscribe(response => {
             this._alertService.displayMessage('Requisition Rejected');
             this._router.navigateByUrl('axis/g-m/requisitions/card')
             this.isLoading = false;

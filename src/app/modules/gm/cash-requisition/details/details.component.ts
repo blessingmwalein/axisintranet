@@ -283,7 +283,7 @@ export class CashRequisitionDetailsComponent implements OnInit {
     }
     rejectReqVehilce(id: string) {
         this.isLoading = true;
-        this._cashRequisitionService.generalManagerApproveReq(this.cashRequisition.id, { id: this.cashRequisition.id.toString(), approved: false, generalManagerApprovedDate: new Date(), status: "General manager rejected", generalManagerApproverId: this._userService.getLocalUser().id }).subscribe(response => {
+        this._cashRequisitionService.generalManagerApproveReq(this.cashRequisition.id, { id: this.cashRequisition.id.toString(), approved: false, generalManagerApprovedDate: new Date(), status: "General Manager Rejected", generalManagerApproverId: this._userService.getLocalUser().id }).subscribe(response => {
             this._alertService.displayMessage('Requisition Approved');
             this._router.navigateByUrl('axis/g-m/requisitions/cash')
             this.isLoading = false;

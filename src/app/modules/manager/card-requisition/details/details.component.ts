@@ -9,6 +9,10 @@ import { AlertService } from 'app/modules/alert/snackbar/alert.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { CardRequisitionService } from 'app/modules/employee-x/services/card-requisitions/card-requisitions.service';
+import { MatDialog } from '@angular/material/dialog';
+import { UpdateReceivedFundsComponent } from '../update-received-funds/update-received-funds.component';
+import { UpdateUsedFundsComponent } from '../update-used-funds/update-used-funds.component';
+import { UpdateReleasedFundsComponent } from '../update-released-funds/update-released-funds.component';
 
 @Component({
     selector: 'academy-details',
@@ -39,7 +43,8 @@ export class CardRequisitionDetailsComponent implements OnInit {
         private _alertService: AlertService,
         private _formBuilder: FormBuilder,
         private _router: Router,
-        private _fuseConfirmationService: FuseConfirmationService
+        private _fuseConfirmationService: FuseConfirmationService,
+        private _matDialog: MatDialog,
 
     ) {
     }
@@ -315,5 +320,42 @@ export class CardRequisitionDetailsComponent implements OnInit {
             this.isLoading = false;
             this._alertService.displayError('Try again')
         })
+    }
+
+    openUpdateCashUsed(): void {
+        // Open the dialog
+        const dialogRef = this._matDialog.open(UpdateUsedFundsComponent, {
+            data: { cardReq: this.cardRequisition },
+        });
+
+        dialogRef.afterClosed()
+            .subscribe((result) => {
+                console.log('Compose dialog was closed!');
+                this.getCardReq();
+            });
+    }
+    openUpdateCashReceuvedDialog(): void {
+        // Open the dialog
+        const dialogRef = this._matDialog.open(UpdateReceivedFundsComponent, {
+            data: { cardReq: this.cardRequisition },
+        });
+
+        dialogRef.afterClosed()
+            .subscribe((result) => {
+                console.log('Compose dialog was closed!');
+                this.getCardReq();
+            });
+    }
+    openUpdateReleasedFundsDialog(): void {
+        // Open the dialog
+        const dialogRef = this._matDialog.open(UpdateReleasedFundsComponent, {
+            data: { cardReq: this.cardRequisition },
+        });
+
+        dialogRef.afterClosed()
+            .subscribe((result) => {
+                console.log('Compose dialog was closed!');
+                this.getCardReq();
+            });
     }
 }
