@@ -94,7 +94,7 @@ export class CashRequisitionDetailsComponent implements OnInit {
                 amount: [],
                 releasedFunds: [],
                 receivedFunds: [],
-                actualUsedAmount: [],
+                actualUsedFunds: [],
             }),
             step2: this._formBuilder.group({
                 id: [],
@@ -145,7 +145,7 @@ export class CashRequisitionDetailsComponent implements OnInit {
                     amount: this.cashRequisition.amount,
                     releasedFunds: this.cashRequisition.releasedFunds,
                     receivedFunds: this.cashRequisition.receivedFunds,
-                    actualUsedAmount: this.cashRequisition.actualUsedAmount
+                    actualUsedFunds: this.cashRequisition.actualUsedFunds
                 },
                 step2: {
                     id: this.cashRequisition.cash.id,
@@ -278,7 +278,7 @@ export class CashRequisitionDetailsComponent implements OnInit {
             this.isLoading = false;
         }, error => {
             this.isLoading = false;
-            this._alertService.displayError('Try again')
+            this._alertService.displayError(`Something went wrong:  ${error?.error?.message}`)
         })
     }
     rejectReqVehilce(id: string) {
@@ -289,7 +289,7 @@ export class CashRequisitionDetailsComponent implements OnInit {
             this.isLoading = false;
         }, error => {
             this.isLoading = false;
-            this._alertService.displayError('Try again')
+            this._alertService.displayError(`Something went wrong:  ${error?.error?.message}`)
         })
     }
 
@@ -317,7 +317,7 @@ export class CashRequisitionDetailsComponent implements OnInit {
             this.isLoading = false;
         }, error => {
             this.isLoading = false;
-            this._alertService.displayError('Try again')
+            this._alertService.displayError(`Something went wrong:  ${error?.error?.message}`)
         })
     }
 

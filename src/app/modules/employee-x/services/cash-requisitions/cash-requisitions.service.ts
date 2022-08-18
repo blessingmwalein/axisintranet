@@ -22,7 +22,7 @@ export class CashRequisitionService {
     getAllCashRequisitions(): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}CashRequisition?isLoggedInUser=true`);
     }
-    getFilteredCashRequisitions(status:boolean): Observable<any[]> {
+    getFilteredCashRequisitions(status: boolean): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}CashRequisition/GetFiltered?isLoggedInUser=${status}`);
     }
 
@@ -52,29 +52,29 @@ export class CashRequisitionService {
     getCashs(): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}Cash`);
     }
-    
-    getCashRequsitionByStatus(status:string): Observable<any[]> {
+
+    getCashRequsitionByStatus(status: string): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}CashRequisition/GetByStatus?status=${status}&isLoggedInUser=false`);
     }
-    updateReleasedFunds(data:any): Observable<any[]>{
+    updateReleasedFunds(data: any): Observable<any[]> {
         return this._httpClient.put<any>(`${this._baseUrl}CashRequisition/updatereleasedfunds/${data.id}`, data);
     }
-    updateReceivedFunds(data:any): Observable<any[]>{
+    updateReceivedFunds(data: any): Observable<any[]> {
         return this._httpClient.put<any>(`${this._baseUrl}CashRequisition/updatereceivedfunds/${data.id}`, data);
     }
-    updateUsedFunds(data:any): Observable<any[]>{
+    updateUsedFunds(data: any): Observable<any[]> {
         return this._httpClient.put<any>(`${this._baseUrl}CashRequisition/updateactualusedfunds/${data.id}`, data);
     }
-    getMonthToMonthReport(data:any): Observable<any[]> {
+    getMonthToMonthReport(data: any): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}CashRequisition/MonthToMonthReport/${data.id}/${data.status}`);
     }
-    getMonthToMonthDetail(data:any): Observable<any[]> {
+    getMonthToMonthDetail(data: any): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}CashRequisition/MonthToMonthReport/${data.id}/${data.status}`);
     }
-    getDayToDayReport(data:any): Observable<any[]> {
+    getDayToDayReport(data: any): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}CashRequisition/DayToDayReport/${data.id}/${data.status}`);
     }
-    getDayToDayReportDetail(data:any): Observable<any[]> {
+    getDayToDayReportDetail(data: any): Observable<any[]> {
         return this._httpClient.get<any[]>(`${this._baseUrl}CashRequisition/DayToDayReport/${data.id}/${data.status}`);
     }
 }

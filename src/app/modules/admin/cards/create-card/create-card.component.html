@@ -51,12 +51,15 @@
       </mat-form-field>
     </div>
     <div class="mt-6">
-      <mat-form-field class=" w-full">
+      <mat-form-field class="flex-auto gt-xs:pl-3 pt-2 w-full">
         <mat-label>Currency</mat-label>
-        <mat-icon matPrefix class="hidden sm:flex icon-size-5" [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
-        <input matInput [formControlName]="'currency'" [placeholder]="'Currency Code'" [spellcheck]="false">
+        <mat-select [placeholder]="'Currency'" [formControlName]="'currency'">
+          <mat-option value="ZWL">ZWL</mat-option>
+          <mat-option value="USD">USD</mat-option>
+        </mat-select>
+        <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:translate'"></mat-icon>
         <mat-error *ngIf="cardCreateForm.get('currency').hasError('required')">
-          Currency code is required
+          Currency is required
         </mat-error>
       </mat-form-field>
     </div>

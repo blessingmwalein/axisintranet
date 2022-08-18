@@ -91,7 +91,7 @@ export class CardRequisitionDetailsComponent implements OnInit {
                 amount: [],
                 releasedFunds: [],
                 receivedFunds: [],
-                actualUsedAmount: [],
+                actualUsedFunds: [],
             }),
             step2: this._formBuilder.group({
                 id: [],
@@ -142,7 +142,7 @@ export class CardRequisitionDetailsComponent implements OnInit {
                     amount: this.cardRequisition.amount,
                     releasedFunds: this.cardRequisition.releasedFunds,
                     receivedFunds: this.cardRequisition.receivedFunds,
-                    actualUsedAmount: this.cardRequisition.actualUsedAmount
+                    actualUsedFunds: this.cardRequisition.actualUsedFunds
                 },
                 step2: {
                     id: this.cardRequisition.card.id,
@@ -275,7 +275,7 @@ export class CardRequisitionDetailsComponent implements OnInit {
             this.isLoading = false;
         }, error => {
             this.isLoading = false;
-            this._alertService.displayError('Try again')
+            this._alertService.displayError(`Something went wrong:  ${error?.error?.message}`)
         })
     }
     rejectReqVehilce(id: string) {
@@ -286,7 +286,7 @@ export class CardRequisitionDetailsComponent implements OnInit {
             this.isLoading = false;
         }, error => {
             this.isLoading = false;
-            this._alertService.displayError('Try again')
+            this._alertService.displayError(`Something went wrong:  ${error?.error?.message}`)
         })
     }
 
@@ -315,7 +315,7 @@ export class CardRequisitionDetailsComponent implements OnInit {
             this.isLoading = false;
         }, error => {
             this.isLoading = false;
-            this._alertService.displayError('Try again')
+            this._alertService.displayError(`Something went wrong:  ${error?.error?.message}`)
         })
     }
 
@@ -333,14 +333,15 @@ export class CardRequisitionDetailsComponent implements OnInit {
     }
 
     getDisableButton() {
-        if (this.cardRequisition.amount > this.cardRequisition.card.amount) {
-            if (this.cardRequisition.lineApproved) {
-                return false;
-            }
-            else {
-                return true;
-            }
-        } else {
+        // if (this.cardRequisition.amount > this.cardRequisition.card.amount) {
+
+        // } else {
+        //     return true;
+        // }
+        if (this.cardRequisition.lineApproved) {
+            return false;
+        }
+        else {
             return true;
         }
     }

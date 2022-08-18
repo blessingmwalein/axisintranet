@@ -101,7 +101,7 @@ export class VehicleReqListComponent implements OnInit {
       this.isLoading = false;
     }, error => {
       this.isLoading = false;
-      this._alertService.displayError('Try again')
+      this._alertService.displayError(`Something went wrong:  ${error?.error?.message}`)
     })
   }
 

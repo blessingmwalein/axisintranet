@@ -21,7 +21,8 @@ import { GeneralManagerModule } from './modules/gm/general-manager.module';
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy: PreloadAllModules,
-    scrollPositionRestoration: 'enabled'
+    scrollPositionRestoration: 'enabled',
+    useHash : true
 };
 
 @NgModule({
@@ -33,6 +34,7 @@ const routerConfig: ExtraOptions = {
         BrowserAnimationsModule,
         RouterModule.forRoot(appRoutes, routerConfig),
 
+        
         // Fuse, FuseConfig & FuseMockAPI
         FuseModule,
         FuseConfigModule.forRoot(appConfig),

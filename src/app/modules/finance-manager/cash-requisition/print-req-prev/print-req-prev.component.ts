@@ -27,6 +27,8 @@ export class PrintReqPrevComponent implements OnInit {
   }
 
   captureScreen() {
+    console.log('print start');
+    
     let data = document.getElementById('contentToConvert');
     html2canvas(data as any).then(canvas => {
       var imgWidth = 210;
