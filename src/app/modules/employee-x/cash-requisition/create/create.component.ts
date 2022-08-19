@@ -22,6 +22,7 @@ export class CreateCashReqComponent implements OnInit {
   private _unsubscribeAll: Subject<any> = new Subject<any>();
   minDate = new Date();
   isPastStartDate = false;
+  file: File;
   constructor(private _alertService: AlertService, private _formBuilder: FormBuilder, private _cashReqService: CashRequisitionService, private _router: Router, private _userService: UserService) { }
 
 
@@ -37,18 +38,18 @@ export class CreateCashReqComponent implements OnInit {
 
     this.horizontalStepperForm = this._formBuilder.group({
       step1: this._formBuilder.group({
-        requestComments: ['', [Validators.required]],
-        cashId: ['', Validators.required],
-        title: ['', Validators.required],
-        amount: ['', Validators.required],
-        status: "Created",
-        lineApproverId: [this._userService.getLocalUser().lineApproverId]
-
+        RequestComments: ['', [Validators.required]],
+        CashId: ['', Validators.required],
+        Title: ['', Validators.required],
+        Amount: ['', Validators.required],
+        Status: "Created",
+        LineApproverId: [this._userService.getLocalUser().lineApproverId],
+        UploadedFileName: ['']
       }),
       step2: this._formBuilder.group({
-        startDate: ['', Validators.required],
-        endDate: ['', Validators.required],
-        duration: ['', Validators.required]
+        StartDate: ['', Validators.required],
+        EndDate: ['', Validators.required],
+        Duration: ['', Validators.required]
       }),
     });
 
@@ -72,10 +73,28 @@ export class CreateCashReqComponent implements OnInit {
   createReq(): void {
     console.log('Clicked');
     this.horizontalStepperForm.patchValue({
-      
+
     })
     this.horizontalStepperForm.disable();
-    this._cashReqService.createCashReq({ ...this.horizontalStepperForm.value.step1, ...this.horizontalStepperForm.value.step2 })
+    let formData: FormData = new FormData();
+    formData.append('UploadedFileName', this.file, 'UploadedFileName');
+    formData.append('RequestComments', this.horizontalStepperForm.value.step1.RequestComments);
+    formData.append('CashId', this.horizontalStepperForm.value.step1.CashId);
+    formData.append('Title', this.horizontalStepperForm.value.step1.Title);
+    formData.append('Amount', this.horizontalStepperForm.value.step1.Amount);
+    formData.append('Status', this.horizontalStepperForm.value.step1.Status);
+    formData.append('LineApproverId', this.horizontalStepperForm.value.step1.LineApproverId);
+    formData.append('StartDate', this.horizontalStepperForm.value.step2.StartDate);
+    formData.append('EndDate', this.horizontalStepperForm.value.step2.EndDate);
+    formData.append('Duration', this.horizontalStepperForm.value.step2.Duration);
+
+    // formData.append('UploadedFileName', file, file.name);
+    // let headers = new Headers();
+    /** In Angular 5, including the header Content-Type can invalidate your request */
+    // headers.append('Content-Type', 'multipart/form-data');
+    // headers.append('Accept', 'application/json');
+
+    this._cashReqService.createCashReq(formData)
       .subscribe(() => {
         this.horizontalStepperForm.enable();
         this._alertService.displayMessage("Cash requisition submitted")
@@ -98,5 +117,14 @@ export class CreateCashReqComponent implements OnInit {
     today.setHours(0, 0, 0, 0);
     this.isPastStartDate ?? date < today
     // return date < today;
+  }
+
+  fileChange(event) {
+    console.log(this.horizontalStepperForm.value.step1.RequestComments);
+
+    let fileList: FileList = event.target.files;
+    if (fileList.length > 0) {
+      this.file = fileList[0];
+    }
   }
 }

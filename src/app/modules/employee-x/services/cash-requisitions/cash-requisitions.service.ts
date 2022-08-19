@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { map, switchMap, tap, take } from 'rxjs/operators';
 import { CashRequisition, Category } from '../../models/cash-requisitions/cash-requisitions.types';
@@ -35,7 +35,12 @@ export class CashRequisitionService {
     }
 
     createCashReq(vehicleReq: any): Observable<any[]> {
-        return this._httpClient.post<any>(`${this._baseUrl}CashRequisition`, vehicleReq);
+        let httpOptions = {
+            headers: new HttpHeaders({
+                "Content-Type": "multipart/form-data",
+            })
+        };
+        return this._httpClient.post<any>(`${this._baseUrl}CashRequisition`, vehicleReq, httpOptions);
     }
     lineManagerApproveReq(id: string, cashReq: any): Observable<any[]> {
         return this._httpClient.put<any>(`${this._baseUrl}CashRequisition/changelineapproval/${id}`, cashReq);
