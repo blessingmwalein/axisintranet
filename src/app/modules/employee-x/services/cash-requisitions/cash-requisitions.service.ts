@@ -37,11 +37,13 @@ export class CashRequisitionService {
     createCashReq(vehicleReq: any): Observable<any[]> {
         let httpOptions = {
             headers: new HttpHeaders({
-                "Content-Type": "multipart/form-data",
+                'enctype': 'multipart/form-data',
+                'Accept': 'application/json'
             })
         };
         return this._httpClient.post<any>(`${this._baseUrl}CashRequisition`, vehicleReq, httpOptions);
     }
+
     lineManagerApproveReq(id: string, cashReq: any): Observable<any[]> {
         return this._httpClient.put<any>(`${this._baseUrl}CashRequisition/changelineapproval/${id}`, cashReq);
     }

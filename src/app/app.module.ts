@@ -18,23 +18,31 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FinanceManagerModule } from './modules/finance-manager/finance-manager.module';
 import { EmployeeXModule } from './modules/employee-x/employee-x.module';
 import { GeneralManagerModule } from './modules/gm/general-manager.module';
+import { CreateCardReqComponent } from './modules/requsitions/cards-reqs/create-card-req/create-card-req.component';
+import { CreateVehicleReqComponent } from './modules/requsitions/vehicle-reqs/create-vehicle-req/create-vehicle-req.component';
+import { CreateCashReqComponent } from './modules/employee-x/cash-requisition/create/create.component';
+import { CreateDeviceReqComponent } from './modules/employee-x/device-requisition/create/create.component';
+import { RequsitionsModule } from './modules/requsitions/requsitions.module';
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy: PreloadAllModules,
     scrollPositionRestoration: 'enabled',
-    useHash : true
+    useHash: true,
 };
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        CreateCashReqComponent,
+        CreateCardReqComponent,
+        CreateDeviceReqComponent,
+        CreateVehicleReqComponent,
     ],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
         RouterModule.forRoot(appRoutes, routerConfig),
 
-        
         // Fuse, FuseConfig & FuseMockAPI
         FuseModule,
         FuseConfigModule.forRoot(appConfig),
@@ -51,10 +59,8 @@ const routerConfig: ExtraOptions = {
         FinanceManagerModule,
         GeneralManagerModule,
         EmployeeXModule,
+        RequsitionsModule,
     ],
-    bootstrap: [
-        AppComponent
-    ]
+    bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}

@@ -22,6 +22,8 @@ export class CreateCashReqComponent implements OnInit {
   private _unsubscribeAll: Subject<any> = new Subject<any>();
   minDate = new Date();
   isPastStartDate = false;
+  file: File;
+  // eslint-disable-next-line max-len
   constructor(private _alertService: AlertService, private _formBuilder: FormBuilder, private _cashReqService: CashRequisitionService, private _router: Router, private _userService: UserService) { }
 
 
@@ -31,9 +33,9 @@ export class CreateCashReqComponent implements OnInit {
     // this.maxDate = moment([currentYear + 1, 11, 31]);
     this.setMinDates();
 
-    this._cashReqService.getCashs().subscribe(data => {
+    this._cashReqService.getCashs().subscribe((data) => {
       this.cashs = data;
-    })
+    });
 
     this.horizontalStepperForm = this._formBuilder.group({
       step1: this._formBuilder.group({
@@ -41,9 +43,9 @@ export class CreateCashReqComponent implements OnInit {
         cashId: ['', Validators.required],
         title: ['', Validators.required],
         amount: ['', Validators.required],
-        status: "Created",
-        lineApproverId: [this._userService.getLocalUser().lineApproverId]
-
+        status: 'Created',
+        lineApproverId: [this._userService.getLocalUser().lineApproverId],
+        uploadedFileName: ['']
       }),
       step2: this._formBuilder.group({
         startDate: ['', Validators.required],
@@ -55,7 +57,7 @@ export class CreateCashReqComponent implements OnInit {
   }
 
   setMinDates() {
-    var today = new Date().toISOString().slice(0, 16);
+    const today = new Date().toISOString().slice(0, 16);
     // document.getElementById("startDate").setAttribute("min", today);
 
   }
@@ -73,17 +75,36 @@ export class CreateCashReqComponent implements OnInit {
     console.log('Clicked');
     this.horizontalStepperForm.patchValue({
 
-    })
+    });
     this.horizontalStepperForm.disable();
-    this._cashReqService.createCashReq({ ...this.horizontalStepperForm.value.step1, ...this.horizontalStepperForm.value.step2 })
+    const formData: FormData = new FormData();
+    formData.append('uploadedFileName', this.file.name);
+    formData.append('uploadedFile', this.file);
+    formData.append('requestComments', this.horizontalStepperForm.value.step1.requestComments);
+    formData.append('cashId', this.horizontalStepperForm.value.step1.cashId);
+    formData.append('title', this.horizontalStepperForm.value.step1.title);
+    formData.append('amount', this.horizontalStepperForm.value.step1.amount);
+    formData.append('status', this.horizontalStepperForm.value.step1.status);
+    formData.append('lineApproverId', this.horizontalStepperForm.value.step1.lineApproverId);
+    formData.append('startDate', this.horizontalStepperForm.value.step2.startDate);
+    formData.append('endDate', this.horizontalStepperForm.value.step2.endDate);
+    formData.append('duration', this.horizontalStepperForm.value.step2.duration);
+
+    // formData.append('UploadedFileName', file, file.name);
+    // let headers = new Headers();
+    /** In Angular 5, including the header Content-Type can invalidate your request */
+    // headers.append('Content-Type', 'multipart/form-data');
+    // headers.append('Accept', 'application/json');
+
+    this._cashReqService.createCashReq(formData)
       .subscribe(() => {
         this.horizontalStepperForm.enable();
-        this._alertService.displayMessage("Cash requisition submitted")
-        this._router.navigate(['axis/finance-manager/requisitions/cash']);
+        this._alertService.displayMessage('Cash requisition submitted');
+        this._router.navigate(['axis/employee/requisitions/cash']);
       },
         (error) => {
           console.log(error);
-          this._alertService.displayError("Failed to  submitt please try again")
+          this._alertService.displayError('Failed to  submitt please try again');
           this.horizontalStepperForm.enable();
         });
   }
@@ -96,7 +117,18 @@ export class CreateCashReqComponent implements OnInit {
     // so the comparison only returns `true` if the passed in date
     // is at least yesterday
     today.setHours(0, 0, 0, 0);
-    this.isPastStartDate ?? date < today
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    this.isPastStartDate ?? date < today;
     // return date < today;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  fileChange(event) {
+    console.log(this.horizontalStepperForm.value.step1.RequestComments);
+
+    const fileList: FileList = event.target.files;
+    if (fileList.length > 0) {
+      this.file = fileList[0];
+    }
   }
 }

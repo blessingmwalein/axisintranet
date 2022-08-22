@@ -37,6 +37,7 @@ export const appRoutes: Route[] = [
         ]
     },
 
+
     // Auth routes for authenticated users
     {
         path: '',
@@ -63,7 +64,7 @@ export const appRoutes: Route[] = [
             initialData: InitialDataResolver,
         },
         children: [
-            //employees 
+            //employees
             {
                 path: 'axis',
                 children: [
@@ -72,6 +73,8 @@ export const appRoutes: Route[] = [
                     { path: 'finance-manager', loadChildren: () => import('app/modules/finance-manager/finance-manager.module').then(m => m.FinanceManagerModule) },
                     { path: 'g-m', loadChildren: () => import('app/modules/gm/general-manager.module').then(m => m.GeneralManagerModule) },
                     { path: 'admin', loadChildren: () => import('app/modules/admin/admin.module').then(m => m.AdminModule) },
+                    { path: 'requsitions', loadChildren: () => import('app/modules/requsitions/requsitions.module').then(m => m.RequsitionsModule) },
+
                 ]
             },
             { path: '**', redirectTo: '404-not-found' }

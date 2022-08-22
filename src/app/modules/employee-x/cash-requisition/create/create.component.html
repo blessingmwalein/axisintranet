@@ -40,30 +40,29 @@
                             <mat-label>Title</mat-label>
                             <mat-icon matPrefix class="hidden sm:flex icon-size-5"
                                 [svgIcon]="'heroicons_solid:briefcase'"></mat-icon>
-                            <input matInput [formControlName]="'Title'" [placeholder]="'Title'">
-                            <mat-error *ngIf="horizontalStepperForm.get('step1').get('Title').hasError('required')">
+                            <input matInput [formControlName]="'title'" [placeholder]="'title'">
+                            <mat-error *ngIf="horizontalStepperForm.get('step1').get('title').hasError('required')">
                                 Title is required
                             </mat-error>
                         </mat-form-field>
                     </div>
                     <div class="flex">
 
-                        <mat-label>Attach File</mat-label>
+                        <mat-label>Attach File (Accepted Formarts Pdf and Images)</mat-label> <br>
                         <mat-icon matPrefix class="hidden sm:flex icon-size-5" [svgIcon]="'heroicons_solid:briefcase'">
                         </mat-icon>
                         <input type="file" (change)="fileChange($event)" [placeholder]="'Attache File'">
                         <!-- <mat-error *ngIf="horizontalStepperForm.get('step1').get('title').hasError('required')">
                                 Title is required
                             </mat-error> -->
-
                     </div>
                     <div class="flex">
                         <mat-form-field class=" w-full">
                             <mat-label>Amount</mat-label>
                             <mat-icon matPrefix class="hidden sm:flex icon-size-5"
                                 [svgIcon]="'heroicons_solid:briefcase'"></mat-icon>
-                            <input matInput [formControlName]="'Amount'" [placeholder]="'Amount'">
-                            <mat-error *ngIf="horizontalStepperForm.get('step1').get('Amount').hasError('required')">
+                            <input matInput [formControlName]="'amount'" [placeholder]="'amount'">
+                            <mat-error *ngIf="horizontalStepperForm.get('step1').get('amount').hasError('required')">
                                 Amount is required
                             </mat-error>
                         </mat-form-field>
@@ -71,11 +70,11 @@
                     <div class="flex pt-1">
                         <mat-form-field class="fuse-mat-textarea flex-auto">
                             <mat-label>Comments</mat-label>
-                            <textarea matInput [formControlName]="'RequestComments'" [placeholder]="'About'"
+                            <textarea matInput [formControlName]="'requestComments'" [placeholder]="'About'"
                                 [rows]="3"></textarea>
                             <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:menu-alt-2'"></mat-icon>
                             <mat-error
-                                *ngIf="horizontalStepperForm.get('step1').get('RequestComments').hasError('required')">
+                                *ngIf="horizontalStepperForm.get('step1').get('requestComments').hasError('required')">
                                 Comments are required
                             </mat-error>
                         </mat-form-field>
@@ -83,13 +82,13 @@
                     <div class="flex flex-col gt-xs:flex-row">
                         <mat-form-field class="flex-auto gt-xs:pr-3">
                             <mat-label>Select Cash</mat-label>
-                            <mat-select [formControlName]="'CashId'" [placeholder]="'Cash'" required>
+                            <mat-select [formControlName]="'cashId'" [placeholder]="'Cash'" required>
                                 <mat-option *ngFor="let cash of cashs" [value]="cash.id">
                                     {{cash.description}}</mat-option>
                             </mat-select>
                             <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:location-marker'">
                             </mat-icon>
-                            <mat-error *ngIf="horizontalStepperForm.get('step1').get('CashId').hasError('required')">
+                            <mat-error *ngIf="horizontalStepperForm.get('step1').get('cashId').hasError('required')">
                                 Please select cash
                             </mat-error>
                         </mat-form-field>
@@ -109,11 +108,11 @@
                     <div class="flex flex-col gt-xs:flex-row">
                         <mat-form-field [ngClass]="formFieldHelpers" class="flex-auto">
                             <mat-label>Start date</mat-label>
-                            <input matInput type="datetime-local" id="StartDate" (change)="isInThePast($event.value)"
-                                [placeholder]="'Start date'" [formControlName]="'StartDate'">
+                            <input matInput type="datetime-local" id="startDate" (change)="isInThePast($event.value)"
+                                [placeholder]="'Start date'" [formControlName]="'startDate'">
                             <!-- <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                             <mat-datepicker #picker2></mat-datepicker> -->
-                            <mat-error *ngIf="horizontalStepperForm.get('step2').get('StartDate').hasError('required')">
+                            <mat-error *ngIf="horizontalStepperForm.get('step2').get('startDate').hasError('required')">
                                 Please choose start date
                             </mat-error>
                             <mat-error *ngIf="isPastStartDate">
@@ -122,11 +121,11 @@
                         </mat-form-field>
                         <mat-form-field [ngClass]="formFieldHelpers" class="flex-auto">
                             <mat-label>End date</mat-label>
-                            <input matInput type="datetime-local" id="StartDate" [placeholder]="'End date'"
-                                [formControlName]="'EndDate'">
+                            <input matInput type="datetime-local" id="endDate" [placeholder]="'End date'"
+                                [formControlName]="'endDate'">
                             <!-- <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                             <mat-datepicker #picker3></mat-datepicker> -->
-                            <mat-error *ngIf="horizontalStepperForm.get('step2').get('EndDate').hasError('required')">
+                            <mat-error *ngIf="horizontalStepperForm.get('step2').get('endDate').hasError('required')">
                                 Please choose end date
                             </mat-error>
                         </mat-form-field>
@@ -135,10 +134,10 @@
                                 <mat-label>Duration(hours)</mat-label>
                                 <mat-icon matPrefix class="hidden sm:flex icon-size-5"
                                     [svgIcon]="'heroicons_solid:briefcase'"></mat-icon>
-                                <input matInput [formControlName]="'Duration'" type="tel" min="1"
+                                <input matInput [formControlName]="'duration'" type="tel" min="1"
                                     [placeholder]="'Duration(hours)'">
                                 <mat-error
-                                    *ngIf="horizontalStepperForm.get('step2').get('Duration').hasError('required')">
+                                    *ngIf="horizontalStepperForm.get('step2').get('duration').hasError('required')">
                                     Duration is required
                                 </mat-error>
                             </mat-form-field>

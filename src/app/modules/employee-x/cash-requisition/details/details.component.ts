@@ -1,4 +1,14 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    ElementRef,
+    Inject,
+    OnDestroy,
+    OnInit,
+    ViewChild,
+    ViewEncapsulation,
+} from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { MatTabGroup } from '@angular/material/tabs';
 import { Subject } from 'rxjs';
@@ -13,15 +23,18 @@ import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { UpdateUsedFundsComponent } from '../update-used-funds/update-used-funds.component';
 import { UpdateReceivedFundsComponent } from '../update-received-funds/update-received-funds.component';
 import { MatDialog } from '@angular/material/dialog';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { PreviewFileComponent } from '../preview-file/preview-file.component';
 
 @Component({
     selector: 'academy-details',
     templateUrl: './details.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CashRequisitionDetailsComponent implements OnInit {
-    @ViewChild('cashRequisitionSteps', { static: true }) cashRequisitionSteps: MatTabGroup;
+    @ViewChild('cashRequisitionSteps', { static: true })
+    cashRequisitionSteps: MatTabGroup;
     cashRequisition: any;
     currentStep: number = 0;
     drawerMode: 'over' | 'side' = 'side';
@@ -30,6 +43,7 @@ export class CashRequisitionDetailsComponent implements OnInit {
     cashReqForm: FormGroup;
     verticalStepperForm: FormGroup;
     cashs: any[];
+    image: SafeUrl;
     /**
      * Constructor
      */
@@ -45,15 +59,14 @@ export class CashRequisitionDetailsComponent implements OnInit {
         private _router: Router,
         private _fuseConfirmationService: FuseConfirmationService,
         private _matDialog: MatDialog,
-    ) {
-    }
+        private sanitizer: DomSanitizer
+    ) {}
 
     ngOnInit(): void {
-
-        this.getCashReq()
-        this._cashRequisitionService.getCashs().subscribe(data => {
+        this.getCashReq();
+        this._cashRequisitionService.getCashs().subscribe((data) => {
             this.cashs = data;
-        })
+        });
 
         this.cashReqForm = this._formBuilder.group({
             title: [''],
@@ -67,23 +80,23 @@ export class CashRequisitionDetailsComponent implements OnInit {
             requestComments: [''],
             approved: [''],
             cancelled: [''],
-            cashId: ['']
+            cashId: [''],
         });
         this.verticalStepperForm = this._formBuilder.group({
             step1: this._formBuilder.group({
-                startDate: [""],
-                endDate: [""],
-                requisitionCol: [""],
-                requestingEmployeeId: [""],
-                financeApprovedDate: [""],
-                financeApproverId: [""],
-                lineApproverId: [""],
-                lineApproved: [""],
-                lineApprovedDate: [""],
-                dateRequested: [""],
-                requestComments: [""],
-                dateActioned: [""],
-                approved: [""],
+                startDate: [''],
+                endDate: [''],
+                requisitionCol: [''],
+                requestingEmployeeId: [''],
+                financeApprovedDate: [''],
+                financeApproverId: [''],
+                lineApproverId: [''],
+                lineApproved: [''],
+                lineApprovedDate: [''],
+                dateRequested: [''],
+                requestComments: [''],
+                dateActioned: [''],
+                approved: [''],
                 cancelled: [],
                 duration: [],
                 title: [],
@@ -94,6 +107,8 @@ export class CashRequisitionDetailsComponent implements OnInit {
                 releasedFunds: [],
                 receivedFunds: [],
                 actualUsedFunds: [],
+                fileSource: [''],
+                uploadedFileName: [''],
             }),
             step2: this._formBuilder.group({
                 id: [],
@@ -101,7 +116,7 @@ export class CashRequisitionDetailsComponent implements OnInit {
                 status: [''],
                 currencyCode: [''],
                 currency: [''],
-                amount: []
+                amount: [],
             }),
             step3: this._formBuilder.group({
                 id: [''],
@@ -111,68 +126,91 @@ export class CashRequisitionDetailsComponent implements OnInit {
                 lastName: [''],
                 departmentsId: [''],
                 phoneNumber: [''],
-                roles: ['']
-            })
+                roles: [''],
+            }),
         });
     }
 
-
     getCashReq() {
-        this._cashRequisitionService.getCashRequisition(this._activatedRoute.snapshot.params['id']).subscribe(response => {
-            this.cashRequisition = response;
-            this.verticalStepperForm.patchValue({
-                step1: {
-                    startDate: this.cashRequisition.startDate,
-                    endDate: this.cashRequisition.endDate,
-                    requisitionCol: this.cashRequisition.requisitionCol,
-                    requestingEmployeeId: this.cashRequisition.requestingEmployeeId,
-                    financeApprovedDate: this.cashRequisition.financeApprovedDate,
-                    financeApproverId: this.cashRequisition.financeApproverId,
-                    lineApproverId: this.cashRequisition.lineApproverId,
-                    lineApproved: this.cashRequisition.lineApproved,
-                    lineApprovedDate: this.cashRequisition.lineApprovedDate,
-                    dateRequested: this.cashRequisition.dateRequested,
-                    requestComments: this.cashRequisition.requestComments,
-                    dateActioned: this.cashRequisition.dateActioned,
-                    approved: this.cashRequisition.approved,
-                    cancelled: this.cashRequisition.cancelled,
-                    duration: this.cashRequisition.duration,
-                    title: this.cashRequisition.title,
-                    id: this.cashRequisition.id,
-                    description: this.cashRequisition.description,
-                    status: this.cashRequisition.status,
-                    amount: this.cashRequisition.amount,
-                    releasedFunds: this.cashRequisition.releasedFunds,
-                    receivedFunds: this.cashRequisition.receivedFunds,
-                    actualUsedFunds: this.cashRequisition.actualUsedFunds
-                },
-                step2: {
-                    id: this.cashRequisition.cash.id,
-                    description: this.cashRequisition.cash.description,
-                    status: this.cashRequisition.cash.status,
-                    currencyCode: this.cashRequisition.cash.currencyCode,
-                    currency: this.cashRequisition.cash.currency,
-                    amount: this.cashRequisition.cash.amount
-                },
-                step3: {
-                    id: this.cashRequisition.employee.id,
-                    email: this.cashRequisition.employee.email,
-                    userName: this.cashRequisition.employee.userName,
-                    firstName: this.cashRequisition.employee.firstName,
-                    lastName: this.cashRequisition.employee.lastName,
-                    departmentsId: this.cashRequisition.employee.departmentsId,
-                    phoneNumber: this.cashRequisition.employee.phoneNumber,
-                    roles: this.cashRequisition.employee.roles
-                }
-            })
-            this.isLoading = false
-        }, error => {
-            console.log(error);
-            this.isLoading = false;
-            this._alertService.displayError("Failed to load requisition reload the page")
-        })
-    }
+        this._cashRequisitionService
+            .getCashRequisition(this._activatedRoute.snapshot.params['id'])
+            .subscribe(
+                (response) => {
+                    this.cashRequisition = response;
+                    this.image = this.sanitizer.bypassSecurityTrustUrl(
+                        this.cashRequisition.fileSource
+                    );
 
+                    console.log(this.image);
+
+                    this.verticalStepperForm.patchValue({
+                        step1: {
+                            startDate: this.cashRequisition.startDate,
+                            endDate: this.cashRequisition.endDate,
+                            requisitionCol: this.cashRequisition.requisitionCol,
+                            requestingEmployeeId:
+                                this.cashRequisition.requestingEmployeeId,
+                            financeApprovedDate:
+                                this.cashRequisition.financeApprovedDate,
+                            financeApproverId:
+                                this.cashRequisition.financeApproverId,
+                            lineApproverId: this.cashRequisition.lineApproverId,
+                            lineApproved: this.cashRequisition.lineApproved,
+                            lineApprovedDate:
+                                this.cashRequisition.lineApprovedDate,
+                            dateRequested: this.cashRequisition.dateRequested,
+                            requestComments:
+                                this.cashRequisition.requestComments,
+                            dateActioned: this.cashRequisition.dateActioned,
+                            approved: this.cashRequisition.approved,
+                            cancelled: this.cashRequisition.cancelled,
+                            duration: this.cashRequisition.duration,
+                            title: this.cashRequisition.title,
+                            id: this.cashRequisition.id,
+                            description: this.cashRequisition.description,
+                            status: this.cashRequisition.status,
+                            amount: this.cashRequisition.amount,
+                            releasedFunds: this.cashRequisition.releasedFunds,
+                            receivedFunds: this.cashRequisition.receivedFunds,
+                            actualUsedFunds:
+                                this.cashRequisition.actualUsedFunds,
+                            fileSource: this.cashRequisition.fileSource,
+                            uploadedFileName:
+                                this.cashRequisition.uploadedFileName,
+                        },
+                        step2: {
+                            id: this.cashRequisition.cash.id,
+                            description: this.cashRequisition.cash.description,
+                            status: this.cashRequisition.cash.status,
+                            currencyCode:
+                                this.cashRequisition.cash.currencyCode,
+                            currency: this.cashRequisition.cash.currency,
+                            amount: this.cashRequisition.cash.amount,
+                        },
+                        step3: {
+                            id: this.cashRequisition.employee.id,
+                            email: this.cashRequisition.employee.email,
+                            userName: this.cashRequisition.employee.userName,
+                            firstName: this.cashRequisition.employee.firstName,
+                            lastName: this.cashRequisition.employee.lastName,
+                            departmentsId:
+                                this.cashRequisition.employee.departmentsId,
+                            phoneNumber:
+                                this.cashRequisition.employee.phoneNumber,
+                            roles: this.cashRequisition.employee.roles,
+                        },
+                    });
+                    this.isLoading = false;
+                },
+                (error) => {
+                    console.log(error);
+                    this.isLoading = false;
+                    this._alertService.displayError(
+                        'Failed to load requisition reload the page'
+                    );
+                }
+            );
+    }
 
     goToStep(step: number): void {
         // Set the current step
@@ -217,22 +255,20 @@ export class CashRequisitionDetailsComponent implements OnInit {
         this._scrollCurrentStepElementIntoView();
     }
 
-
     trackByFn(index: number, item: any): any {
         return item.id || index;
     }
 
-
     private _scrollCurrentStepElementIntoView(): void {
         // Wrap everything into setTimeout so we can make sure that the 'current-step' class points to correct element
         setTimeout(() => {
-
             // Get the current step element and scroll it into view
-            const currentStepElement = this._document.getElementsByClassName('current-step')[0];
+            const currentStepElement =
+                this._document.getElementsByClassName('current-step')[0];
             if (currentStepElement) {
                 currentStepElement.scrollIntoView({
                     behavior: 'smooth',
-                    block: 'start'
+                    block: 'start',
                 });
             }
         });
@@ -240,31 +276,36 @@ export class CashRequisitionDetailsComponent implements OnInit {
 
     openDeleteDialog(id: string) {
         const dialogRef = this._fuseConfirmationService.open({
-            message: "Are sure you want to delete this requisition ?",
-            title: "Delete Requisition Confirmation"
+            message: 'Are sure you want to delete this requisition ?',
+            title: 'Delete Requisition Confirmation',
         });
 
         dialogRef.afterClosed().subscribe((result) => {
             console.log(result);
             if (result == 'confirmed') {
-                this.deteleVehicelReq(id)
+                this.deteleVehicelReq(id);
             }
             if (result == 'cancelled' || result == undefined) {
-                this._alertService.displayError('Requsition delete canceled')
+                this._alertService.displayError('Requsition delete canceled');
             }
         });
     }
 
     deteleVehicelReq(id: string) {
         this.isLoading = true;
-        this._cashRequisitionService.deleteVehicelRequisition(id).subscribe(response => {
-            this._alertService.displayMessage('Requisition Deleted');
-            this._router.navigateByUrl('axis/employee/requisitions/cash')
-            this.isLoading = false;
-        }, error => {
-            this.isLoading = false;
-            this._alertService.displayError(`Something went wrong:  ${error?.error?.message}`)
-        })
+        this._cashRequisitionService.deleteVehicelRequisition(id).subscribe(
+            (response) => {
+                this._alertService.displayMessage('Requisition Deleted');
+                this._router.navigateByUrl('axis/employee/requisitions/cash');
+                this.isLoading = false;
+            },
+            (error) => {
+                this.isLoading = false;
+                this._alertService.displayError(
+                    `Something went wrong:  ${error?.error?.message}`
+                );
+            }
+        );
     }
 
     openCreateDepartmentDialog(): void {
@@ -273,11 +314,10 @@ export class CashRequisitionDetailsComponent implements OnInit {
             data: { cashReq: this.cashRequisition },
         });
 
-        dialogRef.afterClosed()
-            .subscribe((result) => {
-                console.log('Compose dialog was closed!');
-                this.getCashReq();
-            });
+        dialogRef.afterClosed().subscribe((result) => {
+            console.log('Compose dialog was closed!');
+            this.getCashReq();
+        });
     }
     openUpdateCashReceuvedDialog(): void {
         // Open the dialog
@@ -285,10 +325,19 @@ export class CashRequisitionDetailsComponent implements OnInit {
             data: { cashReq: this.cashRequisition },
         });
 
-        dialogRef.afterClosed()
-            .subscribe((result) => {
-                console.log('Compose dialog was closed!');
-                this.getCashReq();
-            });
+        dialogRef.afterClosed().subscribe((result) => {
+            console.log('Compose dialog was closed!');
+            this.getCashReq();
+        });
+    }
+    onFileUpload() {
+        const dialogRef = this._matDialog.open(PreviewFileComponent, {
+            data: { uploadedFileName: this.cashRequisition.uploadedFileName },
+            width:"700px",
+        });
+
+        dialogRef.afterClosed().subscribe((result) => {
+            console.log('Compose dialog was closed!');
+        });
     }
 }

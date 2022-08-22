@@ -40,18 +40,28 @@
                             <mat-label>Title</mat-label>
                             <mat-icon matPrefix class="hidden sm:flex icon-size-5"
                                 [svgIcon]="'heroicons_solid:briefcase'"></mat-icon>
-                            <input matInput [formControlName]="'title'" [placeholder]="'Title'">
+                            <input matInput [formControlName]="'title'" [placeholder]="'title'">
                             <mat-error *ngIf="horizontalStepperForm.get('step1').get('title').hasError('required')">
                                 Title is required
                             </mat-error>
                         </mat-form-field>
                     </div>
                     <div class="flex">
+
+                        <mat-label>Attach File (Accepted Formarts Pdf and Images)</mat-label> <br>
+                        <mat-icon matPrefix class="hidden sm:flex icon-size-5" [svgIcon]="'heroicons_solid:briefcase'">
+                        </mat-icon>
+                        <input type="file" (change)="fileChange($event)" [placeholder]="'Attache File'">
+                        <!-- <mat-error *ngIf="horizontalStepperForm.get('step1').get('title').hasError('required')">
+                                Title is required
+                            </mat-error> -->
+                    </div>
+                    <div class="flex">
                         <mat-form-field class=" w-full">
                             <mat-label>Amount</mat-label>
                             <mat-icon matPrefix class="hidden sm:flex icon-size-5"
                                 [svgIcon]="'heroicons_solid:briefcase'"></mat-icon>
-                            <input matInput [formControlName]="'amount'" [placeholder]="'Amount'">
+                            <input matInput [formControlName]="'amount'" [placeholder]="'amount'">
                             <mat-error *ngIf="horizontalStepperForm.get('step1').get('amount').hasError('required')">
                                 Amount is required
                             </mat-error>
@@ -72,7 +82,6 @@
                     <div class="flex flex-col gt-xs:flex-row">
                         <mat-form-field class="flex-auto gt-xs:pr-3">
                             <mat-label>Select Cash</mat-label>
-
                             <mat-select [formControlName]="'cashId'" [placeholder]="'Cash'" required>
                                 <mat-option *ngFor="let cash of cashs" [value]="cash.id">
                                     {{cash.description}}</mat-option>
@@ -112,7 +121,7 @@
                         </mat-form-field>
                         <mat-form-field [ngClass]="formFieldHelpers" class="flex-auto">
                             <mat-label>End date</mat-label>
-                            <input matInput type="datetime-local" id="startDate" [placeholder]="'End date'"
+                            <input matInput type="datetime-local" id="endDate" [placeholder]="'End date'"
                                 [formControlName]="'endDate'">
                             <!-- <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                             <mat-datepicker #picker3></mat-datepicker> -->

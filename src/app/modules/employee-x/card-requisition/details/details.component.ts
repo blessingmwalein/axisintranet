@@ -12,6 +12,7 @@ import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { MatDialog } from '@angular/material/dialog';
 import { UpdateUsedFundsComponent } from '../update-used-funds/update-used-funds.component';
 import { UpdateReceivedFundsComponent } from '../update-received-funds/update-received-funds.component';
+import { PreviewFileComponent } from '../../cash-requisition/preview-file/preview-file.component';
 
 @Component({
     selector: 'academy-details',
@@ -286,5 +287,16 @@ export class CardRequisitionDetailsComponent implements OnInit {
                 console.log('Compose dialog was closed!');
                 this.getCardReq();
             });
+    }
+
+    onFileUpload() {
+        const dialogRef = this._matDialog.open(PreviewFileComponent, {
+            data: { uploadedFileName: this.cardRequisition.uploadedFileName },
+            width:"700px",
+        });
+
+        dialogRef.afterClosed().subscribe((result) => {
+            console.log('Compose dialog was closed!');
+        });
     }
 }

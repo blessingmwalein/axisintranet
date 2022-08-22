@@ -1,30 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import {
-    AbstractControl,
-    FormBuilder,
-    FormControl,
-    FormGroup,
-    ValidatorFn,
-    Validators,
-} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { takeUntil } from 'rxjs/operators';
-import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
-import { CashRequisitionService } from '../../services/cash-requisitions/cash-requisitions.service';
-import { AlertService } from 'app/modules/alert/snackbar/alert.service';
 import { UserService } from 'app/core/user/user.service';
-import moment from 'moment';
+import { AlertService } from 'app/modules/alert/snackbar/alert.service';
+import { CashRequisitionService } from 'app/modules/employee-x/services/cash-requisitions/cash-requisitions.service';
+import { Subject } from 'rxjs';
 
 @Component({
-    selector: 'app-create',
-    templateUrl: './create.component.html',
-    styleUrls: ['./create.component.scss'],
+    selector: 'app-create-cash-req',
+    templateUrl: './create-cash-req.component.html',
+    styleUrls: ['./create-cash-req.component.scss'],
 })
 export class CreateCashReqComponent implements OnInit {
     horizontalStepperForm: FormGroup;
     formFieldHelpers: string[] = [''];
     cashs: any[];
-    private _unsubscribeAll: Subject<any> = new Subject<any>();
     minDate = new Date();
     isPastStartDate = false;
     file: File;
@@ -37,9 +27,6 @@ export class CreateCashReqComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        // const currentYear = moment().year();
-        // this.minDate = moment([currentYear - 1, 0, 1]);
-        // this.maxDate = moment([currentYear + 1, 11, 31]);
         this.setMinDates();
 
         this._cashReqService.getCashs().subscribe((data) => {
@@ -68,7 +55,6 @@ export class CreateCashReqComponent implements OnInit {
 
     setMinDates() {
         const today = new Date().toISOString().slice(0, 16);
-        // document.getElementById("startDate").setAttribute("min", today);
     }
 
     isPresentDate() {}
@@ -78,8 +64,6 @@ export class CreateCashReqComponent implements OnInit {
     }
 
     createReq(): void {
-        console.log('Clicked');
-        this.horizontalStepperForm.patchValue({});
         this.horizontalStepperForm.disable();
         const formData: FormData = new FormData();
         formData.append('uploadedFileName', this.file.name);
@@ -117,19 +101,11 @@ export class CreateCashReqComponent implements OnInit {
             'duration',
             this.horizontalStepperForm.value.step2.duration
         );
-
-        // formData.append('UploadedFileName', file, file.name);
-        // let headers = new Headers();
-        /** In Angular 5, including the header Content-Type can invalidate your request */
-        // headers.append('Content-Type', 'multipart/form-data');
-        // headers.append('Accept', 'application/json');
-        console.log(formData);
-
         this._cashReqService.createCashReq(formData).subscribe(
             () => {
                 this.horizontalStepperForm.enable();
                 this._alertService.displayMessage('Cash requisition submitted');
-                this._router.navigate(['axis/employee/requisitions/cash']);
+                this._router.navigate(['../requisitions/cash']);
             },
             (error) => {
                 console.log(error);
@@ -143,14 +119,8 @@ export class CreateCashReqComponent implements OnInit {
 
     isInThePast(date) {
         const today = new Date();
-
-        // 👇️ OPTIONAL!
-        // This line sets the hour of the current date to midnight
-        // so the comparison only returns `true` if the passed in date
-        // is at least yesterday
         today.setHours(0, 0, 0, 0);
         this.isPastStartDate ?? date < today;
-        // return date < today;
     }
 
     fileChange(event) {
