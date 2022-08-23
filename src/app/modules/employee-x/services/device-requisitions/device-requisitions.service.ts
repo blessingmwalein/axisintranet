@@ -9,7 +9,10 @@ import { environment } from 'environments/environment';
     providedIn: 'root'
 })
 export class DeviceRequisitionService {
-    
+    getCashRequsitionByStatus(status: string) {
+        throw new Error('Method not implemented.');
+    }
+
     private _baseUrl = environment.apiBaseUrl;
 
     /**

@@ -1,49 +1,47 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from 'app/core/user/user.service';
+import { takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
 import { AlertService } from 'app/modules/alert/snackbar/alert.service';
-import { CashRequisitionService } from 'app/modules/employee-x/services/cash-requisitions/cash-requisitions.service';
-import { Subject } from 'rxjs';
+import { UserService } from 'app/core/user/user.service';
+import { CardRequisitionService } from 'app/modules/employee-x/services/card-requisitions/card-requisitions.service';
 
 @Component({
-    selector: 'app-create-cash-req',
-    templateUrl: './create-cash-req.component.html',
-    styleUrls: ['./create-cash-req.component.scss'],
+    selector: 'app-create',
+    templateUrl: './create.component.html',
+    styleUrls: ['./create.component.scss'],
 })
-export class CreateCashReqComponent implements OnInit {
+export class CreateCardReqComponent implements OnInit {
     horizontalStepperForm: FormGroup;
     formFieldHelpers: string[] = [''];
-    cashs: any[];
-    minDate = new Date();
-    isPastStartDate = false;
+    cards: any[];
     file: File;
+    private _unsubscribeAll: Subject<any> = new Subject<any>();
+
     constructor(
         private _alertService: AlertService,
         private _formBuilder: FormBuilder,
-        private _cashReqService: CashRequisitionService,
+        private _cardReqService: CardRequisitionService,
         private _router: Router,
         private _userService: UserService
     ) {}
 
     ngOnInit(): void {
-        this.setMinDates();
-
-        this._cashReqService.getCashs().subscribe((data) => {
-            this.cashs = data;
+        this._cardReqService.getCards().subscribe((data) => {
+            this.cards = data;
         });
 
         this.horizontalStepperForm = this._formBuilder.group({
             step1: this._formBuilder.group({
                 requestComments: ['', [Validators.required]],
-                cashId: ['', Validators.required],
+                cardId: ['', Validators.required],
                 title: ['', Validators.required],
                 amount: ['', Validators.required],
-                status: 'Created',
+                status: ['Created'],
                 lineApproverId: [
                     this._userService.getLocalUser().lineApproverId,
                 ],
-                uploadedFileName: [''],
             }),
             step2: this._formBuilder.group({
                 startDate: ['', Validators.required],
@@ -53,17 +51,13 @@ export class CreateCashReqComponent implements OnInit {
         });
     }
 
-    setMinDates() {
-        const today = new Date().toISOString().slice(0, 16);
-    }
-
-    isPresentDate() {}
-
     getFormFieldHelpersAsString(): string {
         return this.formFieldHelpers.join(' ');
     }
 
     createReq(): void {
+
+
         this.horizontalStepperForm.disable();
         const formData: FormData = new FormData();
         formData.append('uploadedFileName', this.file.name);
@@ -73,8 +67,8 @@ export class CreateCashReqComponent implements OnInit {
             this.horizontalStepperForm.value.step1.requestComments
         );
         formData.append(
-            'cashId',
-            this.horizontalStepperForm.value.step1.cashId
+            'cardId',
+            this.horizontalStepperForm.value.step1.cardId
         );
         formData.append('title', this.horizontalStepperForm.value.step1.title);
         formData.append(
@@ -97,35 +91,28 @@ export class CreateCashReqComponent implements OnInit {
             'endDate',
             this.horizontalStepperForm.value.step2.endDate
         );
+        // formData.append('endDate', this.horizontalStepperForm.value.step2.endDate);
         formData.append(
             'duration',
             this.horizontalStepperForm.value.step2.duration
         );
-        this._cashReqService.createCashReq(formData).subscribe(
+        this._cardReqService.createCardReq(formData).subscribe(
             () => {
                 this.horizontalStepperForm.enable();
-                this._alertService.displayMessage('Cash requisition submitted');
-                this._router.navigate(['axis/requsitions/cash']);
+                this._alertService.displayMessage('Card requisition submitted');
+                this._router.navigate(['axis/requsitions/card']);
             },
             (error) => {
                 console.log(error);
                 this._alertService.displayError(
-                    'Failed to  submitt please try again'
+                    'Check your fields and try again'
                 );
                 this.horizontalStepperForm.enable();
             }
         );
     }
 
-    isInThePast(date) {
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        this.isPastStartDate ?? date < today;
-    }
-
     fileChange(event) {
-        console.log(this.horizontalStepperForm.value.step1.RequestComments);
-
         const fileList: FileList = event.target.files;
         if (fileList.length > 0) {
             this.file = fileList[0];

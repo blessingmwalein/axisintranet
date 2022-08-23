@@ -2,9 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { AssetReqListComponent } from './asset-requisition/asset-req-list/asset-req-list.component';
-import { CreateAssetReqComponent } from './asset-requisition/create/create.component';
-import { AssetRequisitionDetailsComponent } from './asset-requisition/details/details.component';
 import { ManagerRoutingModule } from './manager-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatButtonModule } from '@angular/material/button';
@@ -27,95 +24,44 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { FuseAlertModule } from '@fuse/components/alert';
 import { FuseFindByKeyPipeModule } from '@fuse/pipes/find-by-key';
 import { SharedModule } from 'app/shared/shared.module';
-import { CardReqListComponent } from './card-requisition/card-req-list/card-req-list.component';
-import { CreateCardReqComponent } from './card-requisition/create/create.component';
-import { CardRequisitionDetailsComponent } from './card-requisition/details/details.component';
-import { CashReqListComponent } from './cash-requisition/cash-req-list/cash-req-list.component';
-import { CreateCashReqComponent } from './cash-requisition/create/create.component';
-import { CashRequisitionDetailsComponent } from './cash-requisition/details/details.component';
-import { CreateDeviceReqComponent } from './device-requisition/create/create.component';
-import { DeviceRequisitionDetailsComponent } from './device-requisition/details/details.component';
-import { DeviceReqListComponent } from './device-requisition/device-req-list/device-req-list.component';
-import { CreateComponent } from './vehicle-requisitions/create/create.component';
-import { VehicleRequisitionDetailsComponent } from './vehicle-requisitions/details/details.component';
-import { VehicleReqListComponent } from './vehicle-requisitions/vehicle-req-list/vehicle-req-list.component';
-import { CardRequisitionComponent } from './card-requisition/card-requisition.component';
-import { CashRequisitionComponent } from './cash-requisition/cash-requisition.component';
-import { DeviceRequisitionComponent } from './device-requisition/device-requisition.component';
-import { VehicleRequisitionsComponent } from './vehicle-requisitions/vehicle-requisitions.component';
-import { ApproveReqComponent } from './vehicle-requisitions/approve-req/approve-req.component';
-import { AssetRequisitionComponent } from './asset-requisition/asset-requisition.component';
+
 import { ManagerDashComponent } from './manager-dash/manager-dash.component';
 import { AnnouncementsComponent } from './announcements/announcements.component';
-import { UpdateReceivedFundsComponent } from './cash-requisition/update-received-funds/update-received-funds.component';
-import { UpdateUsedFundsComponent } from './cash-requisition/update-used-funds/update-used-funds.component';
-import { UpdateReleasedFundsComponent } from './cash-requisition/update-released-funds/update-released-funds.component';
-
-import { UpdateReceivedFundsComponent as UpdateReceivedFundsComponentCard } from './card-requisition/update-received-funds/update-received-funds.component';
-import { UpdateUsedFundsComponent as UpdateUsedFundsComponentCard } from './card-requisition/update-used-funds/update-used-funds.component';
-import { UpdateReleasedFundsComponent as UpdateReleasedFundsComponentCard } from './card-requisition/update-released-funds/update-released-funds.component';
-
 
 @NgModule({
-  declarations: [
-    DashboardComponent,
-    CashRequisitionComponent,
-    CashRequisitionDetailsComponent,
-    CashReqListComponent,
-    CreateCashReqComponent,
-    CardRequisitionComponent,
-    CardReqListComponent,
-    CardRequisitionDetailsComponent,
-    CreateCardReqComponent,
-    DeviceRequisitionComponent,
-    DeviceReqListComponent,
-    CreateDeviceReqComponent,
-    DeviceRequisitionDetailsComponent,
-    VehicleRequisitionDetailsComponent,
-    VehicleRequisitionsComponent,
-    VehicleReqListComponent,
-    VehicleRequisitionDetailsComponent,
-    CreateComponent,
-    ApproveReqComponent,
-    ManagerDashComponent,
-    AssetRequisitionComponent,
-    AssetReqListComponent,
-    CreateAssetReqComponent,
-    AssetRequisitionDetailsComponent,
-    AnnouncementsComponent,
-    UpdateReceivedFundsComponent,
-    UpdateUsedFundsComponent,
-    UpdateReleasedFundsComponent,
-    UpdateReceivedFundsComponentCard,
-    UpdateUsedFundsComponentCard,
-    UpdateReleasedFundsComponentCard
-  ],
-  imports: [
-    CommonModule,
-    ManagerRoutingModule,
-    MatIconModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatTabsModule,
-    MatIconModule,
-    MatInputModule,
-    MatRadioModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatSlideToggleModule,
-    FuseAlertModule,
-    SharedModule,
-    FuseFindByKeyPipeModule,
-    MatStepperModule,
-    MatChipsModule,
-    MatProgressSpinnerModule,
-    MatDividerModule,
-    MatMenuModule,
-    MatProgressBarModule,
-    MatSortModule,
-    MatTableModule,
-    MatCheckboxModule,
-    MatDatepickerModule
-  ]
+    declarations: [
+        DashboardComponent,
+
+        ManagerDashComponent,
+
+        AnnouncementsComponent,
+    ],
+    imports: [
+        CommonModule,
+        ManagerRoutingModule,
+        MatIconModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatTabsModule,
+        MatIconModule,
+        MatInputModule,
+        MatRadioModule,
+        MatSelectModule,
+        MatSidenavModule,
+        MatSlideToggleModule,
+        FuseAlertModule,
+        SharedModule,
+        FuseFindByKeyPipeModule,
+        MatStepperModule,
+        MatChipsModule,
+        MatProgressSpinnerModule,
+        MatDividerModule,
+        MatMenuModule,
+        MatProgressBarModule,
+        MatSortModule,
+        MatTableModule,
+        MatCheckboxModule,
+        MatDatepickerModule,
+    ],
 })
-export class ManagerModule { }
+export class ManagerModule {}

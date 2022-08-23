@@ -20,8 +20,7 @@ export class AuthService {
     constructor(
         private _httpClient: HttpClient,
         private _userService: UserService
-    ) {
-    }
+    ) {}
 
     // -----------------------------------------------------------------------------------------------------
     // @ Accessors
@@ -47,8 +46,11 @@ export class AuthService {
      *
      * @param email
      */
-    forgotPassword(email: string): Observable<any> {
-        return this._httpClient.post('api/auth/forgot-password', email);
+    forgotPassword(credentials: { email: string }): Observable<any> {
+        return this._httpClient.post(
+            `${this._baseUrl}Account/RequestPasswordReset`,
+            credentials
+        );
     }
 
     /**
@@ -56,8 +58,11 @@ export class AuthService {
      *
      * @param password
      */
-    resetPassword(password: string): Observable<any> {
-        return this._httpClient.post('api/auth/reset-password', password);
+    resetPassword(credentials: any): Observable<any> {
+        return this._httpClient.post(
+            `${this._baseUrl}Account/ResetPassword`,
+            credentials
+        );
     }
 
     /**
@@ -70,24 +75,46 @@ export class AuthService {
         if (this._authenticated) {
             return throwError('User is already logged in.');
         }
-        return this._httpClient.post(`${this._baseUrl}Account/login`, credentials).pipe(
-            switchMap((response: any) => {
+        return this._httpClient
+            .post(`${this._baseUrl}Account/login`, credentials)
+            .pipe(
+                switchMap((response: any) => {
+                    // Store the access token in the local storage
+                    console.log(response);
 
-                // Store the access token in the local storage
-                console.log(response);
+                    this.accessToken = response.token;
+                    sessionStorage.setItem(
+                        'userDetails',
+                        JSON.stringify(response)
+                    );
+                    // Set the authenticated flag to true
+                    this._authenticated = true;
 
-                this.accessToken = response.token;
-                sessionStorage.setItem('userDetails',JSON.stringify(response));
-                // Set the authenticated flag to true
-                this._authenticated = true;
+                    // Store the user on the user service
+                    this._userService.user = response.user;
 
-                // Store the user on the user service
-                this._userService.user = response.user;
+                    // Return a new observable with the response
+                    return of(response);
+                })
+            );
+    }
 
-                // Return a new observable with the response
-                return of(response);
-            })
-        );
+    sendResetPasswordLink(credentials: { email: string }): Observable<any> {
+        // Throw error, if the user is already logged in
+        if (this._authenticated) {
+            return throwError('User is already logged in.');
+        }
+        return this._httpClient
+            .post(`${this._baseUrl}Account/RequestPasswordReset`, credentials)
+            .pipe(
+                switchMap((response: any) => {
+                    // Store the access token in the local storage
+                    console.log(response);
+
+                    // Return a new observable with the response
+                    return of(response);
+                })
+            );
     }
 
     /**
@@ -95,29 +122,29 @@ export class AuthService {
      */
     signInUsingToken(): Observable<any> {
         // Renew token
-        return this._httpClient.post('api/auth/refresh-access-token', {
-            accessToken: this.accessToken
-        }).pipe(
-            catchError(() =>
-
-                // Return false
-                of(false)
-            ),
-            switchMap((response: any) => {
-
-                // Store the access token in the local storage
-                this.accessToken = response.accessToken;
-
-                // Set the authenticated flag to true
-                this._authenticated = true;
-
-                // Store the user on the user service
-                this._userService.user = response.user;
-
-                // Return true
-                return of(true);
+        return this._httpClient
+            .post('api/auth/refresh-access-token', {
+                accessToken: this.accessToken,
             })
-        );
+            .pipe(
+                catchError(() =>
+                    // Return false
+                    of(false)
+                ),
+                switchMap((response: any) => {
+                    // Store the access token in the local storage
+                    this.accessToken = response.accessToken;
+
+                    // Set the authenticated flag to true
+                    this._authenticated = true;
+
+                    // Store the user on the user service
+                    this._userService.user = response.user;
+
+                    // Return true
+                    return of(true);
+                })
+            );
     }
 
     /**
@@ -139,7 +166,12 @@ export class AuthService {
      *
      * @param user
      */
-    signUp(user: { name: string; email: string; password: string; company: string }): Observable<any> {
+    signUp(user: {
+        name: string;
+        email: string;
+        password: string;
+        company: string;
+    }): Observable<any> {
         return this._httpClient.post('api/auth/sign-up', user);
     }
 
@@ -148,7 +180,10 @@ export class AuthService {
      *
      * @param credentials
      */
-    unlockSession(credentials: { email: string; password: string }): Observable<any> {
+    unlockSession(credentials: {
+        email: string;
+        password: string;
+    }): Observable<any> {
         return this._httpClient.post('api/auth/unlock-session', credentials);
     }
 
@@ -162,7 +197,7 @@ export class AuthService {
         // }
 
         // console.log("token"+this.accessToken);
-        
+
         // Check the access token availability
         if (!this.accessToken) {
             return of(false);

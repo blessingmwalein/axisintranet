@@ -18,10 +18,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FinanceManagerModule } from './modules/finance-manager/finance-manager.module';
 import { EmployeeXModule } from './modules/employee-x/employee-x.module';
 import { GeneralManagerModule } from './modules/gm/general-manager.module';
-import { CreateCardReqComponent } from './modules/requsitions/cards-reqs/create-card-req/create-card-req.component';
-import { CreateVehicleReqComponent } from './modules/requsitions/vehicle-reqs/create-vehicle-req/create-vehicle-req.component';
-import { CreateCashReqComponent } from './modules/employee-x/cash-requisition/create/create.component';
-import { CreateDeviceReqComponent } from './modules/employee-x/device-requisition/create/create.component';
 import { RequsitionsModule } from './modules/requsitions/requsitions.module';
 
 const routerConfig: ExtraOptions = {
@@ -31,13 +27,7 @@ const routerConfig: ExtraOptions = {
 };
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        CreateCashReqComponent,
-        CreateCardReqComponent,
-        CreateDeviceReqComponent,
-        CreateVehicleReqComponent,
-    ],
+    declarations: [AppComponent],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
