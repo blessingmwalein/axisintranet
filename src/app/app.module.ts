@@ -19,6 +19,16 @@ import { FinanceManagerModule } from './modules/finance-manager/finance-manager.
 import { EmployeeXModule } from './modules/employee-x/employee-x.module';
 import { GeneralManagerModule } from './modules/gm/general-manager.module';
 import { RequsitionsModule } from './modules/requsitions/requsitions.module';
+import { AuthResetPasswordModule } from './modules/auth/reset-password/reset-password.module';
+import { AuthResetPasswordComponent } from './modules/auth/reset-password/reset-password.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { FuseAlertModule } from '@fuse/components/alert';
+import { FuseCardModule } from '@fuse/components/card';
+import { SharedModule } from './shared/shared.module';
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy: PreloadAllModules,
@@ -27,7 +37,7 @@ const routerConfig: ExtraOptions = {
 };
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [AppComponent,AuthResetPasswordComponent],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
@@ -50,6 +60,14 @@ const routerConfig: ExtraOptions = {
         GeneralManagerModule,
         EmployeeXModule,
         RequsitionsModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatProgressSpinnerModule,
+        FuseCardModule,
+        FuseAlertModule,
+        SharedModule,
     ],
     bootstrap: [AppComponent],
 })

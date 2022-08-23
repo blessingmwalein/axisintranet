@@ -110,7 +110,7 @@ export class CardRequisitionService {
     }
     getMonthToMonthDetail(data: any): Observable<any[]> {
         return this._httpClient.get<any[]>(
-            `${this._baseUrl}CardRequisition/MonthToMonthReport/${data.id}/${data.status}`
+            `${this._baseUrl}CardRequisition/MonthToMonthReportDetail/${data.id}/${data.status}`
         );
     }
     getDayToDayReport(data: any): Observable<any[]> {
@@ -120,7 +120,7 @@ export class CardRequisitionService {
     }
     getDayToDayReportDetail(data: any): Observable<any[]> {
         return this._httpClient.get<any[]>(
-            `${this._baseUrl}CardRequisition/DayToDayReport/${data.id}/${data.status}`
+            `${this._baseUrl}CardRequisition/DayToDayReportDetail/${data.id}/${data.status}`
         );
     }
 }

@@ -9,14 +9,14 @@ import { FuseCardModule } from '@fuse/components/card';
 import { FuseAlertModule } from '@fuse/components/alert';
 import { SharedModule } from 'app/shared/shared.module';
 import { AuthResetPasswordComponent } from 'app/modules/auth/reset-password/reset-password.component';
-import { authResetPasswordRoutes } from 'app/modules/auth/reset-password/reset-password.routing';
+// import { authResetPasswordRoutes } from 'app/modules/auth/reset-password/reset-password.routing';
 
 @NgModule({
     declarations: [
-        AuthResetPasswordComponent
+        // AuthResetPasswordComponent
     ],
     imports     : [
-        RouterModule.forChild(authResetPasswordRoutes),
+        // RouterModule.forChild(authResetPasswordRoutes),
         MatButtonModule,
         MatFormFieldModule,
         MatIconModule,

@@ -41,27 +41,23 @@ export class AuthResetPasswordComponent implements OnInit {
      */
     ngOnInit(): void {
         // Create the form
-        this.resetPasswordForm = this._formBuilder.group(
-            {
-                newPassword: ['', Validators.required],
-                confirmNewPassword: ['', Validators.required],
-                email: ['', [Validators.required, Validators.email]],
-                token: [''],
-            },
-            {
-                validators: FuseValidators.mustMatch(
-                    'newPassword',
-                    'confirmNewPassword'
-                ),
-            }
-        );
-        this.activatedRoute.queryParams.subscribe((params) => {
-            const token = params['query'];
-            console.log(token);
-
-            this.resetPasswordForm.patchValue({
-                token: "AQAAAAEAACcQAAAAEJSMHcaXMFvXMD4KePstQYysPTDvH8zy/nav7FkmFMwfWE/9ifmKV2vxqZ4WJxsm0g==BPXU7G23GYRYB6YGEHPQ77ZZ2HABAKQ3",
-            });
+        this.activatedRoute.params.subscribe((params) => {
+            const token = params['token'];
+            console.log(params);
+            this.resetPasswordForm = this._formBuilder.group(
+                {
+                    newPassword: ['', Validators.required],
+                    confirmNewPassword: ['', Validators.required],
+                    email: ['', [Validators.required, Validators.email]],
+                    token: [token],
+                },
+                {
+                    validators: FuseValidators.mustMatch(
+                        'newPassword',
+                        'confirmNewPassword'
+                    ),
+                }
+            );
         });
     }
 
@@ -75,7 +71,13 @@ export class AuthResetPasswordComponent implements OnInit {
     resetPassword(): void {
         // Return if the form is invalid
 
-        console.log(this.resetPasswordForm.invalid);
+        this.activatedRoute.params.subscribe((params) => {
+            const token = params['token'];
+            console.log(params);
+            this.resetPasswordForm.patchValue({
+                token: token,
+            });
+        });
 
         if (this.resetPasswordForm.invalid) {
             return;
