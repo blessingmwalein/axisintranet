@@ -5,6 +5,7 @@
     <!-- Header -->
     <div class="bg-card">
         <div class="flex flex-col w-full max-w-screen-xl mx-auto px-6 sm:px-8">
+            <!-- Project selector -->
             <div
                 class="relative flex self-start pt-2 pb-1 pl-5 pr-4 cursor-pointer overflow-hidden rounded-t-xl border border-b-0 bg-default"
                 matRipple
@@ -73,16 +74,7 @@
                                     >
                                         Cash Requisitions
                                     </div>
-                                    <div class="ml-2 -mt-2 -mr-3">
-                                        <!-- <button mat-icon-button [matMenuTriggerFor]="summaryMenu">
-                      <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
-                    </button>
-                    <mat-menu #summaryMenu="matMenu">
-                      <button mat-menu-item>Yesterday</button>
-                      <button mat-menu-item>2 days ago</button>
-                      <button mat-menu-item>3 days ago</button>
-                    </mat-menu> -->
-                                    </div>
+                                    <div class="ml-2 -mt-2 -mr-3"></div>
                                 </div>
                                 <div class="flex flex-col items-center mt-2">
                                     <div
@@ -97,10 +89,7 @@
                                     </div>
                                     <div
                                         class="flex items-baseline justify-center w-full mt-5 text-secondary"
-                                    >
-                                        <!-- <div class="text-md font-medium truncate">Approved:</div>
-                    <div class="ml-1.5 text-lg font-semibold">13</div> -->
-                                    </div>
+                                    ></div>
                                 </div>
                             </div>
                             <div
@@ -114,16 +103,7 @@
                                     >
                                         Card Requisitions
                                     </div>
-                                    <div class="ml-2 -mt-2 -mr-3">
-                                        <!-- <button mat-icon-button [matMenuTriggerFor]="summaryMenu">
-                      <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
-                    </button>
-                    <mat-menu #summaryMenu="matMenu">
-                      <button mat-menu-item>Yesterday</button>
-                      <button mat-menu-item>2 days ago</button>
-                      <button mat-menu-item>3 days ago</button>
-                    </mat-menu> -->
-                                    </div>
+                                    <div class="ml-2 -mt-2 -mr-3"></div>
                                 </div>
                                 <div class="flex flex-col items-center mt-2">
                                     <div
@@ -155,16 +135,7 @@
                                     >
                                         Device Requisitions
                                     </div>
-                                    <div class="ml-2 -mt-2 -mr-3">
-                                        <!-- <button mat-icon-button [matMenuTriggerFor]="summaryMenu">
-                      <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
-                    </button>
-                    <mat-menu #summaryMenu="matMenu">
-                      <button mat-menu-item>Yesterday</button>
-                      <button mat-menu-item>2 days ago</button>
-                      <button mat-menu-item>3 days ago</button>
-                    </mat-menu> -->
-                                    </div>
+                                    <div class="ml-2 -mt-2 -mr-3"></div>
                                 </div>
                                 <div class="flex flex-col items-center mt-2">
                                     <div
@@ -179,10 +150,7 @@
                                     </div>
                                     <div
                                         class="flex items-baseline justify-center w-full mt-5 text-secondary"
-                                    >
-                                        <!-- <div class="text-md font-medium truncate">Approved:</div>
-                    <div class="ml-1.5 text-lg font-semibold">13</div> -->
-                                    </div>
+                                    ></div>
                                 </div>
                             </div>
                             <div
@@ -326,150 +294,385 @@
                         </div>
 
                         <div
-                            class="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-3 gap-6 w-full min-w-0"
+                            class="grid grid-cols-1 xl:grid-cols-2 gap-8 w-full mt-8"
                         >
-                            <!-- Weekly expenses -->
                             <div
-                                class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
+                                class="grid gap-12 sm:grid-flow-col xl:grid-flow-row"
                             >
-                                <div class="flex items-start justify-between">
+                                <!-- Previous statement -->
+                                <div
+                                    class="relative flex flex-col flex-auto p-6 pr-3 pb-3 bg-card rounded-2xl shadow overflow-hidden"
+                                >
                                     <div
-                                        class="text-lg font-medium tracking-tight leading-6 truncate"
+                                        class="absolute bottom-0 right-0 w-24 h-24 -m-6"
                                     >
-                                        Released Funds
+                                        <mat-icon
+                                            class="icon-size-24 opacity-25 text-green-500 dark:text-green-400"
+                                            [svgIcon]="
+                                                'heroicons_outline:check-circle'
+                                            "
+                                        ></mat-icon>
                                     </div>
-                                </div>
-                                <div class="flex items-center mt-1">
-                                    <div class="flex flex-col">
-                                        <div
-                                            class="text-3xl font-semibold tracking-tight leading-tight"
-                                        >
-                                            {{
-                                                cashMonthToMonth?.requestedAmount
-                                                    | currency: currencySelected
-                                            }}
-                                        </div>
-                                        <div class="flex items-center">
-                                            <mat-icon
-                                                class="mr-1 icon-size-5 text-green-500"
-                                                [svgIcon]="
-                                                    'heroicons_solid:trending-down'
-                                                "
-                                            >
-                                            </mat-icon>
+                                    <div class="flex items-center">
+                                        <div class="flex flex-col">
                                             <div
-                                                class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
+                                                class="text-lg font-medium tracking-tight leading-6 truncate"
                                             >
-                                                <span class="text-green-500">{{
-                                                    cashMonthToMonth?.period
-                                                }}</span>
+                                                Cash reports
+                                            </div>
+                                            <div
+                                                class="text-green-600 font-medium text-sm"
+                                            >
                                                 Period
+                                                {{
+                                                    todayDate | date: "MMM yyyy"
+                                                }}
+                                                {{ cashMonthToMonth?.period }}
                                             </div>
                                         </div>
                                     </div>
                                     <div
-                                        class="flex flex-col flex-auto ml-8"
-                                    ></div>
+                                        class="flex flex-row flex-wrap mt-4 -mx-6"
+                                    >
+                                        <div class="flex flex-col mx-6 my-3">
+                                            <div
+                                                class="text-sm font-medium leading-none text-secondary"
+                                            >
+                                                Released Funds
+                                            </div>
+                                            <div
+                                                class="mt-2 font-medium text-3xl leading-none"
+                                            >
+                                                {{
+                                                    cashMonthToMonth?.requestedAmount ??
+                                                        "0.00"
+                                                        | currency
+                                                            : currencySelected
+                                                }}
+                                            </div>
+                                            <div class="flex items-center">
+                                                <mat-icon
+                                                    class="mr-1 icon-size-5 text-red-500"
+                                                    [svgIcon]="
+                                                        'heroicons_solid:trending-up'
+                                                    "
+                                                >
+                                                </mat-icon>
+                                                <div
+                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
+                                                >
+                                                    <span
+                                                        class="text-green-500"
+                                                        >{{
+                                                            cashMonthToMonth?.period
+                                                        }}</span
+                                                    >
+                                                    Period
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-col mx-6 my-3">
+                                            <div
+                                                class="text-sm font-medium leading-none text-secondary"
+                                            >
+                                                Used Funds
+                                            </div>
+                                            <div
+                                                class="mt-2 font-medium text-3xl leading-none"
+                                            >
+                                                {{
+                                                    cashMonthToMonth?.usedFunds ??
+                                                        "0.00"
+                                                        | currency
+                                                            : currencySelected
+                                                }}
+                                            </div>
+                                            <div class="flex items-center">
+                                                <mat-icon
+                                                    class="mr-1 icon-size-5 text-red-500"
+                                                    [svgIcon]="
+                                                        'heroicons_solid:trending-up'
+                                                    "
+                                                >
+                                                </mat-icon>
+                                                <div
+                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
+                                                >
+                                                    <span
+                                                        class="text-green-500"
+                                                        >{{
+                                                            cashMonthToMonth?.period
+                                                        }}</span
+                                                    >
+                                                    Period
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-col mx-6 my-3">
+                                            <div
+                                                class="text-sm font-medium leading-none text-secondary"
+                                            >
+                                                Requested Amount
+                                            </div>
+                                            <div
+                                                class="mt-2 font-medium text-3xl leading-none"
+                                            >
+                                                {{
+                                                    cashMonthToMonth?.requestedAmount ??
+                                                        "0.00"
+                                                        | currency
+                                                            : currencySelected
+                                                }}
+                                            </div>
+                                            <div class="flex items-center">
+                                                <mat-icon
+                                                    class="mr-1 icon-size-5 text-red-500"
+                                                    [svgIcon]="
+                                                        'heroicons_solid:trending-up'
+                                                    "
+                                                >
+                                                </mat-icon>
+                                                <div
+                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
+                                                >
+                                                    <span
+                                                        class="text-green-500"
+                                                        >{{
+                                                            cashMonthToMonth?.period
+                                                        }}</span
+                                                    >
+                                                    Period
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <!-- Monthly expenses -->
+                        </div>
+
+                        <div
+                            class="grid grid-cols-1 xl:grid-cols-3 gap-8 w-full mt-8"
+                        >
+                            <!-- Recent transactions table -->
                             <div
-                                class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
+                                class="xl:col-span-2 flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden"
                             >
-                                <div class="flex items-start justify-between">
+                                <div class="p-6">
                                     <div
-                                        class="text-lg font-medium tracking-tight leading-6 truncate"
+                                        class="mr-4 text-lg font-medium tracking-tight leading-6 truncate"
                                     >
-                                        Requested Amount
+                                        Cash Month to Month Detail
                                     </div>
                                 </div>
-                                <div class="flex items-center mt-1">
-                                    <div class="flex flex-col">
+                                <div class="overflow-x-auto mx-6">
+                                    <div
+                                        class="grid grid-cols-12 gap-x-1 mt-12"
+                                    >
+                                        <!-- Columns -->
+
+                                        <!-- Item -->
                                         <div
-                                            class="text-3xl font-semibold tracking-tight leading-tight"
+                                            class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                        >
+                                            Status
+                                        </div>
+
+                                        <div
+                                            class="col-span-2 self-center text-right"
+                                        >
+                                            {{ cashMonthToMonthDetail?.status }}
+                                        </div>
+
+                                        <!-- Divider -->
+                                        <div
+                                            class="col-span-12 my-4 border-b"
+                                        ></div>
+                                        <div
+                                            class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                        >
+                                            Comments
+                                        </div>
+
+                                        <div
+                                            class="col-span-2 self-center text-right"
                                         >
                                             {{
-                                                cashMonthToMonth?.requestedAmount
-                                                    | currency: currencySelected
+                                                cashMonthToMonthDetail?.comment
                                             }}
                                         </div>
-                                        <div class="flex items-center">
-                                            <mat-icon
-                                                class="mr-1 icon-size-5 text-red-500"
-                                                [svgIcon]="
-                                                    'heroicons_solid:trending-up'
-                                                "
-                                            >
-                                            </mat-icon>
-                                            <div
-                                                class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
-                                            >
-                                                <span class="text-green-500">{{
-                                                    cashMonthToMonth?.period
-                                                }}</span>
-                                                Period
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="flex flex-col flex-auto ml-8"
-                                    ></div>
-                                </div>
-                            </div>
-                            <!-- Yearly expenses -->
-                            <div
-                                class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
-                            >
-                                <div class="flex items-start justify-between">
-                                    <div
-                                        class="text-lg font-medium tracking-tight leading-6 truncate"
-                                    >
-                                        Used Funds
-                                    </div>
-                                </div>
-                                <div class="flex items-center mt-1">
-                                    <div class="flex flex-col">
+
+                                        <!-- Divider -->
                                         <div
-                                            class="text-3xl font-semibold tracking-tight leading-tight"
+                                            class="col-span-12 my-4 border-b"
+                                        ></div>
+                                        <div
+                                            class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                        >
+                                            Date Created
+                                        </div>
+
+                                        <div
+                                            class="col-span-2 self-center text-right"
                                         >
                                             {{
-                                                cashMonthToMonth?.usedFunds
-                                                    | currency: currencySelected
+                                                cashMonthToMonthDetail?.dateCreated
+                                                    | date: "dd/MM/yyyy"
                                             }}
                                         </div>
-                                        <div class="flex items-center">
-                                            <mat-icon
-                                                class="mr-1 icon-size-5 text-red-500"
-                                                [svgIcon]="
-                                                    'heroicons_solid:trending-up'
-                                                "
-                                            >
-                                            </mat-icon>
-                                            <div
-                                                class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
-                                            >
-                                                <span class="text-green-500">{{
-                                                    cashMonthToMonth?.period
-                                                }}</span>
-                                                Period
-                                            </div>
+                                        <div
+                                            class="col-span-12 my-4 border-b"
+                                        ></div>
+                                        <div
+                                            class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                        >
+                                            Lined Approved Date
+                                        </div>
+
+                                        <div
+                                            class="col-span-2 self-center text-right"
+                                        >
+                                            {{
+                                                cashMonthToMonthDetail?.lineApprovedDate
+                                                    | date: "dd/MM/yyyy"
+                                            }}
+                                        </div>
+
+                                        <!-- Divider -->
+                                        <div
+                                            class="col-span-12 my-4 border-b"
+                                        ></div>
+                                        <div
+                                            class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                        >
+                                            Finance Approved Date
+                                        </div>
+
+                                        <div
+                                            class="col-span-2 self-center text-right"
+                                        >
+                                            {{
+                                                cashMonthToMonthDetail?.financeApprovedDate
+                                                    | date: "dd/MM/yyyy"
+                                            }}
+                                        </div>
+
+                                        <!-- Divider -->
+                                        <div
+                                            class="col-span-12 my-4 border-b"
+                                        ></div>
+                                        <div
+                                            class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                        >
+                                            General Approved Date
+                                        </div>
+
+                                        <div
+                                            class="col-span-2 self-center text-right"
+                                        >
+                                            {{
+                                                cashMonthToMonthDetail?.generalManagerApprovedDate
+                                                    | date: "dd/MM/yyyy"
+                                            }}
+                                        </div>
+                                        <div
+                                            class="col-span-12 my-3 border-b"
+                                        ></div>
+                                        <div
+                                            class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                        >
+                                            Created by
+                                        </div>
+
+                                        <div
+                                            class="col-span-2 self-center text-right"
+                                        >
+                                            {{
+                                                cashMonthToMonthDetail?.createdBy
+                                                    | date: "dd/MM/yyyy"
+                                            }}
+                                        </div>
+
+                                        <!-- Divider -->
+                                        <div
+                                            class="col-span-12 my-3 border-b"
+                                        ></div>
+
+                                        <!-- Tax -->
+                                        <div
+                                            class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                        >
+                                            Released Funds
+                                        </div>
+                                        <div
+                                            class="col-span-2 text-right text-lg"
+                                        >
+                                            {{
+                                                cashMonthToMonthDetail?.releasedFunds ??
+                                                    "0.00" | currency
+                                            }}
+                                        </div>
+
+                                        <!-- Divider -->
+                                        <div
+                                            class="col-span-12 my-3 border-b"
+                                        ></div>
+                                        <div
+                                            class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                        >
+                                            Received Funds
+                                        </div>
+                                        <div
+                                            class="col-span-2 text-right text-lg"
+                                        >
+                                            {{
+                                                cashMonthToMonthDetail?.receivedFunds ??
+                                                    "0.00" | currency
+                                            }}
+                                        </div>
+
+                                        <!-- Divider -->
+                                        <div
+                                            class="col-span-12 my-3 border-b"
+                                        ></div>
+                                        <div
+                                            class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                        >
+                                            Actual Used Funds
+                                        </div>
+                                        <div
+                                            class="col-span-2 text-right text-lg"
+                                        >
+                                            {{
+                                                cashMonthToMonthDetail?.actualUsedFunds ??
+                                                    "0.00" | currency
+                                            }}
+                                        </div>
+
+                                        <!-- Divider -->
+                                        <div
+                                            class="col-span-12 my-3 border-b"
+                                        ></div>
+
+                                        <!-- Total -->
+                                        <div
+                                            class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                        >
+                                            Amount
+                                        </div>
+                                        <div
+                                            class="col-span-2 text-right text-2xl font-medium"
+                                        >
+                                            {{
+                                                cashMonthToMonthDetail?.amount ??
+                                                    0.0 | currency
+                                            }}
                                         </div>
                                     </div>
-                                    <div
-                                        class="flex flex-col flex-auto ml-8"
-                                    ></div>
                                 </div>
                             </div>
                         </div>
                     </ng-template>
                 </mat-tab>
-
-                <!-- Budget -->
-                <!-- <mat-tab label="Month to month details">
-          <ng-template matTabContent>
-
-          </ng-template>
-        </mat-tab> -->
 
                 <mat-tab label="Day to day">
                     <ng-template matTabContent>
@@ -520,149 +723,384 @@
                         </div>
 
                         <div
-                            class="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-3 gap-6 w-full min-w-0"
+                            class="grid grid-cols-1 xl:grid-cols-2 gap-8 w-full mt-8"
                         >
-                            <!-- Weekly expenses -->
                             <div
-                                class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
+                                class="grid gap-12 sm:grid-flow-col xl:grid-flow-row"
                             >
-                                <div class="flex items-start justify-between">
+                                <!-- Previous statement -->
+                                <div
+                                    class="relative flex flex-col flex-auto p-6 pr-3 pb-3 bg-card rounded-2xl shadow overflow-hidden"
+                                >
                                     <div
-                                        class="text-lg font-medium tracking-tight leading-6 truncate"
+                                        class="absolute bottom-0 right-0 w-24 h-24 -m-6"
                                     >
-                                        Released Funds
+                                        <mat-icon
+                                            class="icon-size-24 opacity-25 text-green-500 dark:text-green-400"
+                                            [svgIcon]="
+                                                'heroicons_outline:check-circle'
+                                            "
+                                        ></mat-icon>
                                     </div>
-                                </div>
-                                <div class="flex items-center mt-1">
-                                    <div class="flex flex-col">
-                                        <div
-                                            class="text-3xl font-semibold tracking-tight leading-tight"
-                                        >
-                                            {{
-                                                cardDayToDay?.requestedAmount
-                                                    | currency: currencySelected
-                                            }}
-                                        </div>
-                                        <div class="flex items-center">
-                                            <mat-icon
-                                                class="mr-1 icon-size-5 text-green-500"
-                                                [svgIcon]="
-                                                    'heroicons_solid:trending-down'
-                                                "
-                                            >
-                                            </mat-icon>
+                                    <div class="flex items-center">
+                                        <div class="flex flex-col">
                                             <div
-                                                class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
+                                                class="text-lg font-medium tracking-tight leading-6 truncate"
                                             >
-                                                <span class="text-green-500">{{
-                                                    cashDayToDay?.period
-                                                }}</span>
+                                                Cash reports
+                                            </div>
+                                            <div
+                                                class="text-green-600 font-medium text-sm"
+                                            >
                                                 Period
+                                                {{
+                                                    todayDate | date: "MMM yyyy"
+                                                }}
+                                                {{ cardDayToDay?.period }}
                                             </div>
                                         </div>
                                     </div>
                                     <div
-                                        class="flex flex-col flex-auto ml-8"
-                                    ></div>
+                                        class="flex flex-row flex-wrap mt-4 -mx-6"
+                                    >
+                                        <div class="flex flex-col mx-6 my-3">
+                                            <div
+                                                class="text-sm font-medium leading-none text-secondary"
+                                            >
+                                                Released Funds
+                                            </div>
+                                            <div
+                                                class="mt-2 font-medium text-3xl leading-none"
+                                            >
+                                                {{
+                                                    cardDayToDay?.requestedAmount ??
+                                                        "0.00"
+                                                        | currency
+                                                            : currencySelected
+                                                }}
+                                            </div>
+                                            <div class="flex items-center">
+                                                <mat-icon
+                                                    class="mr-1 icon-size-5 text-red-500"
+                                                    [svgIcon]="
+                                                        'heroicons_solid:trending-up'
+                                                    "
+                                                >
+                                                </mat-icon>
+                                                <div
+                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
+                                                >
+                                                    <span
+                                                        class="text-green-500"
+                                                        >{{
+                                                            cardDayToDay?.period
+                                                        }}</span
+                                                    >
+                                                    Period
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-col mx-6 my-3">
+                                            <div
+                                                class="text-sm font-medium leading-none text-secondary"
+                                            >
+                                                Used Funds
+                                            </div>
+                                            <div
+                                                class="mt-2 font-medium text-3xl leading-none"
+                                            >
+                                                {{
+                                                    cardDayToDay?.usedFunds ??
+                                                        "0.00"
+                                                        | currency
+                                                            : currencySelected
+                                                }}
+                                            </div>
+                                            <div class="flex items-center">
+                                                <mat-icon
+                                                    class="mr-1 icon-size-5 text-red-500"
+                                                    [svgIcon]="
+                                                        'heroicons_solid:trending-up'
+                                                    "
+                                                >
+                                                </mat-icon>
+                                                <div
+                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
+                                                >
+                                                    <span
+                                                        class="text-green-500"
+                                                        >{{
+                                                            cardDayToDay?.period
+                                                        }}</span
+                                                    >
+                                                    Period
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-col mx-6 my-3">
+                                            <div
+                                                class="text-sm font-medium leading-none text-secondary"
+                                            >
+                                                Requested Amount
+                                            </div>
+                                            <div
+                                                class="mt-2 font-medium text-3xl leading-none"
+                                            >
+                                                {{
+                                                    cardDayToDay?.requestedAmount ??
+                                                        "0.00"
+                                                        | currency
+                                                            : currencySelected
+                                                }}
+                                            </div>
+                                            <div class="flex items-center">
+                                                <mat-icon
+                                                    class="mr-1 icon-size-5 text-red-500"
+                                                    [svgIcon]="
+                                                        'heroicons_solid:trending-up'
+                                                    "
+                                                >
+                                                </mat-icon>
+                                                <div
+                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
+                                                >
+                                                    <span
+                                                        class="text-green-500"
+                                                        >{{
+                                                            cardDayToDay?.period
+                                                        }}</span
+                                                    >
+                                                    Period
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <!-- Monthly expenses -->
                             <div
-                                class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
+                                class="grid grid-cols-1 xl:grid-cols-3 gap-8 w-full mt-8"
                             >
-                                <div class="flex items-start justify-between">
-                                    <div
-                                        class="text-lg font-medium tracking-tight leading-6 truncate"
-                                    >
-                                        Requested Amount
-                                    </div>
-                                </div>
-                                <div class="flex items-center mt-1">
-                                    <div class="flex flex-col">
+                                <!-- Recent transactions table -->
+                                <div
+                                    class="xl:col-span-2 flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden"
+                                >
+                                    <div class="p-6">
                                         <div
-                                            class="text-3xl font-semibold tracking-tight leading-tight"
+                                            class="mr-4 text-lg font-medium tracking-tight leading-6 truncate"
                                         >
-                                            {{
-                                                cashDayToDay?.requestedAmount
-                                                    | currency: currencySelected
-                                            }}
+                                            Cash Day to Day Detail
                                         </div>
-                                        <div class="flex items-center">
-                                            <mat-icon
-                                                class="mr-1 icon-size-5 text-red-500"
-                                                [svgIcon]="
-                                                    'heroicons_solid:trending-up'
-                                                "
-                                            >
-                                            </mat-icon>
+                                    </div>
+                                    <div class="overflow-x-auto mx-6">
+                                        <div
+                                            class="grid grid-cols-12 gap-x-1 mt-12"
+                                        >
+                                            <!-- Columns -->
+
+                                            <!-- Item -->
                                             <div
-                                                class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
                                             >
-                                                <span class="text-green-500">{{
-                                                    cashDayToDay?.period
-                                                }}</span>
-                                                Period
+                                                Status
+                                            </div>
+
+                                            <div
+                                                class="col-span-2 self-center text-right"
+                                            >
+                                                {{ cashDayToDayDetail?.status }}
+                                            </div>
+
+                                            <!-- Divider -->
+                                            <div
+                                                class="col-span-12 my-4 border-b"
+                                            ></div>
+                                            <div
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                            >
+                                                Comments
+                                            </div>
+
+                                            <div
+                                                class="col-span-2 self-center text-right"
+                                            >
+                                                {{
+                                                    cashDayToDayDetail?.comment
+                                                }}
+                                            </div>
+
+                                            <!-- Divider -->
+                                            <div
+                                                class="col-span-12 my-4 border-b"
+                                            ></div>
+                                            <div
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                            >
+                                                Date Created
+                                            </div>
+
+                                            <div
+                                                class="col-span-2 self-center text-right"
+                                            >
+                                                {{
+                                                    cashDayToDayDetail?.dateCreated
+                                                        | date: "dd/MM/yyyy"
+                                                }}
+                                            </div>
+                                            <div
+                                                class="col-span-12 my-4 border-b"
+                                            ></div>
+                                            <div
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                            >
+                                                Lined Approved Date
+                                            </div>
+
+                                            <div
+                                                class="col-span-2 self-center text-right"
+                                            >
+                                                {{
+                                                    cashDayToDayDetail?.lineApprovedDate
+                                                        | date: "dd/MM/yyyy"
+                                                }}
+                                            </div>
+
+                                            <!-- Divider -->
+                                            <div
+                                                class="col-span-12 my-4 border-b"
+                                            ></div>
+                                            <div
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                            >
+                                                Finance Approved Date
+                                            </div>
+
+                                            <div
+                                                class="col-span-2 self-center text-right"
+                                            >
+                                                {{
+                                                    cashDayToDayDetail?.financeApprovedDate
+                                                        | date: "dd/MM/yyyy"
+                                                }}
+                                            </div>
+
+                                            <!-- Divider -->
+                                            <div
+                                                class="col-span-12 my-4 border-b"
+                                            ></div>
+                                            <div
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                            >
+                                                General Approved Date
+                                            </div>
+
+                                            <div
+                                                class="col-span-2 self-center text-right"
+                                            >
+                                                {{
+                                                    cashDayToDayDetail?.generalManagerApprovedDate
+                                                        | date: "dd/MM/yyyy"
+                                                }}
+                                            </div>
+                                            <div
+                                                class="col-span-12 my-3 border-b"
+                                            ></div>
+                                            <div
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                            >
+                                                Created by
+                                            </div>
+
+                                            <div
+                                                class="col-span-2 self-center text-right"
+                                            >
+                                                {{
+                                                    cashDayToDayDetail?.createdBy
+                                                        | date: "dd/MM/yyyy"
+                                                }}
+                                            </div>
+
+                                            <!-- Divider -->
+                                            <div
+                                                class="col-span-12 my-3 border-b"
+                                            ></div>
+
+                                            <!-- Tax -->
+                                            <div
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                            >
+                                                Released Funds
+                                            </div>
+                                            <div
+                                                class="col-span-2 text-right text-lg"
+                                            >
+                                                {{
+                                                    cashDayToDayDetail?.releasedFunds ??
+                                                        "0.00" | currency
+                                                }}
+                                            </div>
+
+                                            <!-- Divider -->
+                                            <div
+                                                class="col-span-12 my-3 border-b"
+                                            ></div>
+                                            <div
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                            >
+                                                Received Funds
+                                            </div>
+                                            <div
+                                                class="col-span-2 text-right text-lg"
+                                            >
+                                                {{
+                                                    cashDayToDayDetail?.receivedFunds ??
+                                                        "0.00" | currency
+                                                }}
+                                            </div>
+
+                                            <!-- Divider -->
+                                            <div
+                                                class="col-span-12 my-3 border-b"
+                                            ></div>
+                                            <div
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                            >
+                                                Actual Used Funds
+                                            </div>
+                                            <div
+                                                class="col-span-2 text-right text-lg"
+                                            >
+                                                {{
+                                                    cashDayToDayDetail?.actualUsedFunds ??
+                                                        "0.00" | currency
+                                                }}
+                                            </div>
+
+                                            <!-- Divider -->
+                                            <div
+                                                class="col-span-12 my-3 border-b"
+                                            ></div>
+
+                                            <!-- Total -->
+                                            <div
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                            >
+                                                Amount
+                                            </div>
+                                            <div
+                                                class="col-span-2 text-right text-2xl font-medium"
+                                            >
+                                                {{
+                                                    cashDayToDayDetail?.amount ??
+                                                        0.0 | currency
+                                                }}
                                             </div>
                                         </div>
                                     </div>
-                                    <div
-                                        class="flex flex-col flex-auto ml-8"
-                                    ></div>
-                                </div>
-                            </div>
-                            <!-- Yearly expenses -->
-                            <div
-                                class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
-                            >
-                                <div class="flex items-start justify-between">
-                                    <div
-                                        class="text-lg font-medium tracking-tight leading-6 truncate"
-                                    >
-                                        Used Funds
-                                    </div>
-                                </div>
-                                <div class="flex items-center mt-1">
-                                    <div class="flex flex-col">
-                                        <div
-                                            class="text-3xl font-semibold tracking-tight leading-tight"
-                                        >
-                                            {{
-                                                cashDayToDay?.usedFunds
-                                                    | currency: currencySelected
-                                            }}
-                                        </div>
-                                        <div class="flex items-center">
-                                            <mat-icon
-                                                class="mr-1 icon-size-5 text-red-500"
-                                                [svgIcon]="
-                                                    'heroicons_solid:trending-up'
-                                                "
-                                            >
-                                            </mat-icon>
-                                            <div
-                                                class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
-                                            >
-                                                <span class="text-green-500">{{
-                                                    cashDayToDay?.period
-                                                }}</span>
-                                                Period
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="flex flex-col flex-auto ml-8"
-                                    ></div>
                                 </div>
                             </div>
                         </div>
                     </ng-template>
                 </mat-tab>
-
-                <!-- <mat-tab label="Day to day details">
-          <ng-template matTabContent>
-
-          </ng-template>
-        </mat-tab> -->
             </mat-tab-group>
 
             <mat-tab-group
@@ -720,150 +1158,386 @@
                         </div>
 
                         <div
-                            class="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-3 gap-6 w-full min-w-0"
+                            class="grid grid-cols-1 xl:grid-cols-2 gap-8 w-full mt-8"
                         >
-                            <!-- Weekly expenses -->
                             <div
-                                class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
+                                class="grid gap-12 sm:grid-flow-col xl:grid-flow-row"
                             >
-                                <div class="flex items-start justify-between">
+                                <!-- Previous statement -->
+                                <div
+                                    class="relative flex flex-col flex-auto p-6 pr-3 pb-3 bg-card rounded-2xl shadow overflow-hidden"
+                                >
                                     <div
-                                        class="text-lg font-medium tracking-tight leading-6 truncate"
+                                        class="absolute bottom-0 right-0 w-24 h-24 -m-6"
                                     >
-                                        Released Funds
+                                        <mat-icon
+                                            class="icon-size-24 opacity-25 text-green-500 dark:text-green-400"
+                                            [svgIcon]="
+                                                'heroicons_outline:check-circle'
+                                            "
+                                        ></mat-icon>
                                     </div>
-                                </div>
-                                <div class="flex items-center mt-1">
-                                    <div class="flex flex-col">
-                                        <div
-                                            class="text-3xl font-semibold tracking-tight leading-tight"
-                                        >
-                                            {{
-                                                cardMonthToMonth?.requestedAmount
-                                                    | currency: currencySelected
-                                            }}
-                                        </div>
-                                        <div class="flex items-center">
-                                            <mat-icon
-                                                class="mr-1 icon-size-5 text-green-500"
-                                                [svgIcon]="
-                                                    'heroicons_solid:trending-down'
-                                                "
-                                            >
-                                            </mat-icon>
+                                    <div class="flex items-center">
+                                        <div class="flex flex-col">
                                             <div
-                                                class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
+                                                class="text-lg font-medium tracking-tight leading-6 truncate"
                                             >
-                                                <span class="text-green-500">{{
-                                                    cardMonthToMonth?.period
-                                                }}</span>
+                                                Card reports
+                                            </div>
+                                            <div
+                                                class="text-green-600 font-medium text-sm"
+                                            >
                                                 Period
+                                                {{
+                                                    todayDate | date: "MMM yyyy"
+                                                }}
+                                                {{ cardMonthToMonth?.period }}
                                             </div>
                                         </div>
                                     </div>
                                     <div
-                                        class="flex flex-col flex-auto ml-8"
-                                    ></div>
+                                        class="flex flex-row flex-wrap mt-4 -mx-6"
+                                    >
+                                        <div class="flex flex-col mx-6 my-3">
+                                            <div
+                                                class="text-sm font-medium leading-none text-secondary"
+                                            >
+                                                Released Funds
+                                            </div>
+                                            <div
+                                                class="mt-2 font-medium text-3xl leading-none"
+                                            >
+                                                {{
+                                                    cardMonthToMonth?.requestedAmount ??
+                                                        "0.00"
+                                                        | currency
+                                                            : currencySelected
+                                                }}
+                                            </div>
+                                            <div class="flex items-center">
+                                                <mat-icon
+                                                    class="mr-1 icon-size-5 text-red-500"
+                                                    [svgIcon]="
+                                                        'heroicons_solid:trending-up'
+                                                    "
+                                                >
+                                                </mat-icon>
+                                                <div
+                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
+                                                >
+                                                    <span
+                                                        class="text-green-500"
+                                                        >{{
+                                                            cardMonthToMonth?.period
+                                                        }}</span
+                                                    >
+                                                    Period
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-col mx-6 my-3">
+                                            <div
+                                                class="text-sm font-medium leading-none text-secondary"
+                                            >
+                                                Used Funds
+                                            </div>
+                                            <div
+                                                class="mt-2 font-medium text-3xl leading-none"
+                                            >
+                                                {{
+                                                    cardMonthToMonth?.usedFunds ??
+                                                        "0.00"
+                                                        | currency
+                                                            : currencySelected
+                                                }}
+                                            </div>
+                                            <div class="flex items-center">
+                                                <mat-icon
+                                                    class="mr-1 icon-size-5 text-red-500"
+                                                    [svgIcon]="
+                                                        'heroicons_solid:trending-up'
+                                                    "
+                                                >
+                                                </mat-icon>
+                                                <div
+                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
+                                                >
+                                                    <span
+                                                        class="text-green-500"
+                                                        >{{
+                                                            cardMonthToMonth?.period
+                                                        }}</span
+                                                    >
+                                                    Period
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-col mx-6 my-3">
+                                            <div
+                                                class="text-sm font-medium leading-none text-secondary"
+                                            >
+                                                Requested Amount
+                                            </div>
+                                            <div
+                                                class="mt-2 font-medium text-3xl leading-none"
+                                            >
+                                                {{
+                                                    cardMonthToMonth?.requestedAmount ??
+                                                        "0.00"
+                                                        | currency
+                                                            : currencySelected
+                                                }}
+                                            </div>
+                                            <div class="flex items-center">
+                                                <mat-icon
+                                                    class="mr-1 icon-size-5 text-red-500"
+                                                    [svgIcon]="
+                                                        'heroicons_solid:trending-up'
+                                                    "
+                                                >
+                                                </mat-icon>
+                                                <div
+                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
+                                                >
+                                                    <span
+                                                        class="text-green-500"
+                                                        >{{
+                                                            cardMonthToMonth?.period
+                                                        }}</span
+                                                    >
+                                                    Period
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <!-- Monthly expenses -->
                             <div
-                                class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
+                                class="grid grid-cols-1 xl:grid-cols-3 gap-8 w-full mt-8"
                             >
-                                <div class="flex items-start justify-between">
-                                    <div
-                                        class="text-lg font-medium tracking-tight leading-6 truncate"
-                                    >
-                                        Requested Amount
-                                    </div>
-                                </div>
-                                <div class="flex items-center mt-1">
-                                    <div class="flex flex-col">
+                                <!-- Recent transactions table -->
+                                <div
+                                    class="xl:col-span-2 flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden"
+                                >
+                                    <div class="p-6">
                                         <div
-                                            class="text-3xl font-semibold tracking-tight leading-tight"
+                                            class="mr-4 text-lg font-medium tracking-tight leading-6 truncate"
                                         >
-                                            {{
-                                                cardMonthToMonth?.requestedAmount
-                                                    | currency: currencySelected
-                                            }}
+                                            Card Month to Month Detail
                                         </div>
-                                        <div class="flex items-center">
-                                            <mat-icon
-                                                class="mr-1 icon-size-5 text-red-500"
-                                                [svgIcon]="
-                                                    'heroicons_solid:trending-up'
-                                                "
-                                            >
-                                            </mat-icon>
+                                    </div>
+                                    <div class="overflow-x-auto mx-6">
+                                        <div
+                                            class="grid grid-cols-12 gap-x-1 mt-12"
+                                        >
+                                            <!-- Columns -->
+
+                                            <!-- Item -->
                                             <div
-                                                class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
                                             >
-                                                <span class="text-green-500">{{
-                                                    cardMonthToMonth?.period
-                                                }}</span>
-                                                Period
+                                                Status
+                                            </div>
+
+                                            <div
+                                                class="col-span-2 self-center text-right"
+                                            >
+                                                {{
+                                                    cardMonthToMonthDetail?.status
+                                                }}
+                                            </div>
+
+                                            <!-- Divider -->
+                                            <div
+                                                class="col-span-12 my-4 border-b"
+                                            ></div>
+                                            <div
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                            >
+                                                Comments
+                                            </div>
+
+                                            <div
+                                                class="col-span-2 self-center text-right"
+                                            >
+                                                {{
+                                                    cardMonthToMonthDetail?.comment
+                                                }}
+                                            </div>
+
+                                            <!-- Divider -->
+                                            <div
+                                                class="col-span-12 my-4 border-b"
+                                            ></div>
+                                            <div
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                            >
+                                                Date Created
+                                            </div>
+
+                                            <div
+                                                class="col-span-2 self-center text-right"
+                                            >
+                                                {{
+                                                    cardMonthToMonthDetail?.dateCreated
+                                                        | date: "dd/MM/yyyy"
+                                                }}
+                                            </div>
+                                            <div
+                                                class="col-span-12 my-4 border-b"
+                                            ></div>
+                                            <div
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                            >
+                                                Lined Approved Date
+                                            </div>
+
+                                            <div
+                                                class="col-span-2 self-center text-right"
+                                            >
+                                                {{
+                                                    cardMonthToMonthDetail?.lineApprovedDate
+                                                        | date: "dd/MM/yyyy"
+                                                }}
+                                            </div>
+
+                                            <!-- Divider -->
+                                            <div
+                                                class="col-span-12 my-4 border-b"
+                                            ></div>
+                                            <div
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                            >
+                                                Finance Approved Date
+                                            </div>
+
+                                            <div
+                                                class="col-span-2 self-center text-right"
+                                            >
+                                                {{
+                                                    cardMonthToMonthDetail?.financeApprovedDate
+                                                        | date: "dd/MM/yyyy"
+                                                }}
+                                            </div>
+
+                                            <!-- Divider -->
+                                            <div
+                                                class="col-span-12 my-4 border-b"
+                                            ></div>
+                                            <div
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                            >
+                                                General Approved Date
+                                            </div>
+
+                                            <div
+                                                class="col-span-2 self-center text-right"
+                                            >
+                                                {{
+                                                    cardMonthToMonthDetail?.generalManagerApprovedDate
+                                                        | date: "dd/MM/yyyy"
+                                                }}
+                                            </div>
+                                            <div
+                                                class="col-span-12 my-3 border-b"
+                                            ></div>
+                                            <div
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                            >
+                                                Created by
+                                            </div>
+
+                                            <div
+                                                class="col-span-2 self-center text-right"
+                                            >
+                                                {{
+                                                    cardMonthToMonthDetail?.createdBy
+                                                        | date: "dd/MM/yyyy"
+                                                }}
+                                            </div>
+
+                                            <!-- Divider -->
+                                            <div
+                                                class="col-span-12 my-3 border-b"
+                                            ></div>
+
+                                            <!-- Tax -->
+                                            <div
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                            >
+                                                Released Funds
+                                            </div>
+                                            <div
+                                                class="col-span-2 text-right text-lg"
+                                            >
+                                                {{
+                                                    cardMonthToMonthDetail?.releasedFunds ??
+                                                        "0.00" | currency
+                                                }}
+                                            </div>
+
+                                            <!-- Divider -->
+                                            <div
+                                                class="col-span-12 my-3 border-b"
+                                            ></div>
+                                            <div
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                            >
+                                                Received Funds
+                                            </div>
+                                            <div
+                                                class="col-span-2 text-right text-lg"
+                                            >
+                                                {{
+                                                    cardMonthToMonthDetail?.receivedFunds ??
+                                                        "0.00" | currency
+                                                }}
+                                            </div>
+
+                                            <!-- Divider -->
+                                            <div
+                                                class="col-span-12 my-3 border-b"
+                                            ></div>
+                                            <div
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                            >
+                                                Actual Used Funds
+                                            </div>
+                                            <div
+                                                class="col-span-2 text-right text-lg"
+                                            >
+                                                {{
+                                                    cardMonthToMonthDetail?.actualUsedFunds ??
+                                                        "0.00" | currency
+                                                }}
+                                            </div>
+
+                                            <!-- Divider -->
+                                            <div
+                                                class="col-span-12 my-3 border-b"
+                                            ></div>
+
+                                            <!-- Total -->
+                                            <div
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                            >
+                                                Amount
+                                            </div>
+                                            <div
+                                                class="col-span-2 text-right text-2xl font-medium"
+                                            >
+                                                {{
+                                                    cardMonthToMonthDetail?.amount ??
+                                                        0.0 | currency
+                                                }}
                                             </div>
                                         </div>
                                     </div>
-                                    <div
-                                        class="flex flex-col flex-auto ml-8"
-                                    ></div>
-                                </div>
-                            </div>
-                            <!-- Yearly expenses -->
-                            <div
-                                class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
-                            >
-                                <div class="flex items-start justify-between">
-                                    <div
-                                        class="text-lg font-medium tracking-tight leading-6 truncate"
-                                    >
-                                        Used Funds
-                                    </div>
-                                </div>
-                                <div class="flex items-center mt-1">
-                                    <div class="flex flex-col">
-                                        <div
-                                            class="text-3xl font-semibold tracking-tight leading-tight"
-                                        >
-                                            {{
-                                                cardMonthToMonth?.usedFunds
-                                                    | currency: currencySelected
-                                            }}
-                                        </div>
-                                        <div class="flex items-center">
-                                            <mat-icon
-                                                class="mr-1 icon-size-5 text-red-500"
-                                                [svgIcon]="
-                                                    'heroicons_solid:trending-up'
-                                                "
-                                            >
-                                            </mat-icon>
-                                            <div
-                                                class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
-                                            >
-                                                <span class="text-green-500">{{
-                                                    cardMonthToMonth?.period
-                                                }}</span>
-                                                Period
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="flex flex-col flex-auto ml-8"
-                                    ></div>
                                 </div>
                             </div>
                         </div>
                     </ng-template>
                 </mat-tab>
-
-                <!-- Budget -->
-                <!-- <mat-tab label="Month to month details">
-          <ng-template matTabContent>
-
-          </ng-template>
-        </mat-tab> -->
 
                 <mat-tab label="Day to day">
                     <ng-template matTabContent>
@@ -912,151 +1586,387 @@
                                 </mat-select>
                             </mat-form-field>
                         </div>
-
                         <div
-                            class="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-3 gap-6 w-full min-w-0"
+                            class="grid grid-cols-1 xl:grid-cols-2 gap-8 w-full mt-8"
                         >
-                            <!-- Weekly expenses -->
                             <div
-                                class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
+                                class="grid gap-12 sm:grid-flow-col xl:grid-flow-row"
                             >
-                                <div class="flex items-start justify-between">
+                                <!-- Previous statement -->
+                                <div
+                                    class="relative flex flex-col flex-auto p-6 pr-3 pb-3 bg-card rounded-2xl shadow overflow-hidden"
+                                >
                                     <div
-                                        class="text-lg font-medium tracking-tight leading-6 truncate"
+                                        class="absolute bottom-0 right-0 w-24 h-24 -m-6"
                                     >
-                                        Released Funds
+                                        <mat-icon
+                                            class="icon-size-24 opacity-25 text-green-500 dark:text-green-400"
+                                            [svgIcon]="
+                                                'heroicons_outline:check-circle'
+                                            "
+                                        ></mat-icon>
                                     </div>
-                                </div>
-                                <div class="flex items-center mt-1">
-                                    <div class="flex flex-col">
-                                        <div
-                                            class="text-3xl font-semibold tracking-tight leading-tight"
-                                        >
-                                            {{
-                                                cardDayToDay?.requestedAmount
-                                                    | currency: currencySelected
-                                            }}
-                                        </div>
-                                        <div class="flex items-center">
-                                            <mat-icon
-                                                class="mr-1 icon-size-5 text-green-500"
-                                                [svgIcon]="
-                                                    'heroicons_solid:trending-down'
-                                                "
-                                            >
-                                            </mat-icon>
+                                    <div class="flex items-center">
+                                        <div class="flex flex-col">
                                             <div
-                                                class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
+                                                class="text-lg font-medium tracking-tight leading-6 truncate"
                                             >
-                                                <span class="text-green-500">{{
-                                                    cardDayToDay?.period
-                                                }}</span>
+                                                Cash reports
+                                            </div>
+                                            <div
+                                                class="text-green-600 font-medium text-sm"
+                                            >
                                                 Period
+                                                {{
+                                                    todayDate | date: "MMM yyyy"
+                                                }}
+                                                {{ cardDayToDay?.period }}
                                             </div>
                                         </div>
                                     </div>
                                     <div
-                                        class="flex flex-col flex-auto ml-8"
-                                    ></div>
+                                        class="flex flex-row flex-wrap mt-4 -mx-6"
+                                    >
+                                        <div class="flex flex-col mx-6 my-3">
+                                            <div
+                                                class="text-sm font-medium leading-none text-secondary"
+                                            >
+                                                Released Funds
+                                            </div>
+                                            <div
+                                                class="mt-2 font-medium text-3xl leading-none"
+                                            >
+                                                {{
+                                                    cardDayToDay?.requestedAmount ??
+                                                        "0.00"
+                                                        | currency
+                                                            : currencySelected
+                                                }}
+                                            </div>
+                                            <div class="flex items-center">
+                                                <mat-icon
+                                                    class="mr-1 icon-size-5 text-red-500"
+                                                    [svgIcon]="
+                                                        'heroicons_solid:trending-up'
+                                                    "
+                                                >
+                                                </mat-icon>
+                                                <div
+                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
+                                                >
+                                                    <span
+                                                        class="text-green-500"
+                                                        >{{
+                                                            cardDayToDay?.period
+                                                        }}</span
+                                                    >
+                                                    Period
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-col mx-6 my-3">
+                                            <div
+                                                class="text-sm font-medium leading-none text-secondary"
+                                            >
+                                                Used Funds
+                                            </div>
+                                            <div
+                                                class="mt-2 font-medium text-3xl leading-none"
+                                            >
+                                                {{
+                                                    cardDayToDay?.usedFunds ??
+                                                        "0.00"
+                                                        | currency
+                                                            : currencySelected
+                                                }}
+                                            </div>
+                                            <div class="flex items-center">
+                                                <mat-icon
+                                                    class="mr-1 icon-size-5 text-red-500"
+                                                    [svgIcon]="
+                                                        'heroicons_solid:trending-up'
+                                                    "
+                                                >
+                                                </mat-icon>
+                                                <div
+                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
+                                                >
+                                                    <span
+                                                        class="text-green-500"
+                                                        >{{
+                                                            cardDayToDay?.period
+                                                        }}</span
+                                                    >
+                                                    Period
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-col mx-6 my-3">
+                                            <div
+                                                class="text-sm font-medium leading-none text-secondary"
+                                            >
+                                                Requested Amount
+                                            </div>
+                                            <div
+                                                class="mt-2 font-medium text-3xl leading-none"
+                                            >
+                                                {{
+                                                    cardDayToDay?.requestedAmount ??
+                                                        "0.00"
+                                                        | currency
+                                                            : currencySelected
+                                                }}
+                                            </div>
+                                            <div class="flex items-center">
+                                                <mat-icon
+                                                    class="mr-1 icon-size-5 text-red-500"
+                                                    [svgIcon]="
+                                                        'heroicons_solid:trending-up'
+                                                    "
+                                                >
+                                                </mat-icon>
+                                                <div
+                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
+                                                >
+                                                    <span
+                                                        class="text-green-500"
+                                                        >{{
+                                                            cardDayToDay?.period
+                                                        }}</span
+                                                    >
+                                                    Period
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <!-- Monthly expenses -->
                             <div
-                                class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
+                                class="grid grid-cols-1 xl:grid-cols-3 gap-8 w-full mt-8"
                             >
-                                <div class="flex items-start justify-between">
-                                    <div
-                                        class="text-lg font-medium tracking-tight leading-6 truncate"
-                                    >
-                                        Requested Amount
-                                    </div>
-                                </div>
-                                <div class="flex items-center mt-1">
-                                    <div class="flex flex-col">
+                                <!-- Recent transactions table -->
+                                <div
+                                    class="xl:col-span-2 flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden"
+                                >
+                                    <div class="p-6">
                                         <div
-                                            class="text-3xl font-semibold tracking-tight leading-tight"
+                                            class="mr-4 text-lg font-medium tracking-tight leading-6 truncate"
                                         >
-                                            {{
-                                                cardDayToDay?.requestedAmount
-                                                    | currency: currencySelected
-                                            }}
+                                            Cash Month to Month Detail
                                         </div>
-                                        <div class="flex items-center">
-                                            <mat-icon
-                                                class="mr-1 icon-size-5 text-red-500"
-                                                [svgIcon]="
-                                                    'heroicons_solid:trending-up'
-                                                "
-                                            >
-                                            </mat-icon>
+                                    </div>
+                                    <div class="overflow-x-auto mx-6">
+                                        <div
+                                            class="grid grid-cols-12 gap-x-1 mt-12"
+                                        >
+                                            <!-- Columns -->
+
+                                            <!-- Item -->
                                             <div
-                                                class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
                                             >
-                                                <span class="text-green-500">{{
-                                                    cardDayToDay?.period
-                                                }}</span>
-                                                Period
+                                                Status
+                                            </div>
+
+                                            <div
+                                                class="col-span-2 self-center text-right"
+                                            >
+                                                {{
+                                                    caardDayToDayDetail?.status
+                                                }}
+                                            </div>
+
+                                            <!-- Divider -->
+                                            <div
+                                                class="col-span-12 my-4 border-b"
+                                            ></div>
+                                            <div
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                            >
+                                                Comments
+                                            </div>
+
+                                            <div
+                                                class="col-span-2 self-center text-right"
+                                            >
+                                                {{
+                                                    caardDayToDayDetail?.comment
+                                                }}
+                                            </div>
+
+                                            <!-- Divider -->
+                                            <div
+                                                class="col-span-12 my-4 border-b"
+                                            ></div>
+                                            <div
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                            >
+                                                Date Created
+                                            </div>
+
+                                            <div
+                                                class="col-span-2 self-center text-right"
+                                            >
+                                                {{
+                                                    caardDayToDayDetail?.dateCreated
+                                                        | date: "dd/MM/yyyy"
+                                                }}
+                                            </div>
+                                            <div
+                                                class="col-span-12 my-4 border-b"
+                                            ></div>
+                                            <div
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                            >
+                                                Lined Approved Date
+                                            </div>
+
+                                            <div
+                                                class="col-span-2 self-center text-right"
+                                            >
+                                                {{
+                                                    caardDayToDayDetail?.lineApprovedDate
+                                                        | date: "dd/MM/yyyy"
+                                                }}
+                                            </div>
+
+                                            <!-- Divider -->
+                                            <div
+                                                class="col-span-12 my-4 border-b"
+                                            ></div>
+                                            <div
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                            >
+                                                Finance Approved Date
+                                            </div>
+
+                                            <div
+                                                class="col-span-2 self-center text-right"
+                                            >
+                                                {{
+                                                    caardDayToDayDetail?.financeApprovedDate
+                                                        | date: "dd/MM/yyyy"
+                                                }}
+                                            </div>
+
+                                            <!-- Divider -->
+                                            <div
+                                                class="col-span-12 my-4 border-b"
+                                            ></div>
+                                            <div
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                            >
+                                                General Approved Date
+                                            </div>
+
+                                            <div
+                                                class="col-span-2 self-center text-right"
+                                            >
+                                                {{
+                                                    caardDayToDayDetail?.generalManagerApprovedDate
+                                                        | date: "dd/MM/yyyy"
+                                                }}
+                                            </div>
+                                            <div
+                                                class="col-span-12 my-3 border-b"
+                                            ></div>
+                                            <div
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                            >
+                                                Created by
+                                            </div>
+
+                                            <div
+                                                class="col-span-2 self-center text-right"
+                                            >
+                                                {{
+                                                    caardDayToDayDetail?.createdBy
+                                                        | date: "dd/MM/yyyy"
+                                                }}
+                                            </div>
+
+                                            <!-- Divider -->
+                                            <div
+                                                class="col-span-12 my-3 border-b"
+                                            ></div>
+
+                                            <!-- Tax -->
+                                            <div
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                            >
+                                                Released Funds
+                                            </div>
+                                            <div
+                                                class="col-span-2 text-right text-lg"
+                                            >
+                                                {{
+                                                    caardDayToDayDetail?.releasedFunds ??
+                                                        "0.00" | currency
+                                                }}
+                                            </div>
+
+                                            <!-- Divider -->
+                                            <div
+                                                class="col-span-12 my-3 border-b"
+                                            ></div>
+                                            <div
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                            >
+                                                Received Funds
+                                            </div>
+                                            <div
+                                                class="col-span-2 text-right text-lg"
+                                            >
+                                                {{
+                                                    caardDayToDayDetail?.receivedFunds ??
+                                                        "0.00" | currency
+                                                }}
+                                            </div>
+
+                                            <!-- Divider -->
+                                            <div
+                                                class="col-span-12 my-3 border-b"
+                                            ></div>
+                                            <div
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                            >
+                                                Actual Used Funds
+                                            </div>
+                                            <div
+                                                class="col-span-2 text-right text-lg"
+                                            >
+                                                {{
+                                                    caardDayToDayDetail?.actualUsedFunds ??
+                                                        "0.00" | currency
+                                                }}
+                                            </div>
+
+                                            <!-- Divider -->
+                                            <div
+                                                class="col-span-12 my-3 border-b"
+                                            ></div>
+
+                                            <!-- Total -->
+                                            <div
+                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
+                                            >
+                                                Amount
+                                            </div>
+                                            <div
+                                                class="col-span-2 text-right text-2xl font-medium"
+                                            >
+                                                {{
+                                                    caardDayToDayDetail?.amount ??
+                                                        0.0 | currency
+                                                }}
                                             </div>
                                         </div>
                                     </div>
-                                    <div
-                                        class="flex flex-col flex-auto ml-8"
-                                    ></div>
-                                </div>
-                            </div>
-                            <!-- Yearly expenses -->
-                            <div
-                                class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
-                            >
-                                <div class="flex items-start justify-between">
-                                    <div
-                                        class="text-lg font-medium tracking-tight leading-6 truncate"
-                                    >
-                                        Used Funds
-                                    </div>
-                                </div>
-                                <div class="flex items-center mt-1">
-                                    <div class="flex flex-col">
-                                        <div
-                                            class="text-3xl font-semibold tracking-tight leading-tight"
-                                        >
-                                            {{
-                                                cardDayToDay?.usedFunds
-                                                    | currency: currencySelected
-                                            }}
-                                        </div>
-                                        <div class="flex items-center">
-                                            <mat-icon
-                                                class="mr-1 icon-size-5 text-red-500"
-                                                [svgIcon]="
-                                                    'heroicons_solid:trending-up'
-                                                "
-                                            >
-                                            </mat-icon>
-                                            <div
-                                                class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
-                                            >
-                                                <span class="text-green-500">{{
-                                                    cardDayToDay?.period
-                                                }}</span>
-                                                Period
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="flex flex-col flex-auto ml-8"
-                                    ></div>
                                 </div>
                             </div>
                         </div>
                     </ng-template>
                 </mat-tab>
-
-                <!-- <mat-tab label="Day to day details">
-          <ng-template matTabContent>
-
-          </ng-template>
-        </mat-tab> -->
             </mat-tab-group>
         </div>
     </div>

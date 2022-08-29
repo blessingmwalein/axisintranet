@@ -92,6 +92,7 @@ export class CashRequisitionDetailsComponent implements OnInit {
             financeApprovedDate: [''],
             lineApprovedDate: [''],
             lineApproved: [true],
+            gmApproved: [true],
             approved: [true],
             requestComments: [''],
             cancelled: [''],
@@ -362,14 +363,20 @@ export class CashRequisitionDetailsComponent implements OnInit {
         this._cashRequisitionService
             .generalManagerApproveReq(this.cashRequisition.id, {
                 id: this.cashRequisition.id.toString(),
-                approved: true,
+                approved: this.cashReqForm.value.gmApproved,
                 generalManagerApprovedDate: new Date(),
                 status: this.cashReqForm.value.status,
                 generalManagerApproverId: this._userService.getLocalUser().id,
             })
             .subscribe(
                 (response) => {
-                    this._alertService.displayMessage('Requisition Approved');
+                    this.cashReqForm.value.gmApproved
+                        ? this._alertService.displayMessage(
+                              'Requisition approved'
+                          )
+                        : this._alertService.displayError(
+                              'Requisition rejected'
+                          );
                     this._router.navigateByUrl('axis/requsitions/cash');
                     this.isLoading = false;
                 },
@@ -392,7 +399,13 @@ export class CashRequisitionDetailsComponent implements OnInit {
             })
             .subscribe(
                 (response) => {
-                    this._alertService.displayMessage('Requisition Approved');
+                    this.cashReqForm.value.lineApproved
+                        ? this._alertService.displayMessage(
+                              'Requisition approved'
+                          )
+                        : this._alertService.displayError(
+                              'Requisition rejected'
+                          );
                     this._router.navigateByUrl('axis/requsitions/cash');
                     this.isLoading = false;
                 },
@@ -409,37 +422,20 @@ export class CashRequisitionDetailsComponent implements OnInit {
         this._cashRequisitionService
             .financeManagerApproveReq(this.cashRequisition.id, {
                 id: this.cashRequisition.id.toString(),
-                approved: true,
+                approved: this.cashReqForm.value.approved,
                 financeApprovedDate: new Date(),
                 status: this.cashReqForm.value.status,
                 financeApproverId: this._userService.getLocalUser().id,
             })
             .subscribe(
                 (response) => {
-                    this._alertService.displayMessage('Requisition Approved');
-                    this._router.navigateByUrl('axis/requsitions/cash');
-                    this.isLoading = false;
-                },
-                (error) => {
-                    this.isLoading = false;
-                    this._alertService.displayError(
-                        `Something went wrong:  ${error?.error?.message}`
-                    );
-                }
-            );
-    }
-    rejectReqCash(id: string) {
-        this.isLoading = true;
-        this._cashRequisitionService
-            .lineManagerApproveReq(this.cashRequisition.id, {
-                id: this.cashRequisition.id.toString(),
-                lineApproved: !this.cashReqForm.value.lineApproved,
-                status: 'Line manager rejected',
-                lineApprovedDate: new Date(),
-            })
-            .subscribe(
-                (response) => {
-                    this._alertService.displayMessage('Requisition Rejected');
+                    this.cashReqForm.value.approved
+                        ? this._alertService.displayMessage(
+                              'Requisition approved'
+                          )
+                        : this._alertService.displayError(
+                              'Requisition rejected'
+                          );
                     this._router.navigateByUrl('axis/requsitions/cash');
                     this.isLoading = false;
                 },
@@ -471,7 +467,7 @@ export class CashRequisitionDetailsComponent implements OnInit {
                 ) {
                     this.cashReqForm.patchValue({
                         status: 'General manager rejected',
-                        approved: false,
+                        gmApproved: false,
                     });
                     this.approveCashGeneralReq();
                 } else if (this.user.roles[0].toUpperCase() == 'LINE MANAGER') {

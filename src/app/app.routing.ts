@@ -47,7 +47,7 @@ export const appRoutes: Route[] = [
                         'app/modules/auth/forgot-password/forgot-password.module'
                     ).then((m) => m.AuthForgotPasswordModule),
             },
-            { path: 'password-reset/:token', component: AuthResetPasswordComponent },
+            { path: 'password-reset', component: AuthResetPasswordComponent },
             {
                 path: 'sign-in',
                 loadChildren: () =>

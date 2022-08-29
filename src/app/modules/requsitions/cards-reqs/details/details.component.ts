@@ -86,6 +86,7 @@ export class CardRequisitionDetailsComponent implements OnInit {
             requestComments: [''],
             lineApproved: [true],
             approved: [true],
+            gmApproved: [true],
             cancelled: [''],
         });
 
@@ -270,40 +271,6 @@ export class CardRequisitionDetailsComponent implements OnInit {
         });
     }
 
-    openDeleteDialog(id: string) {
-        const dialogRef = this._fuseConfirmationService.open({
-            message: 'Are sure you want to delete this requisition ?',
-            title: 'Delete Requisition Confirmation',
-        });
-
-        dialogRef.afterClosed().subscribe((result) => {
-            console.log(result);
-            if (result == 'confirmed') {
-                this.deteleVehicelReq(id);
-            }
-            if (result == 'cancelled' || result == undefined) {
-                this._alertService.displayError('Requsition delete canceled');
-            }
-        });
-    }
-
-    deteleVehicelReq(id: string) {
-        this.isLoading = true;
-        this._cardRequisitionService.deleteVehicelRequisition(id).subscribe(
-            (response) => {
-                this._alertService.displayMessage('Requisition Deleted');
-                this._router.navigateByUrl('axis/employee/requisitions/card');
-                this.isLoading = false;
-            },
-            (error) => {
-                this.isLoading = false;
-                this._alertService.displayError(
-                    `Something went wrong:  ${error?.error?.message}`
-                );
-            }
-        );
-    }
-
     openUpdateUsedFundsDialog(): void {
         // Open the dialog
         const dialogRef = this._matDialog.open(UpdateUsedFundsComponent, {
@@ -370,7 +337,13 @@ export class CardRequisitionDetailsComponent implements OnInit {
             })
             .subscribe(
                 (response) => {
-                    this._alertService.displayMessage('Requisition Approved');
+                    this.cardReqForm.value.gmApproved
+                        ? this._alertService.displayMessage(
+                              'Requisition approved'
+                          )
+                        : this._alertService.displayError(
+                              'Requisition rejected'
+                          );
                     this._router.navigateByUrl('axis/requsitions/card');
                     this.isLoading = false;
                 },
@@ -393,7 +366,13 @@ export class CardRequisitionDetailsComponent implements OnInit {
             })
             .subscribe(
                 (response) => {
-                    this._alertService.displayMessage('Requisition Approved');
+                    this.cardReqForm.value.lineApproved
+                        ? this._alertService.displayMessage(
+                              'Requisition approved'
+                          )
+                        : this._alertService.displayError(
+                              'Requisition rejected'
+                          );
                     this._router.navigateByUrl('axis/requsitions/card');
                     this.isLoading = false;
                 },
@@ -417,7 +396,13 @@ export class CardRequisitionDetailsComponent implements OnInit {
             })
             .subscribe(
                 (response) => {
-                    this._alertService.displayMessage('Requisition Approved');
+                    this.cardReqForm.value.approved
+                        ? this._alertService.displayMessage(
+                              'Requisition approved'
+                          )
+                        : this._alertService.displayError(
+                              'Requisition rejected'
+                          );
                     this._router.navigateByUrl('axis/requsitions/card');
                     this.isLoading = false;
                 },
@@ -472,7 +457,7 @@ export class CardRequisitionDetailsComponent implements OnInit {
                 ) {
                     this.cardReqForm.patchValue({
                         status: 'General manager rejected',
-                        approved: false,
+                        gmApproved: false,
                     });
                     this.approveCardhGeneralReq();
                 } else if (this.user.roles[0].toUpperCase() == 'LINE MANAGER') {

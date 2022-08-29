@@ -41,9 +41,10 @@ export class AuthResetPasswordComponent implements OnInit {
      */
     ngOnInit(): void {
         // Create the form
-        this.activatedRoute.params.subscribe((params) => {
-            const token = params['token'];
-            console.log(params);
+        this.activatedRoute.queryParamMap.subscribe((params) => {
+            const token = params.get('query') ? params.get('query') : '';
+            console.log(token);
+
             this.resetPasswordForm = this._formBuilder.group(
                 {
                     newPassword: ['', Validators.required],
@@ -71,14 +72,6 @@ export class AuthResetPasswordComponent implements OnInit {
     resetPassword(): void {
         // Return if the form is invalid
 
-        this.activatedRoute.params.subscribe((params) => {
-            const token = params['token'];
-            console.log(params);
-            this.resetPasswordForm.patchValue({
-                token: token,
-            });
-        });
-
         if (this.resetPasswordForm.invalid) {
             return;
         }
@@ -99,7 +92,7 @@ export class AuthResetPasswordComponent implements OnInit {
 
                     this.alert = {
                         type: 'success',
-                        message: response.message,
+                        message: `${response.message} you can now login with new password`,
                     };
                     this.showAlert = true;
                     this.resetPasswordForm.enable();
