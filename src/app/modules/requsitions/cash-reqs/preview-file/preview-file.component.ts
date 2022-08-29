@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { FuseAlertType } from '@fuse/components/alert';
 import { User } from 'app/core/user/user.types';
+import { environment } from 'environments/environment';
 
 @Component({
     selector: 'app-preview-file',
@@ -23,7 +24,7 @@ export class PreviewFileComponent implements OnInit {
     constructor(
         public matDialogRef: MatDialogRef<PreviewFileComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any,
-        private sanitizer:DomSanitizer
+        private sanitizer: DomSanitizer
     ) {}
 
     // -----------------------------------------------------------------------------------------------------
@@ -63,9 +64,17 @@ export class PreviewFileComponent implements OnInit {
         }
     }
     getImage(name: string): SafeUrl {
-        return this.sanitizer.bypassSecurityTrustUrl(`http://154.120.241.142:8097/Files/${name}`);
+        return this.sanitizer.bypassSecurityTrustUrl(
+            `${environment.filesBaseUrl}${name}`
+        );
     }
     getPdfUrl(name: string): SafeUrl {
-        return this.sanitizer.bypassSecurityTrustUrl(`http://154.120.241.142:8097/Files/${name}`);
+        return this.sanitizer.bypassSecurityTrustUrl(
+            `${environment.filesBaseUrl}${name}`
+        );
+    }
+
+    download(): void {
+        window.open(`${environment.filesBaseUrl}${name}`);
     }
 }

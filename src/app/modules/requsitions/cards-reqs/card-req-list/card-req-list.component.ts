@@ -155,4 +155,16 @@ export class CardReqListComponent implements OnInit {
     viewReqVehilce(id: string) {
         this._router.navigateByUrl(`axis/requsitions/card/${id}`);
     }
+
+    getHoursAndMinutes(minutes: number) {
+        const hours = Math.floor(minutes / 60);
+        const minutes_ = minutes % 60;
+        return `${hours}hours ${minutes_}min`;
+    }
+
+    getByMineEmployee(value) {
+        this.status = value;
+
+        this.getFilteredCashReq();
+    }
 }

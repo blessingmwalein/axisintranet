@@ -64,13 +64,13 @@
                 {{cashRequisition.amount}}
               </td>
             </tr>
-          
+
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
               <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
                 Start Date
               </th>
               <td class="px-6 py-4">
-                {{cashRequisition.startDate | date:'medium'}}
+                {{cashRequisition?.startDate | date:'medium'}}
               </td>
             </tr>
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -78,7 +78,7 @@
                 End Date
               </th>
               <td class="px-6 py-4">
-                {{cashRequisition.endDate | date:'medium'}}
+                {{cashRequisition?.endDate | date:'medium'}}
               </td>
             </tr>
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -94,7 +94,7 @@
                 Date Requested
               </th>
               <td class="px-6 py-4">
-                {{cashRequisition.dateRequested | date:'medium'}}
+                {{cashRequisition?.dateRequested | date:'medium'}}
               </td>
             </tr>
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -179,7 +179,7 @@
                 Code
               </th>
               <td class="px-6 py-4">
-                {{cashRequisition.device.itemCode}} 
+                {{cashRequisition.device.itemCode}}
               </td>
             </tr>
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">

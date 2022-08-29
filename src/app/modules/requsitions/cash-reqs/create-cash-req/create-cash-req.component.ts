@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FuseAlertType } from '@fuse/components/alert';
 import { UserService } from 'app/core/user/user.service';
 import { AlertService } from 'app/modules/alert/snackbar/alert.service';
 import { CashRequisitionService } from 'app/modules/employee-x/services/cash-requisitions/cash-requisitions.service';
 import { Subject } from 'rxjs';
+import { fuseAnimations } from '@fuse/animations';
 
 @Component({
     selector: 'app-create-cash-req',
@@ -17,7 +19,14 @@ export class CreateCashReqComponent implements OnInit {
     cashs: any[];
     minDate = new Date();
     isPastStartDate = false;
+    startDateMin = new Date().toISOString().split('T')[0] + 'T00:00:00';
     file: File;
+    errors = [];
+    alert: { type: FuseAlertType; message: string } = {
+        type: 'error',
+        message: 'Somthing went Wrong',
+    };
+    showAlert: boolean = false;
     constructor(
         private _alertService: AlertService,
         private _formBuilder: FormBuilder,
@@ -49,6 +58,7 @@ export class CreateCashReqComponent implements OnInit {
                 startDate: ['', Validators.required],
                 endDate: ['', Validators.required],
                 duration: ['', Validators.required],
+                durationView: [],
             }),
         });
     }
@@ -64,9 +74,10 @@ export class CreateCashReqComponent implements OnInit {
     }
 
     createReq(): void {
+        this.showAlert = false;
         this.horizontalStepperForm.disable();
         const formData: FormData = new FormData();
-        formData.append('uploadedFileName', this.file.name);
+        formData.append('uploadedFileName', this.file?.name);
         formData.append('uploadedFile', this.file);
         formData.append(
             'requestComments',
@@ -109,8 +120,10 @@ export class CreateCashReqComponent implements OnInit {
             },
             (error) => {
                 console.log(error);
+                this.errors = error?.error?.errors;
+                this.showAlert = true;
                 this._alertService.displayError(
-                    'Failed to  submitt please try again'
+                    'Please confirm your fields and try again'
                 );
                 this.horizontalStepperForm.enable();
             }
@@ -130,5 +143,44 @@ export class CreateCashReqComponent implements OnInit {
         if (fileList.length > 0) {
             this.file = fileList[0];
         }
+    }
+
+    //create function to get time difference seconds
+    getTimeDifference(startDate, endDate) {
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        const diff = end.getTime() - start.getTime();
+        return Math.round(diff / 1000);
+    }
+    //create function get hours and minutes from seconds
+    getHoursAndMinutes(seconds) {
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds - hours * 3600) / 60);
+        return hours + ' hours ' + minutes + ' minutes';
+    }
+
+    //create function to change seconds to minutes
+    getMinutes(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        return minutes;
+    }
+
+    onDateChange() {
+        this.horizontalStepperForm.patchValue({
+            step2: {
+                duration: this.getMinutes(
+                    this.getTimeDifference(
+                        this.horizontalStepperForm.value.step2.startDate,
+                        this.horizontalStepperForm.value.step2.endDate
+                    )
+                ),
+                durationView: this.getHoursAndMinutes(
+                    this.getTimeDifference(
+                        this.horizontalStepperForm.value.step2.startDate,
+                        this.horizontalStepperForm.value.step2.endDate
+                    )
+                ),
+            },
+        });
     }
 }

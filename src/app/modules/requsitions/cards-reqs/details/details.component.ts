@@ -26,6 +26,7 @@ import { User } from 'app/modules/admin/models/users/users.types';
 import { UserService } from 'app/core/user/user.service';
 import { UpdateReleasedFundsComponent } from '../update-released-funds/update-released-funds.component';
 import { PrintReqPrevComponent } from '../print-req-prev/print-req-prev.component';
+import { environment } from 'environments/environment';
 
 @Component({
     selector: 'academy-details',
@@ -164,7 +165,9 @@ export class CardRequisitionDetailsComponent implements OnInit {
                             dateActioned: this.cardRequisition.dateActioned,
                             approved: this.cardRequisition.approved,
                             cancelled: this.cardRequisition.cancelled,
-                            duration: this.cardRequisition.duration,
+                            duration: this.getHoursAndMinutes(
+                                this.cardRequisition.duration
+                            ),
                             title: this.cardRequisition.title,
                             id: this.cardRequisition.id,
                             description: this.cardRequisition.description,
@@ -295,14 +298,18 @@ export class CardRequisitionDetailsComponent implements OnInit {
     }
 
     onFileUpload() {
-        const dialogRef = this._matDialog.open(PrintReqPrevComponent, {
-            data: { uploadedFileName: this.cardRequisition.uploadedFileName },
-            width: '700px',
-        });
+        // const dialogRef = this._matDialog.open(PreviewFileComponent, {
+        //     data: { uploadedFileName: this.cashRequisition.uploadedFileName },
+        //     width: '700px',
+        // });
 
-        dialogRef.afterClosed().subscribe((result) => {
-            console.log('Compose dialog was closed!');
-        });
+        // dialogRef.afterClosed().subscribe((result) => {
+        //     console.log('Compose dialog was closed!');
+        // });
+
+        window.open(
+            `${environment.filesBaseUrl}${this.cardRequisition.uploadedFileName}`
+        );
     }
     openApproveDialog() {
         const dialogRef = this._fuseConfirmationService.open({
@@ -491,5 +498,11 @@ export class CardRequisitionDetailsComponent implements OnInit {
             console.log('Compose dialog was closed!');
             // this();
         });
+    }
+
+    getHoursAndMinutes(minutes: number) {
+        const hours = Math.floor(minutes / 60);
+        const minutes_ = minutes % 60;
+        return `${hours}hours ${minutes_}minutes`;
     }
 }

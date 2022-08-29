@@ -44,6 +44,16 @@
             class="p-4 bg-card shadow rounded overflow-hidden max-w-full"
             [formGroup]="horizontalStepperForm"
         >
+            <fuse-alert
+                class="mt-8 -mb-4"
+                *ngIf="showAlert"
+                [appearance]="'outline'"
+                [showIcon]="false"
+                [type]="alert.type"
+                [@shake]="alert.type === 'error'"
+            >
+                <p *ngFor="let error of errors">* {{ error }}</p>
+            </fuse-alert>
             <mat-horizontal-stepper [linear]="true" #horizontalStepper>
                 <mat-step
                     [formGroupName]="'step1'"
@@ -77,10 +87,7 @@
                         </mat-form-field>
                     </div>
                     <div class="flex">
-                        <mat-label
-                            >Attach File (Accepted Formarts Pdf and
-                            Images)</mat-label
-                        >
+                        <mat-label>Attach File</mat-label>
                         <br />
                         <mat-icon
                             matPrefix
@@ -216,8 +223,10 @@
                             <input
                                 matInput
                                 type="datetime-local"
+                                min="{{ startDateMin }}"
                                 [placeholder]="'Start date'"
                                 [formControlName]="'startDate'"
+                                (change)="onDateChange()"
                             />
                             <!-- <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                             <mat-datepicker #picker2></mat-datepicker> -->
@@ -240,8 +249,10 @@
                             <input
                                 matInput
                                 type="datetime-local"
+                                min="{{ startDateMin }}"
                                 [placeholder]="'End date'"
                                 [formControlName]="'endDate'"
+                                (change)="onDateChange()"
                             />
                             <!-- <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                             <mat-datepicker #picker3></mat-datepicker> -->
@@ -266,8 +277,8 @@
                                 ></mat-icon>
                                 <input
                                     matInput
-                                    [formControlName]="'duration'"
-                                    [placeholder]="'Duration(hours)'"
+                                    [formControlName]="'durationView'"
+                                    readonly
                                 />
                             </mat-form-field>
                         </div>

@@ -29,6 +29,7 @@ import { User } from 'app/modules/admin/models/users/users.types';
 import { UserService } from 'app/core/user/user.service';
 import { UpdateReleasedFundsComponent } from '../update-released-funds/update-released-funds.component';
 import { PrintReqPrevComponent } from '../print-req-prev/print-req-prev.component';
+import { environment } from 'environments/environment';
 
 @Component({
     selector: 'academy-details',
@@ -158,8 +159,8 @@ export class CashRequisitionDetailsComponent implements OnInit {
                     );
                     this.verticalStepperForm.patchValue({
                         step1: {
-                            startDate: this.cashRequisition.startDate,
-                            endDate: this.cashRequisition.endDate,
+                            startDate: this.cashRequisition?.startDate,
+                            endDate: this.cashRequisition?.endDate,
                             requisitionCol: this.cashRequisition.requisitionCol,
                             requestingEmployeeId:
                                 this.cashRequisition.requestingEmployeeId,
@@ -168,16 +169,18 @@ export class CashRequisitionDetailsComponent implements OnInit {
                             financeApproverId:
                                 this.cashRequisition.financeApproverId,
                             lineApproverId: this.cashRequisition.lineApproverId,
-                            lineApproved: this.cashRequisition.lineApproved,
+                            lineApproved: this.cashRequisition?.lineApproved,
                             lineApprovedDate:
                                 this.cashRequisition.lineApprovedDate,
-                            dateRequested: this.cashRequisition.dateRequested,
+                            dateRequested: this.cashRequisition?.dateRequested,
                             requestComments:
                                 this.cashRequisition.requestComments,
                             dateActioned: this.cashRequisition.dateActioned,
-                            approved: this.cashRequisition.approved,
+                            approved: this.cashRequisition?.approved,
                             cancelled: this.cashRequisition.cancelled,
-                            duration: this.cashRequisition.duration,
+                            duration: this.getHoursAndMinutes(
+                                this.cashRequisition.duration
+                            ),
                             title: this.cashRequisition.title,
                             id: this.cashRequisition.id,
                             description: this.cashRequisition.description,
@@ -326,14 +329,18 @@ export class CashRequisitionDetailsComponent implements OnInit {
         });
     }
     onFileUpload() {
-        const dialogRef = this._matDialog.open(PreviewFileComponent, {
-            data: { uploadedFileName: this.cashRequisition.uploadedFileName },
-            width: '700px',
-        });
+        // const dialogRef = this._matDialog.open(PreviewFileComponent, {
+        //     data: { uploadedFileName: this.cashRequisition.uploadedFileName },
+        //     width: '700px',
+        // });
 
-        dialogRef.afterClosed().subscribe((result) => {
-            console.log('Compose dialog was closed!');
-        });
+        // dialogRef.afterClosed().subscribe((result) => {
+        //     console.log('Compose dialog was closed!');
+        // });
+
+        window.open(
+            `${environment.filesBaseUrl}${this.cashRequisition.uploadedFileName}`
+        );
     }
 
     //manager operations
@@ -501,5 +508,12 @@ export class CashRequisitionDetailsComponent implements OnInit {
             console.log('Compose dialog was closed!');
             // this();
         });
+    }
+
+    //create function return hours and minutes from minutes
+    getHoursAndMinutes(minutes: number) {
+        const hours = Math.floor(minutes / 60);
+        const minutes_ = minutes % 60;
+        return `${hours}hours ${minutes_}minutes`;
     }
 }

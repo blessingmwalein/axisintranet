@@ -6,6 +6,8 @@ import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
 import { AlertService } from 'app/modules/alert/snackbar/alert.service';
 import { UserService } from 'app/core/user/user.service';
 import { CardRequisitionService } from 'app/modules/employee-x/services/card-requisitions/card-requisitions.service';
+import { fuseAnimations } from '@fuse/animations';
+import { FuseAlertType } from '@fuse/components/alert';
 
 @Component({
     selector: 'app-create',
@@ -17,6 +19,14 @@ export class CreateCardReqComponent implements OnInit {
     formFieldHelpers: string[] = [''];
     cards: any[];
     file: File;
+    errors = [];
+    startDateMin = new Date().toISOString().split('T')[0] + 'T00:00:00';
+    alert: { type: FuseAlertType; message: string } = {
+        type: 'error',
+        message: 'Somthing went Wrong',
+    };
+    showAlert: boolean = false;
+
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
     constructor(
@@ -47,8 +57,11 @@ export class CreateCardReqComponent implements OnInit {
                 startDate: ['', Validators.required],
                 endDate: ['', Validators.required],
                 duration: ['', Validators.required],
+                durationView: [],
             }),
         });
+
+        console.log();
     }
 
     getFormFieldHelpersAsString(): string {
@@ -56,11 +69,10 @@ export class CreateCardReqComponent implements OnInit {
     }
 
     createReq(): void {
-
-
+        this.showAlert = false;
         this.horizontalStepperForm.disable();
         const formData: FormData = new FormData();
-        formData.append('uploadedFileName', this.file.name);
+        formData.append('uploadedFileName', this.file?.name);
         formData.append('uploadedFile', this.file);
         formData.append(
             'requestComments',
@@ -104,6 +116,8 @@ export class CreateCardReqComponent implements OnInit {
             },
             (error) => {
                 console.log(error);
+                this.errors = error?.error?.errors;
+                this.showAlert = true;
                 this._alertService.displayError(
                     'Check your fields and try again'
                 );
@@ -117,5 +131,44 @@ export class CreateCardReqComponent implements OnInit {
         if (fileList.length > 0) {
             this.file = fileList[0];
         }
+    }
+
+    //create function to get time difference seconds
+    getTimeDifference(startDate, endDate) {
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        const diff = end.getTime() - start.getTime();
+        return Math.round(diff / 1000);
+    }
+    //create function get hours and minutes from seconds
+    getHoursAndMinutes(seconds) {
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds - hours * 3600) / 60);
+        return hours + ' hours ' + minutes + ' minutes';
+    }
+
+    //create function to change seconds to minutes
+    getMinutes(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        return minutes;
+    }
+
+    onDateChange() {
+        this.horizontalStepperForm.patchValue({
+            step2: {
+                duration: this.getMinutes(
+                    this.getTimeDifference(
+                        this.horizontalStepperForm.value.step2.startDate,
+                        this.horizontalStepperForm.value.step2.endDate
+                    )
+                ),
+                durationView: this.getHoursAndMinutes(
+                    this.getTimeDifference(
+                        this.horizontalStepperForm.value.step2.startDate,
+                        this.horizontalStepperForm.value.step2.endDate
+                    )
+                ),
+            },
+        });
     }
 }

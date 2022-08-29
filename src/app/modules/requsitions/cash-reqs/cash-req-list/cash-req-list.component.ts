@@ -147,6 +147,12 @@ export class CashReqListComponent implements OnInit {
         }
     }
 
+    getByMineEmployee(value) {
+        this.status = value;
+
+        this.getFilteredCashReq();
+    }
+
     trackByFn(index: number, item: any): any {
         return item.id || index;
     }
@@ -191,5 +197,12 @@ export class CashReqListComponent implements OnInit {
                 );
             }
         );
+    }
+
+    //create function return hours and minutes from minutes
+    getHoursAndMinutes(minutes: number) {
+        const hours = Math.floor(minutes / 60);
+        const minutes_ = minutes % 60;
+        return `${hours}hours ${minutes_}min`;
     }
 }

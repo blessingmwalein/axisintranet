@@ -5,100 +5,97 @@
     >
         <div class="flex items-center justify-between -mt-3 -ml-4">
             <div
-            class="flex justify-start"
-            *ngIf="
-                user.roles[0].toUpperCase() == 'LINE MANAGER' ||
-                user.roles[0].toUpperCase() == 'FINANCE MANAGER' ||
-                user.roles[0].toUpperCase() == 'GENERAL MANAGER'
-            "
-        >
-            <button
-                class="pr-4 pl-3.5"
-                (click)="openApproveDialog()"
-                mat-button
+                class="flex justify-start"
+                *ngIf="
+                    user.roles[0].toUpperCase() == 'LINE MANAGER' ||
+                    user.roles[0].toUpperCase() == 'FINANCE MANAGER' ||
+                    user.roles[0].toUpperCase() == 'GENERAL MANAGER'
+                "
             >
-                <ng-container>
-                    <div class="flex items-center justify-center">
-                        <mat-icon
-                            [svgIcon]="'heroicons_outline:check-circle'"
-                        ></mat-icon>
-                        <span class="ml-2 font-semibold"
-                            >Approve Requisition</span
-                        >
-                    </div>
-                </ng-container>
-            </button>
-            <button
-                class="pr-4 pl-3.5"
-                (click)="openRejectDialog(cardRequisition.id)"
-                mat-button
-            >
-                <ng-container>
-                    <div class="flex items-center justify-center">
-                        <mat-icon
-                            [svgIcon]="'heroicons_outline:x'"
-                        ></mat-icon>
-                        <span class="ml-2 font-semibold"
-                            >Reject Requisition</span
-                        >
-                    </div>
-                </ng-container>
-            </button>
-        </div>
-        <button mat-icon-button></button>
-        <div class="flex justify-end items-center">
-            <!-- More menu -->
+                <button
+                    class="pr-4 pl-3.5"
+                    (click)="openApproveDialog()"
+                    mat-button
+                >
+                    <ng-container>
+                        <div class="flex items-center justify-center">
+                            <mat-icon
+                                [svgIcon]="'heroicons_outline:check-circle'"
+                            ></mat-icon>
+                            <span class="ml-2 font-semibold"
+                                >Approve Requisition</span
+                            >
+                        </div>
+                    </ng-container>
+                </button>
+                <button
+                    class="pr-4 pl-3.5"
+                    (click)="openRejectDialog(cardRequisition.id)"
+                    mat-button
+                >
+                    <ng-container>
+                        <div class="flex items-center justify-center">
+                            <mat-icon
+                                [svgIcon]="'heroicons_outline:x'"
+                            ></mat-icon>
+                            <span class="ml-2 font-semibold"
+                                >Reject Requisition</span
+                            >
+                        </div>
+                    </ng-container>
+                </button>
+            </div>
+            <button mat-icon-button></button>
+            <div class="flex justify-end items-center">
+                <!-- More menu -->
 
-            <button mat-icon-button [matMenuTriggerFor]="moreMenu">
-                <mat-icon
-                    [svgIcon]="'heroicons_outline:dots-vertical'"
-                ></mat-icon>
-            </button>
-            <mat-menu #moreMenu="matMenu">
-                <button
-                    mat-menu-item
-                    (click)="openUpdateUsedFundsDialog()"
-                >
+                <button mat-icon-button [matMenuTriggerFor]="moreMenu">
                     <mat-icon
-                        [svgIcon]="'heroicons_outline:trash'"
+                        [svgIcon]="'heroicons_outline:dots-vertical'"
                     ></mat-icon>
-                    <span>Update Used Funds</span>
                 </button>
-                <button
-                    mat-menu-item
-                    (click)="openUpdateCashReceuvedDialog()"
-                >
-                    <mat-icon
-                        [svgIcon]="'heroicons_outline:trash'"
-                    ></mat-icon>
-                    <span>Update Received Funds</span>
+                <mat-menu #moreMenu="matMenu">
+                    <button mat-menu-item (click)="openUpdateUsedFundsDialog()">
+                        <mat-icon
+                            [svgIcon]="'heroicons_outline:trash'"
+                        ></mat-icon>
+                        <span>Update Used Funds</span>
+                    </button>
+                    <button
+                        mat-menu-item
+                        (click)="openUpdateCashReceuvedDialog()"
+                    >
+                        <mat-icon
+                            [svgIcon]="'heroicons_outline:trash'"
+                        ></mat-icon>
+                        <span>Update Received Funds</span>
+                    </button>
+                    <button
+                        mat-menu-item
+                        (click)="openUpdateReleasedFunds()"
+                        *ngIf="user.roles[0].toUpperCase() == 'FINANCE MANAGER'"
+                    >
+                        <mat-icon
+                            [svgIcon]="'heroicons_outline:trash'"
+                        ></mat-icon>
+                        <span>Update Released Funds</span>
+                    </button>
+                    <button
+                        mat-menu-item
+                        (click)="openPrintDialog()"
+                        *ngIf="user.roles[0].toUpperCase() !== 'EMPLOYEE'"
+                    >
+                        <mat-icon
+                            [svgIcon]="'heroicons_outline:printer'"
+                        ></mat-icon>
+                        <span>Print Requisition</span>
+                    </button>
+                </mat-menu>
+                <!-- Close button -->
+                <button mat-icon-button [routerLink]="['../']">
+                    <mat-icon [svgIcon]="'heroicons_outline:x'"></mat-icon>
                 </button>
-                <button
-                    mat-menu-item
-                    (click)="openUpdateReleasedFunds()"
-                    *ngIf="user.roles[0].toUpperCase() == 'FINANCE MANAGER'"
-                >
-                    <mat-icon
-                        [svgIcon]="'heroicons_outline:trash'"
-                    ></mat-icon>
-                    <span>Update Released Funds</span>
-                </button>
-                <button
-                    mat-menu-item
-                    (click)="openPrintDialog()"
-                    *ngIf="user.roles[0].toUpperCase() !== 'EMPLOYEE'"
-                >
-                    <mat-icon
-                        [svgIcon]="'heroicons_outline:printer'"
-                    ></mat-icon>
-                    <span>Print Requisition</span>
-                </button>
-            </mat-menu>
-            <!-- Close button -->
-            <button mat-icon-button [routerLink]="['../']">
-                <mat-icon [svgIcon]="'heroicons_outline:x'"></mat-icon>
-            </button>
-        </div>
+            </div>
         </div>
 
         <mat-divider class="mt-6 mb-8"></mat-divider>
@@ -118,13 +115,21 @@
                     <div class="col-span-6 sm:col-span-3">
                         <mat-form-field class="flex-auto w-full">
                             <mat-label>Title</mat-label>
-                            <input matInput [formControlName]="'title'" />
+                            <input
+                                matInput
+                                [formControlName]="'title'"
+                                readonly
+                            />
                         </mat-form-field>
                     </div>
                     <div class="col-span-6 sm:col-span-3">
                         <mat-form-field class="flex-auto w-full">
                             <mat-label>Status</mat-label>
-                            <input matInput [formControlName]="'status'" />
+                            <input
+                                matInput
+                                [formControlName]="'status'"
+                                readonly
+                            />
                         </mat-form-field>
                     </div>
                     <div class="col-span-12 sm:col-span-6">
@@ -134,6 +139,7 @@
                                 matInput
                                 [formControlName]="'requestComments'"
                                 [rows]="3"
+                                readonly
                             ></textarea>
                             <mat-icon
                                 class="icon-size-5"
@@ -167,6 +173,7 @@
                                         matInput
                                         formControlName="startDate"
                                         [matDatepicker]="startDatePicker"
+                                        readonly
                                     />
                                     <mat-datepicker #startDatePicker>
                                         <mat-datepicker-actions>
@@ -214,6 +221,7 @@
                                         matInput
                                         formControlName="endDate"
                                         [matDatepicker]="endDatePicker"
+                                        readonly
                                     />
                                     <mat-datepicker #endDatePicker>
                                         <mat-datepicker-actions>
@@ -317,13 +325,21 @@
                     <div class="col-span-6 sm:col-span-3">
                         <mat-form-field class="flex-auto w-full">
                             <mat-label>Duration</mat-label>
-                            <input matInput [formControlName]="'duration'" />
+                            <input
+                                matInput
+                                [formControlName]="'duration'"
+                                readonly
+                            />
                         </mat-form-field>
                     </div>
                     <div class="col-span-6 sm:col-span-3">
                         <mat-form-field class="flex-auto w-full">
                             <mat-label>Amount</mat-label>
-                            <input matInput [formControlName]="'amount'" />
+                            <input
+                                matInput
+                                [formControlName]="'amount'"
+                                readonly
+                            />
                         </mat-form-field>
                     </div>
                 </div>
@@ -335,6 +351,7 @@
                                 matInput
                                 [formControlName]="'releasedFunds'"
                                 disabled
+                                readonly
                             />
                         </mat-form-field>
                     </div>
@@ -345,6 +362,7 @@
                                 matInput
                                 [formControlName]="'receivedFunds'"
                                 disabled
+                                readonly
                             />
                         </mat-form-field>
                     </div>
@@ -355,6 +373,7 @@
                                 matInput
                                 [formControlName]="'actualUsedFunds'"
                                 disabled
+                                readonly
                             />
                         </mat-form-field>
                     </div>
@@ -364,7 +383,6 @@
                         class="col-span-12 sm:col-span-12"
                         style="height: 100px"
                     >
-                        <mat-label>Attatched File</mat-label>
                         <button
                             class="px-8"
                             mat-flat-button
@@ -372,7 +390,7 @@
                             type="button"
                             (click)="onFileUpload()"
                         >
-                            Preview Attatched File
+                            Download File
                         </button>
                     </div>
                 </div>
@@ -393,6 +411,7 @@
                                 matInput
                                 [formControlName]="'cardNumber'"
                                 disabled="true"
+                                readonly
                             />
                         </mat-form-field>
                     </div>
@@ -403,6 +422,7 @@
                                 matInput
                                 [formControlName]="'currency'"
                                 disabled
+                                readonly
                             />
                         </mat-form-field>
                     </div>
@@ -415,6 +435,7 @@
                                 [formControlName]="'description'"
                                 [rows]="3"
                                 disabled
+                                readonly
                             ></textarea>
                             <mat-icon
                                 class="icon-size-5"
@@ -430,6 +451,7 @@
                                 matInput
                                 [formControlName]="'status'"
                                 disabled
+                                readonly
                             />
                         </mat-form-field>
                     </div>
@@ -440,6 +462,7 @@
                                 matInput
                                 [formControlName]="'amount'"
                                 disabled
+                                readonly
                             />
                         </mat-form-field>
                     </div>
@@ -469,6 +492,7 @@
                                 matInput
                                 [formControlName]="'firstName'"
                                 disabled="true"
+                                readonly
                             />
                         </mat-form-field>
                     </div>
@@ -479,6 +503,7 @@
                                 matInput
                                 [formControlName]="'lastName'"
                                 disabled
+                                readonly
                             />
                         </mat-form-field>
                     </div>
@@ -489,23 +514,19 @@
                                 matInput
                                 [formControlName]="'phoneNumber'"
                                 disabled
+                                readonly
                             />
                         </mat-form-field>
                     </div>
                     <div class="col-span-12 sm:col-span-6">
                         <mat-form-field class="flex-auto w-full">
-                            <mat-label>Email</mat-label>
-                            <textarea
+                            <mat-label>Phone Number</mat-label>
+                            <input
                                 matInput
                                 [formControlName]="'email'"
-                                [rows]="3"
                                 disabled
-                            ></textarea>
-                            <mat-icon
-                                class="icon-size-5"
-                                matPrefix
-                                [svgIcon]="'heroicons_solid:menu-alt-2'"
-                            ></mat-icon>
+                                readonly
+                            />
                         </mat-form-field>
                     </div>
                 </div>

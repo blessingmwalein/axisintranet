@@ -5,7 +5,10 @@
 export const environment = {
     production: false,
     snackBarTimeout: 5000,
-    apiBaseUrl: 'http://192.168.1.148:8087/api/',
+    // apiBaseUrl: 'http://192.168.1.148:8087/api/',
+    apiBaseUrl: 'http://192.168.1.148:8097/api/',
+    // filesBaseUrl: 'http://192.168.1.148:8087/files/',
+    filesBaseUrl: 'http://192.168.1.148:8097/files/',
     // apiBaseUrl: "http://154.120.241.142:8087/api/"
 };
 

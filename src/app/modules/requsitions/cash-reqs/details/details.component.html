@@ -118,13 +118,21 @@
                     <div class="col-span-6 sm:col-span-3">
                         <mat-form-field class="flex-auto w-full">
                             <mat-label>Title</mat-label>
-                            <input matInput [formControlName]="'title'" />
+                            <input
+                                matInput
+                                [formControlName]="'title'"
+                                readonly
+                            />
                         </mat-form-field>
                     </div>
                     <div class="col-span-6 sm:col-span-3">
                         <mat-form-field class="flex-auto w-full">
                             <mat-label>Status</mat-label>
-                            <input matInput [formControlName]="'status'" />
+                            <input
+                                matInput
+                                [formControlName]="'status'"
+                                readonly
+                            />
                         </mat-form-field>
                     </div>
                     <div class="col-span-12 sm:col-span-6">
@@ -134,6 +142,7 @@
                                 matInput
                                 [formControlName]="'requestComments'"
                                 [rows]="3"
+                                readonly
                             ></textarea>
                             <mat-icon
                                 class="icon-size-5"
@@ -156,7 +165,7 @@
                                 </mat-icon>
                                 <span class="ml-2 text-md font-medium">
                                     <ng-container>{{
-                                        cashRequisition.startDate
+                                        cashRequisition?.startDate
                                             | date: "medium"
                                     }}</ng-container>
                                 </span>
@@ -167,6 +176,7 @@
                                         matInput
                                         formControlName="startDate"
                                         [matDatepicker]="startDatePicker"
+                                        readonly
                                     />
                                     <mat-datepicker #startDatePicker>
                                         <mat-datepicker-actions>
@@ -204,7 +214,8 @@
                                 </mat-icon>
                                 <span class="ml-2 text-md font-medium">
                                     <ng-container>{{
-                                        cashRequisition.endDate | date: "medium"
+                                        cashRequisition?.endDate
+                                            | date: "medium"
                                     }}</ng-container>
                                 </span>
                                 <mat-form-field
@@ -214,6 +225,7 @@
                                         matInput
                                         formControlName="endDate"
                                         [matDatepicker]="endDatePicker"
+                                        readonly
                                     />
                                     <mat-datepicker #endDatePicker>
                                         <mat-datepicker-actions>
@@ -251,7 +263,7 @@
                                         class="text-md font-medium whitespace-nowrap"
                                     >
                                         Date Requested :{{
-                                            cashRequisition.dateRequested
+                                            cashRequisition?.dateRequested
                                                 | date: "medium"
                                         }}</span
                                     >
@@ -265,7 +277,7 @@
                                         class="text-md font-medium whitespace-nowrap"
                                     >
                                         {{
-                                            cashRequisition.lineApproved
+                                            cashRequisition?.lineApproved
                                                 ? "Line
                                         Manager Approved On : " +
                                                   cashRequisition.lineApprovedDate
@@ -284,7 +296,7 @@
                                         class="text-md font-medium whitespace-nowrap"
                                     >
                                         {{
-                                            cashRequisition.approved
+                                            cashRequisition?.approved
                                                 ? "Finace Manager Approved On : " +
                                                   cashRequisition.financeApprovedDate
                                                 : "Awaiting Finance
@@ -302,7 +314,7 @@
                                         class="text-md font-medium whitespace-nowrap"
                                     >
                                         {{
-                                            cashRequisition.generalManagerApproved
+                                            cashRequisition?.generalManagerApproved
                                                 ? "General Manager Approved On : " +
                                                   cashRequisition.generalManagerApprovedDate
                                                 : "Awaiting General
@@ -318,13 +330,21 @@
                     <div class="col-span-6 sm:col-span-3">
                         <mat-form-field class="flex-auto w-full">
                             <mat-label>Duration</mat-label>
-                            <input matInput [formControlName]="'duration'" />
+                            <input
+                                matInput
+                                [formControlName]="'duration'"
+                                readonly
+                            />
                         </mat-form-field>
                     </div>
                     <div class="col-span-6 sm:col-span-3">
                         <mat-form-field class="flex-auto w-full">
                             <mat-label>Amount</mat-label>
-                            <input matInput [formControlName]="'amount'" />
+                            <input
+                                matInput
+                                [formControlName]="'amount'"
+                                readonly
+                            />
                         </mat-form-field>
                     </div>
                 </div>
@@ -336,6 +356,7 @@
                                 matInput
                                 [formControlName]="'releasedFunds'"
                                 disabled
+                                readonly
                             />
                         </mat-form-field>
                     </div>
@@ -346,6 +367,7 @@
                                 matInput
                                 [formControlName]="'receivedFunds'"
                                 disabled
+                                readonly
                             />
                         </mat-form-field>
                     </div>
@@ -356,6 +378,7 @@
                                 matInput
                                 [formControlName]="'actualUsedFunds'"
                                 disabled
+                                readonly
                             />
                         </mat-form-field>
                     </div>
@@ -365,7 +388,6 @@
                         class="col-span-12 sm:col-span-12"
                         style="height: 100px"
                     >
-                        <mat-label>Attatched File</mat-label>
                         <button
                             class="px-8"
                             mat-flat-button
@@ -373,7 +395,7 @@
                             type="button"
                             (click)="onFileUpload()"
                         >
-                            Preview Attatched File
+                            Download File
                         </button>
                     </div>
                 </div>
@@ -394,6 +416,7 @@
                                 matInput
                                 [formControlName]="'currencyCode'"
                                 disabled="true"
+                                readonly
                             />
                         </mat-form-field>
                     </div>
@@ -404,6 +427,7 @@
                                 matInput
                                 [formControlName]="'currency'"
                                 disabled
+                                readonly
                             />
                         </mat-form-field>
                     </div>
@@ -415,6 +439,7 @@
                                 matInput
                                 [formControlName]="'description'"
                                 [rows]="3"
+                                readonly
                                 disabled
                             ></textarea>
                             <mat-icon
@@ -431,6 +456,7 @@
                                 matInput
                                 [formControlName]="'status'"
                                 disabled
+                                readonly
                             />
                         </mat-form-field>
                     </div>
@@ -441,6 +467,7 @@
                                 matInput
                                 [formControlName]="'amount'"
                                 disabled
+                                readonly
                             />
                         </mat-form-field>
                     </div>
@@ -470,6 +497,7 @@
                                 matInput
                                 [formControlName]="'firstName'"
                                 disabled="true"
+                                readonly
                             />
                         </mat-form-field>
                     </div>
@@ -480,6 +508,7 @@
                                 matInput
                                 [formControlName]="'lastName'"
                                 disabled
+                                readonly
                             />
                         </mat-form-field>
                     </div>
@@ -490,6 +519,7 @@
                                 matInput
                                 [formControlName]="'phoneNumber'"
                                 disabled
+                                readonly
                             />
                         </mat-form-field>
                     </div>
@@ -501,6 +531,7 @@
                                 [formControlName]="'email'"
                                 [rows]="3"
                                 disabled
+                                readonly
                             ></textarea>
                             <mat-icon
                                 class="icon-size-5"
