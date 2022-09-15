@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
@@ -26,6 +26,8 @@ export class CreateCardReqComponent implements OnInit {
         message: 'Somthing went Wrong',
     };
     showAlert: boolean = false;
+
+    @ViewChild('endDate') endDate: ElementRef;
 
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
@@ -126,6 +128,18 @@ export class CreateCardReqComponent implements OnInit {
         );
     }
 
+    numberOnly(event): boolean {
+        const charCode = event.which ? event.which : event.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
+    //check function to set min date value to be accpeted on start date select
+    checkStartDate(event) {
+        console.log(event.target.value);
+    }
+
     fileChange(event) {
         const fileList: FileList = event.target.files;
         if (fileList.length > 0) {
@@ -153,7 +167,16 @@ export class CreateCardReqComponent implements OnInit {
         return minutes;
     }
 
-    onDateChange() {
+    onDateChange(event) {
+        console.log(event.target.value);
+        let timeZone = event.target.value;
+
+        //add 30 minutes to time zone
+        timeZone = new Date(timeZone).getTime() + 30 * 60000;
+        // console.log(new timeZone());
+
+        this.endDate.nativeElement.min = new Date(timeZone).toISOString();
+
         this.horizontalStepperForm.patchValue({
             step2: {
                 duration: this.getMinutes(

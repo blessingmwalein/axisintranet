@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+    Component,
+    ElementRef,
+    HostListener,
+    Input,
+    OnInit,
+} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FuseAlertType } from '@fuse/components/alert';
@@ -32,8 +38,17 @@ export class CreateCashReqComponent implements OnInit {
         private _formBuilder: FormBuilder,
         private _cashReqService: CashRequisitionService,
         private _router: Router,
-        private _userService: UserService
+        private _userService: UserService,
+        private el: ElementRef
     ) {}
+
+    numberOnly(event): boolean {
+        const charCode = event.which ? event.which : event.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
 
     ngOnInit(): void {
         this.setMinDates();
@@ -121,7 +136,8 @@ export class CreateCashReqComponent implements OnInit {
             (error) => {
                 console.log(error);
                 this.errors = error?.error?.errors;
-                this.showAlert = true;
+
+                if (error.errors) this.showAlert = true;
                 this._alertService.displayError(
                     'Please confirm your fields and try again'
                 );

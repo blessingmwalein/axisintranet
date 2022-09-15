@@ -114,6 +114,7 @@
                             ></mat-icon>
                             <input
                                 matInput
+                                (keypress)="numberOnly($event)"
                                 [formControlName]="'amount'"
                                 [placeholder]="'Amount'"
                                 type="tel"
@@ -226,7 +227,7 @@
                                 min="{{ startDateMin }}"
                                 [placeholder]="'Start date'"
                                 [formControlName]="'startDate'"
-                                (change)="onDateChange()"
+                                (change)="onDateChange($event)"
                             />
                             <!-- <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                             <mat-datepicker #picker2></mat-datepicker> -->
@@ -249,10 +250,12 @@
                             <input
                                 matInput
                                 type="datetime-local"
+                                id="endDate"
                                 min="{{ startDateMin }}"
                                 [placeholder]="'End date'"
                                 [formControlName]="'endDate'"
-                                (change)="onDateChange()"
+                                (change)="onDateChange($event)"
+                                #endDate
                             />
                             <!-- <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                             <mat-datepicker #picker3></mat-datepicker> -->

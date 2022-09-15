@@ -114,6 +114,7 @@
                             ></mat-icon>
                             <input
                                 matInput
+                                (keypress)="numberOnly($event)"
                                 [formControlName]="'amount'"
                                 [placeholder]="'amount'"
                             />
