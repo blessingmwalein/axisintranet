@@ -84,7 +84,6 @@ export class ManagerDashComponent implements OnInit {
 
         this.user = this._userService.getLocalUser();
 
-
         this._vehicleService.getAllVehicleRequisitionsNotLogged().subscribe(
             (vehicleReqs) => {
                 this.vehicleReq = vehicleReqs;
@@ -160,25 +159,25 @@ export class ManagerDashComponent implements OnInit {
     setStatus(value) {
         this.status = value;
         this.getCashMonthToMonthReporty();
-        this.getCashMonthToMonthReportyDetail()
+        this.getCashMonthToMonthReportyDetail();
         this.getCashDayToDayReporty();
-        this.getCashDayToDayReportyDetail()
+        this.getCashDayToDayReportyDetail();
     }
     setCash(value) {
         this.cash = value.id;
         this.currencySelected = value.currency;
         this.getCashMonthToMonthReporty();
-        this.getCashMonthToMonthReportyDetail()
+        this.getCashMonthToMonthReportyDetail();
         this.getCashDayToDayReporty();
-        this.getCashDayToDayReportyDetail()
+        this.getCashDayToDayReportyDetail();
     }
     setCard(value) {
         this.card = value.id;
         this.currencySelected = value.currency;
         this.getCashMonthToMonthReporty();
-        this.getCashMonthToMonthReportyDetail()
+        this.getCashMonthToMonthReportyDetail();
         this.getCashDayToDayReporty();
-        this.getCashDayToDayReportyDetail()
+        this.getCashDayToDayReportyDetail();
     }
 
     getCashMonthToMonthReporty() {
@@ -200,7 +199,7 @@ export class ManagerDashComponent implements OnInit {
             .subscribe(
                 (data) => {
                     console.log(data);
-                    this.cashMonthToMonthDetail = data[0];
+                    this.cashMonthToMonthDetail = data;
                 },
                 (error) => {
                     console.log(error);
@@ -213,7 +212,7 @@ export class ManagerDashComponent implements OnInit {
             .subscribe(
                 (data) => {
                     console.log(data);
-                    this.cashDayToDayDetail = data[0];
+                    this.cashDayToDayDetail = data;
                 },
                 (error) => {
                     console.log(error);
@@ -226,7 +225,7 @@ export class ManagerDashComponent implements OnInit {
             .subscribe(
                 (data) => {
                     console.log(data);
-                    this.cashDayToDay = data[0];
+                    this.cashDayToDay = data;
                 },
                 (error) => {
                     console.log(error);

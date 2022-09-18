@@ -20,8 +20,8 @@ export class VehicleReqListComponent implements OnInit {
         'title',
         'status',
         'duration',
+        'name',
         'startDate',
-        'endDate',
         'action',
     ];
     isLoading: boolean = true;
@@ -41,25 +41,28 @@ export class VehicleReqListComponent implements OnInit {
     ngOnInit(): void {
         this.user = this._userService.getUserfromStorage();
         console.log(this.user);
+
         this.getReqByRole();
     }
 
     getVehicleReqs() {
         this.isLoading = true;
-        this._vehicleRequisitionService.getAllVehicleRequisitionsNotLogged().subscribe(
-            (response) => {
-                this.vehicleReqDataSource.data = response;
-                console.log(this.vehicleReqDataSource.data);
-                this.isLoading = false;
-            },
-            (error) => {
-                console.log(error);
-                this._alertService.displayError(
-                    'Could not fetch vehicle requisitions reload!'
-                );
-                this.isLoading = false;
-            }
-        );
+        this._vehicleRequisitionService
+            .getAllVehicleRequisitionsNotLogged()
+            .subscribe(
+                (response) => {
+                    this.vehicleReqDataSource.data = response;
+                    console.log(this.vehicleReqDataSource.data);
+                    this.isLoading = false;
+                },
+                (error) => {
+                    console.log(error);
+                    this._alertService.displayError(
+                        'Could not fetch vehicle requisitions reload!'
+                    );
+                    this.isLoading = false;
+                }
+            );
     }
 
     getFilteredVehicleReq() {

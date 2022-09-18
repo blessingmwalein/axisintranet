@@ -7,6 +7,7 @@ import {
     Category,
 } from '../../models/cash-requisitions/cash-requisitions.types';
 import { environment } from 'environments/environment';
+import { NotificationsService } from '../nortifications/notifications.service';
 
 @Injectable({
     providedIn: 'root',
@@ -17,7 +18,7 @@ export class CashRequisitionService {
     /**
      * Constructor
      */
-    constructor(private _httpClient: HttpClient) {}
+    constructor(private _httpClient: HttpClient, private not:NotificationsService) {}
 
     getAllCashRequisitions(): Observable<any[]> {
         return this._httpClient.get<any[]>(
@@ -63,6 +64,7 @@ export class CashRequisitionService {
         );
     }
     financeManagerApproveReq(id: string, cashReq: any): Observable<any[]> {
+        // var response = await this.not.sendApprovedWhatsappMessageToUser();
         return this._httpClient.put<any>(
             `${this._baseUrl}CashRequisition/changeapproval/${id}`,
             cashReq

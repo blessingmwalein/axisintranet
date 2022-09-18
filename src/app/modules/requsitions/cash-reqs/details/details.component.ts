@@ -30,6 +30,7 @@ import { UserService } from 'app/core/user/user.service';
 import { UpdateReleasedFundsComponent } from '../update-released-funds/update-released-funds.component';
 import { PrintReqPrevComponent } from '../print-req-prev/print-req-prev.component';
 import { environment } from 'environments/environment';
+import { NotificationsService } from 'app/modules/employee-x/services/nortifications/notifications.service';
 
 @Component({
     selector: 'academy-details',
@@ -66,7 +67,8 @@ export class CashRequisitionDetailsComponent implements OnInit {
         private _fuseConfirmationService: FuseConfirmationService,
         private _matDialog: MatDialog,
         private sanitizer: DomSanitizer,
-        private _userService: UserService
+        private _userService: UserService,
+        private _not: NotificationsService
     ) {}
 
     ngOnInit(): void {
@@ -362,6 +364,20 @@ export class CashRequisitionDetailsComponent implements OnInit {
                 } else if (this.user.roles[0].toUpperCase() == 'LINE MANAGER') {
                     this.approveCashLineManger();
                 }
+
+                this._not
+                    .sendApprovedWhatsappMessageToUser(
+                        this.cashRequisition.employee.phoneNumber,
+                        `${this.cashRequisition.employee.firstName} ${this.cashRequisition.employee.lastName}`,
+                        `${this._userService.getLocalUser().firstname} ${
+                            this._userService.getLocalUser().lastname
+                        }`,
+                        'Cash'
+                    )
+                    .subscribe(
+                        (response) => {},
+                        (error) => {}
+                    );
             }
         });
     }
@@ -484,6 +500,20 @@ export class CashRequisitionDetailsComponent implements OnInit {
                     });
                     this.approveCashLineManger();
                 }
+
+                this._not
+                    .sendRejectWhatsappMessageToUser(
+                        this.cashRequisition.employee.phoneNumber,
+                        `${this.cashRequisition.employee.firstName} ${this.cashRequisition.employee.lastName}`,
+                        `${this._userService.getLocalUser().firstname} ${
+                            this._userService.getLocalUser().lastname
+                        }`,
+                        'Cash'
+                    )
+                    .subscribe(
+                        (response) => {},
+                        (error) => {}
+                    );
             }
         });
     }

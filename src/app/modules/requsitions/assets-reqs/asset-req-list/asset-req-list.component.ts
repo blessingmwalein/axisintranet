@@ -20,9 +20,9 @@ export class AssetReqListComponent implements OnInit {
         'title',
         'status',
         'duration',
+        'name',
         'startDate',
         'asset',
-        'endDate',
         'action',
     ];
     isLoading: boolean = true;
@@ -42,7 +42,9 @@ export class AssetReqListComponent implements OnInit {
     ngOnInit(): void {
         this.user = this._userService.getUserfromStorage();
         console.log(this.user);
-        this.getReqByRole();
+        this.setStatus('Created');
+
+        // this.getReqByRole();
         // this.getAssetReqs();
     }
 

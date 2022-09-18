@@ -33,6 +33,7 @@ import { UserService } from 'app/core/user/user.service';
 import { User } from 'app/modules/admin/models/users/users.types';
 import { MatDialog } from '@angular/material/dialog';
 import { PrintReqPrevComponent } from '../print-req-prev/print-req-prev.component';
+import { NotificationsService } from 'app/modules/employee-x/services/nortifications/notifications.service';
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -70,6 +71,7 @@ export class AssetRequisitionDetailsComponent implements OnInit {
         private _fuseConfirmationService: FuseConfirmationService,
         private _userService: UserService,
         private _matDialog: MatDialog,
+        private _not: NotificationsService
     ) {}
 
     ngOnInit(): void {
@@ -293,8 +295,8 @@ export class AssetRequisitionDetailsComponent implements OnInit {
         });
     }
 
-     //manager operations
-     openApproveDialog() {
+    //manager operations
+    openApproveDialog() {
         const dialogRef = this._fuseConfirmationService.open({
             message: 'Are sure you want to approve this requisition ?',
             title: 'Approve  Requisition',
@@ -308,6 +310,19 @@ export class AssetRequisitionDetailsComponent implements OnInit {
                 } else if (this.user.roles[0].toUpperCase() == 'LINE MANAGER') {
                     this.approveAssetLineManger();
                 }
+                this._not
+                    .sendApprovedWhatsappMessageToUser(
+                        this.assetRequisition.employee.phoneNumber,
+                        `${this.assetRequisition.employee.firstName} ${this.assetRequisition.employee.lastName}`,
+                        `${this._userService.getLocalUser().firstname} ${
+                            this._userService.getLocalUser().lastname
+                        }`,
+                        'Cash'
+                    )
+                    .subscribe(
+                        (response) => {},
+                        (error) => {}
+                    );
             }
         });
     }
@@ -400,6 +415,19 @@ export class AssetRequisitionDetailsComponent implements OnInit {
                     });
                     this.approveAssetLineManger();
                 }
+                this._not
+                    .sendRejectWhatsappMessageToUser(
+                        this.assetRequisition.employee.phoneNumber,
+                        `${this.assetRequisition.employee.firstName} ${this.assetRequisition.employee.lastName}`,
+                        `${this._userService.getLocalUser().firstname} ${
+                            this._userService.getLocalUser().lastname
+                        }`,
+                        'Cash'
+                    )
+                    .subscribe(
+                        (response) => {},
+                        (error) => {}
+                    );
             }
         });
     }

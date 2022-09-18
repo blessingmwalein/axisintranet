@@ -190,7 +190,7 @@ export class UsersDetailsComponent implements OnInit, OnDestroy {
 
         this._userService.editUserProfile(user.id, user).subscribe(() => {
             this._alertService.displayMessage(`User ${this.user.userName} updated`)
-            this._userService.assignUserRoles({ userName: this.user.userName, roles: user.roles }).subscribe(response => {
+            this._userService.editUserRoles({ userName: this.user.userName, roles: user.roles }).subscribe(response => {
                 this._alertService.displayMessage(`User ${this.user.userName} roles updated`)
             }, error => {
                 this._alertService.displayError("Failed to update user roles try again")

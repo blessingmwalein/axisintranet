@@ -186,7 +186,7 @@ export class ManagerDashComponent implements OnInit {
             .subscribe(
                 (data) => {
                     console.log(data);
-                    this.cashMonthToMonth = data[0];
+                    this.cashMonthToMonth = data;
                 },
                 (error) => {
                     console.log(error);
@@ -199,7 +199,7 @@ export class ManagerDashComponent implements OnInit {
             .subscribe(
                 (data) => {
                     console.log(data);
-                    this.cashMonthToMonthDetail = data[0];
+                    this.cashMonthToMonthDetail = data;
                 },
                 (error) => {
                     console.log(error);
@@ -212,7 +212,7 @@ export class ManagerDashComponent implements OnInit {
             .subscribe(
                 (data) => {
                     console.log(data);
-                    this.cashDayToDayDetail = data[0];
+                    this.cashDayToDayDetail = data;
                 },
                 (error) => {
                     console.log(error);
@@ -225,7 +225,7 @@ export class ManagerDashComponent implements OnInit {
             .subscribe(
                 (data) => {
                     console.log(data);
-                    this.cashDayToDay = data[0];
+                    this.cashDayToDay = data;
                 },
                 (error) => {
                     console.log(error);
@@ -240,7 +240,7 @@ export class ManagerDashComponent implements OnInit {
             .subscribe(
                 (data) => {
                     console.log(data);
-                    this.cardMonthToMonth = data[0];
+                    this.cardMonthToMonth = data;
                 },
                 (error) => {
                     console.log(error);
@@ -253,7 +253,7 @@ export class ManagerDashComponent implements OnInit {
             .subscribe(
                 (data) => {
                     console.log(data);
-                    this.cardDayToDay = data[0];
+                    this.cardDayToDay = data;
                 },
                 (error) => {
                     console.log(error);
@@ -266,7 +266,7 @@ export class ManagerDashComponent implements OnInit {
             .subscribe(
                 (data) => {
                     console.log(data);
-                    this.cardMonthToMonth = data[0];
+                    this.cardMonthToMonth = data;
                 },
                 (error) => {
                     console.log(error);
@@ -279,7 +279,7 @@ export class ManagerDashComponent implements OnInit {
             .subscribe(
                 (data) => {
                     console.log(data);
-                    this.cardDayToDay = data[0];
+                    this.cardDayToDay = data;
                 },
                 (error) => {
                     console.log(error);

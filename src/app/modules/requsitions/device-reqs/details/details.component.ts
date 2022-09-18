@@ -23,6 +23,7 @@ import { User } from 'app/modules/admin/models/users/users.types';
 import { UserService } from 'app/core/user/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PrintReqPrevComponent } from '../print-req-prev/print-req-prev.component';
+import { NotificationsService } from 'app/modules/employee-x/services/nortifications/notifications.service';
 @Component({
     selector: 'academy-details',
     templateUrl: './details.component.html',
@@ -56,6 +57,7 @@ export class DeviceRequisitionDetailsComponent implements OnInit {
         private _fuseConfirmationService: FuseConfirmationService,
         private _userService: UserService,
         private _matDialog: MatDialog,
+        private _not: NotificationsService
     ) {}
 
     ngOnInit(): void {
@@ -307,6 +309,20 @@ export class DeviceRequisitionDetailsComponent implements OnInit {
                 } else if (this.user.roles[0].toUpperCase() == 'LINE MANAGER') {
                     this.approveDeviceLineManger();
                 }
+
+                this._not
+                    .sendApprovedWhatsappMessageToUser(
+                        this.deviceRequisition.employee.phoneNumber,
+                        `${this.deviceRequisition.employee.firstName} ${this.deviceRequisition.employee.lastName}`,
+                        `${this._userService.getLocalUser().firstname} ${
+                            this._userService.getLocalUser().lastname
+                        }`,
+                        'Cash'
+                    )
+                    .subscribe(
+                        (response) => {},
+                        (error) => {}
+                    );
             }
         });
     }
@@ -399,6 +415,20 @@ export class DeviceRequisitionDetailsComponent implements OnInit {
                     });
                     this.approveDeviceLineManger();
                 }
+
+                this._not
+                    .sendRejectWhatsappMessageToUser(
+                        this.deviceRequisition.employee.phoneNumber,
+                        `${this.deviceRequisition.employee.firstName} ${this.deviceRequisition.employee.lastName}`,
+                        `${this._userService.getLocalUser().firstname} ${
+                            this._userService.getLocalUser().lastname
+                        }`,
+                        'Cash'
+                    )
+                    .subscribe(
+                        (response) => {},
+                        (error) => {}
+                    );
             }
         });
     }

@@ -27,6 +27,7 @@ import { UserService } from 'app/core/user/user.service';
 import { UpdateReleasedFundsComponent } from '../update-released-funds/update-released-funds.component';
 import { PrintReqPrevComponent } from '../print-req-prev/print-req-prev.component';
 import { environment } from 'environments/environment';
+import { NotificationsService } from 'app/modules/employee-x/services/nortifications/notifications.service';
 
 @Component({
     selector: 'academy-details',
@@ -60,7 +61,8 @@ export class CardRequisitionDetailsComponent implements OnInit {
         private _router: Router,
         private _fuseConfirmationService: FuseConfirmationService,
         private _matDialog: MatDialog,
-        private _userService: UserService
+        private _userService: UserService,
+        private _not: NotificationsService
     ) {}
 
     ngOnInit(): void {
@@ -299,7 +301,7 @@ export class CardRequisitionDetailsComponent implements OnInit {
 
     onFileUpload() {
         // const dialogRef = this._matDialog.open(PreviewFileComponent, {
-        //     data: { uploadedFileName: this.cashRequisition.uploadedFileName },
+        //     data: { uploadedFileName: this.cardRequisition.uploadedFileName },
         //     width: '700px',
         // });
 
@@ -329,6 +331,20 @@ export class CardRequisitionDetailsComponent implements OnInit {
                 } else if (this.user.roles[0].toUpperCase() == 'LINE MANAGER') {
                     this.approveCardLineManger();
                 }
+
+                this._not
+                    .sendApprovedWhatsappMessageToUser(
+                        this.cardRequisition.employee.phoneNumber,
+                        `${this.cardRequisition.employee.firstName} ${this.cardRequisition.employee.lastName}`,
+                        `${this._userService.getLocalUser().firstname} ${
+                            this._userService.getLocalUser().lastname
+                        }`,
+                        'Cash'
+                    )
+                    .subscribe(
+                        (response) => {},
+                        (error) => {}
+                    );
             }
         });
     }
@@ -474,6 +490,20 @@ export class CardRequisitionDetailsComponent implements OnInit {
                     });
                     this.approveCardLineManger();
                 }
+
+                this._not
+                    .sendRejectWhatsappMessageToUser(
+                        this.cardRequisition.employee.phoneNumber,
+                        `${this.cardRequisition.employee.firstName} ${this.cardRequisition.employee.lastName}`,
+                        `${this._userService.getLocalUser().firstname} ${
+                            this._userService.getLocalUser().lastname
+                        }`,
+                        'Cash'
+                    )
+                    .subscribe(
+                        (response) => {},
+                        (error) => {}
+                    );
             }
         });
     }

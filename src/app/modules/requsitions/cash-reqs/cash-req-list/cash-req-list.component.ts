@@ -21,8 +21,8 @@ export class CashReqListComponent implements OnInit {
         'title',
         'status',
         'duration',
+        'name',
         'startDate',
-        'endDate',
         'amount',
         'action',
     ];
@@ -44,7 +44,8 @@ export class CashReqListComponent implements OnInit {
         //set user type
         this.user = this._userService.getUserfromStorage();
         console.log(this.user);
-        this.getReqByRole();
+        this.setStatus('Created');
+        // this.getReqByRole();
     }
 
     getCashReqs() {

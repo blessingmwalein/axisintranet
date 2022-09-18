@@ -190,6 +190,15 @@
                             </ng-container>
 
                             <!-- Expenses amount -->
+                            <ng-container matColumnDef="name">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    Requester
+                                </th>
+                                <td mat-cell *matCellDef="let cardReq">
+                                    {{ cardReq.employee.firstName }}
+                                    {{ cardReq.employee.lastName }}
+                                </td>
+                            </ng-container>
                             <ng-container matColumnDef="startDate">
                                 <th mat-header-cell *matHeaderCellDef>
                                     Start Date
@@ -199,15 +208,6 @@
                                 </td>
                             </ng-container>
 
-                            <!-- Expenses percentage -->
-                            <ng-container matColumnDef="endDate">
-                                <th mat-header-cell *matHeaderCellDef>
-                                    End Date
-                                </th>
-                                <td mat-cell *matCellDef="let cardReq">
-                                    {{ cardReq.endDate | date: "medium" }}
-                                </td>
-                            </ng-container>
                             <ng-container matColumnDef="amount">
                                 <th mat-header-cell *matHeaderCellDef>
                                     Amount

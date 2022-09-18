@@ -20,9 +20,9 @@ export class DeviceReqListComponent implements OnInit {
         'title',
         'status',
         'duration',
+        'name',
         'startDate',
         'device',
-        'endDate',
         'action',
     ];
     isLoading: boolean = true;
@@ -42,7 +42,8 @@ export class DeviceReqListComponent implements OnInit {
     ngOnInit(): void {
         this.user = this._userService.getUserfromStorage();
         console.log(this.user);
-        this.getReqByRole();
+        this.setStatus('Created');
+        // this.getReqByRole();
     }
 
     getDeviceReqs() {

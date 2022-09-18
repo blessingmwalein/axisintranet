@@ -21,6 +21,7 @@ import { User } from 'app/modules/admin/models/users/users.types';
 import { MatDialog } from '@angular/material/dialog';
 import { UserService } from 'app/core/user/user.service';
 import { PrintReqPrevComponent } from '../print-req-prev/print-req-prev.component';
+import { NotificationsService } from 'app/modules/employee-x/services/nortifications/notifications.service';
 
 @Component({
     selector: 'academy-details',
@@ -54,7 +55,8 @@ export class VehicleRequisitionDetailsComponent implements OnInit {
         private _router: Router,
         private _fuseConfirmationService: FuseConfirmationService,
         private _userService: UserService,
-        private _matDialog: MatDialog
+        private _matDialog: MatDialog,
+        private _not: NotificationsService
     ) {}
 
     ngOnInit(): void {
@@ -275,6 +277,20 @@ export class VehicleRequisitionDetailsComponent implements OnInit {
                 } else if (this.user.roles[0].toUpperCase() == 'LINE MANAGER') {
                     this.approveVehicleLineManger();
                 }
+
+                this._not
+                    .sendApprovedWhatsappMessageToUser(
+                        this.vehicleRequisition.employee.phoneNumber,
+                        `${this.vehicleRequisition.employee.firstName} ${this.vehicleRequisition.employee.lastName}`,
+                        `${this._userService.getLocalUser().firstname} ${
+                            this._userService.getLocalUser().lastname
+                        }`,
+                        'Cash'
+                    )
+                    .subscribe(
+                        (response) => {},
+                        (error) => {}
+                    );
             }
         });
     }
@@ -345,6 +361,20 @@ export class VehicleRequisitionDetailsComponent implements OnInit {
                     });
                     this.approveVehicleLineManger();
                 }
+
+                this._not
+                    .sendRejectWhatsappMessageToUser(
+                        this.vehicleRequisition.employee.phoneNumber,
+                        `${this.vehicleRequisition.employee.firstName} ${this.vehicleRequisition.employee.lastName}`,
+                        `${this._userService.getLocalUser().firstname} ${
+                            this._userService.getLocalUser().lastname
+                        }`,
+                        'Cash'
+                    )
+                    .subscribe(
+                        (response) => {},
+                        (error) => {}
+                    );
             }
         });
     }

@@ -19,8 +19,8 @@ export class CardReqListComponent implements OnInit {
         'title',
         'status',
         'duration',
+        'name',
         'startDate',
-        'endDate',
         'amount',
         'action',
     ];
@@ -41,7 +41,8 @@ export class CardReqListComponent implements OnInit {
 
     ngOnInit(): void {
         this.user = this._userService.getUserfromStorage();
-        this.getReqByRole();
+        this.setStatus('Created');
+        // this.getReqByRole();
     }
 
     getCardReqs() {

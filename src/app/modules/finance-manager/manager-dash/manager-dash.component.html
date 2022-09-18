@@ -6,11 +6,8 @@
     <div class="bg-card">
         <div class="flex flex-col w-full max-w-screen-xl mx-auto px-6 sm:px-8">
             <!-- Project selector -->
-            <div
-                class="relative flex self-start pt-2 pb-1 pl-5 pr-4 cursor-pointer overflow-hidden rounded-t-xl border border-b-0 bg-default"
-                matRipple
-                [matMenuTriggerFor]="projectsMenu"
-            >
+            <div class="relative flex self-start pt-2 pb-1 pl-5 pr-4 cursor-pointer overflow-hidden rounded-t-xl border border-b-0 bg-default"
+                matRipple [matMenuTriggerFor]="projectsMenu">
                 <div class="flex items-center">
                     <div class="overflow-hidden">
                         <div class="font-medium leading-6 truncate">
@@ -18,29 +15,17 @@
                         </div>
                     </div>
                     <div class="flex items-center justify-center pl-2">
-                        <mat-icon
-                            class="icon-size-5"
-                            [svgIcon]="'heroicons_solid:chevron-down'"
-                        ></mat-icon>
+                        <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:chevron-down'"></mat-icon>
                     </div>
                 </div>
                 <mat-menu #projectsMenu="matMenu" [xPosition]="'before'">
-                    <button
-                        mat-menu-item
-                        (click)="selectedProject = 'Dashboard'"
-                    >
+                    <button mat-menu-item (click)="selectedProject = 'Dashboard'">
                         Dashboard
                     </button>
-                    <button
-                        mat-menu-item
-                        (click)="selectedProject = 'Cash Reports'"
-                    >
+                    <button mat-menu-item (click)="selectedProject = 'Cash Reports'">
                         Cash reports
                     </button>
-                    <button
-                        mat-menu-item
-                        (click)="selectedProject = 'Card Reports'"
-                    >
+                    <button mat-menu-item (click)="selectedProject = 'Card Reports'">
                         Card reports
                     </button>
                 </mat-menu>
@@ -50,118 +35,80 @@
     <div class="flex-auto border-t -mt-px pt-4 sm:pt-6" *ngIf="!loading">
         <div class="w-full max-w-screen-xl mx-auto">
             <!-- Tabs -->
-            <mat-tab-group
-                class="sm:px-2"
-                [animationDuration]="'0'"
-                *ngIf="selectedProject == 'Dashboard'"
-            >
+            <mat-tab-group class="sm:px-2" [animationDuration]="'0'" *ngIf="selectedProject == 'Dashboard'">
                 <!-- Home -->
                 <mat-tab label="Dashboard">
                     <ng-template matTabContent>
-                        <div
-                            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full min-w-0"
-                        >
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full min-w-0">
                             <!-- Summary -->
-                            <div
-                                (click)="navigateTo('axis/requsitions/cash')"
+                            <div (click)="navigateTo('axis/requsitions/cash')"
                                 class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
-                                style="cursor: pointer"
-                                style="cursor: pointer"
-                            >
+                                style="cursor: pointer" style="cursor: pointer">
                                 <div class="flex items-start justify-between">
-                                    <div
-                                        class="text-lg font-medium tracking-tight leading-6 truncate"
-                                    >
+                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">
                                         Cash Requisitions
                                     </div>
                                     <div class="ml-2 -mt-2 -mr-3"></div>
                                 </div>
                                 <div class="flex flex-col items-center mt-2">
                                     <div
-                                        class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500"
-                                    >
+                                        class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500">
                                         {{ cashReqs.length }}
                                     </div>
-                                    <div
-                                        class="text-lg font-medium text-blue-600 dark:text-blue-500"
-                                    >
+                                    <div class="text-lg font-medium text-blue-600 dark:text-blue-500">
                                         Available
                                     </div>
-                                    <div
-                                        class="flex items-baseline justify-center w-full mt-5 text-secondary"
-                                    ></div>
+                                    <div class="flex items-baseline justify-center w-full mt-5 text-secondary"></div>
                                 </div>
                             </div>
-                            <div
-                                (click)="navigateTo('axis/requsitions/card')"
+                            <div (click)="navigateTo('axis/requsitions/card')"
                                 class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
-                                style="cursor: pointer"
-                            >
+                                style="cursor: pointer">
                                 <div class="flex items-start justify-between">
-                                    <div
-                                        class="text-lg font-medium tracking-tight leading-6 truncate"
-                                    >
+                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">
                                         Card Requisitions
                                     </div>
                                     <div class="ml-2 -mt-2 -mr-3"></div>
                                 </div>
                                 <div class="flex flex-col items-center mt-2">
                                     <div
-                                        class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500"
-                                    >
+                                        class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500">
                                         {{ cardReqs.length }}
                                     </div>
-                                    <div
-                                        class="text-lg font-medium text-blue-600 dark:text-blue-500"
-                                    >
+                                    <div class="text-lg font-medium text-blue-600 dark:text-blue-500">
                                         Available
                                     </div>
-                                    <div
-                                        class="flex items-baseline justify-center w-full mt-5 text-secondary"
-                                    >
+                                    <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
                                         <!-- <div class="text-md font-medium truncate">Approved:</div>
                     <div class="ml-1.5 text-lg font-semibold">13</div> -->
                                     </div>
                                 </div>
                             </div>
-                            <div
-                                (click)="navigateTo('axis/requsitions/device')"
+                            <div (click)="navigateTo('axis/requsitions/device')"
                                 class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
-                                style="cursor: pointer"
-                            >
+                                style="cursor: pointer">
                                 <div class="flex items-start justify-between">
-                                    <div
-                                        class="text-lg font-medium tracking-tight leading-6 truncate"
-                                    >
+                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">
                                         Device Requisitions
                                     </div>
                                     <div class="ml-2 -mt-2 -mr-3"></div>
                                 </div>
                                 <div class="flex flex-col items-center mt-2">
                                     <div
-                                        class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500"
-                                    >
+                                        class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500">
                                         {{ deviceReqs.length }}
                                     </div>
-                                    <div
-                                        class="text-lg font-medium text-blue-600 dark:text-blue-500"
-                                    >
+                                    <div class="text-lg font-medium text-blue-600 dark:text-blue-500">
                                         Available
                                     </div>
-                                    <div
-                                        class="flex items-baseline justify-center w-full mt-5 text-secondary"
-                                    ></div>
+                                    <div class="flex items-baseline justify-center w-full mt-5 text-secondary"></div>
                                 </div>
                             </div>
-                            <div
-                                (click)="navigateTo('axis/requsitions/asset')"
+                            <div (click)="navigateTo('axis/requsitions/asset')"
                                 class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
-                                style="cursor: pointer"
-                            >
+                                style="cursor: pointer">
                                 <div class="flex items-start justify-between">
-                                    <div
-                                        class="text-lg font-medium tracking-tight leading-6 truncate"
-                                    >
+                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">
                                         Asset Requisitions
                                     </div>
                                     <div class="ml-2 -mt-2 -mr-3">
@@ -177,32 +124,23 @@
                                 </div>
                                 <div class="flex flex-col items-center mt-2">
                                     <div
-                                        class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500"
-                                    >
+                                        class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500">
                                         {{ assetsReqs.length }}
                                     </div>
-                                    <div
-                                        class="text-lg font-medium text-blue-600 dark:text-blue-500"
-                                    >
+                                    <div class="text-lg font-medium text-blue-600 dark:text-blue-500">
                                         Available
                                     </div>
-                                    <div
-                                        class="flex items-baseline justify-center w-full mt-5 text-secondary"
-                                    >
+                                    <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
                                         <!-- <div class="text-md font-medium truncate">Approved:</div>
                     <div class="ml-1.5 text-lg font-semibold">13</div> -->
                                     </div>
                                 </div>
                             </div>
-                            <div
-                                (click)="navigateTo('axis/requsitions/vehicle')"
+                            <div (click)="navigateTo('axis/requsitions/vehicle')"
                                 class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
-                                style="cursor: pointer"
-                            >
+                                style="cursor: pointer">
                                 <div class="flex items-start justify-between">
-                                    <div
-                                        class="text-lg font-medium tracking-tight leading-6 truncate"
-                                    >
+                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">
                                         Vehicle Requisitions
                                     </div>
                                     <div class="ml-2 -mt-2 -mr-3">
@@ -218,18 +156,13 @@
                                 </div>
                                 <div class="flex flex-col items-center mt-2">
                                     <div
-                                        class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500"
-                                    >
+                                        class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500">
                                         {{ vehicleReq.length }}
                                     </div>
-                                    <div
-                                        class="text-lg font-medium text-blue-600 dark:text-blue-500"
-                                    >
+                                    <div class="text-lg font-medium text-blue-600 dark:text-blue-500">
                                         Available
                                     </div>
-                                    <div
-                                        class="flex items-baseline justify-center w-full mt-5 text-secondary"
-                                    >
+                                    <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
                                         <!-- <div class="text-md font-medium truncate">Approved:</div>
                     <div class="ml-1.5 text-lg font-semibold">13</div> -->
                                     </div>
@@ -239,208 +172,138 @@
                     </ng-template>
                 </mat-tab>
             </mat-tab-group>
-            <mat-tab-group
-                class="sm:px-2"
-                [animationDuration]="'0'"
-                *ngIf="selectedProject == 'Cash Reports'"
-            >
+            <mat-tab-group class="sm:px-2" [animationDuration]="'0'" *ngIf="selectedProject == 'Cash Reports'">
                 <!-- Home -->
                 <mat-tab label="Month to month">
                     <ng-template matTabContent>
-                        <div
-                            class="flex flex-col sm:flex-row items-center w-full max-w-xs sm:max-w-none"
-                        >
+                        <div class="flex flex-col sm:flex-row items-center w-full max-w-xs sm:max-w-none">
                             <mat-form-field class="sm:w-36 mr-3">
                                 <mat-select [(value)]="cash">
                                     <ng-container>
-                                        <mat-option
-                                            *ngFor="let cash of cashs"
-                                            [value]="cash.id"
-                                            (click)="setCash(cash)"
-                                        >
-                                            {{ cash.description }}</mat-option
-                                        >
+                                        <mat-option *ngFor="let cash of cashs" [value]="cash.id"
+                                            (click)="setCash(cash)">
+                                            {{ cash.description }}</mat-option>
                                     </ng-container>
                                 </mat-select>
                             </mat-form-field>
                             <mat-form-field class="sm:w-36">
                                 <mat-select [(value)]="status">
                                     <ng-container>
-                                        <mat-option
-                                            value="Created"
-                                            (click)="setStatus('Created')"
-                                            >Created</mat-option
-                                        >
-                                        <mat-option
-                                            value="Line Approved"
-                                            (click)="setStatus('Line Approved')"
-                                            >Line manager approved
+                                        <mat-option value="Created" (click)="setStatus('Created')">Created</mat-option>
+                                        <mat-option value="Line Approved" (click)="setStatus('Line Approved')">Line
+                                            manager approved
                                         </mat-option>
-                                        <mat-option
-                                            value="Finance Approved"
-                                            (click)="
+                                        <mat-option value="Finance Approved" (click)="
                                                 setStatus('Finance Approved')
-                                            "
-                                            >Finance manager approved
+                                            ">Finance manager approved
                                         </mat-option>
-                                        <mat-option
-                                            value="Cash Used"
-                                            (click)="setStatus('Cash Used')"
-                                            >Cash Used
+                                        <mat-option value="Cash Used" (click)="setStatus('Cash Used')">Cash Used
                                         </mat-option>
                                     </ng-container>
                                 </mat-select>
                             </mat-form-field>
                         </div>
 
-                        <div
-                            class="grid grid-cols-1 xl:grid-cols-2 gap-8 w-full mt-8"
-                        >
-                            <div
-                                class="grid gap-12 sm:grid-flow-col xl:grid-flow-row"
-                            >
+                        <div class="grid grid-cols-1 xl:grid-cols-1 gap-8 w-full mt-8">
+                            <div class="grid gap-12 sm:grid-flow-col xl:grid-flow-row">
                                 <!-- Previous statement -->
                                 <div
-                                    class="relative flex flex-col flex-auto p-6 pr-3 pb-3 bg-card rounded-2xl shadow overflow-hidden"
-                                >
-                                    <div
-                                        class="absolute bottom-0 right-0 w-24 h-24 -m-6"
-                                    >
-                                        <mat-icon
-                                            class="icon-size-24 opacity-25 text-green-500 dark:text-green-400"
+                                    class="relative flex flex-col flex-auto p-6 pr-3 pb-3 bg-card rounded-2xl shadow overflow-hidden">
+                                    <div class="absolute bottom-0 right-0 w-24 h-24 -m-6">
+                                        <mat-icon class="icon-size-24 opacity-25 text-green-500 dark:text-green-400"
                                             [svgIcon]="
                                                 'heroicons_outline:check-circle'
-                                            "
-                                        ></mat-icon>
+                                            "></mat-icon>
                                     </div>
                                     <div class="flex items-center">
                                         <div class="flex flex-col">
-                                            <div
-                                                class="text-lg font-medium tracking-tight leading-6 truncate"
-                                            >
+                                            <div class="text-lg font-medium tracking-tight leading-6 truncate">
                                                 Cash reports
                                             </div>
-                                            <div
-                                                class="text-green-600 font-medium text-sm"
-                                            >
+                                            <div class="text-green-600 font-medium text-sm">
                                                 Period
                                                 {{
-                                                    todayDate | date: "MMM yyyy"
+                                                todayDate | date: "MMM yyyy"
                                                 }}
                                                 {{ cashMonthToMonth?.period }}
                                             </div>
                                         </div>
                                     </div>
-                                    <div
-                                        class="flex flex-row flex-wrap mt-4 -mx-6"
-                                    >
+                                    <div class="flex flex-row flex-wrap mt-4 -mx-6">
                                         <div class="flex flex-col mx-6 my-3">
-                                            <div
-                                                class="text-sm font-medium leading-none text-secondary"
-                                            >
+                                            <div class="text-sm font-medium leading-none text-secondary">
                                                 Released Funds
                                             </div>
-                                            <div
-                                                class="mt-2 font-medium text-3xl leading-none"
-                                            >
+                                            <div class="mt-2 font-medium text-3xl leading-none">
                                                 {{
-                                                    cashMonthToMonth?.requestedAmount ??
-                                                        "0.00"
-                                                        | currency
-                                                            : currencySelected
+                                                cashMonthToMonth?.requestedAmount ??
+                                                "0.00"
+                                                | currency
+                                                : currencySelected
                                                 }}
                                             </div>
                                             <div class="flex items-center">
-                                                <mat-icon
-                                                    class="mr-1 icon-size-5 text-red-500"
-                                                    [svgIcon]="
+                                                <mat-icon class="mr-1 icon-size-5 text-red-500" [svgIcon]="
                                                         'heroicons_solid:trending-up'
-                                                    "
-                                                >
+                                                    ">
                                                 </mat-icon>
                                                 <div
-                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
-                                                >
-                                                    <span
-                                                        class="text-green-500"
-                                                        >{{
-                                                            cashMonthToMonth?.period
-                                                        }}</span
-                                                    >
+                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap">
+                                                    <span class="text-green-500">{{
+                                                        cashMonthToMonth?.period
+                                                        }}</span>
                                                     Period
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="flex flex-col mx-6 my-3">
-                                            <div
-                                                class="text-sm font-medium leading-none text-secondary"
-                                            >
+                                            <div class="text-sm font-medium leading-none text-secondary">
                                                 Used Funds
                                             </div>
-                                            <div
-                                                class="mt-2 font-medium text-3xl leading-none"
-                                            >
+                                            <div class="mt-2 font-medium text-3xl leading-none">
                                                 {{
-                                                    cashMonthToMonth?.usedFunds ??
-                                                        "0.00"
-                                                        | currency
-                                                            : currencySelected
+                                                cashMonthToMonth?.usedFunds ??
+                                                "0.00"
+                                                | currency
+                                                : currencySelected
                                                 }}
                                             </div>
                                             <div class="flex items-center">
-                                                <mat-icon
-                                                    class="mr-1 icon-size-5 text-red-500"
-                                                    [svgIcon]="
+                                                <mat-icon class="mr-1 icon-size-5 text-red-500" [svgIcon]="
                                                         'heroicons_solid:trending-up'
-                                                    "
-                                                >
+                                                    ">
                                                 </mat-icon>
                                                 <div
-                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
-                                                >
-                                                    <span
-                                                        class="text-green-500"
-                                                        >{{
-                                                            cashMonthToMonth?.period
-                                                        }}</span
-                                                    >
+                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap">
+                                                    <span class="text-green-500">{{
+                                                        cashMonthToMonth?.period
+                                                        }}</span>
                                                     Period
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="flex flex-col mx-6 my-3">
-                                            <div
-                                                class="text-sm font-medium leading-none text-secondary"
-                                            >
+                                            <div class="text-sm font-medium leading-none text-secondary">
                                                 Requested Amount
                                             </div>
-                                            <div
-                                                class="mt-2 font-medium text-3xl leading-none"
-                                            >
+                                            <div class="mt-2 font-medium text-3xl leading-none">
                                                 {{
-                                                    cashMonthToMonth?.requestedAmount ??
-                                                        "0.00"
-                                                        | currency
-                                                            : currencySelected
+                                                cashMonthToMonth?.requestedAmount ??
+                                                "0.00"
+                                                | currency
+                                                : currencySelected
                                                 }}
                                             </div>
                                             <div class="flex items-center">
-                                                <mat-icon
-                                                    class="mr-1 icon-size-5 text-red-500"
-                                                    [svgIcon]="
+                                                <mat-icon class="mr-1 icon-size-5 text-red-500" [svgIcon]="
                                                         'heroicons_solid:trending-up'
-                                                    "
-                                                >
+                                                    ">
                                                 </mat-icon>
                                                 <div
-                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
-                                                >
-                                                    <span
-                                                        class="text-green-500"
-                                                        >{{
-                                                            cashMonthToMonth?.period
-                                                        }}</span
-                                                    >
+                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap">
+                                                    <span class="text-green-500">{{
+                                                        cashMonthToMonth?.period
+                                                        }}</span>
                                                     Period
                                                 </div>
                                             </div>
@@ -450,223 +313,92 @@
                             </div>
                         </div>
 
-                        <div
-                            class="grid grid-cols-1 xl:grid-cols-3 gap-8 w-full mt-8"
-                        >
+                        <div class="grid gap-12 sm:grid-flow-col xl:grid-flow-row mt-8">
                             <!-- Recent transactions table -->
                             <div
-                                class="xl:col-span-2 flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden"
-                            >
+                                class="xl:col-span-2 flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden">
                                 <div class="p-6">
-                                    <div
-                                        class="mr-4 text-lg font-medium tracking-tight leading-6 truncate"
-                                    >
+                                    <div class="mr-4 text-lg font-medium tracking-tight leading-6 truncate">
                                         Cash Month to Month Detail
                                     </div>
                                 </div>
                                 <div class="overflow-x-auto mx-6">
-                                    <div
-                                        class="grid grid-cols-12 gap-x-1 mt-12"
-                                    >
-                                        <!-- Columns -->
-
-                                        <!-- Item -->
-                                        <div
-                                            class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                        >
-                                            Status
-                                        </div>
-
-                                        <div
-                                            class="col-span-2 self-center text-right"
-                                        >
-                                            {{ cashMonthToMonthDetail?.status }}
-                                        </div>
-
-                                        <!-- Divider -->
-                                        <div
-                                            class="col-span-12 my-4 border-b"
-                                        ></div>
-                                        <div
-                                            class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                        >
-                                            Comments
-                                        </div>
-
-                                        <div
-                                            class="col-span-2 self-center text-right"
-                                        >
-                                            {{
-                                                cashMonthToMonthDetail?.comment
-                                            }}
-                                        </div>
-
-                                        <!-- Divider -->
-                                        <div
-                                            class="col-span-12 my-4 border-b"
-                                        ></div>
-                                        <div
-                                            class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                        >
-                                            Date Created
-                                        </div>
-
-                                        <div
-                                            class="col-span-2 self-center text-right"
-                                        >
-                                            {{
-                                                cashMonthToMonthDetail?.dateCreated
-                                                    | date: "dd/MM/yyyy"
-                                            }}
-                                        </div>
-                                        <div
-                                            class="col-span-12 my-4 border-b"
-                                        ></div>
-                                        <div
-                                            class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                        >
-                                            Lined Approved Date
-                                        </div>
-
-                                        <div
-                                            class="col-span-2 self-center text-right"
-                                        >
-                                            {{
-                                                cashMonthToMonthDetail?.lineApprovedDate
-                                                    | date: "dd/MM/yyyy"
-                                            }}
-                                        </div>
-
-                                        <!-- Divider -->
-                                        <div
-                                            class="col-span-12 my-4 border-b"
-                                        ></div>
-                                        <div
-                                            class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                        >
-                                            Finance Approved Date
-                                        </div>
-
-                                        <div
-                                            class="col-span-2 self-center text-right"
-                                        >
-                                            {{
-                                                cashMonthToMonthDetail?.financeApprovedDate
-                                                    | date: "dd/MM/yyyy"
-                                            }}
-                                        </div>
-
-                                        <!-- Divider -->
-                                        <div
-                                            class="col-span-12 my-4 border-b"
-                                        ></div>
-                                        <div
-                                            class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                        >
-                                            General Approved Date
-                                        </div>
-
-                                        <div
-                                            class="col-span-2 self-center text-right"
-                                        >
-                                            {{
-                                                cashMonthToMonthDetail?.generalManagerApprovedDate
-                                                    | date: "dd/MM/yyyy"
-                                            }}
-                                        </div>
-                                        <div
-                                            class="col-span-12 my-3 border-b"
-                                        ></div>
-                                        <div
-                                            class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                        >
-                                            Created by
-                                        </div>
-
-                                        <div
-                                            class="col-span-2 self-center text-right"
-                                        >
-                                            {{
-                                                cashMonthToMonthDetail?.createdBy
-                                                    | date: "dd/MM/yyyy"
-                                            }}
-                                        </div>
-
-                                        <!-- Divider -->
-                                        <div
-                                            class="col-span-12 my-3 border-b"
-                                        ></div>
-
-                                        <!-- Tax -->
-                                        <div
-                                            class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                        >
-                                            Released Funds
-                                        </div>
-                                        <div
-                                            class="col-span-2 text-right text-lg"
-                                        >
-                                            {{
-                                                cashMonthToMonthDetail?.releasedFunds ??
-                                                    "0.00" | currency
-                                            }}
-                                        </div>
-
-                                        <!-- Divider -->
-                                        <div
-                                            class="col-span-12 my-3 border-b"
-                                        ></div>
-                                        <div
-                                            class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                        >
-                                            Received Funds
-                                        </div>
-                                        <div
-                                            class="col-span-2 text-right text-lg"
-                                        >
-                                            {{
-                                                cashMonthToMonthDetail?.receivedFunds ??
-                                                    "0.00" | currency
-                                            }}
-                                        </div>
-
-                                        <!-- Divider -->
-                                        <div
-                                            class="col-span-12 my-3 border-b"
-                                        ></div>
-                                        <div
-                                            class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                        >
-                                            Actual Used Funds
-                                        </div>
-                                        <div
-                                            class="col-span-2 text-right text-lg"
-                                        >
-                                            {{
-                                                cashMonthToMonthDetail?.actualUsedFunds ??
-                                                    "0.00" | currency
-                                            }}
-                                        </div>
-
-                                        <!-- Divider -->
-                                        <div
-                                            class="col-span-12 my-3 border-b"
-                                        ></div>
-
-                                        <!-- Total -->
-                                        <div
-                                            class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                        >
-                                            Amount
-                                        </div>
-                                        <div
-                                            class="col-span-2 text-right text-2xl font-medium"
-                                        >
-                                            {{
-                                                cashMonthToMonthDetail?.amount ??
-                                                    0.0 | currency
-                                            }}
-                                        </div>
+                                    <div class="overflow-x-auto relative">
+                                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                                            <thead
+                                                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                                <tr>
+                                                    <th scope="col" class="py-3 px-6">
+                                                        Comment
+                                                    </th>
+                                                    <th scope="col" class="py-3 px-6">
+                                                        Created At
+                                                    </th>
+                                                    <th scope="col" class="py-3 px-6">
+                                                        Amount
+                                                    </th>
+                                                    <th scope="col" class="py-3 px-6">
+                                                        Released Funds
+                                                    </th>
+                                                    <th scope="col" class="py-3 px-6">
+                                                        Received Funds
+                                                    </th>
+                                                    <th scope="col" class="py-3 px-6">
+                                                        Used Funds
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngIf="
+                                                    cashMonthToMonthDetail.length >
+                                                    0
+                                                ">
+                                                <tr *ngFor="
+                                                        let cashMonthToMonthD of cashMonthToMonthDetail
+                                                    " class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                    <th scope="row"
+                                                        class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                        {{
+                                                        cashMonthToMonthD.status
+                                                        }}
+                                                    </th>
+                                                    <td class="py-4 px-6">
+                                                        {{
+                                                        cashMonthToMonthD.dateCreated
+                                                        | date
+                                                        : "dd/MM/yyyy"
+                                                        }}
+                                                    </td>
+                                                    <td class="py-4 px-6">
+                                                        {{
+                                                        cashMonthToMonthD.amount
+                                                        | currency
+                                                        : currencySelected
+                                                        }}
+                                                    </td>
+                                                    <td class="py-4 px-6">
+                                                        {{
+                                                        cashMonthToMonthD.releasedFunds
+                                                        | currency
+                                                        : currencySelected
+                                                        }}
+                                                    </td>
+                                                    <td class="py-4 px-6">
+                                                        {{
+                                                        cashMonthToMonthD.receivedFunds
+                                                        | currency
+                                                        : currencySelected
+                                                        }}
+                                                    </td>
+                                                    <td class="py-4 px-6">
+                                                        {{
+                                                        cashMonthToMonthD.actualUsedFunds
+                                                        | currency
+                                                        : currencySelected
+                                                        }}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -676,200 +408,134 @@
 
                 <mat-tab label="Day to day">
                     <ng-template matTabContent>
-                        <div
-                            class="flex flex-col sm:flex-row items-center w-full max-w-xs sm:max-w-none"
-                        >
+                        <div class="flex flex-col sm:flex-row items-center w-full max-w-xs sm:max-w-none">
                             <mat-form-field class="sm:w-36 mr-3">
                                 <mat-select [(value)]="cash">
                                     <ng-container>
-                                        <mat-option
-                                            *ngFor="let cash of cashs"
-                                            [value]="cash.id"
-                                            (click)="setCash(cash)"
-                                        >
-                                            {{ cash.description }}</mat-option
-                                        >
+                                        <mat-option *ngFor="let cash of cashs" [value]="cash.id"
+                                            (click)="setCash(cash)">
+                                            {{ cash.description }}</mat-option>
                                     </ng-container>
                                 </mat-select>
                             </mat-form-field>
                             <mat-form-field class="sm:w-36">
                                 <mat-select [(value)]="status">
                                     <ng-container>
-                                        <mat-option
-                                            value="Created"
-                                            (click)="setStatus('Created')"
-                                            >Created</mat-option
-                                        >
-                                        <mat-option
-                                            value="Line Approved"
-                                            (click)="setStatus('Line Approved')"
-                                            >Line manager approved
+                                        <mat-option value="Created" (click)="setStatus('Created')">Created</mat-option>
+                                        <mat-option value="Line Approved" (click)="setStatus('Line Approved')">Line
+                                            manager approved
                                         </mat-option>
-                                        <mat-option
-                                            value="Finance Approved"
-                                            (click)="
+                                        <mat-option value="Finance Approved" (click)="
                                                 setStatus('Finance Approved')
-                                            "
-                                            >Finance manager approved
+                                            ">Finance manager approved
                                         </mat-option>
-                                        <mat-option
-                                            value="Cash Used"
-                                            (click)="setStatus('Cash Used')"
-                                            >Cash Used
+                                        <mat-option value="Cash Used" (click)="setStatus('Cash Used')">Cash Used
                                         </mat-option>
                                     </ng-container>
                                 </mat-select>
                             </mat-form-field>
                         </div>
 
-                        <div
-                            class="grid grid-cols-1 xl:grid-cols-2 gap-8 w-full mt-8"
-                        >
-                            <div
-                                class="grid gap-12 sm:grid-flow-col xl:grid-flow-row"
-                            >
+                        <div class="grid grid-cols-1 xl:grid-cols-1 gap-8 w-full mt-8">
+                            <div class="grid gap-12 sm:grid-flow-col xl:grid-flow-row">
                                 <!-- Previous statement -->
                                 <div
-                                    class="relative flex flex-col flex-auto p-6 pr-3 pb-3 bg-card rounded-2xl shadow overflow-hidden"
-                                >
-                                    <div
-                                        class="absolute bottom-0 right-0 w-24 h-24 -m-6"
-                                    >
-                                        <mat-icon
-                                            class="icon-size-24 opacity-25 text-green-500 dark:text-green-400"
+                                    class="relative flex flex-col flex-auto p-6 pr-3 pb-3 bg-card rounded-2xl shadow overflow-hidden">
+                                    <div class="absolute bottom-0 right-0 w-24 h-24 -m-6">
+                                        <mat-icon class="icon-size-24 opacity-25 text-green-500 dark:text-green-400"
                                             [svgIcon]="
                                                 'heroicons_outline:check-circle'
-                                            "
-                                        ></mat-icon>
+                                            "></mat-icon>
                                     </div>
                                     <div class="flex items-center">
                                         <div class="flex flex-col">
-                                            <div
-                                                class="text-lg font-medium tracking-tight leading-6 truncate"
-                                            >
+                                            <div class="text-lg font-medium tracking-tight leading-6 truncate">
                                                 Cash reports
                                             </div>
-                                            <div
-                                                class="text-green-600 font-medium text-sm"
-                                            >
+                                            <div class="text-green-600 font-medium text-sm">
                                                 Period
                                                 {{
-                                                    todayDate | date: "MMM yyyy"
+                                                todayDate | date: "MMM yyyy"
                                                 }}
                                                 {{ cardDayToDay?.period }}
                                             </div>
                                         </div>
                                     </div>
-                                    <div
-                                        class="flex flex-row flex-wrap mt-4 -mx-6"
-                                    >
+                                    <div class="flex flex-row flex-wrap mt-4 -mx-6">
                                         <div class="flex flex-col mx-6 my-3">
-                                            <div
-                                                class="text-sm font-medium leading-none text-secondary"
-                                            >
+                                            <div class="text-sm font-medium leading-none text-secondary">
                                                 Released Funds
                                             </div>
-                                            <div
-                                                class="mt-2 font-medium text-3xl leading-none"
-                                            >
+                                            <div class="mt-2 font-medium text-3xl leading-none">
                                                 {{
-                                                    cardDayToDay?.requestedAmount ??
-                                                        "0.00"
-                                                        | currency
-                                                            : currencySelected
+                                                cardDayToDay?.requestedAmount ??
+                                                "0.00"
+                                                | currency
+                                                : currencySelected
                                                 }}
                                             </div>
                                             <div class="flex items-center">
-                                                <mat-icon
-                                                    class="mr-1 icon-size-5 text-red-500"
-                                                    [svgIcon]="
+                                                <mat-icon class="mr-1 icon-size-5 text-red-500" [svgIcon]="
                                                         'heroicons_solid:trending-up'
-                                                    "
-                                                >
+                                                    ">
                                                 </mat-icon>
                                                 <div
-                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
-                                                >
-                                                    <span
-                                                        class="text-green-500"
-                                                        >{{
-                                                            cardDayToDay?.period
-                                                        }}</span
-                                                    >
+                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap">
+                                                    <span class="text-green-500">{{
+                                                        cardDayToDay?.period
+                                                        }}</span>
                                                     Period
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="flex flex-col mx-6 my-3">
-                                            <div
-                                                class="text-sm font-medium leading-none text-secondary"
-                                            >
+                                            <div class="text-sm font-medium leading-none text-secondary">
                                                 Used Funds
                                             </div>
-                                            <div
-                                                class="mt-2 font-medium text-3xl leading-none"
-                                            >
+                                            <div class="mt-2 font-medium text-3xl leading-none">
                                                 {{
-                                                    cardDayToDay?.usedFunds ??
-                                                        "0.00"
-                                                        | currency
-                                                            : currencySelected
+                                                cardDayToDay?.usedFunds ??
+                                                "0.00"
+                                                | currency
+                                                : currencySelected
                                                 }}
                                             </div>
                                             <div class="flex items-center">
-                                                <mat-icon
-                                                    class="mr-1 icon-size-5 text-red-500"
-                                                    [svgIcon]="
+                                                <mat-icon class="mr-1 icon-size-5 text-red-500" [svgIcon]="
                                                         'heroicons_solid:trending-up'
-                                                    "
-                                                >
+                                                    ">
                                                 </mat-icon>
                                                 <div
-                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
-                                                >
-                                                    <span
-                                                        class="text-green-500"
-                                                        >{{
-                                                            cardDayToDay?.period
-                                                        }}</span
-                                                    >
+                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap">
+                                                    <span class="text-green-500">{{
+                                                        cardDayToDay?.period
+                                                        }}</span>
                                                     Period
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="flex flex-col mx-6 my-3">
-                                            <div
-                                                class="text-sm font-medium leading-none text-secondary"
-                                            >
+                                            <div class="text-sm font-medium leading-none text-secondary">
                                                 Requested Amount
                                             </div>
-                                            <div
-                                                class="mt-2 font-medium text-3xl leading-none"
-                                            >
+                                            <div class="mt-2 font-medium text-3xl leading-none">
                                                 {{
-                                                    cardDayToDay?.requestedAmount ??
-                                                        "0.00"
-                                                        | currency
-                                                            : currencySelected
+                                                cardDayToDay?.requestedAmount ??
+                                                "0.00"
+                                                | currency
+                                                : currencySelected
                                                 }}
                                             </div>
                                             <div class="flex items-center">
-                                                <mat-icon
-                                                    class="mr-1 icon-size-5 text-red-500"
-                                                    [svgIcon]="
+                                                <mat-icon class="mr-1 icon-size-5 text-red-500" [svgIcon]="
                                                         'heroicons_solid:trending-up'
-                                                    "
-                                                >
+                                                    ">
                                                 </mat-icon>
                                                 <div
-                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
-                                                >
-                                                    <span
-                                                        class="text-green-500"
-                                                        >{{
-                                                            cardDayToDay?.period
-                                                        }}</span
-                                                    >
+                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap">
+                                                    <span class="text-green-500">{{
+                                                        cardDayToDay?.period
+                                                        }}</span>
                                                     Period
                                                 </div>
                                             </div>
@@ -877,224 +543,91 @@
                                     </div>
                                 </div>
                             </div>
-                            <div
-                                class="grid grid-cols-1 xl:grid-cols-3 gap-8 w-full mt-8"
-                            >
+                            <div class="grid gap-12 sm:grid-flow-col xl:grid-flow-row mt-8">
                                 <!-- Recent transactions table -->
                                 <div
-                                    class="xl:col-span-2 flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden"
-                                >
+                                    class="xl:col-span-2 flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden">
                                     <div class="p-6">
-                                        <div
-                                            class="mr-4 text-lg font-medium tracking-tight leading-6 truncate"
-                                        >
+                                        <div class="mr-4 text-lg font-medium tracking-tight leading-6 truncate">
                                             Cash Day to Day Detail
                                         </div>
                                     </div>
                                     <div class="overflow-x-auto mx-6">
-                                        <div
-                                            class="grid grid-cols-12 gap-x-1 mt-12"
-                                        >
-                                            <!-- Columns -->
-
-                                            <!-- Item -->
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                Status
-                                            </div>
-
-                                            <div
-                                                class="col-span-2 self-center text-right"
-                                            >
-                                                {{ cashDayToDayDetail?.status }}
-                                            </div>
-
-                                            <!-- Divider -->
-                                            <div
-                                                class="col-span-12 my-4 border-b"
-                                            ></div>
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                Comments
-                                            </div>
-
-                                            <div
-                                                class="col-span-2 self-center text-right"
-                                            >
-                                                {{
-                                                    cashDayToDayDetail?.comment
-                                                }}
-                                            </div>
-
-                                            <!-- Divider -->
-                                            <div
-                                                class="col-span-12 my-4 border-b"
-                                            ></div>
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                Date Created
-                                            </div>
-
-                                            <div
-                                                class="col-span-2 self-center text-right"
-                                            >
-                                                {{
-                                                    cashDayToDayDetail?.dateCreated
-                                                        | date: "dd/MM/yyyy"
-                                                }}
-                                            </div>
-                                            <div
-                                                class="col-span-12 my-4 border-b"
-                                            ></div>
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                Lined Approved Date
-                                            </div>
-
-                                            <div
-                                                class="col-span-2 self-center text-right"
-                                            >
-                                                {{
-                                                    cashDayToDayDetail?.lineApprovedDate
-                                                        | date: "dd/MM/yyyy"
-                                                }}
-                                            </div>
-
-                                            <!-- Divider -->
-                                            <div
-                                                class="col-span-12 my-4 border-b"
-                                            ></div>
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                Finance Approved Date
-                                            </div>
-
-                                            <div
-                                                class="col-span-2 self-center text-right"
-                                            >
-                                                {{
-                                                    cashDayToDayDetail?.financeApprovedDate
-                                                        | date: "dd/MM/yyyy"
-                                                }}
-                                            </div>
-
-                                            <!-- Divider -->
-                                            <div
-                                                class="col-span-12 my-4 border-b"
-                                            ></div>
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                General Approved Date
-                                            </div>
-
-                                            <div
-                                                class="col-span-2 self-center text-right"
-                                            >
-                                                {{
-                                                    cashDayToDayDetail?.generalManagerApprovedDate
-                                                        | date: "dd/MM/yyyy"
-                                                }}
-                                            </div>
-                                            <div
-                                                class="col-span-12 my-3 border-b"
-                                            ></div>
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                Created by
-                                            </div>
-
-                                            <div
-                                                class="col-span-2 self-center text-right"
-                                            >
-                                                {{
-                                                    cashDayToDayDetail?.createdBy
-                                                        | date: "dd/MM/yyyy"
-                                                }}
-                                            </div>
-
-                                            <!-- Divider -->
-                                            <div
-                                                class="col-span-12 my-3 border-b"
-                                            ></div>
-
-                                            <!-- Tax -->
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                Released Funds
-                                            </div>
-                                            <div
-                                                class="col-span-2 text-right text-lg"
-                                            >
-                                                {{
-                                                    cashDayToDayDetail?.releasedFunds ??
-                                                        "0.00" | currency
-                                                }}
-                                            </div>
-
-                                            <!-- Divider -->
-                                            <div
-                                                class="col-span-12 my-3 border-b"
-                                            ></div>
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                Received Funds
-                                            </div>
-                                            <div
-                                                class="col-span-2 text-right text-lg"
-                                            >
-                                                {{
-                                                    cashDayToDayDetail?.receivedFunds ??
-                                                        "0.00" | currency
-                                                }}
-                                            </div>
-
-                                            <!-- Divider -->
-                                            <div
-                                                class="col-span-12 my-3 border-b"
-                                            ></div>
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                Actual Used Funds
-                                            </div>
-                                            <div
-                                                class="col-span-2 text-right text-lg"
-                                            >
-                                                {{
-                                                    cashDayToDayDetail?.actualUsedFunds ??
-                                                        "0.00" | currency
-                                                }}
-                                            </div>
-
-                                            <!-- Divider -->
-                                            <div
-                                                class="col-span-12 my-3 border-b"
-                                            ></div>
-
-                                            <!-- Total -->
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                Amount
-                                            </div>
-                                            <div
-                                                class="col-span-2 text-right text-2xl font-medium"
-                                            >
-                                                {{
-                                                    cashDayToDayDetail?.amount ??
-                                                        0.0 | currency
-                                                }}
-                                            </div>
+                                        <div class="overflow-x-auto relative">
+                                            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                                                <thead
+                                                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                                    <tr>
+                                                        <th scope="col" class="py-3 px-6">
+                                                            Comment
+                                                        </th>
+                                                        <th scope="col" class="py-3 px-6">
+                                                            Created At
+                                                        </th>
+                                                        <th scope="col" class="py-3 px-6">
+                                                            Amount
+                                                        </th>
+                                                        <th scope="col" class="py-3 px-6">
+                                                            Released Funds
+                                                        </th>
+                                                        <th scope="col" class="py-3 px-6">
+                                                            Received Funds
+                                                        </th>
+                                                        <th scope="col" class="py-3 px-6">
+                                                            Used Funds
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody *ngIf="cashDayToDayDetail.length > 0">
+                                                    <tr *ngFor="let cashDayToDay of cashDayToDayDetail
+                                                                                                "
+                                                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                        <th scope="row"
+                                                            class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                            {{
+                                                            cashDayToDay.status
+                                                            }}
+                                                        </th>
+                                                        <td class="py-4 px-6">
+                                                            {{
+                                                            cashDayToDay.dateCreated
+                                                            | date
+                                                            : "dd/MM/yyyy"
+                                                            }}
+                                                        </td>
+                                                        <td class="py-4 px-6">
+                                                            {{
+                                                            cashDayToDay.amount
+                                                            | currency
+                                                            : currencySelected
+                                                            }}
+                                                        </td>
+                                                        <td class="py-4 px-6">
+                                                            {{
+                                                            cashDayToDay.releasedFunds
+                                                            | currency
+                                                            : currencySelected
+                                                            }}
+                                                        </td>
+                                                        <td class="py-4 px-6">
+                                                            {{
+                                                            cashDayToDay.receivedFunds
+                                                            | currency
+                                                            : currencySelected
+                                                            }}
+                                                        </td>
+                                                        <td class="py-4 px-6">
+                                                            {{
+                                                            cashDayToDay.actualUsedFunds
+                                                            | currency
+                                                            : currencySelected
+                                                            }}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -1103,208 +636,138 @@
                 </mat-tab>
             </mat-tab-group>
 
-            <mat-tab-group
-                class="sm:px-2"
-                [animationDuration]="'0'"
-                *ngIf="selectedProject == 'Card Reports'"
-            >
+            <mat-tab-group class="sm:px-2" [animationDuration]="'0'" *ngIf="selectedProject == 'Card Reports'">
                 <!-- Home -->
                 <mat-tab label="Month to month">
                     <ng-template matTabContent>
-                        <div
-                            class="flex flex-col sm:flex-row items-center w-full max-w-xs sm:max-w-none"
-                        >
+                        <div class="flex flex-col sm:flex-row items-center w-full max-w-xs sm:max-w-none">
                             <mat-form-field class="sm:w-36 mr-3">
                                 <mat-select [(value)]="card">
                                     <ng-container>
-                                        <mat-option
-                                            *ngFor="let card of cards"
-                                            [value]="card.id"
-                                            (click)="setCard(card)"
-                                        >
-                                            {{ card.description }}</mat-option
-                                        >
+                                        <mat-option *ngFor="let card of cards" [value]="card.id"
+                                            (click)="setCard(card)">
+                                            {{ card.description }}</mat-option>
                                     </ng-container>
                                 </mat-select>
                             </mat-form-field>
                             <mat-form-field class="sm:w-36">
                                 <mat-select [(value)]="status">
                                     <ng-container>
-                                        <mat-option
-                                            value="Created"
-                                            (click)="setStatus('Created')"
-                                            >Created</mat-option
-                                        >
-                                        <mat-option
-                                            value="Line Approved"
-                                            (click)="setStatus('Line Approved')"
-                                            >Line manager approved
+                                        <mat-option value="Created" (click)="setStatus('Created')">Created</mat-option>
+                                        <mat-option value="Line Approved" (click)="setStatus('Line Approved')">Line
+                                            manager approved
                                         </mat-option>
-                                        <mat-option
-                                            value="Finance Approved"
-                                            (click)="
+                                        <mat-option value="Finance Approved" (click)="
                                                 setStatus('Finance Approved')
-                                            "
-                                            >Finance manager approved
+                                            ">Finance manager approved
                                         </mat-option>
-                                        <mat-option
-                                            value="Cash Used"
-                                            (click)="setStatus('Cash Used')"
-                                            >Cash Used
+                                        <mat-option value="Cash Used" (click)="setStatus('Cash Used')">Cash Used
                                         </mat-option>
                                     </ng-container>
                                 </mat-select>
                             </mat-form-field>
                         </div>
 
-                        <div
-                            class="grid grid-cols-1 xl:grid-cols-2 gap-8 w-full mt-8"
-                        >
-                            <div
-                                class="grid gap-12 sm:grid-flow-col xl:grid-flow-row"
-                            >
+                        <div class="grid grid-cols-1 xl:grid-cols-1 gap-8 w-full mt-8">
+                            <div class="grid gap-12 sm:grid-flow-col xl:grid-flow-row">
                                 <!-- Previous statement -->
                                 <div
-                                    class="relative flex flex-col flex-auto p-6 pr-3 pb-3 bg-card rounded-2xl shadow overflow-hidden"
-                                >
-                                    <div
-                                        class="absolute bottom-0 right-0 w-24 h-24 -m-6"
-                                    >
-                                        <mat-icon
-                                            class="icon-size-24 opacity-25 text-green-500 dark:text-green-400"
+                                    class="relative flex flex-col flex-auto p-6 pr-3 pb-3 bg-card rounded-2xl shadow overflow-hidden">
+                                    <div class="absolute bottom-0 right-0 w-24 h-24 -m-6">
+                                        <mat-icon class="icon-size-24 opacity-25 text-green-500 dark:text-green-400"
                                             [svgIcon]="
                                                 'heroicons_outline:check-circle'
-                                            "
-                                        ></mat-icon>
+                                            "></mat-icon>
                                     </div>
                                     <div class="flex items-center">
                                         <div class="flex flex-col">
-                                            <div
-                                                class="text-lg font-medium tracking-tight leading-6 truncate"
-                                            >
+                                            <div class="text-lg font-medium tracking-tight leading-6 truncate">
                                                 Card reports
                                             </div>
-                                            <div
-                                                class="text-green-600 font-medium text-sm"
-                                            >
+                                            <div class="text-green-600 font-medium text-sm">
                                                 Period
                                                 {{
-                                                    todayDate | date: "MMM yyyy"
+                                                todayDate | date: "MMM yyyy"
                                                 }}
                                                 {{ cardMonthToMonth?.period }}
                                             </div>
                                         </div>
                                     </div>
-                                    <div
-                                        class="flex flex-row flex-wrap mt-4 -mx-6"
-                                    >
+                                    <div class="flex flex-row flex-wrap mt-4 -mx-6">
                                         <div class="flex flex-col mx-6 my-3">
-                                            <div
-                                                class="text-sm font-medium leading-none text-secondary"
-                                            >
+                                            <div class="text-sm font-medium leading-none text-secondary">
                                                 Released Funds
                                             </div>
-                                            <div
-                                                class="mt-2 font-medium text-3xl leading-none"
-                                            >
+                                            <div class="mt-2 font-medium text-3xl leading-none">
                                                 {{
-                                                    cardMonthToMonth?.requestedAmount ??
-                                                        "0.00"
-                                                        | currency
-                                                            : currencySelected
+                                                cardMonthToMonth?.requestedAmount ??
+                                                "0.00"
+                                                | currency
+                                                : currencySelected
                                                 }}
                                             </div>
                                             <div class="flex items-center">
-                                                <mat-icon
-                                                    class="mr-1 icon-size-5 text-red-500"
-                                                    [svgIcon]="
+                                                <mat-icon class="mr-1 icon-size-5 text-red-500" [svgIcon]="
                                                         'heroicons_solid:trending-up'
-                                                    "
-                                                >
+                                                    ">
                                                 </mat-icon>
                                                 <div
-                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
-                                                >
-                                                    <span
-                                                        class="text-green-500"
-                                                        >{{
-                                                            cardMonthToMonth?.period
-                                                        }}</span
-                                                    >
+                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap">
+                                                    <span class="text-green-500">{{
+                                                        cardMonthToMonth?.period
+                                                        }}</span>
                                                     Period
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="flex flex-col mx-6 my-3">
-                                            <div
-                                                class="text-sm font-medium leading-none text-secondary"
-                                            >
+                                            <div class="text-sm font-medium leading-none text-secondary">
                                                 Used Funds
                                             </div>
-                                            <div
-                                                class="mt-2 font-medium text-3xl leading-none"
-                                            >
+                                            <div class="mt-2 font-medium text-3xl leading-none">
                                                 {{
-                                                    cardMonthToMonth?.usedFunds ??
-                                                        "0.00"
-                                                        | currency
-                                                            : currencySelected
+                                                cardMonthToMonth?.usedFunds ??
+                                                "0.00"
+                                                | currency
+                                                : currencySelected
                                                 }}
                                             </div>
                                             <div class="flex items-center">
-                                                <mat-icon
-                                                    class="mr-1 icon-size-5 text-red-500"
-                                                    [svgIcon]="
+                                                <mat-icon class="mr-1 icon-size-5 text-red-500" [svgIcon]="
                                                         'heroicons_solid:trending-up'
-                                                    "
-                                                >
+                                                    ">
                                                 </mat-icon>
                                                 <div
-                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
-                                                >
-                                                    <span
-                                                        class="text-green-500"
-                                                        >{{
-                                                            cardMonthToMonth?.period
-                                                        }}</span
-                                                    >
+                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap">
+                                                    <span class="text-green-500">{{
+                                                        cardMonthToMonth?.period
+                                                        }}</span>
                                                     Period
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="flex flex-col mx-6 my-3">
-                                            <div
-                                                class="text-sm font-medium leading-none text-secondary"
-                                            >
+                                            <div class="text-sm font-medium leading-none text-secondary">
                                                 Requested Amount
                                             </div>
-                                            <div
-                                                class="mt-2 font-medium text-3xl leading-none"
-                                            >
+                                            <div class="mt-2 font-medium text-3xl leading-none">
                                                 {{
-                                                    cardMonthToMonth?.requestedAmount ??
-                                                        "0.00"
-                                                        | currency
-                                                            : currencySelected
+                                                cardMonthToMonth?.requestedAmount ??
+                                                "0.00"
+                                                | currency
+                                                : currencySelected
                                                 }}
                                             </div>
                                             <div class="flex items-center">
-                                                <mat-icon
-                                                    class="mr-1 icon-size-5 text-red-500"
-                                                    [svgIcon]="
+                                                <mat-icon class="mr-1 icon-size-5 text-red-500" [svgIcon]="
                                                         'heroicons_solid:trending-up'
-                                                    "
-                                                >
+                                                    ">
                                                 </mat-icon>
                                                 <div
-                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
-                                                >
-                                                    <span
-                                                        class="text-green-500"
-                                                        >{{
-                                                            cardMonthToMonth?.period
-                                                        }}</span
-                                                    >
+                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap">
+                                                    <span class="text-green-500">{{
+                                                        cardMonthToMonth?.period
+                                                        }}</span>
                                                     Period
                                                 </div>
                                             </div>
@@ -1312,225 +775,93 @@
                                     </div>
                                 </div>
                             </div>
-                            <div
-                                class="grid grid-cols-1 xl:grid-cols-3 gap-8 w-full mt-8"
-                            >
+                            <div class="grid gap-12 sm:grid-flow-col xl:grid-flow-row mt-8">
                                 <!-- Recent transactions table -->
                                 <div
-                                    class="xl:col-span-2 flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden"
-                                >
+                                    class="xl:col-span-2 flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden">
                                     <div class="p-6">
-                                        <div
-                                            class="mr-4 text-lg font-medium tracking-tight leading-6 truncate"
-                                        >
+                                        <div class="mr-4 text-lg font-medium tracking-tight leading-6 truncate">
                                             Card Month to Month Detail
                                         </div>
                                     </div>
                                     <div class="overflow-x-auto mx-6">
-                                        <div
-                                            class="grid grid-cols-12 gap-x-1 mt-12"
-                                        >
-                                            <!-- Columns -->
-
-                                            <!-- Item -->
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                Status
-                                            </div>
-
-                                            <div
-                                                class="col-span-2 self-center text-right"
-                                            >
-                                                {{
-                                                    cardMonthToMonthDetail?.status
-                                                }}
-                                            </div>
-
-                                            <!-- Divider -->
-                                            <div
-                                                class="col-span-12 my-4 border-b"
-                                            ></div>
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                Comments
-                                            </div>
-
-                                            <div
-                                                class="col-span-2 self-center text-right"
-                                            >
-                                                {{
-                                                    cardMonthToMonthDetail?.comment
-                                                }}
-                                            </div>
-
-                                            <!-- Divider -->
-                                            <div
-                                                class="col-span-12 my-4 border-b"
-                                            ></div>
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                Date Created
-                                            </div>
-
-                                            <div
-                                                class="col-span-2 self-center text-right"
-                                            >
-                                                {{
-                                                    cardMonthToMonthDetail?.dateCreated
-                                                        | date: "dd/MM/yyyy"
-                                                }}
-                                            </div>
-                                            <div
-                                                class="col-span-12 my-4 border-b"
-                                            ></div>
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                Lined Approved Date
-                                            </div>
-
-                                            <div
-                                                class="col-span-2 self-center text-right"
-                                            >
-                                                {{
-                                                    cardMonthToMonthDetail?.lineApprovedDate
-                                                        | date: "dd/MM/yyyy"
-                                                }}
-                                            </div>
-
-                                            <!-- Divider -->
-                                            <div
-                                                class="col-span-12 my-4 border-b"
-                                            ></div>
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                Finance Approved Date
-                                            </div>
-
-                                            <div
-                                                class="col-span-2 self-center text-right"
-                                            >
-                                                {{
-                                                    cardMonthToMonthDetail?.financeApprovedDate
-                                                        | date: "dd/MM/yyyy"
-                                                }}
-                                            </div>
-
-                                            <!-- Divider -->
-                                            <div
-                                                class="col-span-12 my-4 border-b"
-                                            ></div>
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                General Approved Date
-                                            </div>
-
-                                            <div
-                                                class="col-span-2 self-center text-right"
-                                            >
-                                                {{
-                                                    cardMonthToMonthDetail?.generalManagerApprovedDate
-                                                        | date: "dd/MM/yyyy"
-                                                }}
-                                            </div>
-                                            <div
-                                                class="col-span-12 my-3 border-b"
-                                            ></div>
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                Created by
-                                            </div>
-
-                                            <div
-                                                class="col-span-2 self-center text-right"
-                                            >
-                                                {{
-                                                    cardMonthToMonthDetail?.createdBy
-                                                        | date: "dd/MM/yyyy"
-                                                }}
-                                            </div>
-
-                                            <!-- Divider -->
-                                            <div
-                                                class="col-span-12 my-3 border-b"
-                                            ></div>
-
-                                            <!-- Tax -->
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                Released Funds
-                                            </div>
-                                            <div
-                                                class="col-span-2 text-right text-lg"
-                                            >
-                                                {{
-                                                    cardMonthToMonthDetail?.releasedFunds ??
-                                                        "0.00" | currency
-                                                }}
-                                            </div>
-
-                                            <!-- Divider -->
-                                            <div
-                                                class="col-span-12 my-3 border-b"
-                                            ></div>
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                Received Funds
-                                            </div>
-                                            <div
-                                                class="col-span-2 text-right text-lg"
-                                            >
-                                                {{
-                                                    cardMonthToMonthDetail?.receivedFunds ??
-                                                        "0.00" | currency
-                                                }}
-                                            </div>
-
-                                            <!-- Divider -->
-                                            <div
-                                                class="col-span-12 my-3 border-b"
-                                            ></div>
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                Actual Used Funds
-                                            </div>
-                                            <div
-                                                class="col-span-2 text-right text-lg"
-                                            >
-                                                {{
-                                                    cardMonthToMonthDetail?.actualUsedFunds ??
-                                                        "0.00" | currency
-                                                }}
-                                            </div>
-
-                                            <!-- Divider -->
-                                            <div
-                                                class="col-span-12 my-3 border-b"
-                                            ></div>
-
-                                            <!-- Total -->
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                Amount
-                                            </div>
-                                            <div
-                                                class="col-span-2 text-right text-2xl font-medium"
-                                            >
-                                                {{
-                                                    cardMonthToMonthDetail?.amount ??
-                                                        0.0 | currency
-                                                }}
-                                            </div>
+                                        <div class="overflow-x-auto relative">
+                                            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                                                <thead
+                                                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                                    <tr>
+                                                        <th scope="col" class="py-3 px-6">
+                                                            Comment
+                                                        </th>
+                                                        <th scope="col" class="py-3 px-6">
+                                                            Created At
+                                                        </th>
+                                                        <th scope="col" class="py-3 px-6">
+                                                            Amount
+                                                        </th>
+                                                        <th scope="col" class="py-3 px-6">
+                                                            Released Funds
+                                                        </th>
+                                                        <th scope="col" class="py-3 px-6">
+                                                            Received Funds
+                                                        </th>
+                                                        <th scope="col" class="py-3 px-6">
+                                                            Used Funds
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody *ngIf="
+                                                cardMonthToMonthDetail.length >
+                                                        0
+                                                    ">
+                                                    <tr *ngFor="
+                                                            let cardMonthToMonthD of cardMonthToMonthDetail
+                                                        "
+                                                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                        <th scope="row"
+                                                            class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                            {{
+                                                            cardMonthToMonthD.status
+                                                            }}
+                                                        </th>
+                                                        <td class="py-4 px-6">
+                                                            {{
+                                                            cardMonthToMonthD.dateCreated
+                                                            | date
+                                                            : "dd/MM/yyyy"
+                                                            }}
+                                                        </td>
+                                                        <td class="py-4 px-6">
+                                                            {{
+                                                            cardMonthToMonthD.amount
+                                                            | currency
+                                                            : currencySelected
+                                                            }}
+                                                        </td>
+                                                        <td class="py-4 px-6">
+                                                            {{
+                                                            cardMonthToMonthD.releasedFunds
+                                                            | currency
+                                                            : currencySelected
+                                                            }}
+                                                        </td>
+                                                        <td class="py-4 px-6">
+                                                            {{
+                                                            cardMonthToMonthD.receivedFunds
+                                                            | currency
+                                                            : currencySelected
+                                                            }}
+                                                        </td>
+                                                        <td class="py-4 px-6">
+                                                            {{
+                                                            cardMonthToMonthD.actualUsedFunds
+                                                            | currency
+                                                            : currencySelected
+                                                            }}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
@@ -1541,199 +872,133 @@
 
                 <mat-tab label="Day to day">
                     <ng-template matTabContent>
-                        <div
-                            class="flex flex-col sm:flex-row items-center w-full max-w-xs sm:max-w-none"
-                        >
+                        <div class="flex flex-col sm:flex-row items-center w-full max-w-xs sm:max-w-none">
                             <mat-form-field class="sm:w-36 mr-3">
                                 <mat-select [(value)]="card">
                                     <ng-container>
-                                        <mat-option
-                                            *ngFor="let card of cards"
-                                            [value]="card.id"
-                                            (click)="setCard(card)"
-                                        >
-                                            {{ card.description }}</mat-option
-                                        >
+                                        <mat-option *ngFor="let card of cards" [value]="card.id"
+                                            (click)="setCard(card)">
+                                            {{ card.description }}</mat-option>
                                     </ng-container>
                                 </mat-select>
                             </mat-form-field>
                             <mat-form-field class="sm:w-36">
                                 <mat-select [(value)]="status">
                                     <ng-container>
-                                        <mat-option
-                                            value="Created"
-                                            (click)="setStatus('Created')"
-                                            >Created</mat-option
-                                        >
-                                        <mat-option
-                                            value="Line Approved"
-                                            (click)="setStatus('Line Approved')"
-                                            >Line manager approved
+                                        <mat-option value="Created" (click)="setStatus('Created')">Created</mat-option>
+                                        <mat-option value="Line Approved" (click)="setStatus('Line Approved')">Line
+                                            manager approved
                                         </mat-option>
-                                        <mat-option
-                                            value="Finance Approved"
-                                            (click)="
+                                        <mat-option value="Finance Approved" (click)="
                                                 setStatus('Finance Approved')
-                                            "
-                                            >Finance manager approved
+                                            ">Finance manager approved
                                         </mat-option>
-                                        <mat-option
-                                            value="Cash Used"
-                                            (click)="setStatus('Cash Used')"
-                                            >Cash Used
+                                        <mat-option value="Cash Used" (click)="setStatus('Cash Used')">Cash Used
                                         </mat-option>
                                     </ng-container>
                                 </mat-select>
                             </mat-form-field>
                         </div>
-                        <div
-                            class="grid grid-cols-1 xl:grid-cols-2 gap-8 w-full mt-8"
-                        >
-                            <div
-                                class="grid gap-12 sm:grid-flow-col xl:grid-flow-row"
-                            >
+                        <div class="grid grid-cols-1 xl:grid-cols-1 gap-8 w-full mt-8">
+                            <div class="grid gap-12 sm:grid-flow-col xl:grid-flow-row">
                                 <!-- Previous statement -->
                                 <div
-                                    class="relative flex flex-col flex-auto p-6 pr-3 pb-3 bg-card rounded-2xl shadow overflow-hidden"
-                                >
-                                    <div
-                                        class="absolute bottom-0 right-0 w-24 h-24 -m-6"
-                                    >
-                                        <mat-icon
-                                            class="icon-size-24 opacity-25 text-green-500 dark:text-green-400"
+                                    class="relative flex flex-col flex-auto p-6 pr-3 pb-3 bg-card rounded-2xl shadow overflow-hidden">
+                                    <div class="absolute bottom-0 right-0 w-24 h-24 -m-6">
+                                        <mat-icon class="icon-size-24 opacity-25 text-green-500 dark:text-green-400"
                                             [svgIcon]="
                                                 'heroicons_outline:check-circle'
-                                            "
-                                        ></mat-icon>
+                                            "></mat-icon>
                                     </div>
                                     <div class="flex items-center">
                                         <div class="flex flex-col">
-                                            <div
-                                                class="text-lg font-medium tracking-tight leading-6 truncate"
-                                            >
-                                                Cash reports
+                                            <div class="text-lg font-medium tracking-tight leading-6 truncate">
+                                                Card reports
                                             </div>
-                                            <div
-                                                class="text-green-600 font-medium text-sm"
-                                            >
+                                            <div class="text-green-600 font-medium text-sm">
                                                 Period
                                                 {{
-                                                    todayDate | date: "MMM yyyy"
+                                                todayDate | date: "MMM yyyy"
                                                 }}
                                                 {{ cardDayToDay?.period }}
                                             </div>
                                         </div>
                                     </div>
-                                    <div
-                                        class="flex flex-row flex-wrap mt-4 -mx-6"
-                                    >
+                                    <div class="flex flex-row flex-wrap mt-4 -mx-6">
                                         <div class="flex flex-col mx-6 my-3">
-                                            <div
-                                                class="text-sm font-medium leading-none text-secondary"
-                                            >
+                                            <div class="text-sm font-medium leading-none text-secondary">
                                                 Released Funds
                                             </div>
-                                            <div
-                                                class="mt-2 font-medium text-3xl leading-none"
-                                            >
+                                            <div class="mt-2 font-medium text-3xl leading-none">
                                                 {{
-                                                    cardDayToDay?.requestedAmount ??
-                                                        "0.00"
-                                                        | currency
-                                                            : currencySelected
+                                                cardDayToDay?.requestedAmount ??
+                                                "0.00"
+                                                | currency
+                                                : currencySelected
                                                 }}
                                             </div>
                                             <div class="flex items-center">
-                                                <mat-icon
-                                                    class="mr-1 icon-size-5 text-red-500"
-                                                    [svgIcon]="
+                                                <mat-icon class="mr-1 icon-size-5 text-red-500" [svgIcon]="
                                                         'heroicons_solid:trending-up'
-                                                    "
-                                                >
+                                                    ">
                                                 </mat-icon>
                                                 <div
-                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
-                                                >
-                                                    <span
-                                                        class="text-green-500"
-                                                        >{{
-                                                            cardDayToDay?.period
-                                                        }}</span
-                                                    >
+                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap">
+                                                    <span class="text-green-500">{{
+                                                        cardDayToDay?.period
+                                                        }}</span>
                                                     Period
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="flex flex-col mx-6 my-3">
-                                            <div
-                                                class="text-sm font-medium leading-none text-secondary"
-                                            >
+                                            <div class="text-sm font-medium leading-none text-secondary">
                                                 Used Funds
                                             </div>
-                                            <div
-                                                class="mt-2 font-medium text-3xl leading-none"
-                                            >
+                                            <div class="mt-2 font-medium text-3xl leading-none">
                                                 {{
-                                                    cardDayToDay?.usedFunds ??
-                                                        "0.00"
-                                                        | currency
-                                                            : currencySelected
+                                                cardDayToDay?.usedFunds ??
+                                                "0.00"
+                                                | currency
+                                                : currencySelected
                                                 }}
                                             </div>
                                             <div class="flex items-center">
-                                                <mat-icon
-                                                    class="mr-1 icon-size-5 text-red-500"
-                                                    [svgIcon]="
+                                                <mat-icon class="mr-1 icon-size-5 text-red-500" [svgIcon]="
                                                         'heroicons_solid:trending-up'
-                                                    "
-                                                >
+                                                    ">
                                                 </mat-icon>
                                                 <div
-                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
-                                                >
-                                                    <span
-                                                        class="text-green-500"
-                                                        >{{
-                                                            cardDayToDay?.period
-                                                        }}</span
-                                                    >
+                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap">
+                                                    <span class="text-green-500">{{
+                                                        cardDayToDay?.period
+                                                        }}</span>
                                                     Period
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="flex flex-col mx-6 my-3">
-                                            <div
-                                                class="text-sm font-medium leading-none text-secondary"
-                                            >
+                                            <div class="text-sm font-medium leading-none text-secondary">
                                                 Requested Amount
                                             </div>
-                                            <div
-                                                class="mt-2 font-medium text-3xl leading-none"
-                                            >
+                                            <div class="mt-2 font-medium text-3xl leading-none">
                                                 {{
-                                                    cardDayToDay?.requestedAmount ??
-                                                        "0.00"
-                                                        | currency
-                                                            : currencySelected
+                                                cardDayToDay?.requestedAmount ??
+                                                "0.00"
+                                                | currency
+                                                : currencySelected
                                                 }}
                                             </div>
                                             <div class="flex items-center">
-                                                <mat-icon
-                                                    class="mr-1 icon-size-5 text-red-500"
-                                                    [svgIcon]="
+                                                <mat-icon class="mr-1 icon-size-5 text-red-500" [svgIcon]="
                                                         'heroicons_solid:trending-up'
-                                                    "
-                                                >
+                                                    ">
                                                 </mat-icon>
                                                 <div
-                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap"
-                                                >
-                                                    <span
-                                                        class="text-green-500"
-                                                        >{{
-                                                            cardDayToDay?.period
-                                                        }}</span
-                                                    >
+                                                    class="font-medium text-sm text-secondary leading-none whitespace-nowrap">
+                                                    <span class="text-green-500">{{
+                                                        cardDayToDay?.period
+                                                        }}</span>
                                                     Period
                                                 </div>
                                             </div>
@@ -1741,225 +1006,93 @@
                                     </div>
                                 </div>
                             </div>
-                            <div
-                                class="grid grid-cols-1 xl:grid-cols-3 gap-8 w-full mt-8"
-                            >
+                            <div class="grid gap-12 sm:grid-flow-col xl:grid-flow-row mt-8">
                                 <!-- Recent transactions table -->
                                 <div
-                                    class="xl:col-span-2 flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden"
-                                >
+                                    class="xl:col-span-2 flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden">
                                     <div class="p-6">
-                                        <div
-                                            class="mr-4 text-lg font-medium tracking-tight leading-6 truncate"
-                                        >
-                                            Cash Month to Month Detail
+                                        <div class="mr-4 text-lg font-medium tracking-tight leading-6 truncate">
+                                            Card Day to Day Detail
                                         </div>
                                     </div>
                                     <div class="overflow-x-auto mx-6">
-                                        <div
-                                            class="grid grid-cols-12 gap-x-1 mt-12"
-                                        >
-                                            <!-- Columns -->
-
-                                            <!-- Item -->
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                Status
-                                            </div>
-
-                                            <div
-                                                class="col-span-2 self-center text-right"
-                                            >
-                                                {{
-                                                    caardDayToDayDetail?.status
-                                                }}
-                                            </div>
-
-                                            <!-- Divider -->
-                                            <div
-                                                class="col-span-12 my-4 border-b"
-                                            ></div>
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                Comments
-                                            </div>
-
-                                            <div
-                                                class="col-span-2 self-center text-right"
-                                            >
-                                                {{
-                                                    caardDayToDayDetail?.comment
-                                                }}
-                                            </div>
-
-                                            <!-- Divider -->
-                                            <div
-                                                class="col-span-12 my-4 border-b"
-                                            ></div>
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                Date Created
-                                            </div>
-
-                                            <div
-                                                class="col-span-2 self-center text-right"
-                                            >
-                                                {{
-                                                    caardDayToDayDetail?.dateCreated
-                                                        | date: "dd/MM/yyyy"
-                                                }}
-                                            </div>
-                                            <div
-                                                class="col-span-12 my-4 border-b"
-                                            ></div>
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                Lined Approved Date
-                                            </div>
-
-                                            <div
-                                                class="col-span-2 self-center text-right"
-                                            >
-                                                {{
-                                                    caardDayToDayDetail?.lineApprovedDate
-                                                        | date: "dd/MM/yyyy"
-                                                }}
-                                            </div>
-
-                                            <!-- Divider -->
-                                            <div
-                                                class="col-span-12 my-4 border-b"
-                                            ></div>
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                Finance Approved Date
-                                            </div>
-
-                                            <div
-                                                class="col-span-2 self-center text-right"
-                                            >
-                                                {{
-                                                    caardDayToDayDetail?.financeApprovedDate
-                                                        | date: "dd/MM/yyyy"
-                                                }}
-                                            </div>
-
-                                            <!-- Divider -->
-                                            <div
-                                                class="col-span-12 my-4 border-b"
-                                            ></div>
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                General Approved Date
-                                            </div>
-
-                                            <div
-                                                class="col-span-2 self-center text-right"
-                                            >
-                                                {{
-                                                    caardDayToDayDetail?.generalManagerApprovedDate
-                                                        | date: "dd/MM/yyyy"
-                                                }}
-                                            </div>
-                                            <div
-                                                class="col-span-12 my-3 border-b"
-                                            ></div>
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                Created by
-                                            </div>
-
-                                            <div
-                                                class="col-span-2 self-center text-right"
-                                            >
-                                                {{
-                                                    caardDayToDayDetail?.createdBy
-                                                        | date: "dd/MM/yyyy"
-                                                }}
-                                            </div>
-
-                                            <!-- Divider -->
-                                            <div
-                                                class="col-span-12 my-3 border-b"
-                                            ></div>
-
-                                            <!-- Tax -->
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                Released Funds
-                                            </div>
-                                            <div
-                                                class="col-span-2 text-right text-lg"
-                                            >
-                                                {{
-                                                    caardDayToDayDetail?.releasedFunds ??
-                                                        "0.00" | currency
-                                                }}
-                                            </div>
-
-                                            <!-- Divider -->
-                                            <div
-                                                class="col-span-12 my-3 border-b"
-                                            ></div>
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                Received Funds
-                                            </div>
-                                            <div
-                                                class="col-span-2 text-right text-lg"
-                                            >
-                                                {{
-                                                    caardDayToDayDetail?.receivedFunds ??
-                                                        "0.00" | currency
-                                                }}
-                                            </div>
-
-                                            <!-- Divider -->
-                                            <div
-                                                class="col-span-12 my-3 border-b"
-                                            ></div>
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                Actual Used Funds
-                                            </div>
-                                            <div
-                                                class="col-span-2 text-right text-lg"
-                                            >
-                                                {{
-                                                    caardDayToDayDetail?.actualUsedFunds ??
-                                                        "0.00" | currency
-                                                }}
-                                            </div>
-
-                                            <!-- Divider -->
-                                            <div
-                                                class="col-span-12 my-3 border-b"
-                                            ></div>
-
-                                            <!-- Total -->
-                                            <div
-                                                class="col-span-10 self-center font-medium tracking-tight text-secondary"
-                                            >
-                                                Amount
-                                            </div>
-                                            <div
-                                                class="col-span-2 text-right text-2xl font-medium"
-                                            >
-                                                {{
-                                                    caardDayToDayDetail?.amount ??
-                                                        0.0 | currency
-                                                }}
-                                            </div>
+                                        <div class="overflow-x-auto relative">
+                                            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                                                <thead
+                                                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                                    <tr>
+                                                        <th scope="col" class="py-3 px-6">
+                                                            Comment
+                                                        </th>
+                                                        <th scope="col" class="py-3 px-6">
+                                                            Created At
+                                                        </th>
+                                                        <th scope="col" class="py-3 px-6">
+                                                            Amount
+                                                        </th>
+                                                        <th scope="col" class="py-3 px-6">
+                                                            Released Funds
+                                                        </th>
+                                                        <th scope="col" class="py-3 px-6">
+                                                            Received Funds
+                                                        </th>
+                                                        <th scope="col" class="py-3 px-6">
+                                                            Used Funds
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody *ngIf="
+                                                cardDayToDayDetail.length >
+                                                        0
+                                                    ">
+                                                    <tr *ngFor="
+                                                            let cardDayToDayD of cardDayToDayDetail
+                                                        "
+                                                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                        <th scope="row"
+                                                            class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                            {{
+                                                            cardDayToDayD.status
+                                                            }}
+                                                        </th>
+                                                        <td class="py-4 px-6">
+                                                            {{
+                                                            cardDayToDayD.dateCreated
+                                                            | date
+                                                            : "dd/MM/yyyy"
+                                                            }}
+                                                        </td>
+                                                        <td class="py-4 px-6">
+                                                            {{
+                                                            cardDayToDayD.amount
+                                                            | currency
+                                                            : currencySelected
+                                                            }}
+                                                        </td>
+                                                        <td class="py-4 px-6">
+                                                            {{
+                                                            cardDayToDayD.releasedFunds
+                                                            | currency
+                                                            : currencySelected
+                                                            }}
+                                                        </td>
+                                                        <td class="py-4 px-6">
+                                                            {{
+                                                            cardDayToDayD.receivedFunds
+                                                            | currency
+                                                            : currencySelected
+                                                            }}
+                                                        </td>
+                                                        <td class="py-4 px-6">
+                                                            {{
+                                                            cardDayToDayD.actualUsedFunds
+                                                            | currency
+                                                            : currencySelected
+                                                            }}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
