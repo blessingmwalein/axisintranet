@@ -9,9 +9,33 @@ export const environment = {
     // apiBaseUrl: 'http://192.168.1.148:8097/api/',
     // filesBaseUrl: 'http://192.168.1.148:8087/files/',
     // filesBaseUrl: 'http://192.168.1.148:8097/files/',
-    filesBaseUrl: 'http://154.120.241.142:8097/files/',
-    apiBaseUrl: 'http://154.120.241.142:8097/api/',
-    // apiBaseUrl: "http://154.120.241.142:8097/api/"
+    filesBaseUrl: 'http://140.82.25.196:8097/files/',
+    apiBaseUrl: 'http://140.82.25.196:8097/api/',
+    messageBirdUrl:
+        'https://flows.messagebird.com/flows/d6303a00-3df8-407d-a302-0c9da1a92b3a/invoke',
+
+    getSendRequisitionMessage(
+        userTo: string,
+        userFrom: string,
+        requisitionType: string
+    ): string {
+        return `Good day ${userTo},${userFrom} has sent you a ${requisitionType} requisition. Please login to your account to view the requisition.`;
+    },
+    getApproveRequisitionMessage(
+        userTo: string,
+        userFrom: string,
+        requisitionType: string
+    ): string {
+        return `Good day ${userTo},${userFrom} has approved your ${requisitionType} requisition. Please login to your account to view the requisition.`;
+    },
+
+    getRejectRequisitionMessage(
+        userTo: string,
+        userFrom: string,
+        requisitionType: string
+    ): string {
+        return `Good day ${userTo},${userFrom} has rejected your ${requisitionType} requisition. Please login to your account to view the requisition.`;
+    },
 };
 
 /*
