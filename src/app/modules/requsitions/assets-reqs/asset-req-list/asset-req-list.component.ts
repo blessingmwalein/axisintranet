@@ -42,10 +42,11 @@ export class AssetReqListComponent implements OnInit {
     ngOnInit(): void {
         this.user = this._userService.getUserfromStorage();
         console.log(this.user);
-        this.setStatus('Created');
-
-        // this.getReqByRole();
-        // this.getAssetReqs();
+        if (this.user.roles[0].toUpperCase() == 'LINE MANAGER') {
+            this.getReqByRole();
+        } else {
+            this.setStatus('Created');
+        }
     }
 
     getAssetReqs() {

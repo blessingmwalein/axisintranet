@@ -326,6 +326,13 @@ export const adminNavigation: FuseNavigationItem[] = [
                 link: '/axis/admin/departments',
             },
             {
+                id: 'admin.titles',
+                title: 'Titles',
+                type: 'basic',
+                icon: 'heroicons_outline:support',
+                link: '/axis/admin/titles',
+            },
+            {
                 id: 'admin.users',
                 title: 'Users',
                 type: 'basic',

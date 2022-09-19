@@ -34,13 +34,21 @@
                     #horizontalStepperStep1>
                     <ng-template matStepLabel>Basic information</ng-template>
                     <div class="flex">
-                        <mat-form-field class=" w-full">
-                            <mat-label>Title</mat-label>
-                            <mat-icon matPrefix class="hidden sm:flex icon-size-5"
-                                [svgIcon]="'heroicons_solid:briefcase'"></mat-icon>
-                            <input matInput [formControlName]="'title'" [placeholder]="'Title'">
-                            <mat-error *ngIf="horizontalStepperForm.get('step1').get('title').hasError('required')">
-                                Title is required
+                        <mat-form-field class="flex-auto gt-xs:pr-3">
+                            <mat-label>Select Title</mat-label>
+                            <mat-select [formControlName]="'title'" [placeholder]="'Title'" required>
+                                <mat-option *ngFor="let title of titles" [value]="title.name">
+                                    {{ title.name }}</mat-option>
+                            </mat-select>
+                            <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:location-marker'">
+                            </mat-icon>
+                            <mat-error *ngIf="
+                                    horizontalStepperForm
+                                        .get('step1')
+                                        .get('title')
+                                        .hasError('required')
+                                ">
+                                Please select title
                             </mat-error>
                         </mat-form-field>
                     </div>

@@ -1,11 +1,7 @@
-<div
-    class="absolute inset-0 flex flex-col min-w-0 overflow-y-auto"
-    cdkScrollable
->
+<div class="absolute inset-0 flex flex-col min-w-0 overflow-y-auto" cdkScrollable>
     <!-- Header -->
     <div
-        class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent"
-    >
+        class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
         <div class="flex-1 min-w-0">
             <!-- Breadcrumbs -->
             <div class="flex flex-wrap items-center font-medium">
@@ -13,25 +9,17 @@
                     <a class="whitespace-nowrap text-primary-500">Axis</a>
                 </div>
                 <div class="flex items-center ml-1 whitespace-nowrap">
-                    <mat-icon
-                        class="icon-size-5 text-secondary"
-                        [svgIcon]="'heroicons_solid:chevron-right'"
-                    ></mat-icon>
+                    <mat-icon class="icon-size-5 text-secondary" [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
                     <a class="ml-1 text-primary-500">Employee</a>
                 </div>
                 <div class="flex items-center ml-1 whitespace-nowrap">
-                    <mat-icon
-                        class="icon-size-5 text-secondary"
-                        [svgIcon]="'heroicons_solid:chevron-right'"
-                    ></mat-icon>
+                    <mat-icon class="icon-size-5 text-secondary" [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
                     <span class="ml-1 text-secondary">Requisitions</span>
                 </div>
             </div>
             <!-- Title -->
             <div class="mt-2">
-                <h2
-                    class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate"
-                >
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
                     Create Cash Requisition
                 </h2>
             </div>
@@ -40,66 +28,40 @@
 
     <!-- Main -->
     <div class="p-5">
-        <form
-            class="p-4 bg-card shadow rounded overflow-hidden max-w-full"
-            [formGroup]="horizontalStepperForm"
-        >
-            <fuse-alert
-                class="mt-8 -mb-4"
-                *ngIf="showAlert"
-                [appearance]="'outline'"
-                [showIcon]="false"
-                [type]="alert.type"
-                [@shake]="alert.type === 'error'"
-            >
+        <form class="p-4 bg-card shadow rounded overflow-hidden max-w-full" [formGroup]="horizontalStepperForm">
+            <fuse-alert class="mt-8 -mb-4" *ngIf="showAlert" [appearance]="'outline'" [showIcon]="false"
+                [type]="alert.type" [@shake]="alert.type === 'error'">
                 <p *ngFor="let error of errors">* {{ error }}</p>
             </fuse-alert>
             <mat-horizontal-stepper [linear]="true" #horizontalStepper>
-                <mat-step
-                    [formGroupName]="'step1'"
-                    [stepControl]="horizontalStepperForm.get('step1')"
-                    #horizontalStepperStep1
-                >
+                <mat-step [formGroupName]="'step1'" [stepControl]="horizontalStepperForm.get('step1')"
+                    #horizontalStepperStep1>
                     <ng-template matStepLabel>Basic information</ng-template>
                     <div class="flex">
-                        <mat-form-field class="w-full">
-                            <mat-label>Title</mat-label>
-                            <mat-icon
-                                matPrefix
-                                class="hidden sm:flex icon-size-5"
-                                [svgIcon]="'heroicons_solid:briefcase'"
-                            ></mat-icon>
-                            <input
-                                matInput
-                                [formControlName]="'title'"
-                                [placeholder]="'title'"
-                            />
-                            <mat-error
-                                *ngIf="
+                        <mat-form-field class="flex-auto gt-xs:pr-3">
+                            <mat-label>Select Title</mat-label>
+                            <mat-select [formControlName]="'title'" [placeholder]="'Title'" required>
+                                <mat-option *ngFor="let title of titles" [value]="title.name">
+                                    {{ title.name }}</mat-option>
+                            </mat-select>
+                            <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:location-marker'">
+                            </mat-icon>
+                            <mat-error *ngIf="
                                     horizontalStepperForm
                                         .get('step1')
                                         .get('title')
                                         .hasError('required')
-                                "
-                            >
-                                Title is required
+                                ">
+                                Please select title
                             </mat-error>
                         </mat-form-field>
                     </div>
                     <div class="flex">
                         <mat-label>Attach File</mat-label>
                         <br />
-                        <mat-icon
-                            matPrefix
-                            class="hidden sm:flex icon-size-5"
-                            [svgIcon]="'heroicons_solid:briefcase'"
-                        >
+                        <mat-icon matPrefix class="hidden sm:flex icon-size-5" [svgIcon]="'heroicons_solid:briefcase'">
                         </mat-icon>
-                        <input
-                            type="file"
-                            (change)="fileChange($event)"
-                            [placeholder]="'Attache File'"
-                        />
+                        <input type="file" (change)="fileChange($event)" [placeholder]="'Attache File'" />
                         <!-- <mat-error *ngIf="horizontalStepperForm.get('step1').get('title').hasError('required')">
                                 Title is required
                             </mat-error> -->
@@ -107,25 +69,16 @@
                     <div class="flex">
                         <mat-form-field class="w-full">
                             <mat-label>Amount</mat-label>
-                            <mat-icon
-                                matPrefix
-                                class="hidden sm:flex icon-size-5"
-                                [svgIcon]="'heroicons_solid:briefcase'"
-                            ></mat-icon>
-                            <input
-                                matInput
-                                (keypress)="numberOnly($event)"
-                                [formControlName]="'amount'"
-                                [placeholder]="'amount'"
-                            />
-                            <mat-error
-                                *ngIf="
+                            <mat-icon matPrefix class="hidden sm:flex icon-size-5"
+                                [svgIcon]="'heroicons_solid:briefcase'"></mat-icon>
+                            <input matInput (keypress)="numberOnly($event)" [formControlName]="'amount'"
+                                [placeholder]="'amount'" />
+                            <mat-error *ngIf="
                                     horizontalStepperForm
                                         .get('step1')
                                         .get('amount')
                                         .hasError('required')
-                                "
-                            >
+                                ">
                                 Amount is required
                             </mat-error>
                         </mat-form-field>
@@ -133,25 +86,15 @@
                     <div class="flex pt-1">
                         <mat-form-field class="fuse-mat-textarea flex-auto">
                             <mat-label>Comments</mat-label>
-                            <textarea
-                                matInput
-                                [formControlName]="'requestComments'"
-                                [placeholder]="'About'"
-                                [rows]="3"
-                            ></textarea>
-                            <mat-icon
-                                class="icon-size-5"
-                                matPrefix
-                                [svgIcon]="'heroicons_solid:menu-alt-2'"
-                            ></mat-icon>
-                            <mat-error
-                                *ngIf="
+                            <textarea matInput [formControlName]="'requestComments'" [placeholder]="'About'"
+                                [rows]="3"></textarea>
+                            <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:menu-alt-2'"></mat-icon>
+                            <mat-error *ngIf="
                                     horizontalStepperForm
                                         .get('step1')
                                         .get('requestComments')
                                         .hasError('required')
-                                "
-                            >
+                                ">
                                 Comments are required
                             </mat-error>
                         </mat-form-field>
@@ -159,167 +102,96 @@
                     <div class="flex flex-col gt-xs:flex-row">
                         <mat-form-field class="flex-auto gt-xs:pr-3">
                             <mat-label>Select Cash</mat-label>
-                            <mat-select
-                                [formControlName]="'cashId'"
-                                [placeholder]="'Cash'"
-                                required
-                            >
-                                <mat-option
-                                    *ngFor="let cash of cashs"
-                                    [value]="cash.id"
-                                >
-                                    {{ cash.description }}</mat-option
-                                >
+                            <mat-select [formControlName]="'cashId'" [placeholder]="'Cash'" required>
+                                <mat-option *ngFor="let cash of cashs" [value]="cash.id">
+                                    {{ cash.description }}</mat-option>
                             </mat-select>
-                            <mat-icon
-                                class="icon-size-5"
-                                matPrefix
-                                [svgIcon]="'heroicons_solid:location-marker'"
-                            >
+                            <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:location-marker'">
                             </mat-icon>
-                            <mat-error
-                                *ngIf="
+                            <mat-error *ngIf="
                                     horizontalStepperForm
                                         .get('step1')
                                         .get('cashId')
                                         .hasError('required')
-                                "
-                            >
+                                ">
                                 Please select cash
                             </mat-error>
                         </mat-form-field>
                     </div>
                     <div class="flex justify-end">
-                        <button
-                            class="px-8"
-                            mat-flat-button
-                            [color]="'primary'"
-                            [disabled]="
+                        <button class="px-8" mat-flat-button [color]="'primary'" [disabled]="
                                 horizontalStepperStep1.stepControl.pristine ||
                                 horizontalStepperStep1.stepControl.invalid
-                            "
-                            type="button"
-                            matStepperNext
-                        >
+                            " type="button" matStepperNext>
                             Next
                         </button>
                     </div>
                 </mat-step>
 
-                <mat-step
-                    [formGroupName]="'step2'"
-                    [stepControl]="horizontalStepperForm.get('step2')"
-                    #horizontalStepperStep2
-                >
+                <mat-step [formGroupName]="'step2'" [stepControl]="horizontalStepperForm.get('step2')"
+                    #horizontalStepperStep2>
                     <ng-template matStepLabel>Date Details</ng-template>
                     <div class="flex flex-col gt-xs:flex-row">
-                        <mat-form-field
-                            [ngClass]="formFieldHelpers"
-                            class="flex-auto"
-                        >
+                        <mat-form-field [ngClass]="formFieldHelpers" class="flex-auto">
                             <mat-label>Start date</mat-label>
-                            <input
-                                matInput
-                                type="datetime-local"
-                                id="startDate"
-                                min="{{ startDateMin }}"
-                                [placeholder]="'Start date'"
-                                (change)="onDateChange()"
-                                [formControlName]="'startDate'"
-                            />
+                            <input matInput type="datetime-local" id="startDate" min="{{ startDateMin }}"
+                                [placeholder]="'Start date'" (change)="onDateChange()"
+                                [formControlName]="'startDate'" />
                             <!-- <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                             <mat-datepicker #picker2></mat-datepicker> -->
-                            <mat-error
-                                *ngIf="
+                            <mat-error *ngIf="
                                     horizontalStepperForm
                                         .get('step2')
                                         .get('startDate')
                                         .hasError('required')
-                                "
-                            >
+                                ">
                                 Please choose start date
                             </mat-error>
                             <mat-error *ngIf="isPastStartDate">
                                 Please choose present date
                             </mat-error>
                         </mat-form-field>
-                        <mat-form-field
-                            [ngClass]="formFieldHelpers"
-                            class="flex-auto"
-                        >
+                        <mat-form-field [ngClass]="formFieldHelpers" class="flex-auto">
                             <mat-label>End date</mat-label>
-                            <input
-                                matInput
-                                type="datetime-local"
-                                id="endDate"
-                                min="{{ startDateMin }}"
-                                (change)="onDateChange()"
-                                [placeholder]="'End date'"
-                                [formControlName]="'endDate'"
-                            />
+                            <input matInput type="datetime-local" id="endDate" min="{{ startDateMin }}"
+                                (change)="onDateChange()" [placeholder]="'End date'" [formControlName]="'endDate'" />
                             <!-- <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                             <mat-datepicker #picker3></mat-datepicker> -->
-                            <mat-error
-                                *ngIf="
+                            <mat-error *ngIf="
                                     horizontalStepperForm
                                         .get('step2')
                                         .get('endDate')
                                         .hasError('required')
-                                "
-                            >
+                                ">
                                 Please choose end date
                             </mat-error>
                         </mat-form-field>
                         <div class="flex">
                             <mat-form-field class="w-full">
                                 <mat-label>Duration(hours)</mat-label>
-                                <mat-icon
-                                    matPrefix
-                                    class="hidden sm:flex icon-size-5"
-                                    [svgIcon]="'heroicons_solid:briefcase'"
-                                ></mat-icon>
-                                <input
-                                    matInput
-                                    [formControlName]="'durationView'"
-                                    type="tel"
-                                    min="1"
-                                    [placeholder]="'Duration(hours)'"
-                                    readonly
-                                />
-                                <mat-error
-                                    *ngIf="
+                                <mat-icon matPrefix class="hidden sm:flex icon-size-5"
+                                    [svgIcon]="'heroicons_solid:briefcase'"></mat-icon>
+                                <input matInput [formControlName]="'durationView'" type="tel" min="1"
+                                    [placeholder]="'Duration(hours)'" readonly />
+                                <mat-error *ngIf="
                                         horizontalStepperForm
                                             .get('step2')
                                             .get('duration')
                                             .hasError('required')
-                                    "
-                                >
+                                    ">
                                     Duration is required
                                 </mat-error>
                             </mat-form-field>
                         </div>
                     </div>
                     <div class="flex justify-end pt-2">
-                        <button
-                            class="px-8 mr-2"
-                            mat-flat-button
-                            [color]="'accent'"
-                            type="button"
-                            matStepperPrevious
-                        >
+                        <button class="px-8 mr-2" mat-flat-button [color]="'accent'" type="button" matStepperPrevious>
                             Back
                         </button>
-                        <button
-                            class="px-8"
-                            mat-flat-button
-                            [color]="'primary'"
-                            [disabled]="
+                        <button class="px-8" mat-flat-button [color]="'primary'" [disabled]="
                                 horizontalStepperStep2.stepControl.pristine ||
                                 horizontalStepperStep2.stepControl.invalid
-                            "
-                            type="button"
-                            matStepperNext
-                        >
+                            " type="button" matStepperNext>
                             Next
                         </button>
                     </div>
@@ -332,29 +204,14 @@
                         Are you sure you want to send this requisition
                     </fuse-alert>
                     <div class="flex justify-end mt-8">
-                        <button
-                            class="px-8 mr-2"
-                            mat-flat-button
-                            [color]="'accent'"
-                            type="button"
-                            matStepperPrevious
-                        >
+                        <button class="px-8 mr-2" mat-flat-button [color]="'accent'" type="button" matStepperPrevious>
                             Back
                         </button>
-                        <button
-                            class="px-8"
-                            mat-flat-button
-                            [color]="'primary'"
-                            type="reset"
-                            [disabled]="horizontalStepperForm.disabled"
-                            (click)="createReq()"
-                        >
+                        <button class="px-8" mat-flat-button [color]="'primary'" type="reset"
+                            [disabled]="horizontalStepperForm.disabled" (click)="createReq()">
                             Save
-                            <mat-progress-spinner
-                                *ngIf="horizontalStepperForm.disabled"
-                                [diameter]="24"
-                                [mode]="'indeterminate'"
-                            ></mat-progress-spinner>
+                            <mat-progress-spinner *ngIf="horizontalStepperForm.disabled" [diameter]="24"
+                                [mode]="'indeterminate'"></mat-progress-spinner>
                         </button>
                     </div>
                 </mat-step>

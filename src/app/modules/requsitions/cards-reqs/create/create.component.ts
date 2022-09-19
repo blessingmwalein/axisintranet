@@ -8,6 +8,9 @@ import { UserService } from 'app/core/user/user.service';
 import { CardRequisitionService } from 'app/modules/employee-x/services/card-requisitions/card-requisitions.service';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertType } from '@fuse/components/alert';
+import { TitleService } from 'app/modules/admin/services/titles/title.service';
+import { Title } from 'app/modules/admin/models/titles/title.types';
+import { NotificationsService } from 'app/modules/employee-x/services/nortifications/notifications.service';
 
 @Component({
     selector: 'app-create',
@@ -18,12 +21,13 @@ export class CreateCardReqComponent implements OnInit {
     horizontalStepperForm: FormGroup;
     formFieldHelpers: string[] = [''];
     cards: any[];
+    titles: Title[];
     file: File;
     errors = [];
     startDateMin = new Date().toISOString().split('T')[0] + 'T00:00:00';
     alert: { type: FuseAlertType; message: string } = {
         type: 'error',
-        message: 'Somthing went Wrong',
+        message: 'Something went Wrong',
     };
     showAlert: boolean = false;
 
@@ -36,12 +40,18 @@ export class CreateCardReqComponent implements OnInit {
         private _formBuilder: FormBuilder,
         private _cardReqService: CardRequisitionService,
         private _router: Router,
-        private _userService: UserService
+        private _userService: UserService,
+        private _titleService: TitleService,
+        private _not: NotificationsService
     ) {}
 
     ngOnInit(): void {
         this._cardReqService.getCards().subscribe((data) => {
             this.cards = data;
+        });
+
+        this._titleService.getTitles().subscribe((data) => {
+            this.titles = data;
         });
 
         this.horizontalStepperForm = this._formBuilder.group({
@@ -114,7 +124,20 @@ export class CreateCardReqComponent implements OnInit {
             () => {
                 this.horizontalStepperForm.enable();
                 this._alertService.displayMessage('Card requisition submitted');
-                this._router.navigate(['axis/requsitions/card']);
+                this._not
+                    .sendSendWhatsappMessageToUser(
+                        this._userService.getLocalUser().approverPhoneNumber,
+                        `${this._userService.getLocalUser().approverName} ${
+                            this._userService.getLocalUser().approverSurname
+                        }`,
+                        `${this._userService.getLocalUser().firstname} ${
+                            this._userService.getLocalUser().lastname
+                        }`,
+                        'Cash'
+                    )
+                    .subscribe(() => {
+                        this._router.navigate(['axis/requsitions/card']);
+                    });
             },
             (error) => {
                 console.log(error);

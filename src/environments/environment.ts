@@ -12,7 +12,7 @@ export const environment = {
     filesBaseUrl: 'http://140.82.25.196:8097/files/',
     apiBaseUrl: 'http://140.82.25.196:8097/api/',
     messageBirdUrl:
-        'https://flows.messagebird.com/flows/d6303a00-3df8-407d-a302-0c9da1a92b3a/invoke',
+        'https://flows.messagebird.com/flows/76f31dea-3292-4e39-8d85-d00f1b6f5ef2/invoke',
 
     getSendRequisitionMessage(
         userTo: string,

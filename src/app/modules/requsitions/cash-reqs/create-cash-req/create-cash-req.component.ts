@@ -13,6 +13,9 @@ import { AlertService } from 'app/modules/alert/snackbar/alert.service';
 import { CashRequisitionService } from 'app/modules/employee-x/services/cash-requisitions/cash-requisitions.service';
 import { Subject } from 'rxjs';
 import { fuseAnimations } from '@fuse/animations';
+import { TitleService } from 'app/modules/admin/services/titles/title.service';
+import { Title } from 'app/modules/admin/models/titles/title.types';
+import { NotificationsService } from 'app/modules/employee-x/services/nortifications/notifications.service';
 
 @Component({
     selector: 'app-create-cash-req',
@@ -23,6 +26,7 @@ export class CreateCashReqComponent implements OnInit {
     horizontalStepperForm: FormGroup;
     formFieldHelpers: string[] = [''];
     cashs: any[];
+    titles: Title[];
     minDate = new Date();
     isPastStartDate = false;
     startDateMin = new Date().toISOString().split('T')[0] + 'T00:00:00';
@@ -39,7 +43,9 @@ export class CreateCashReqComponent implements OnInit {
         private _cashReqService: CashRequisitionService,
         private _router: Router,
         private _userService: UserService,
-        private el: ElementRef
+        private el: ElementRef,
+        private _titleService: TitleService,
+        private _not: NotificationsService
     ) {}
 
     numberOnly(event): boolean {
@@ -55,6 +61,10 @@ export class CreateCashReqComponent implements OnInit {
 
         this._cashReqService.getCashs().subscribe((data) => {
             this.cashs = data;
+        });
+
+        this._titleService.getTitles().subscribe((data) => {
+            this.titles = data;
         });
 
         this.horizontalStepperForm = this._formBuilder.group({
@@ -128,10 +138,23 @@ export class CreateCashReqComponent implements OnInit {
             this.horizontalStepperForm.value.step2.duration
         );
         this._cashReqService.createCashReq(formData).subscribe(
-            () => {
+            (response: any) => {
                 this.horizontalStepperForm.enable();
                 this._alertService.displayMessage('Cash requisition submitted');
-                this._router.navigate(['axis/requsitions/cash']);
+                this._not
+                    .sendSendWhatsappMessageToUser(
+                        this._userService.getLocalUser().approverPhoneNumber,
+                        `${this._userService.getLocalUser().approverName} ${
+                            this._userService.getLocalUser().approverSurname
+                        }`,
+                        `${this._userService.getLocalUser().firstname} ${
+                            this._userService.getLocalUser().lastname
+                        }`,
+                        'Cash'
+                    )
+                    .subscribe(() => {
+                        this._router.navigate(['axis/requsitions/cash']);
+                    });
             },
             (error) => {
                 console.log(error);

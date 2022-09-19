@@ -16,110 +16,112 @@ import { VehiclesComponent } from './vehicles/vehicles.component';
 import { UserDetailComponent } from './user-list/user-detail/user-detail.component';
 import { MantainanceComponent } from './mantainance/mantainance.component';
 import { AdminDashComponent } from './admin-dash/admin-dash.component';
+import { TitlesComponent } from './titles/titles.component';
 
 const routes: Routes = [
-  {
-    path: 'dashboard',
-    component: AdminDashComponent
-  },
-  {
-    path: 'calendar',
-    children: [
-      {
-        path: '',
-        component: CalendarComponent,
-      },
-      // {
-      //   path: 'settings',
-      //   component: CalendarSettingsComponent,
-      // },
+    {
+        path: 'dashboard',
+        component: AdminDashComponent,
+    },
+    {
+        path: 'calendar',
+        children: [
+            {
+                path: '',
+                component: CalendarComponent,
+            },
+            // {
+            //   path: 'settings',
+            //   component: CalendarSettingsComponent,
+            // },
+        ],
+    },
+    {
+        path: 'announcements',
+        component: AnnouncementsComponent,
+    },
+    {
+        path: 'departments',
+        component: DepartmentsComponent,
+    },
+    {
+        path: 'titles',
+        component: TitlesComponent,
+    },
+    {
+        path: 'requisitions-items/asset',
+        component: AssetsComponent,
+    },
+    {
+        path: 'requisitions-items/card',
+        component: CardsComponent,
+    },
+    {
+        path: 'requisitions-items/cash',
+        component: CashsComponent,
+    },
+    {
+        path: 'requisitions-items/device',
+        component: DevicesComponent,
+    },
+    {
+        path: 'requisitions-items/vehicle',
+        component: VehiclesComponent,
+    },
+    {
+        path: 'create/user',
+        component: CreateComponent,
+    },
+    {
+        path: 'users',
+        component: UserListComponent,
+    },
+    {
+        path: 'users/:id',
+        component: UserDetailComponent,
+    },
+    // {
+    //   path: 'users',
+    //   component: UsersComponent,
+    //   resolve: {
+    //     tags: UsersTagsResolver
+    //   },
+    //   children: [
+    //     {
+    //       path: '',
+    //       component: UserListComponent,
+    //       children: [
+    //         {
+    //           path: ':id',
+    //           component: UsersDetailsComponent,
+    //           resolve: {
+    //             task: UsersUserResolver,
+    //             departments: UsersDepartmentsResolver
+    //           },
+    //           canDeactivate: [CanDeactivateUsersDetails]
+    //         }
+    //       ]
+    //     },
 
-    ]
-  },
-  {
-    path: 'announcements',
-    component: AnnouncementsComponent
-  },
-  {
-    path: 'departments',
-    component: DepartmentsComponent
-  },
-  {
-    path: 'requisitions-items/asset',
-    component: AssetsComponent
-  },
-  {
-    path: 'requisitions-items/card',
-    component: CardsComponent
-  },
-  {
-    path: 'requisitions-items/cash',
-    component: CashsComponent
-  },
-  {
-    path: 'requisitions-items/device',
-    component: DevicesComponent
-  },
-  {
-    path: 'requisitions-items/vehicle',
-    component: VehiclesComponent
-  },
-  {
-    path: 'create/user',
-    component: CreateComponent
-  },
-  {
-    path: 'users',
-    component: UserListComponent
-  },
-  {
-    path: 'users/:id',
-    component: UserDetailComponent
-  },
-  // {
-  //   path: 'users',
-  //   component: UsersComponent,
-  //   resolve: {
-  //     tags: UsersTagsResolver
-  //   },
-  //   children: [
-  //     {
-  //       path: '',
-  //       component: UserListComponent,
-  //       children: [
-  //         {
-  //           path: ':id',
-  //           component: UsersDetailsComponent,
-  //           resolve: {
-  //             task: UsersUserResolver,
-  //             departments: UsersDepartmentsResolver
-  //           },
-  //           canDeactivate: [CanDeactivateUsersDetails]
-  //         }
-  //       ]
-  //     },
-
-  //   ]
-  // },
-  {
-    path: 'security',
-    children: [
-      {
-        path: 'roles',
-        component: RolesComponent
-      },
-      {
-        path: 'permissions',
-        component: MantainanceComponent
-      }
-    ]
-  }
-
-
+    //   ]
+    // },
+    {
+        path: 'security',
+        children: [
+            {
+                path: 'roles',
+                component: RolesComponent,
+            },
+            {
+                path: 'permissions',
+                component: MantainanceComponent,
+            },
+        ],
+    },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule],
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {}

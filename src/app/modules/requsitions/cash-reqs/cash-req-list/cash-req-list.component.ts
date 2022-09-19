@@ -41,11 +41,13 @@ export class CashReqListComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        //set user type
         this.user = this._userService.getUserfromStorage();
         console.log(this.user);
-        this.setStatus('Created');
-        // this.getReqByRole();
+        if (this.user.roles[0].toUpperCase() == 'LINE MANAGER') {
+            this.getReqByRole();
+        } else {
+            this.setStatus('Created');
+        }
     }
 
     getCashReqs() {
@@ -100,6 +102,7 @@ export class CashReqListComponent implements OnInit {
             this.getloggedCashReqs();
         }
     }
+
     getCashReqsByStatus() {
         this.isLoading = true;
         this._cashRequisitionService
@@ -119,6 +122,7 @@ export class CashReqListComponent implements OnInit {
                 }
             );
     }
+
     getloggedCashReqs() {
         this.isLoading = true;
         this._cashRequisitionService.getAllCashRequisitionsLogged().subscribe(
@@ -136,6 +140,7 @@ export class CashReqListComponent implements OnInit {
             }
         );
     }
+
     setStatus(value) {
         this.status = value;
         if (
