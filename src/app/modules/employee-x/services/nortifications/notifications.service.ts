@@ -16,13 +16,11 @@ export class NotificationsService {
         fromUser: string,
         requisitionType: string
     ) {
-        return this._httpClient.post(this._messageBirdUrl, {
-            to: toNumber,
-            msg: environment.getSendRequisitionMessage(
-                toUser,
-                fromUser,
-                requisitionType
-            ),
+        return this._httpClient.post(environment.requisitionCreatedUrl, {
+            userTo: toUser,
+            userFrom: fromUser,
+            requisitionType: requisitionType,
+            phone: toNumber,
         });
     }
 
@@ -32,13 +30,11 @@ export class NotificationsService {
         fromUser: string,
         requisitionType: string
     ) {
-        return this._httpClient.post(this._messageBirdUrl, {
-            to: toNumber,
-            msg: environment.getApproveRequisitionMessage(
-                toUser,
-                fromUser,
-                requisitionType
-            ),
+        return this._httpClient.post(environment.requisitionApprovedUrl, {
+            userTo: toUser,
+            userFrom: fromUser,
+            requisitionType: requisitionType,
+            phone: toNumber,
         });
     }
     sendRejectWhatsappMessageToUser(
@@ -47,13 +43,14 @@ export class NotificationsService {
         fromUser: string,
         requisitionType: string
     ) {
-        return this._httpClient.post(this._messageBirdUrl, {
-            to: toNumber,
-            msg: environment.getRejectRequisitionMessage(
-                toUser,
-                fromUser,
-                requisitionType
-            ),
+        return this._httpClient.post(environment.requisitionRejectedUrl, {
+            userTo: toUser,
+            userFrom: fromUser,
+            requisitionType: requisitionType,
+            phone: toNumber,
         });
     }
+
+    //create function to add 2 numbers
+
 }

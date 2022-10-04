@@ -82,7 +82,9 @@ export class VehicleRequisitionDetailsComponent implements OnInit {
             financeApprovedDate: [''],
             lineApprovedDate: [''],
             requestComments: [''],
-            approved: [''],
+            lineApproved: [true],
+            gmApproved: [true],
+            approved: [true],
             cancelled: [''],
         });
 
@@ -277,20 +279,6 @@ export class VehicleRequisitionDetailsComponent implements OnInit {
                 } else if (this.user.roles[0].toUpperCase() == 'LINE MANAGER') {
                     this.approveVehicleLineManger();
                 }
-
-                this._not
-                    .sendApprovedWhatsappMessageToUser(
-                        this.vehicleRequisition.employee.phoneNumber,
-                        `${this.vehicleRequisition.employee.firstName} ${this.vehicleRequisition.employee.lastName}`,
-                        `${this._userService.getLocalUser().firstname} ${
-                            this._userService.getLocalUser().lastname
-                        }`,
-                        'Cash'
-                    )
-                    .subscribe(
-                        (response) => {},
-                        (error) => {}
-                    );
             }
         });
     }
@@ -307,6 +295,37 @@ export class VehicleRequisitionDetailsComponent implements OnInit {
             .subscribe(
                 (response) => {
                     this._alertService.displayMessage('Requisition Approved');
+                    this.vehicleReqForm.value.lineApproved
+                        ? this._not
+                              .sendApprovedWhatsappMessageToUser(
+                                  this.vehicleRequisition.employee.phoneNumber,
+                                  `${this.vehicleRequisition.employee.firstName} ${this.vehicleRequisition.employee.lastName}`,
+                                  `${
+                                      this._userService.getLocalUser().firstname
+                                  } ${
+                                      this._userService.getLocalUser().lastname
+                                  }`,
+                                  'Vehicle'
+                              )
+                              .subscribe(
+                                  (response) => {},
+                                  (error) => {}
+                              )
+                        : this._not
+                              .sendRejectWhatsappMessageToUser(
+                                  this.vehicleRequisition.employee.phoneNumber,
+                                  `${this.vehicleRequisition.employee.firstName} ${this.vehicleRequisition.employee.lastName}`,
+                                  `${
+                                      this._userService.getLocalUser().firstname
+                                  } ${
+                                      this._userService.getLocalUser().lastname
+                                  }`,
+                                  'Vehicle'
+                              )
+                              .subscribe(
+                                  (response) => {},
+                                  (error) => {}
+                              );
                     this._router.navigateByUrl('axis/requsitions/device');
                     this.isLoading = false;
                 },
@@ -321,7 +340,7 @@ export class VehicleRequisitionDetailsComponent implements OnInit {
         this._vehicleRequisitionService
             .financeManagerApproveReq(this.vehicleRequisition.id, {
                 id: this.vehicleRequisition.id.toString(),
-                approved: true,
+                approved: this.vehicleReqForm.value.approved,
                 financeApprovedDate: new Date(),
                 status: this.vehicleReqForm.value.status,
                 financeApproverId: this._userService.getLocalUser().id,
@@ -329,6 +348,37 @@ export class VehicleRequisitionDetailsComponent implements OnInit {
             .subscribe(
                 (response) => {
                     this._alertService.displayMessage('Requisition Approved');
+                    this.vehicleReqForm.value.approved
+                        ? this._not
+                              .sendApprovedWhatsappMessageToUser(
+                                  this.vehicleRequisition.employee.phoneNumber,
+                                  `${this.vehicleRequisition.employee.firstName} ${this.vehicleRequisition.employee.lastName}`,
+                                  `${
+                                      this._userService.getLocalUser().firstname
+                                  } ${
+                                      this._userService.getLocalUser().lastname
+                                  }`,
+                                  'Vehicle'
+                              )
+                              .subscribe(
+                                  (response) => {},
+                                  (error) => {}
+                              )
+                        : this._not
+                              .sendRejectWhatsappMessageToUser(
+                                  this.vehicleRequisition.employee.phoneNumber,
+                                  `${this.vehicleRequisition.employee.firstName} ${this.vehicleRequisition.employee.lastName}`,
+                                  `${
+                                      this._userService.getLocalUser().firstname
+                                  } ${
+                                      this._userService.getLocalUser().lastname
+                                  }`,
+                                  'Vehicle'
+                              )
+                              .subscribe(
+                                  (response) => {},
+                                  (error) => {}
+                              );
                     this._router.navigateByUrl('axis/requsitions/device');
                     this.isLoading = false;
                 },
@@ -361,20 +411,6 @@ export class VehicleRequisitionDetailsComponent implements OnInit {
                     });
                     this.approveVehicleLineManger();
                 }
-
-                this._not
-                    .sendRejectWhatsappMessageToUser(
-                        this.vehicleRequisition.employee.phoneNumber,
-                        `${this.vehicleRequisition.employee.firstName} ${this.vehicleRequisition.employee.lastName}`,
-                        `${this._userService.getLocalUser().firstname} ${
-                            this._userService.getLocalUser().lastname
-                        }`,
-                        'Cash'
-                    )
-                    .subscribe(
-                        (response) => {},
-                        (error) => {}
-                    );
             }
         });
     }

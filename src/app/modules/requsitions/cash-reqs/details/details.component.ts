@@ -364,20 +364,6 @@ export class CashRequisitionDetailsComponent implements OnInit {
                 } else if (this.user.roles[0].toUpperCase() == 'LINE MANAGER') {
                     this.approveCashLineManger();
                 }
-
-                this._not
-                    .sendApprovedWhatsappMessageToUser(
-                        this.cashRequisition.employee.phoneNumber,
-                        `${this.cashRequisition.employee.firstName} ${this.cashRequisition.employee.lastName}`,
-                        `${this._userService.getLocalUser().firstname} ${
-                            this._userService.getLocalUser().lastname
-                        }`,
-                        'Cash'
-                    )
-                    .subscribe(
-                        (response) => {},
-                        (error) => {}
-                    );
             }
         });
     }
@@ -386,7 +372,7 @@ export class CashRequisitionDetailsComponent implements OnInit {
         this._cashRequisitionService
             .generalManagerApproveReq(this.cashRequisition.id, {
                 id: this.cashRequisition.id.toString(),
-                approved: this.cashReqForm.value.gmApproved,
+                gmApproved: this.cashReqForm.value.gmApproved,
                 generalManagerApprovedDate: new Date(),
                 status: this.cashReqForm.value.status,
                 generalManagerApproverId: this._userService.getLocalUser().id,
@@ -400,6 +386,37 @@ export class CashRequisitionDetailsComponent implements OnInit {
                         : this._alertService.displayError(
                               'Requisition rejected'
                           );
+                    this.cashReqForm.value.gmApproved
+                        ? this._not
+                              .sendApprovedWhatsappMessageToUser(
+                                  this.cashRequisition.employee.phoneNumber,
+                                  `${this.cashRequisition.employee.firstName} ${this.cashRequisition.employee.lastName}`,
+                                  `${
+                                      this._userService.getLocalUser().firstname
+                                  } ${
+                                      this._userService.getLocalUser().lastname
+                                  }`,
+                                  'Cash'
+                              )
+                              .subscribe(
+                                  (response) => {},
+                                  (error) => {}
+                              )
+                        : this._not
+                              .sendRejectWhatsappMessageToUser(
+                                  this.cashRequisition.employee.phoneNumber,
+                                  `${this.cashRequisition.employee.firstName} ${this.cashRequisition.employee.lastName}`,
+                                  `${
+                                      this._userService.getLocalUser().firstname
+                                  } ${
+                                      this._userService.getLocalUser().lastname
+                                  }`,
+                                  'Cash'
+                              )
+                              .subscribe(
+                                  (response) => {},
+                                  (error) => {}
+                              );
                     this._router.navigateByUrl('axis/requsitions/cash');
                     this.isLoading = false;
                 },
@@ -429,6 +446,38 @@ export class CashRequisitionDetailsComponent implements OnInit {
                         : this._alertService.displayError(
                               'Requisition rejected'
                           );
+
+                    this.cashReqForm.value.lineApproved
+                        ? this._not
+                              .sendApprovedWhatsappMessageToUser(
+                                  this.cashRequisition.employee.phoneNumber,
+                                  `${this.cashRequisition.employee.firstName} ${this.cashRequisition.employee.lastName}`,
+                                  `${
+                                      this._userService.getLocalUser().firstname
+                                  } ${
+                                      this._userService.getLocalUser().lastname
+                                  }`,
+                                  'Cash'
+                              )
+                              .subscribe(
+                                  (response) => {},
+                                  (error) => {}
+                              )
+                        : this._not
+                              .sendRejectWhatsappMessageToUser(
+                                  this.cashRequisition.employee.phoneNumber,
+                                  `${this.cashRequisition.employee.firstName} ${this.cashRequisition.employee.lastName}`,
+                                  `${
+                                      this._userService.getLocalUser().firstname
+                                  } ${
+                                      this._userService.getLocalUser().lastname
+                                  }`,
+                                  'Cash'
+                              )
+                              .subscribe(
+                                  (response) => {},
+                                  (error) => {}
+                              );
                     this._router.navigateByUrl('axis/requsitions/cash');
                     this.isLoading = false;
                 },
@@ -459,8 +508,39 @@ export class CashRequisitionDetailsComponent implements OnInit {
                         : this._alertService.displayError(
                               'Requisition rejected'
                           );
-                    this._router.navigateByUrl('axis/requsitions/cash');
+                    this.cashReqForm.value.approved
+                        ? this._not
+                              .sendApprovedWhatsappMessageToUser(
+                                  this.cashRequisition.employee.phoneNumber,
+                                  `${this.cashRequisition.employee.firstName} ${this.cashRequisition.employee.lastName}`,
+                                  `${
+                                      this._userService.getLocalUser().firstname
+                                  } ${
+                                      this._userService.getLocalUser().lastname
+                                  }`,
+                                  'Cash'
+                              )
+                              .subscribe(
+                                  (response) => {},
+                                  (error) => {}
+                              )
+                        : this._not
+                              .sendRejectWhatsappMessageToUser(
+                                  this.cashRequisition.employee.phoneNumber,
+                                  `${this.cashRequisition.employee.firstName} ${this.cashRequisition.employee.lastName}`,
+                                  `${
+                                      this._userService.getLocalUser().firstname
+                                  } ${
+                                      this._userService.getLocalUser().lastname
+                                  }`,
+                                  'Cash'
+                              )
+                              .subscribe(
+                                  (response) => {},
+                                  (error) => {}
+                              );
                     this.isLoading = false;
+                    this._router.navigateByUrl('axis/requsitions/cash');
                 },
                 (error) => {
                     this.isLoading = false;
@@ -539,7 +619,6 @@ export class CashRequisitionDetailsComponent implements OnInit {
             // this();
         });
     }
-
     //create function return hours and minutes from minutes
     getHoursAndMinutes(minutes: number) {
         const hours = Math.floor(minutes / 60);

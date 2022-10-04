@@ -76,14 +76,11 @@ export class AuthSignInComponent implements OnInit {
                     .subscribe((roles: Role[]): void => {
                         console.log(user);
                         this._userService.setUser(user);
-                        this._router.navigateByUrl(
-                            this.userRedirectCallBack(user.roles[0])
-                        );
-                        // this._userService.get(data.id).subscribe((user: any) => {
-                        //     console.log(user);
-                        //     this._userService.setUser(user)
-                        //     this._router.navigateByUrl(this.userRedirectCallBack(user.roles[0]));
-                        // });
+                        const redirectURL =
+                            this._activatedRoute.snapshot.queryParamMap.get(
+                                'redirectURL'
+                            ) || this.userRedirectCallBack(user.roles[0]);
+                        this._router.navigateByUrl(redirectURL);
                     });
             },
             (error) => {

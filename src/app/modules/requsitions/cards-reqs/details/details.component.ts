@@ -331,20 +331,6 @@ export class CardRequisitionDetailsComponent implements OnInit {
                 } else if (this.user.roles[0].toUpperCase() == 'LINE MANAGER') {
                     this.approveCardLineManger();
                 }
-
-                this._not
-                    .sendApprovedWhatsappMessageToUser(
-                        this.cardRequisition.employee.phoneNumber,
-                        `${this.cardRequisition.employee.firstName} ${this.cardRequisition.employee.lastName}`,
-                        `${this._userService.getLocalUser().firstname} ${
-                            this._userService.getLocalUser().lastname
-                        }`,
-                        'Cash'
-                    )
-                    .subscribe(
-                        (response) => {},
-                        (error) => {}
-                    );
             }
         });
     }
@@ -353,7 +339,7 @@ export class CardRequisitionDetailsComponent implements OnInit {
         this._cardRequisitionService
             .generalManagerApproveReq(this.cardRequisition.id, {
                 id: this.cardRequisition.id.toString(),
-                approved: true,
+                gmApproved: this.cardReqForm.value.gmApproved,
                 generalManagerApprovedDate: new Date(),
                 status: this.cardReqForm.value.status,
                 generalManagerApproverId: this._userService.getLocalUser().id,
@@ -367,6 +353,37 @@ export class CardRequisitionDetailsComponent implements OnInit {
                         : this._alertService.displayError(
                               'Requisition rejected'
                           );
+                    this.cardReqForm.value.gmApproved
+                        ? this._not
+                              .sendApprovedWhatsappMessageToUser(
+                                  this.cardRequisition.employee.phoneNumber,
+                                  `${this.cardRequisition.employee.firstName} ${this.cardRequisition.employee.lastName}`,
+                                  `${
+                                      this._userService.getLocalUser().firstname
+                                  } ${
+                                      this._userService.getLocalUser().lastname
+                                  }`,
+                                  'Card'
+                              )
+                              .subscribe(
+                                  (response) => {},
+                                  (error) => {}
+                              )
+                        : this._not
+                              .sendRejectWhatsappMessageToUser(
+                                  this.cardRequisition.employee.phoneNumber,
+                                  `${this.cardRequisition.employee.firstName} ${this.cardRequisition.employee.lastName}`,
+                                  `${
+                                      this._userService.getLocalUser().firstname
+                                  } ${
+                                      this._userService.getLocalUser().lastname
+                                  }`,
+                                  'Card'
+                              )
+                              .subscribe(
+                                  (response) => {},
+                                  (error) => {}
+                              );
                     this._router.navigateByUrl('axis/requsitions/card');
                     this.isLoading = false;
                 },
@@ -396,6 +413,37 @@ export class CardRequisitionDetailsComponent implements OnInit {
                         : this._alertService.displayError(
                               'Requisition rejected'
                           );
+                    this.cardReqForm.value.lineApproved
+                        ? this._not
+                              .sendApprovedWhatsappMessageToUser(
+                                  this.cardRequisition.employee.phoneNumber,
+                                  `${this.cardRequisition.employee.firstName} ${this.cardRequisition.employee.lastName}`,
+                                  `${
+                                      this._userService.getLocalUser().firstname
+                                  } ${
+                                      this._userService.getLocalUser().lastname
+                                  }`,
+                                  'Card'
+                              )
+                              .subscribe(
+                                  (response) => {},
+                                  (error) => {}
+                              )
+                        : this._not
+                              .sendRejectWhatsappMessageToUser(
+                                  this.cardRequisition.employee.phoneNumber,
+                                  `${this.cardRequisition.employee.firstName} ${this.cardRequisition.employee.lastName}`,
+                                  `${
+                                      this._userService.getLocalUser().firstname
+                                  } ${
+                                      this._userService.getLocalUser().lastname
+                                  }`,
+                                  'Card'
+                              )
+                              .subscribe(
+                                  (response) => {},
+                                  (error) => {}
+                              );
                     this._router.navigateByUrl('axis/requsitions/card');
                     this.isLoading = false;
                 },
@@ -412,7 +460,7 @@ export class CardRequisitionDetailsComponent implements OnInit {
         this._cardRequisitionService
             .financeManagerApproveReq(this.cardRequisition.id, {
                 id: this.cardRequisition.id.toString(),
-                approved: true,
+                approved: this.cardReqForm.value.approved,
                 financeApprovedDate: new Date(),
                 status: this.cardReqForm.value.status,
                 financeApproverId: this._userService.getLocalUser().id,
@@ -426,6 +474,37 @@ export class CardRequisitionDetailsComponent implements OnInit {
                         : this._alertService.displayError(
                               'Requisition rejected'
                           );
+                    this.cardReqForm.value.approved
+                        ? this._not
+                              .sendApprovedWhatsappMessageToUser(
+                                  this.cardRequisition.employee.phoneNumber,
+                                  `${this.cardRequisition.employee.firstName} ${this.cardRequisition.employee.lastName}`,
+                                  `${
+                                      this._userService.getLocalUser().firstname
+                                  } ${
+                                      this._userService.getLocalUser().lastname
+                                  }`,
+                                  'Card'
+                              )
+                              .subscribe(
+                                  (response) => {},
+                                  (error) => {}
+                              )
+                        : this._not
+                              .sendRejectWhatsappMessageToUser(
+                                  this.cardRequisition.employee.phoneNumber,
+                                  `${this.cardRequisition.employee.firstName} ${this.cardRequisition.employee.lastName}`,
+                                  `${
+                                      this._userService.getLocalUser().firstname
+                                  } ${
+                                      this._userService.getLocalUser().lastname
+                                  }`,
+                                  'Card'
+                              )
+                              .subscribe(
+                                  (response) => {},
+                                  (error) => {}
+                              );
                     this._router.navigateByUrl('axis/requsitions/card');
                     this.isLoading = false;
                 },
@@ -490,20 +569,6 @@ export class CardRequisitionDetailsComponent implements OnInit {
                     });
                     this.approveCardLineManger();
                 }
-
-                this._not
-                    .sendRejectWhatsappMessageToUser(
-                        this.cardRequisition.employee.phoneNumber,
-                        `${this.cardRequisition.employee.firstName} ${this.cardRequisition.employee.lastName}`,
-                        `${this._userService.getLocalUser().firstname} ${
-                            this._userService.getLocalUser().lastname
-                        }`,
-                        'Cash'
-                    )
-                    .subscribe(
-                        (response) => {},
-                        (error) => {}
-                    );
             }
         });
     }

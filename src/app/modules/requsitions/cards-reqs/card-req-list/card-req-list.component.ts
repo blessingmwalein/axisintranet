@@ -43,6 +43,11 @@ export class CardReqListComponent implements OnInit {
         this.user = this._userService.getUserfromStorage();
         if (this.user.roles[0].toUpperCase() == 'LINE MANAGER') {
             this.getReqByRole();
+        } else if (
+            this.user.roles[0].toUpperCase() == 'GENERAL MANAGER' ||
+            this.user.roles[0].toUpperCase() == 'FINANCE MANAGER'
+        ) {
+            this.setStatus('Line Approved');
         } else {
             this.setStatus('Created');
         }

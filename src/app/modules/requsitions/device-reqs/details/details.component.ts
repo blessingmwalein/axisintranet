@@ -82,7 +82,9 @@ export class DeviceRequisitionDetailsComponent implements OnInit {
             financeApprovedDate: [''],
             lineApprovedDate: [''],
             requestComments: [''],
-            approved: [''],
+            lineApproved: [true],
+            gmApproved: [true],
+            approved: [true],
             cancelled: [''],
         });
 
@@ -309,20 +311,6 @@ export class DeviceRequisitionDetailsComponent implements OnInit {
                 } else if (this.user.roles[0].toUpperCase() == 'LINE MANAGER') {
                     this.approveDeviceLineManger();
                 }
-
-                this._not
-                    .sendApprovedWhatsappMessageToUser(
-                        this.deviceRequisition.employee.phoneNumber,
-                        `${this.deviceRequisition.employee.firstName} ${this.deviceRequisition.employee.lastName}`,
-                        `${this._userService.getLocalUser().firstname} ${
-                            this._userService.getLocalUser().lastname
-                        }`,
-                        'Cash'
-                    )
-                    .subscribe(
-                        (response) => {},
-                        (error) => {}
-                    );
             }
         });
     }
@@ -339,6 +327,37 @@ export class DeviceRequisitionDetailsComponent implements OnInit {
             .subscribe(
                 (response) => {
                     this._alertService.displayMessage('Requisition Approved');
+                    this.deviceReqForm.value.lineApproved
+                        ? this._not
+                              .sendApprovedWhatsappMessageToUser(
+                                  this.deviceRequisition.employee.phoneNumber,
+                                  `${this.deviceRequisition.employee.firstName} ${this.deviceRequisition.employee.lastName}`,
+                                  `${
+                                      this._userService.getLocalUser().firstname
+                                  } ${
+                                      this._userService.getLocalUser().lastname
+                                  }`,
+                                  'Device'
+                              )
+                              .subscribe(
+                                  (response) => {},
+                                  (error) => {}
+                              )
+                        : this._not
+                              .sendRejectWhatsappMessageToUser(
+                                  this.deviceRequisition.employee.phoneNumber,
+                                  `${this.deviceRequisition.employee.firstName} ${this.deviceRequisition.employee.lastName}`,
+                                  `${
+                                      this._userService.getLocalUser().firstname
+                                  } ${
+                                      this._userService.getLocalUser().lastname
+                                  }`,
+                                  'Device'
+                              )
+                              .subscribe(
+                                  (response) => {},
+                                  (error) => {}
+                              );
                     this._router.navigateByUrl('axis/requsitions/device');
                     this.isLoading = false;
                 },
@@ -353,7 +372,7 @@ export class DeviceRequisitionDetailsComponent implements OnInit {
         this._deviceRequisitionService
             .financeManagerApproveReq(this.deviceRequisition.id, {
                 id: this.deviceRequisition.id.toString(),
-                approved: true,
+                approved: this.deviceReqForm.value.approved,
                 financeApprovedDate: new Date(),
                 status: this.deviceReqForm.value.status,
                 financeApproverId: this._userService.getLocalUser().id,
@@ -361,6 +380,38 @@ export class DeviceRequisitionDetailsComponent implements OnInit {
             .subscribe(
                 (response) => {
                     this._alertService.displayMessage('Requisition Approved');
+
+                    this.deviceReqForm.value.approved
+                        ? this._not
+                              .sendApprovedWhatsappMessageToUser(
+                                  this.deviceRequisition.employee.phoneNumber,
+                                  `${this.deviceRequisition.employee.firstName} ${this.deviceRequisition.employee.lastName}`,
+                                  `${
+                                      this._userService.getLocalUser().firstname
+                                  } ${
+                                      this._userService.getLocalUser().lastname
+                                  }`,
+                                  'Device'
+                              )
+                              .subscribe(
+                                  (response) => {},
+                                  (error) => {}
+                              )
+                        : this._not
+                              .sendRejectWhatsappMessageToUser(
+                                  this.deviceRequisition.employee.phoneNumber,
+                                  `${this.deviceRequisition.employee.firstName} ${this.deviceRequisition.employee.lastName}`,
+                                  `${
+                                      this._userService.getLocalUser().firstname
+                                  } ${
+                                      this._userService.getLocalUser().lastname
+                                  }`,
+                                  'Device'
+                              )
+                              .subscribe(
+                                  (response) => {},
+                                  (error) => {}
+                              );
                     this._router.navigateByUrl('axis/requsitions/device');
                     this.isLoading = false;
                 },
@@ -415,20 +466,6 @@ export class DeviceRequisitionDetailsComponent implements OnInit {
                     });
                     this.approveDeviceLineManger();
                 }
-
-                this._not
-                    .sendRejectWhatsappMessageToUser(
-                        this.deviceRequisition.employee.phoneNumber,
-                        `${this.deviceRequisition.employee.firstName} ${this.deviceRequisition.employee.lastName}`,
-                        `${this._userService.getLocalUser().firstname} ${
-                            this._userService.getLocalUser().lastname
-                        }`,
-                        'Cash'
-                    )
-                    .subscribe(
-                        (response) => {},
-                        (error) => {}
-                    );
             }
         });
     }

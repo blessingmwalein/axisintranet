@@ -1,40 +1,20 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
-
 export const environment = {
     production: false,
     snackBarTimeout: 5000,
-    // apiBaseUrl: 'http://192.168.1.148:8087/api/',
-    // apiBaseUrl: 'http://192.168.1.148:8097/api/',
-    // filesBaseUrl: 'http://192.168.1.148:8087/files/',
-    // filesBaseUrl: 'http://192.168.1.148:8097/files/',
-    filesBaseUrl: 'http://140.82.25.196:8097/files/',
-    apiBaseUrl: 'http://140.82.25.196:8097/api/',
-    messageBirdUrl:
-        'https://flows.messagebird.com/flows/76f31dea-3292-4e39-8d85-d00f1b6f5ef2/invoke',
-
-    getSendRequisitionMessage(
-        userTo: string,
-        userFrom: string,
-        requisitionType: string
-    ): string {
-        return `Good day ${userTo},${userFrom} has sent you a ${requisitionType} requisition. Please login to your account to view the requisition.`;
+    filesBaseUrl: 'https://axisbay.co.zw:8097/files/',
+    apiBaseUrl: 'https://axisbay.co.zw:8097/api/',
+    messageBirdUrl: ' https://flows.messagebird.com/flows/',
+    get requisitionCreatedUrl() {
+        return `${this.messageBirdUrl}d6303a00-3df8-407d-a302-0c9da1a92b3a/invoke`;
     },
-    getApproveRequisitionMessage(
-        userTo: string,
-        userFrom: string,
-        requisitionType: string
-    ): string {
-        return `Good day ${userTo},${userFrom} has approved your ${requisitionType} requisition. Please login to your account to view the requisition.`;
+    get requisitionApprovedUrl() {
+        return `${this.messageBirdUrl}15b53f44-f10f-4cf1-aa83-6a4bbc2f3f8c/invoke`;
     },
-
-    getRejectRequisitionMessage(
-        userTo: string,
-        userFrom: string,
-        requisitionType: string
-    ): string {
-        return `Good day ${userTo},${userFrom} has rejected your ${requisitionType} requisition. Please login to your account to view the requisition.`;
+    get requisitionRejectedUrl() {
+        return `${this.messageBirdUrl}81ac23f9-f40e-4fcc-9e92-50bc3a40f679/invoke`;
+    },
+    get requisitionReadCollectUrl() {
+        return `${this.messageBirdUrl}2f7c9e2c-b3cc-4415-8a82-3b920780965b/invoke`;
     },
 };
 

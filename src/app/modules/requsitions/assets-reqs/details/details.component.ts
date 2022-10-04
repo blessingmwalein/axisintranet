@@ -310,19 +310,6 @@ export class AssetRequisitionDetailsComponent implements OnInit {
                 } else if (this.user.roles[0].toUpperCase() == 'LINE MANAGER') {
                     this.approveAssetLineManger();
                 }
-                this._not
-                    .sendApprovedWhatsappMessageToUser(
-                        this.assetRequisition.employee.phoneNumber,
-                        `${this.assetRequisition.employee.firstName} ${this.assetRequisition.employee.lastName}`,
-                        `${this._userService.getLocalUser().firstname} ${
-                            this._userService.getLocalUser().lastname
-                        }`,
-                        'Cash'
-                    )
-                    .subscribe(
-                        (response) => {},
-                        (error) => {}
-                    );
             }
         });
     }
@@ -339,6 +326,37 @@ export class AssetRequisitionDetailsComponent implements OnInit {
             .subscribe(
                 (response) => {
                     this._alertService.displayMessage('Requisition Approved');
+                    this.assetReqForm.value.lineApproved
+                        ? this._not
+                              .sendApprovedWhatsappMessageToUser(
+                                  this.assetRequisition.employee.phoneNumber,
+                                  `${this.assetRequisition.employee.firstName} ${this.assetRequisition.employee.lastName}`,
+                                  `${
+                                      this._userService.getLocalUser().firstname
+                                  } ${
+                                      this._userService.getLocalUser().lastname
+                                  }`,
+                                  'Asset'
+                              )
+                              .subscribe(
+                                  (response) => {},
+                                  (error) => {}
+                              )
+                        : this._not
+                              .sendRejectWhatsappMessageToUser(
+                                  this.assetRequisition.employee.phoneNumber,
+                                  `${this.assetRequisition.employee.firstName} ${this.assetRequisition.employee.lastName}`,
+                                  `${
+                                      this._userService.getLocalUser().firstname
+                                  } ${
+                                      this._userService.getLocalUser().lastname
+                                  }`,
+                                  'Asset'
+                              )
+                              .subscribe(
+                                  (response) => {},
+                                  (error) => {}
+                              );
                     this._router.navigateByUrl('axis/requsitions/asset');
                     this.isLoading = false;
                 },
@@ -353,7 +371,7 @@ export class AssetRequisitionDetailsComponent implements OnInit {
         this._assetRequisitionService
             .financeManagerApproveReq(this.assetRequisition.id, {
                 id: this.assetRequisition.id.toString(),
-                approved: true,
+                approved: this.assetReqForm.value.approved,
                 financeApprovedDate: new Date(),
                 status: this.assetReqForm.value.status,
                 financeApproverId: this._userService.getLocalUser().id,
@@ -361,6 +379,37 @@ export class AssetRequisitionDetailsComponent implements OnInit {
             .subscribe(
                 (response) => {
                     this._alertService.displayMessage('Requisition Approved');
+                    this.assetReqForm.value.approved
+                        ? this._not
+                              .sendApprovedWhatsappMessageToUser(
+                                  this.assetRequisition.employee.phoneNumber,
+                                  `${this.assetRequisition.employee.firstName} ${this.assetRequisition.employee.lastName}`,
+                                  `${
+                                      this._userService.getLocalUser().firstname
+                                  } ${
+                                      this._userService.getLocalUser().lastname
+                                  }`,
+                                  'Asset'
+                              )
+                              .subscribe(
+                                  (response) => {},
+                                  (error) => {}
+                              )
+                        : this._not
+                              .sendRejectWhatsappMessageToUser(
+                                  this.assetRequisition.employee.phoneNumber,
+                                  `${this.assetRequisition.employee.firstName} ${this.assetRequisition.employee.lastName}`,
+                                  `${
+                                      this._userService.getLocalUser().firstname
+                                  } ${
+                                      this._userService.getLocalUser().lastname
+                                  }`,
+                                  'Asset'
+                              )
+                              .subscribe(
+                                  (response) => {},
+                                  (error) => {}
+                              );
                     this._router.navigateByUrl('axis/requsitions/asset');
                     this.isLoading = false;
                 },
@@ -415,19 +464,6 @@ export class AssetRequisitionDetailsComponent implements OnInit {
                     });
                     this.approveAssetLineManger();
                 }
-                this._not
-                    .sendRejectWhatsappMessageToUser(
-                        this.assetRequisition.employee.phoneNumber,
-                        `${this.assetRequisition.employee.firstName} ${this.assetRequisition.employee.lastName}`,
-                        `${this._userService.getLocalUser().firstname} ${
-                            this._userService.getLocalUser().lastname
-                        }`,
-                        'Cash'
-                    )
-                    .subscribe(
-                        (response) => {},
-                        (error) => {}
-                    );
             }
         });
     }

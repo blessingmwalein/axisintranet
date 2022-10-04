@@ -197,6 +197,10 @@
                                                 setStatus('Finance Approved')
                                             ">Finance manager approved
                                         </mat-option>
+                                        <mat-option value="General Approved" (click)="
+                                                setStatus('General Approved')
+                                            ">General manager approved
+                                        </mat-option>
                                         <mat-option value="Cash Used" (click)="setStatus('Cash Used')">Cash Used
                                         </mat-option>
                                     </ng-container>
@@ -329,7 +333,7 @@
                                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                                 <tr>
                                                     <th scope="col" class="py-3 px-6">
-                                                        Comment
+                                                        Title
                                                     </th>
                                                     <th scope="col" class="py-3 px-6">
                                                         Created At
@@ -358,7 +362,7 @@
                                                     <th scope="row"
                                                         class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                         {{
-                                                        cashMonthToMonthD.status
+                                                        cashMonthToMonthD.title
                                                         }}
                                                     </th>
                                                     <td class="py-4 px-6">
@@ -428,6 +432,10 @@
                                         <mat-option value="Finance Approved" (click)="
                                                 setStatus('Finance Approved')
                                             ">Finance manager approved
+                                        </mat-option>
+                                        <mat-option value="General Approved" (click)="
+                                                setStatus('General Approved')
+                                            ">General manager approved
                                         </mat-option>
                                         <mat-option value="Cash Used" (click)="setStatus('Cash Used')">Cash Used
                                         </mat-option>
@@ -559,7 +567,7 @@
                                                     class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                                     <tr>
                                                         <th scope="col" class="py-3 px-6">
-                                                            Comment
+                                                            Title
                                                         </th>
                                                         <th scope="col" class="py-3 px-6">
                                                             Created At
@@ -585,7 +593,7 @@
                                                         <th scope="row"
                                                             class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                             {{
-                                                            cashDayToDay.status
+                                                            cashDayToDay.title
                                                             }}
                                                         </th>
                                                         <td class="py-4 px-6">
@@ -660,6 +668,10 @@
                                         <mat-option value="Finance Approved" (click)="
                                                 setStatus('Finance Approved')
                                             ">Finance manager approved
+                                        </mat-option>
+                                        <mat-option value="General Approved" (click)="
+                                                setStatus('General Approved')
+                                            ">General manager approved
                                         </mat-option>
                                         <mat-option value="Cash Used" (click)="setStatus('Cash Used')">Cash Used
                                         </mat-option>
@@ -791,7 +803,7 @@
                                                     class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                                     <tr>
                                                         <th scope="col" class="py-3 px-6">
-                                                            Comment
+                                                            Title
                                                         </th>
                                                         <th scope="col" class="py-3 px-6">
                                                             Created At
@@ -821,7 +833,7 @@
                                                         <th scope="row"
                                                             class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                             {{
-                                                            cardMonthToMonthD.status
+                                                            cardMonthToMonthD.title
                                                             }}
                                                         </th>
                                                         <td class="py-4 px-6">
@@ -892,6 +904,10 @@
                                         <mat-option value="Finance Approved" (click)="
                                                 setStatus('Finance Approved')
                                             ">Finance manager approved
+                                        </mat-option>
+                                        <mat-option value="General Approved" (click)="
+                                                setStatus('General Approved')
+                                            ">General manager approved
                                         </mat-option>
                                         <mat-option value="Cash Used" (click)="setStatus('Cash Used')">Cash Used
                                         </mat-option>
@@ -1022,7 +1038,7 @@
                                                     class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                                     <tr>
                                                         <th scope="col" class="py-3 px-6">
-                                                            Comment
+                                                            Title
                                                         </th>
                                                         <th scope="col" class="py-3 px-6">
                                                             Created At
@@ -1052,7 +1068,7 @@
                                                         <th scope="row"
                                                             class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                             {{
-                                                            cardDayToDayD.status
+                                                            cardDayToDayD.title
                                                             }}
                                                         </th>
                                                         <td class="py-4 px-6">
