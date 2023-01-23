@@ -123,6 +123,18 @@
                             </ng-container>
                         </mat-select>
                     </mat-form-field>
+                    <mat-form-field class="w-full sm:w-36 ml-2" *ngIf="
+                            user.roles[0].toUpperCase() == 'LINE MANAGER' ||
+                            user.roles[0].toUpperCase() == 'FINANCE MANAGER' ||
+                            user.roles[0].toUpperCase() == 'GENERAL MANAGER'
+                        ">
+                        <mat-select>
+                            <ng-container>
+                                <mat-option value="mine" (click)="approveBulk()">Bulk Approve Selected
+                                    Items</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
                 </div>
 
                 <button
@@ -154,6 +166,15 @@
                             mat-table
                             [dataSource]="cardReqDataSource"
                         >
+                        <ng-container matColumnDef="check" sticky>
+                            <th mat-header-cell *matHeaderCellDef>
+                                Check
+                            </th>
+                            <td mat-cell *matCellDef="let cashReq">
+                                <mat-checkbox (change)="selectReq($event.checked,cashReq)"
+                                    class="flex items-center h-10 min-h-10 "></mat-checkbox>
+                            </td>
+                        </ng-container>
                             <!-- Type -->
                             <ng-container matColumnDef="status" sticky>
                                 <th mat-header-cell *matHeaderCellDef>

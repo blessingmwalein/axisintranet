@@ -78,7 +78,14 @@
                     </div>
                     <div class="col-span-12 sm:col-span-6">
                         <mat-form-field class="flex-auto w-full">
-                            <mat-label>Comments</mat-label>
+                            <mat-label>Approver Comment</mat-label>
+                            <textarea matInput [formControlName]="'comment'" [rows]="3" readonly></textarea>
+                            <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:menu-alt-2'"></mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-span-12 sm:col-span-6">
+                        <mat-form-field class="flex-auto w-full">
+                            <mat-label>Requester Comments</mat-label>
                             <textarea matInput [formControlName]="'requestComments'" [rows]="3" readonly></textarea>
                             <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:menu-alt-2'"></mat-icon>
                         </mat-form-field>

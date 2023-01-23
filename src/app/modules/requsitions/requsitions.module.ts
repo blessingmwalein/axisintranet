@@ -65,6 +65,7 @@ import { UpdateReleasedFundsComponent as UpdateReleasedFundsComponentCard } from
 import { PrintReqPrevComponent as PrintReqPrevComponentDevice } from './device-reqs/print-req-prev/print-req-prev.component';
 import { PrintReqPrevComponent as PrintReqPrevComponentVehicle } from './vehicle-reqs/print-req-prev/print-req-prev.component';
 import {PrintReqPrevComponent as PrintReqPrevComponentAsset} from './assets-reqs/print-req-prev/print-req-prev.component';
+import { ApproveReqDialogComponent } from './cash-reqs/details/approve-req-dialog/approve-req-dialog.component';
 @NgModule({
     declarations: [
         CreateCashReqComponent,
@@ -93,7 +94,8 @@ import {PrintReqPrevComponent as PrintReqPrevComponentAsset} from './assets-reqs
         AssetRequisitionDetailsComponent,
         PrintReqPrevComponent,
         PrintReqPrevComponentVehicle,
-        PrintReqPrevComponentAsset
+        PrintReqPrevComponentAsset,
+        ApproveReqDialogComponent
     ],
     imports: [
         CommonModule,

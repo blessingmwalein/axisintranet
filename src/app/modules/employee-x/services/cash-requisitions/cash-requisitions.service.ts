@@ -57,22 +57,22 @@ export class CashRequisitionService {
         );
     }
 
-    lineManagerApproveReq(id: string, cashReq: any): Observable<any[]> {
+    lineManagerApproveReq( cashReq: any): Observable<any[]> {
         return this._httpClient.put<any>(
-            `${this._baseUrl}CashRequisition/changelineapproval/${id}`,
+            `${this._baseUrl}CashRequisition/changelineapproval`,
             cashReq
         );
     }
-    financeManagerApproveReq(id: string, cashReq: any): Observable<any[]> {
+    financeManagerApproveReq( cashReq: any): Observable<any[]> {
         // var response = await this.not.sendApprovedWhatsappMessageToUser();
         return this._httpClient.put<any>(
-            `${this._baseUrl}CashRequisition/changeapproval/${id}`,
+            `${this._baseUrl}CashRequisition/changeapproval`,
             cashReq
         );
     }
-    generalManagerApproveReq(id: string, cashReq: any): Observable<any[]> {
+    generalManagerApproveReq(cashReq: any): Observable<any[]> {
         return this._httpClient.put<any>(
-            `${this._baseUrl}CashRequisition/changegmapproval/${id}`,
+            `${this._baseUrl}CashRequisition/changegmapproval`,
             cashReq
         );
     }

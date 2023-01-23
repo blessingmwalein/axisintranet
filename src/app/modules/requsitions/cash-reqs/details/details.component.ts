@@ -31,6 +31,7 @@ import { UpdateReleasedFundsComponent } from '../update-released-funds/update-re
 import { PrintReqPrevComponent } from '../print-req-prev/print-req-prev.component';
 import { environment } from 'environments/environment';
 import { NotificationsService } from 'app/modules/employee-x/services/nortifications/notifications.service';
+import { ApproveReqDialogComponent } from './approve-req-dialog/approve-req-dialog.component';
 
 @Component({
     selector: 'academy-details',
@@ -51,6 +52,7 @@ export class CashRequisitionDetailsComponent implements OnInit {
     cashs: any[];
     image: SafeUrl;
     user: User;
+    comment: string = '';
     /**
      * Constructor
      */
@@ -69,7 +71,7 @@ export class CashRequisitionDetailsComponent implements OnInit {
         private sanitizer: DomSanitizer,
         private _userService: UserService,
         private _not: NotificationsService
-    ) {}
+    ) { }
 
     ngOnInit(): void {
         this.user = this._userService.getUserfromStorage();
@@ -83,10 +85,10 @@ export class CashRequisitionDetailsComponent implements OnInit {
                 this.user.roles[0].toUpperCase() == 'FINANCE MANAGER'
                     ? 'Finance Approved'
                     : this.user.roles[0].toUpperCase() == 'LINE MANAGER'
-                    ? 'Line Approved'
-                    : this.user.roles[0].toUpperCase() == 'GENERAL MANAGER'
-                    ? 'General Approved'
-                    : '',
+                        ? 'Line Approved'
+                        : this.user.roles[0].toUpperCase() == 'GENERAL MANAGER'
+                            ? 'General Approved'
+                            : '',
             ],
             description: [''],
             duration: [''],
@@ -114,6 +116,7 @@ export class CashRequisitionDetailsComponent implements OnInit {
                 lineApprovedDate: [''],
                 dateRequested: [''],
                 requestComments: [''],
+                comment: [''],
                 dateActioned: [''],
                 approved: [''],
                 cancelled: [],
@@ -177,6 +180,7 @@ export class CashRequisitionDetailsComponent implements OnInit {
                             dateRequested: this.cashRequisition?.dateRequested,
                             requestComments:
                                 this.cashRequisition.requestComments,
+                            comment: this.cashRequisition.comment,
                             dateActioned: this.cashRequisition.dateActioned,
                             approved: this.cashRequisition?.approved,
                             cancelled: this.cashRequisition.cancelled,
@@ -346,77 +350,108 @@ export class CashRequisitionDetailsComponent implements OnInit {
     }
 
     //manager operations
-    openApproveDialog() {
-        const dialogRef = this._fuseConfirmationService.open({
-            message: 'Are sure you want to approve this requisition ?',
-            title: 'Approve  Requisition',
+    // openApproveDialog() {
+    //     const dialogRef = this._fuseConfirmationService.open({
+    //         message: 'Are sure you want to approve this requisition ?',
+    //         title: 'Approve  Requisition',
+
+    //     });
+
+    //     dialogRef.afterClosed().subscribe((result) => {
+    //         console.log(result);
+    //         if (result == 'confirmed') {
+    //             if (this.user.roles[0].toUpperCase() == 'FINANCE MANAGER') {
+    //                 this.approveCashFinanceReq();
+    //             } else if (
+    //                 this.user.roles[0].toUpperCase() == 'GENERAL MANAGER'
+    //             ) {
+    //                 this.approveCashGeneralReq();
+    //             } else if (this.user.roles[0].toUpperCase() == 'LINE MANAGER') {
+    //                 this.approveCashLineManger();
+    //             }
+    //         }
+    //     });
+    // }
+
+    openApproveDialog(): void {
+        // Open the dialog
+        const dialogRef = this._matDialog.open(ApproveReqDialogComponent, {
+            data: {
+                message: 'Are sure you want to approve this requisition ?',
+                title: 'Approve  Requisition',
+                isApprove: true,
+            },
         });
 
-        dialogRef.afterClosed().subscribe((result) => {
-            console.log(result);
-            if (result == 'confirmed') {
-                if (this.user.roles[0].toUpperCase() == 'FINANCE MANAGER') {
-                    this.approveCashFinanceReq();
-                } else if (
-                    this.user.roles[0].toUpperCase() == 'GENERAL MANAGER'
-                ) {
-                    this.approveCashGeneralReq();
-                } else if (this.user.roles[0].toUpperCase() == 'LINE MANAGER') {
-                    this.approveCashLineManger();
+        // dialogRef.afterClosed()
+        //     .subscribe((result) => {
+
+        //     });
+        const dialogSubmitSubscription =
+            dialogRef.componentInstance.submitClicked.subscribe(result => {
+                console.log(result);
+                this.comment = result.comment;
+                if (result.value == 'confirmed') {
+                    if (this.user.roles[0].toUpperCase() == 'FINANCE MANAGER') {
+                        this.approveCashFinanceReq();
+                    } else if (
+                        this.user.roles[0].toUpperCase() == 'GENERAL MANAGER'
+                    ) {
+                        this.approveCashGeneralReq();
+                    } else if (this.user.roles[0].toUpperCase() == 'LINE MANAGER') {
+                        this.approveCashLineManger();
+                    }
                 }
-            }
-        });
+                dialogSubmitSubscription.unsubscribe();
+            });
     }
     approveCashGeneralReq() {
         this.isLoading = true;
         this._cashRequisitionService
-            .generalManagerApproveReq(this.cashRequisition.id, {
+            .generalManagerApproveReq([{
                 id: this.cashRequisition.id.toString(),
                 gmApproved: this.cashReqForm.value.gmApproved,
                 generalManagerApprovedDate: new Date(),
                 status: this.cashReqForm.value.status,
                 generalManagerApproverId: this._userService.getLocalUser().id,
-            })
+                comment: this.comment,
+            }])
             .subscribe(
                 (response) => {
                     this.cashReqForm.value.gmApproved
                         ? this._alertService.displayMessage(
-                              'Requisition approved'
-                          )
+                            'Requisition approved'
+                        )
                         : this._alertService.displayError(
-                              'Requisition rejected'
-                          );
+                            'Requisition rejected'
+                        );
                     this.cashReqForm.value.gmApproved
                         ? this._not
-                              .sendApprovedWhatsappMessageToUser(
-                                  this.cashRequisition.employee.phoneNumber,
-                                  `${this.cashRequisition.employee.firstName} ${this.cashRequisition.employee.lastName}`,
-                                  `${
-                                      this._userService.getLocalUser().firstname
-                                  } ${
-                                      this._userService.getLocalUser().lastname
-                                  }`,
-                                  'Cash'
-                              )
-                              .subscribe(
-                                  (response) => {},
-                                  (error) => {}
-                              )
+                            .sendApprovedWhatsappMessageToUser(
+                                this.cashRequisition.employee.phoneNumber,
+                                `${this.cashRequisition.employee.firstName} ${this.cashRequisition.employee.lastName}`,
+                                `${this._userService.getLocalUser().firstname
+                                } ${this._userService.getLocalUser().lastname
+                                }`,
+                                'Cash'
+                            )
+                            .subscribe(
+                                (response) => { },
+                                (error) => { }
+                            )
                         : this._not
-                              .sendRejectWhatsappMessageToUser(
-                                  this.cashRequisition.employee.phoneNumber,
-                                  `${this.cashRequisition.employee.firstName} ${this.cashRequisition.employee.lastName}`,
-                                  `${
-                                      this._userService.getLocalUser().firstname
-                                  } ${
-                                      this._userService.getLocalUser().lastname
-                                  }`,
-                                  'Cash'
-                              )
-                              .subscribe(
-                                  (response) => {},
-                                  (error) => {}
-                              );
+                            .sendRejectWhatsappMessageToUser(
+                                this.cashRequisition.employee.phoneNumber,
+                                `${this.cashRequisition.employee.firstName} ${this.cashRequisition.employee.lastName}`,
+                                `${this._userService.getLocalUser().firstname
+                                } ${this._userService.getLocalUser().lastname
+                                }`,
+                                'Cash'
+                            )
+                            .subscribe(
+                                (response) => { },
+                                (error) => { }
+                            );
                     this._router.navigateByUrl('axis/requsitions/cash');
                     this.isLoading = false;
                 },
@@ -431,53 +466,50 @@ export class CashRequisitionDetailsComponent implements OnInit {
     approveCashLineManger() {
         this.isLoading = true;
         this._cashRequisitionService
-            .lineManagerApproveReq(this.cashRequisition.id, {
+            .lineManagerApproveReq([{
                 id: this.cashRequisition.id.toString(),
                 lineApproved: this.cashReqForm.value.lineApproved,
                 status: this.cashReqForm.value.status,
                 lineApprovedDate: new Date(),
-            })
+                comment: this.comment,
+            }])
             .subscribe(
                 (response) => {
                     this.cashReqForm.value.lineApproved
                         ? this._alertService.displayMessage(
-                              'Requisition approved'
-                          )
+                            'Requisition approved'
+                        )
                         : this._alertService.displayError(
-                              'Requisition rejected'
-                          );
+                            'Requisition rejected'
+                        );
 
                     this.cashReqForm.value.lineApproved
                         ? this._not
-                              .sendApprovedWhatsappMessageToUser(
-                                  this.cashRequisition.employee.phoneNumber,
-                                  `${this.cashRequisition.employee.firstName} ${this.cashRequisition.employee.lastName}`,
-                                  `${
-                                      this._userService.getLocalUser().firstname
-                                  } ${
-                                      this._userService.getLocalUser().lastname
-                                  }`,
-                                  'Cash'
-                              )
-                              .subscribe(
-                                  (response) => {},
-                                  (error) => {}
-                              )
+                            .sendApprovedWhatsappMessageToUser(
+                                this.cashRequisition.employee.phoneNumber,
+                                `${this.cashRequisition.employee.firstName} ${this.cashRequisition.employee.lastName}`,
+                                `${this._userService.getLocalUser().firstname
+                                } ${this._userService.getLocalUser().lastname
+                                }`,
+                                'Cash'
+                            )
+                            .subscribe(
+                                (response) => { },
+                                (error) => { }
+                            )
                         : this._not
-                              .sendRejectWhatsappMessageToUser(
-                                  this.cashRequisition.employee.phoneNumber,
-                                  `${this.cashRequisition.employee.firstName} ${this.cashRequisition.employee.lastName}`,
-                                  `${
-                                      this._userService.getLocalUser().firstname
-                                  } ${
-                                      this._userService.getLocalUser().lastname
-                                  }`,
-                                  'Cash'
-                              )
-                              .subscribe(
-                                  (response) => {},
-                                  (error) => {}
-                              );
+                            .sendRejectWhatsappMessageToUser(
+                                this.cashRequisition.employee.phoneNumber,
+                                `${this.cashRequisition.employee.firstName} ${this.cashRequisition.employee.lastName}`,
+                                `${this._userService.getLocalUser().firstname
+                                } ${this._userService.getLocalUser().lastname
+                                }`,
+                                'Cash'
+                            )
+                            .subscribe(
+                                (response) => { },
+                                (error) => { }
+                            );
                     this._router.navigateByUrl('axis/requsitions/cash');
                     this.isLoading = false;
                 },
@@ -492,53 +524,50 @@ export class CashRequisitionDetailsComponent implements OnInit {
     approveCashFinanceReq() {
         this.isLoading = true;
         this._cashRequisitionService
-            .financeManagerApproveReq(this.cashRequisition.id, {
+            .financeManagerApproveReq([{
                 id: this.cashRequisition.id.toString(),
                 approved: this.cashReqForm.value.approved,
                 financeApprovedDate: new Date(),
                 status: this.cashReqForm.value.status,
                 financeApproverId: this._userService.getLocalUser().id,
-            })
+                comment: this.comment,
+            }])
             .subscribe(
                 (response) => {
                     this.cashReqForm.value.approved
                         ? this._alertService.displayMessage(
-                              'Requisition approved'
-                          )
+                            'Requisition approved'
+                        )
                         : this._alertService.displayError(
-                              'Requisition rejected'
-                          );
+                            'Requisition rejected'
+                        );
                     this.cashReqForm.value.approved
                         ? this._not
-                              .sendApprovedWhatsappMessageToUser(
-                                  this.cashRequisition.employee.phoneNumber,
-                                  `${this.cashRequisition.employee.firstName} ${this.cashRequisition.employee.lastName}`,
-                                  `${
-                                      this._userService.getLocalUser().firstname
-                                  } ${
-                                      this._userService.getLocalUser().lastname
-                                  }`,
-                                  'Cash'
-                              )
-                              .subscribe(
-                                  (response) => {},
-                                  (error) => {}
-                              )
+                            .sendApprovedWhatsappMessageToUser(
+                                this.cashRequisition.employee.phoneNumber,
+                                `${this.cashRequisition.employee.firstName} ${this.cashRequisition.employee.lastName}`,
+                                `${this._userService.getLocalUser().firstname
+                                } ${this._userService.getLocalUser().lastname
+                                }`,
+                                'Cash'
+                            )
+                            .subscribe(
+                                (response) => { },
+                                (error) => { }
+                            )
                         : this._not
-                              .sendRejectWhatsappMessageToUser(
-                                  this.cashRequisition.employee.phoneNumber,
-                                  `${this.cashRequisition.employee.firstName} ${this.cashRequisition.employee.lastName}`,
-                                  `${
-                                      this._userService.getLocalUser().firstname
-                                  } ${
-                                      this._userService.getLocalUser().lastname
-                                  }`,
-                                  'Cash'
-                              )
-                              .subscribe(
-                                  (response) => {},
-                                  (error) => {}
-                              );
+                            .sendRejectWhatsappMessageToUser(
+                                this.cashRequisition.employee.phoneNumber,
+                                `${this.cashRequisition.employee.firstName} ${this.cashRequisition.employee.lastName}`,
+                                `${this._userService.getLocalUser().firstname
+                                } ${this._userService.getLocalUser().lastname
+                                }`,
+                                'Cash'
+                            )
+                            .subscribe(
+                                (response) => { },
+                                (error) => { }
+                            );
                     this.isLoading = false;
                     this._router.navigateByUrl('axis/requsitions/cash');
                 },
@@ -551,9 +580,12 @@ export class CashRequisitionDetailsComponent implements OnInit {
             );
     }
     openRejectDialog(id: string) {
-        const dialogRef = this._fuseConfirmationService.open({
-            message: 'Are sure you want to reject this requisition ?',
-            title: 'Reject Requisition Confirmation',
+        const dialogRef = this._matDialog.open(ApproveReqDialogComponent, {
+            data: {
+                message: 'Are sure you want to reject this requisition ?',
+                title: 'Reject Requisition Confirmation',
+                isApprove: false,
+            },
         });
 
         dialogRef.afterClosed().subscribe((result) => {
@@ -585,14 +617,13 @@ export class CashRequisitionDetailsComponent implements OnInit {
                     .sendRejectWhatsappMessageToUser(
                         this.cashRequisition.employee.phoneNumber,
                         `${this.cashRequisition.employee.firstName} ${this.cashRequisition.employee.lastName}`,
-                        `${this._userService.getLocalUser().firstname} ${
-                            this._userService.getLocalUser().lastname
+                        `${this._userService.getLocalUser().firstname} ${this._userService.getLocalUser().lastname
                         }`,
                         'Cash'
                     )
                     .subscribe(
-                        (response) => {},
-                        (error) => {}
+                        (response) => { },
+                        (error) => { }
                     );
             }
         });

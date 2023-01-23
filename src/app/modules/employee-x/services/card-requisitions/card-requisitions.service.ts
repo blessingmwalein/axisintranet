@@ -53,9 +53,9 @@ export class CardRequisitionService {
             httpOptions
         );
     }
-    lineManagerApproveReq(id: string, cashReq: any): Observable<any[]> {
+    lineManagerApproveReq( cashReq: any): Observable<any[]> {
         return this._httpClient.put<any>(
-            `${this._baseUrl}CardRequisition/changelineapproval/${id}`,
+            `${this._baseUrl}CardRequisition/changelineapproval`,
             cashReq
         );
     }
@@ -64,15 +64,15 @@ export class CardRequisitionService {
             `${this._baseUrl}CardRequisition?isLoggedInUser=false`
         );
     }
-    financeManagerApproveReq(id: string, cashReq: any): Observable<any[]> {
+    financeManagerApproveReq(cashReq: any): Observable<any[]> {
         return this._httpClient.put<any>(
-            `${this._baseUrl}CardRequisition/changeapproval/${id}`,
+            `${this._baseUrl}CardRequisition/changeapproval`,
             cashReq
         );
     }
-    generalManagerApproveReq(id: string, cashReq: any): Observable<any[]> {
+    generalManagerApproveReq(cashReq: any): Observable<any[]> {
         return this._httpClient.put<any>(
-            `${this._baseUrl}CardRequisition/changegmapproval/${id}`,
+            `${this._baseUrl}CardRequisition/changegmapproval`,
             cashReq
         );
     }

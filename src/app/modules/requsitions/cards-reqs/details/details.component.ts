@@ -28,6 +28,7 @@ import { UpdateReleasedFundsComponent } from '../update-released-funds/update-re
 import { PrintReqPrevComponent } from '../print-req-prev/print-req-prev.component';
 import { environment } from 'environments/environment';
 import { NotificationsService } from 'app/modules/employee-x/services/nortifications/notifications.service';
+import { ApproveReqDialogComponent } from '../../cash-reqs/details/approve-req-dialog/approve-req-dialog.component';
 
 @Component({
     selector: 'academy-details',
@@ -46,6 +47,8 @@ export class CardRequisitionDetailsComponent implements OnInit {
     cardReqForm: FormGroup;
     verticalStepperForm: FormGroup;
     user: User;
+    comment: string = '';
+
     /**
      * Constructor
      */
@@ -63,7 +66,7 @@ export class CardRequisitionDetailsComponent implements OnInit {
         private _matDialog: MatDialog,
         private _userService: UserService,
         private _not: NotificationsService
-    ) {}
+    ) { }
 
     ngOnInit(): void {
         this.user = this._userService.getUserfromStorage();
@@ -75,10 +78,10 @@ export class CardRequisitionDetailsComponent implements OnInit {
                 this.user.roles[0].toUpperCase() == 'FINANCE MANAGER'
                     ? 'Finance Approved'
                     : this.user.roles[0].toUpperCase() == 'LINE MANAGER'
-                    ? 'Line Approved'
-                    : this.user.roles[0].toUpperCase() == 'GENERAL MANAGER'
-                    ? 'General Approved'
-                    : '',
+                        ? 'Line Approved'
+                        : this.user.roles[0].toUpperCase() == 'GENERAL MANAGER'
+                            ? 'General Approved'
+                            : '',
             ],
             description: [''],
             duration: [''],
@@ -106,6 +109,7 @@ export class CardRequisitionDetailsComponent implements OnInit {
                 lineApprovedDate: [''],
                 dateRequested: [''],
                 requestComments: [''],
+                comment: [''],
                 dateActioned: [''],
                 approved: [''],
                 cancelled: [],
@@ -164,6 +168,7 @@ export class CardRequisitionDetailsComponent implements OnInit {
                             dateRequested: this.cardRequisition.dateRequested,
                             requestComments:
                                 this.cardRequisition.requestComments,
+                            comment: this.cardRequisition.comment,
                             dateActioned: this.cardRequisition.dateActioned,
                             approved: this.cardRequisition.approved,
                             cancelled: this.cardRequisition.cancelled,
@@ -314,76 +319,83 @@ export class CardRequisitionDetailsComponent implements OnInit {
         );
     }
     openApproveDialog() {
-        const dialogRef = this._fuseConfirmationService.open({
-            message: 'Are sure you want to approve this requisition ?',
-            title: 'Approve  Requisition',
-        });
 
-        dialogRef.afterClosed().subscribe((result) => {
-            console.log(result);
-            if (result == 'confirmed') {
-                if (this.user.roles[0].toUpperCase() == 'FINANCE MANAGER') {
-                    this.approveCardFinanceReq();
-                } else if (
-                    this.user.roles[0].toUpperCase() == 'GENERAL MANAGER'
-                ) {
-                    this.approveCardhGeneralReq();
-                } else if (this.user.roles[0].toUpperCase() == 'LINE MANAGER') {
-                    this.approveCardLineManger();
-                }
-            }
+        const dialogRef = this._matDialog.open(ApproveReqDialogComponent, {
+            data: {
+                message: 'Are sure you want to approve this requisition ?',
+                title: 'Approve  Requisition',
+                isApprove: true,
+            },
         });
+        const dialogSubmitSubscription =
+            dialogRef.componentInstance.submitClicked.subscribe(result => {
+                console.log(result);
+                this.comment = result.comment;
+
+                if (result.value == 'confirmed') {
+                    if (this.user.roles[0].toUpperCase() == 'FINANCE MANAGER') {
+                        this.approveCardFinanceReq();
+                    } else if (
+                        this.user.roles[0].toUpperCase() == 'GENERAL MANAGER'
+                    ) {
+                        this.approveCardhGeneralReq();
+                    } else if (this.user.roles[0].toUpperCase() == 'LINE MANAGER') {
+                        this.approveCardLineManger();
+                    }
+                }
+            });
+        // dialogRef.afterClosed().subscribe((result) => {
+
+        // });
     }
     approveCardhGeneralReq() {
         this.isLoading = true;
         this._cardRequisitionService
-            .generalManagerApproveReq(this.cardRequisition.id, {
+            .generalManagerApproveReq([{
                 id: this.cardRequisition.id.toString(),
                 gmApproved: this.cardReqForm.value.gmApproved,
                 generalManagerApprovedDate: new Date(),
                 status: this.cardReqForm.value.status,
                 generalManagerApproverId: this._userService.getLocalUser().id,
-            })
+                comment:this.comment
+
+            }])
             .subscribe(
                 (response) => {
                     this.cardReqForm.value.gmApproved
                         ? this._alertService.displayMessage(
-                              'Requisition approved'
-                          )
+                            'Requisition approved'
+                        )
                         : this._alertService.displayError(
-                              'Requisition rejected'
-                          );
+                            'Requisition rejected'
+                        );
                     this.cardReqForm.value.gmApproved
                         ? this._not
-                              .sendApprovedWhatsappMessageToUser(
-                                  this.cardRequisition.employee.phoneNumber,
-                                  `${this.cardRequisition.employee.firstName} ${this.cardRequisition.employee.lastName}`,
-                                  `${
-                                      this._userService.getLocalUser().firstname
-                                  } ${
-                                      this._userService.getLocalUser().lastname
-                                  }`,
-                                  'Card'
-                              )
-                              .subscribe(
-                                  (response) => {},
-                                  (error) => {}
-                              )
+                            .sendApprovedWhatsappMessageToUser(
+                                this.cardRequisition.employee.phoneNumber,
+                                `${this.cardRequisition.employee.firstName} ${this.cardRequisition.employee.lastName}`,
+                                `${this._userService.getLocalUser().firstname
+                                } ${this._userService.getLocalUser().lastname
+                                }`,
+                                'Card'
+                            )
+                            .subscribe(
+                                (response) => { },
+                                (error) => { }
+                            )
                         : this._not
-                              .sendRejectWhatsappMessageToUser(
-                                  this.cardRequisition.employee.phoneNumber,
-                                  `${this.cardRequisition.employee.firstName} ${this.cardRequisition.employee.lastName}`,
-                                  `${
-                                      this._userService.getLocalUser().firstname
-                                  } ${
-                                      this._userService.getLocalUser().lastname
-                                  }`,
-                                  'Card'
-                              )
-                              .subscribe(
-                                  (response) => {},
-                                  (error) => {}
-                              );
+                            .sendRejectWhatsappMessageToUser(
+                                this.cardRequisition.employee.phoneNumber,
+                                `${this.cardRequisition.employee.firstName} ${this.cardRequisition.employee.lastName}`,
+                                `${this._userService.getLocalUser().firstname
+                                } ${this._userService.getLocalUser().lastname
+                                }`,
+                                'Card'
+                            )
+                            .subscribe(
+                                (response) => { },
+                                (error) => { }
+                            );
                     this._router.navigateByUrl('axis/requsitions/card');
                     this.isLoading = false;
                 },
@@ -398,52 +410,50 @@ export class CardRequisitionDetailsComponent implements OnInit {
     approveCardLineManger() {
         this.isLoading = true;
         this._cardRequisitionService
-            .lineManagerApproveReq(this.cardRequisition.id, {
+            .lineManagerApproveReq([{
                 id: this.cardRequisition.id.toString(),
                 lineApproved: this.cardReqForm.value.lineApproved,
                 status: this.cardReqForm.value.status,
                 lineApprovedDate: new Date(),
-            })
+                comment:this.comment
+
+            }])
             .subscribe(
                 (response) => {
                     this.cardReqForm.value.lineApproved
                         ? this._alertService.displayMessage(
-                              'Requisition approved'
-                          )
+                            'Requisition approved'
+                        )
                         : this._alertService.displayError(
-                              'Requisition rejected'
-                          );
+                            'Requisition rejected'
+                        );
                     this.cardReqForm.value.lineApproved
                         ? this._not
-                              .sendApprovedWhatsappMessageToUser(
-                                  this.cardRequisition.employee.phoneNumber,
-                                  `${this.cardRequisition.employee.firstName} ${this.cardRequisition.employee.lastName}`,
-                                  `${
-                                      this._userService.getLocalUser().firstname
-                                  } ${
-                                      this._userService.getLocalUser().lastname
-                                  }`,
-                                  'Card'
-                              )
-                              .subscribe(
-                                  (response) => {},
-                                  (error) => {}
-                              )
+                            .sendApprovedWhatsappMessageToUser(
+                                this.cardRequisition.employee.phoneNumber,
+                                `${this.cardRequisition.employee.firstName} ${this.cardRequisition.employee.lastName}`,
+                                `${this._userService.getLocalUser().firstname
+                                } ${this._userService.getLocalUser().lastname
+                                }`,
+                                'Card'
+                            )
+                            .subscribe(
+                                (response) => { },
+                                (error) => { }
+                            )
                         : this._not
-                              .sendRejectWhatsappMessageToUser(
-                                  this.cardRequisition.employee.phoneNumber,
-                                  `${this.cardRequisition.employee.firstName} ${this.cardRequisition.employee.lastName}`,
-                                  `${
-                                      this._userService.getLocalUser().firstname
-                                  } ${
-                                      this._userService.getLocalUser().lastname
-                                  }`,
-                                  'Card'
-                              )
-                              .subscribe(
-                                  (response) => {},
-                                  (error) => {}
-                              );
+                            .sendRejectWhatsappMessageToUser(
+                                this.cardRequisition.employee.phoneNumber,
+                                `${this.cardRequisition.employee.firstName} ${this.cardRequisition.employee.lastName}`,
+                                `${this._userService.getLocalUser().firstname
+                                } ${this._userService.getLocalUser().lastname
+                                }`,
+                                'Card'
+                            )
+                            .subscribe(
+                                (response) => { },
+                                (error) => { }
+                            );
                     this._router.navigateByUrl('axis/requsitions/card');
                     this.isLoading = false;
                 },
@@ -458,53 +468,50 @@ export class CardRequisitionDetailsComponent implements OnInit {
     approveCardFinanceReq() {
         this.isLoading = true;
         this._cardRequisitionService
-            .financeManagerApproveReq(this.cardRequisition.id, {
+            .financeManagerApproveReq([{
                 id: this.cardRequisition.id.toString(),
                 approved: this.cardReqForm.value.approved,
                 financeApprovedDate: new Date(),
                 status: this.cardReqForm.value.status,
                 financeApproverId: this._userService.getLocalUser().id,
-            })
+                comment:this.comment
+            }])
             .subscribe(
                 (response) => {
                     this.cardReqForm.value.approved
                         ? this._alertService.displayMessage(
-                              'Requisition approved'
-                          )
+                            'Requisition approved'
+                        )
                         : this._alertService.displayError(
-                              'Requisition rejected'
-                          );
+                            'Requisition rejected'
+                        );
                     this.cardReqForm.value.approved
                         ? this._not
-                              .sendApprovedWhatsappMessageToUser(
-                                  this.cardRequisition.employee.phoneNumber,
-                                  `${this.cardRequisition.employee.firstName} ${this.cardRequisition.employee.lastName}`,
-                                  `${
-                                      this._userService.getLocalUser().firstname
-                                  } ${
-                                      this._userService.getLocalUser().lastname
-                                  }`,
-                                  'Card'
-                              )
-                              .subscribe(
-                                  (response) => {},
-                                  (error) => {}
-                              )
+                            .sendApprovedWhatsappMessageToUser(
+                                this.cardRequisition.employee.phoneNumber,
+                                `${this.cardRequisition.employee.firstName} ${this.cardRequisition.employee.lastName}`,
+                                `${this._userService.getLocalUser().firstname
+                                } ${this._userService.getLocalUser().lastname
+                                }`,
+                                'Card'
+                            )
+                            .subscribe(
+                                (response) => { },
+                                (error) => { }
+                            )
                         : this._not
-                              .sendRejectWhatsappMessageToUser(
-                                  this.cardRequisition.employee.phoneNumber,
-                                  `${this.cardRequisition.employee.firstName} ${this.cardRequisition.employee.lastName}`,
-                                  `${
-                                      this._userService.getLocalUser().firstname
-                                  } ${
-                                      this._userService.getLocalUser().lastname
-                                  }`,
-                                  'Card'
-                              )
-                              .subscribe(
-                                  (response) => {},
-                                  (error) => {}
-                              );
+                            .sendRejectWhatsappMessageToUser(
+                                this.cardRequisition.employee.phoneNumber,
+                                `${this.cardRequisition.employee.firstName} ${this.cardRequisition.employee.lastName}`,
+                                `${this._userService.getLocalUser().firstname
+                                } ${this._userService.getLocalUser().lastname
+                                }`,
+                                'Card'
+                            )
+                            .subscribe(
+                                (response) => { },
+                                (error) => { }
+                            );
                     this._router.navigateByUrl('axis/requsitions/card');
                     this.isLoading = false;
                 },
@@ -519,12 +526,12 @@ export class CardRequisitionDetailsComponent implements OnInit {
     rejectReqCash(id: string) {
         this.isLoading = true;
         this._cardRequisitionService
-            .lineManagerApproveReq(this.cardRequisition.id, {
+            .lineManagerApproveReq([{
                 id: this.cardRequisition.id.toString(),
                 lineApproved: !this.cardReqForm.value.lineApproved,
                 status: 'Line manager rejected',
                 lineApprovedDate: new Date(),
-            })
+            }])
             .subscribe(
                 (response) => {
                     this._alertService.displayMessage('Requisition Rejected');
@@ -594,7 +601,6 @@ export class CardRequisitionDetailsComponent implements OnInit {
             // this();
         });
     }
-
     getHoursAndMinutes(minutes: number) {
         const hours = Math.floor(minutes / 60);
         const minutes_ = minutes % 60;
