@@ -32,6 +32,7 @@ import { PrintReqPrevComponent } from '../print-req-prev/print-req-prev.componen
 import { environment } from 'environments/environment';
 import { NotificationsService } from 'app/modules/employee-x/services/nortifications/notifications.service';
 import { ApproveReqDialogComponent } from './approve-req-dialog/approve-req-dialog.component';
+import { floor } from 'lodash';
 
 @Component({
     selector: 'academy-details',
@@ -129,6 +130,7 @@ export class CashRequisitionDetailsComponent implements OnInit {
                 releasedFunds: [],
                 receivedFunds: [],
                 actualUsedFunds: [],
+                variance: [],
                 fileSource: [''],
                 uploadedFileName: [''],
             }),
@@ -194,6 +196,7 @@ export class CashRequisitionDetailsComponent implements OnInit {
                             amount: this.cashRequisition.amount,
                             releasedFunds: this.cashRequisition.releasedFunds,
                             receivedFunds: this.cashRequisition.receivedFunds,
+                            variance:floor(this.cashRequisition.receivedFunds - this.cashRequisition.actualUsedFunds),
                             actualUsedFunds:
                                 this.cashRequisition.actualUsedFunds,
                             fileSource: this.cashRequisition.fileSource,
