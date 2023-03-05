@@ -98,6 +98,25 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
                 return this.navigation.gM
         }
     }
+    getSidebarNavigationTitle(): any {
+
+        switch (this.user.roles[0].toLowerCase()) {
+            case 'employee':
+                return 'EMPLOYEE';
+                break;
+            case 'administrator':
+                return 'ADMINISTRATOR';
+                break;
+            case 'line manager':
+                return 'FINANCE MANAGER';
+                break;
+            case 'finance manager':
+                return 'DIRECTOR FINANCE';
+                break;
+            case 'general manager':
+                return 'MANAGING DIRECTOR';
+        }
+    }
 
     /**
      * On destroy

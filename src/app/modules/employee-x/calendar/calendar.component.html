@@ -1,19 +1,9 @@
-<p>
-  calendar works!
-</p>
+
 <div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden dark:bg-gray-900">
 
   <mat-drawer-container class="flex-auto h-full bg-transparent">
 
-      <!-- Drawer -->
-      <mat-drawer
-          class="w-60 dark:bg-gray-900"
-          [autoFocus]="false"
-          [mode]="drawerMode"
-          [opened]="drawerOpened"
-          #drawer>
-          <calendar-sidebar (calendarUpdated)="onCalendarUpdated($event)"></calendar-sidebar>
-      </mat-drawer>
+     
 
       <mat-drawer-content class="flex">
 
@@ -129,7 +119,7 @@
                   <full-calendar
                       [defaultView]="view"
                       [events]="events"
-                      [firstDay]="settings.startWeekOn"
+                      [firstDay]="settings?.startWeekOn"
                       [handleWindowResize]="false"
                       [header]="false"
                       [height]="'parent'"

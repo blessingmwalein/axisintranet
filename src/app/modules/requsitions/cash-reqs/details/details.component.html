@@ -46,6 +46,11 @@
                         <mat-icon [svgIcon]="'heroicons_outline:trash'"></mat-icon>
                         <span>Update Released Funds</span>
                     </button>
+                    <button mat-menu-item (click)="openClearVariance()"
+                        >
+                        <mat-icon [svgIcon]="'heroicons_outline:trash'"></mat-icon>
+                        <span>Clear Variance</span>
+                    </button>
                     <button mat-menu-item (click)="openPrintDialog()"
                         *ngIf="user.roles[0].toUpperCase() !== 'EMPLOYEE'">
                         <mat-icon [svgIcon]="'heroicons_outline:printer'"></mat-icon>

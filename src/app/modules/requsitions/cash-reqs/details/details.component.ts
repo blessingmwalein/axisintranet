@@ -318,7 +318,7 @@ export class CashRequisitionDetailsComponent implements OnInit {
     openCreateDepartmentDialog(): void {
         // Open the dialog
         const dialogRef = this._matDialog.open(UpdateUsedFundsComponent, {
-            data: { cashReq: this.cashRequisition },
+            data: { cashReq: this.cashRequisition, isUpdateVariance: false },
         });
 
         dialogRef.afterClosed().subscribe((result) => {
@@ -329,7 +329,18 @@ export class CashRequisitionDetailsComponent implements OnInit {
     openUpdateCashReceuvedDialog(): void {
         // Open the dialog
         const dialogRef = this._matDialog.open(UpdateReceivedFundsComponent, {
-            data: { cashReq: this.cashRequisition },
+            data: { cashReq: this.cashRequisition, isUpdateVariance: false },
+        });
+
+        dialogRef.afterClosed().subscribe((result) => {
+            console.log('Compose dialog was closed!');
+            this.getCashReq();
+        });
+    }
+    openClearVariance(): void {
+         // Open the dialog
+         const dialogRef = this._matDialog.open(UpdateUsedFundsComponent, {
+            data: { cashReq: this.cashRequisition, isUpdateVariance: true },
         });
 
         dialogRef.afterClosed().subscribe((result) => {

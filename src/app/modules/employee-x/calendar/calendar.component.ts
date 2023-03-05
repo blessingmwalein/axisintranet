@@ -192,16 +192,15 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy
         this._calendarService.settings$
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((settings) => {
-
                 // Store the settings
                 this.settings = settings;
 
                 // Set the FullCalendar event time format based on the time format setting
                 this.eventTimeFormat = {
-                    hour    : settings.timeFormat === '12' ? 'numeric' : '2-digit',
-                    hour12  : settings.timeFormat === '12',
+                    hour    : settings?.timeFormat === '12' ? 'numeric' : '2-digit',
+                    hour12  : settings?.timeFormat === '12',
                     minute  : '2-digit',
-                    meridiem: settings.timeFormat === '12' ? 'short' : false
+                    meridiem: settings?.timeFormat === '12' ? 'short' : false
                 };
 
                 // Mark for check

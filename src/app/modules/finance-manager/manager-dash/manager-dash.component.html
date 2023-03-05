@@ -104,7 +104,7 @@
                                     <div class="flex items-baseline justify-center w-full mt-5 text-secondary"></div>
                                 </div>
                             </div>
-                            <div (click)="navigateTo('axis/requsitions/asset')"
+                            <!-- <div (click)="navigateTo('axis/requsitions/asset')"
                                 class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
                                 style="cursor: pointer">
                                 <div class="flex items-start justify-between">
@@ -112,14 +112,7 @@
                                         Asset Requisitions
                                     </div>
                                     <div class="ml-2 -mt-2 -mr-3">
-                                        <!-- <button mat-icon-button [matMenuTriggerFor]="summaryMenu">
-                      <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
-                    </button>
-                    <mat-menu #summaryMenu="matMenu">
-                      <button mat-menu-item>Yesterday</button>
-                      <button mat-menu-item>2 days ago</button>
-                      <button mat-menu-item>3 days ago</button>
-                    </mat-menu> -->
+                                       
                                     </div>
                                 </div>
                                 <div class="flex flex-col items-center mt-2">
@@ -131,11 +124,10 @@
                                         Available
                                     </div>
                                     <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
-                                        <!-- <div class="text-md font-medium truncate">Approved:</div>
-                    <div class="ml-1.5 text-lg font-semibold">13</div> -->
+                                        
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div (click)="navigateTo('axis/requsitions/vehicle')"
                                 class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
                                 style="cursor: pointer">
@@ -169,6 +161,23 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6 w-full min-w-0">
+                            <!-- Summary -->
+                            <div class="flex flex-col mt-6 flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
+                                style="cursor: pointer" style="cursor: pointer">
+                                <canvas baseChart class="chart" [data]="lineChartData" [options]="lineChartOptions"
+                                    [type]="lineChartType" (chartHover)="chartHovered($event)"
+                                    (chartClick)="chartClicked($event)"></canvas>
+                            </div>
+                            <div class="flex flex-col mt-6 flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
+                                style="cursor: pointer" style="cursor: pointer">
+                                <canvas baseChart [data]="barChartData" [options]="barChartOptions"
+                                    [plugins]="barChartPlugins" [legend]="barChartLegend" [type]="'bar'">
+                                </canvas>
+                            </div>
+
+                        </div>
+
                     </ng-template>
                 </mat-tab>
             </mat-tab-group>
@@ -196,6 +205,10 @@
                                         <mat-option value="Finance Approved" (click)="
                                                 setStatus('Finance Approved')
                                             ">Finance manager approved
+                                        </mat-option>
+                                        <mat-option value="General Approved" (click)="
+                                                setStatus('General Approved')
+                                            ">General manager approved
                                         </mat-option>
                                         <mat-option value="Cash Used" (click)="setStatus('Cash Used')">Cash Used
                                         </mat-option>
@@ -317,9 +330,20 @@
                             <!-- Recent transactions table -->
                             <div
                                 class="xl:col-span-2 flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden">
-                                <div class="p-6">
+                                <div class="p-6 flex-row">
                                     <div class="mr-4 text-lg font-medium tracking-tight leading-6 truncate">
                                         Cash Month to Month Detail
+                                    </div>
+                                    <div class="mr-4 text-lg font-medium tracking-tight leading-6 truncate">
+                                        <mat-form-field class="w-full">
+                                            <mat-icon matPrefix class="hidden sm:flex icon-size-5"
+                                                [svgIcon]="'heroicons_solid:search'"></mat-icon>
+                                                <mat-select (selectionChange)="filterTableDataByTitle($event)" [placeholder]="'Title'" >
+                                                    <mat-option *ngFor="let title of titles" [value]="title.name">
+                                                        {{ title.name }}</mat-option>
+                                                </mat-select>
+                                                
+                                        </mat-form-field>
                                     </div>
                                 </div>
                                 <div class="overflow-x-auto mx-6">
@@ -329,11 +353,9 @@
                                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                                 <tr>
                                                     <th scope="col" class="py-3 px-6">
-                                                        Comment
+                                                        Title
                                                     </th>
-                                                    <th scope="col" class="py-3 px-6">
-                                                        Created At
-                                                    </th>
+
                                                     <th scope="col" class="py-3 px-6">
                                                         Amount
                                                     </th>
@@ -345,6 +367,12 @@
                                                     </th>
                                                     <th scope="col" class="py-3 px-6">
                                                         Used Funds
+                                                    </th>
+                                                    <th scope="col" class="py-3 px-6">
+                                                        Start Date
+                                                    </th>
+                                                    <th scope="col" class="py-3 px-6">
+                                                        End Date
                                                     </th>
                                                 </tr>
                                             </thead>
@@ -358,16 +386,10 @@
                                                     <th scope="row"
                                                         class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                         {{
-                                                        cashMonthToMonthD.status
+                                                        cashMonthToMonthD.title
                                                         }}
                                                     </th>
-                                                    <td class="py-4 px-6">
-                                                        {{
-                                                        cashMonthToMonthD.dateCreated
-                                                        | date
-                                                        : "dd/MM/yyyy"
-                                                        }}
-                                                    </td>
+
                                                     <td class="py-4 px-6">
                                                         {{
                                                         cashMonthToMonthD.amount
@@ -394,6 +416,20 @@
                                                         cashMonthToMonthD.actualUsedFunds
                                                         | currency
                                                         : currencySelected
+                                                        }}
+                                                    </td>
+                                                    <td class="py-4 px-6">
+                                                        {{
+                                                        cashMonthToMonthD.startDate
+                                                        | date
+                                                        : "dd/MM/yyyy"
+                                                        }}
+                                                    </td>
+                                                    <td class="py-4 px-6">
+                                                        {{
+                                                        cashMonthToMonthD.endDate
+                                                        | date
+                                                        : "dd/MM/yyyy"
                                                         }}
                                                     </td>
                                                 </tr>
@@ -428,6 +464,10 @@
                                         <mat-option value="Finance Approved" (click)="
                                                 setStatus('Finance Approved')
                                             ">Finance manager approved
+                                        </mat-option>
+                                        <mat-option value="General Approved" (click)="
+                                                setStatus('General Approved')
+                                            ">General manager approved
                                         </mat-option>
                                         <mat-option value="Cash Used" (click)="setStatus('Cash Used')">Cash Used
                                         </mat-option>
@@ -559,7 +599,7 @@
                                                     class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                                     <tr>
                                                         <th scope="col" class="py-3 px-6">
-                                                            Comment
+                                                            Title
                                                         </th>
                                                         <th scope="col" class="py-3 px-6">
                                                             Created At
@@ -585,7 +625,7 @@
                                                         <th scope="row"
                                                             class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                             {{
-                                                            cashDayToDay.status
+                                                            cashDayToDay.title
                                                             }}
                                                         </th>
                                                         <td class="py-4 px-6">
@@ -660,6 +700,10 @@
                                         <mat-option value="Finance Approved" (click)="
                                                 setStatus('Finance Approved')
                                             ">Finance manager approved
+                                        </mat-option>
+                                        <mat-option value="General Approved" (click)="
+                                                setStatus('General Approved')
+                                            ">General manager approved
                                         </mat-option>
                                         <mat-option value="Cash Used" (click)="setStatus('Cash Used')">Cash Used
                                         </mat-option>
@@ -791,7 +835,7 @@
                                                     class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                                     <tr>
                                                         <th scope="col" class="py-3 px-6">
-                                                            Comment
+                                                            Title
                                                         </th>
                                                         <th scope="col" class="py-3 px-6">
                                                             Created At
@@ -821,7 +865,7 @@
                                                         <th scope="row"
                                                             class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                             {{
-                                                            cardMonthToMonthD.status
+                                                            cardMonthToMonthD.title
                                                             }}
                                                         </th>
                                                         <td class="py-4 px-6">
@@ -892,6 +936,10 @@
                                         <mat-option value="Finance Approved" (click)="
                                                 setStatus('Finance Approved')
                                             ">Finance manager approved
+                                        </mat-option>
+                                        <mat-option value="General Approved" (click)="
+                                                setStatus('General Approved')
+                                            ">General manager approved
                                         </mat-option>
                                         <mat-option value="Cash Used" (click)="setStatus('Cash Used')">Cash Used
                                         </mat-option>
@@ -1022,7 +1070,7 @@
                                                     class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                                     <tr>
                                                         <th scope="col" class="py-3 px-6">
-                                                            Comment
+                                                            Title
                                                         </th>
                                                         <th scope="col" class="py-3 px-6">
                                                             Created At
@@ -1052,7 +1100,7 @@
                                                         <th scope="row"
                                                             class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                             {{
-                                                            cardDayToDayD.status
+                                                            cardDayToDayD.title
                                                             }}
                                                         </th>
                                                         <td class="py-4 px-6">

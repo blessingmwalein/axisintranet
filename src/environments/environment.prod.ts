@@ -1,9 +1,10 @@
 export const environment = {
     production: false,
     snackBarTimeout: 5000,
-    filesBaseUrl: 'https://axisbay.co.zw:8097/files/',
-    apiBaseUrl: 'https://axisbay.co.zw:8097/api/',
-    // apiBaseUrl: "https://140.82.25.196:8093/api/",
+    filesBaseUrl: 'http://140.82.25.196:8093/files/',
+    // filesBaseUrl: 'https://axisbay.co.zw:8097/files/',
+    // apiBaseUrl: 'https://axisbay.co.zw:8097/api/',
+    apiBaseUrl: "http://140.82.25.196:8093/api/",
     messageBirdUrl: ' https://flows.messagebird.com/flows/',
     get requisitionCreatedUrl() {
         return `${this.messageBirdUrl}d6303a00-3df8-407d-a302-0c9da1a92b3a/invoke`;

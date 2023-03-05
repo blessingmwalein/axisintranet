@@ -28,6 +28,7 @@ import { FuseFindByKeyPipeModule } from '@fuse/pipes/find-by-key';
 import { SharedModule } from 'app/shared/shared.module';
 import { ManagerDashComponent } from './manager-dash/manager-dash.component';
 import { AnnouncementsComponent } from './announcements/announcements.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
     declarations: [
@@ -62,6 +63,7 @@ import { AnnouncementsComponent } from './announcements/announcements.component'
         MatTableModule,
         MatCheckboxModule,
         MatDatepickerModule,
+        NgChartsModule,
     ],
 })
 export class FinanceManagerModule {}

@@ -28,13 +28,15 @@ import { SharedModule } from 'app/shared/shared.module';
 import { ManagerDashComponent } from './manager-dash/manager-dash.component';
 import { AnnouncementsComponent } from './announcements/announcements.component';
 import { GeneralManagerRoutingModule } from './general-manager-routing.module';
+import { NgChartsModule } from 'ng2-charts';
+import { CalendarComponent } from './calendar/calendar.component';
 
 @NgModule({
     declarations: [
         DashboardComponent,
-
         ManagerDashComponent,
         AnnouncementsComponent,
+        CalendarComponent,
     ],
     imports: [
         CommonModule,
@@ -62,6 +64,7 @@ import { GeneralManagerRoutingModule } from './general-manager-routing.module';
         MatTableModule,
         MatCheckboxModule,
         MatDatepickerModule,
+        NgChartsModule,
     ],
 })
 export class GeneralManagerModule {}

@@ -57,7 +57,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                     },
                     {
                         id: 'employee.requisitions.device',
-                        title: 'Device',
+                        title: 'Promotional Materials',
                         type: 'basic',
                         link: '/axis/requsitions/device',
                     },
@@ -82,8 +82,8 @@ export const defaultNavigation: FuseNavigationItem[] = [
 export const managerNavigation: FuseNavigationItem[] = [
     {
         id: 'manager',
-        title: 'Manager',
-        subtitle: 'Manager Pages',
+        title: 'Finance Manager',
+        subtitle: 'Finance Manager Pages',
         type: 'group',
         icon: 'heroicons_outline:home',
         children: [
@@ -128,7 +128,7 @@ export const managerNavigation: FuseNavigationItem[] = [
                     },
                     {
                         id: 'manager.requisitions.device',
-                        title: 'Device',
+                        title: 'Promotional Materials',
                         type: 'basic',
                         link: '/axis/requsitions/device',
                     },
@@ -152,8 +152,8 @@ export const managerNavigation: FuseNavigationItem[] = [
 export const financeManagerNavigation: FuseNavigationItem[] = [
     {
         id: 'finance-manager',
-        title: 'Finance Manager',
-        subtitle: 'Finance Manager Pages',
+        title: 'Director Finance',
+        subtitle: 'Director Finance Pages',
         type: 'group',
         icon: 'heroicons_outline:home',
         children: [
@@ -198,7 +198,7 @@ export const financeManagerNavigation: FuseNavigationItem[] = [
                     },
                     {
                         id: 'employee.requisitions.device',
-                        title: 'Device',
+                        title: 'Promotional Materials',
                         type: 'basic',
                         link: '/axis/requsitions/device',
                     },
@@ -222,8 +222,8 @@ export const financeManagerNavigation: FuseNavigationItem[] = [
 export const gMNavigation: FuseNavigationItem[] = [
     {
         id: 'g-m',
-        title: 'General Manager',
-        subtitle: 'General Manager Pages',
+        title: 'Managing Director',
+        subtitle: 'Managing Director Pages',
         type: 'group',
         icon: 'heroicons_outline:home',
         children: [
@@ -268,7 +268,7 @@ export const gMNavigation: FuseNavigationItem[] = [
                     },
                     {
                         id: 'employee.requisitions.device',
-                        title: 'Device',
+                        title: 'Promotional Materials',
                         type: 'basic',
                         link: '/axis/requsitions/device',
                     },
@@ -365,7 +365,7 @@ export const adminNavigation: FuseNavigationItem[] = [
                     },
                     {
                         id: 'admin.requisitions-items.device',
-                        title: 'Device',
+                        title: 'Promotional Materials',
                         type: 'basic',
                         link: '/axis/admin/requisitions-items/device',
                     },

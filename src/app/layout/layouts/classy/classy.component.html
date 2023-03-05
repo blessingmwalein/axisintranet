@@ -1,5 +1,5 @@
 <!-- Navigation -->
-<fuse-vertical-navigation class="dark bg-gray-900 print:hidden" [mode]="isScreenSmall ? 'over' : 'side'"
+<fuse-vertical-navigation style="background-color: #FF0101;" class="dark bg-gray-900 print:hidden" [mode]="isScreenSmall ? 'over' : 'side'"
     [name]="'mainNavigation'" [navigation]="getSidebarNavigation()" [usertype]="user.roles[0]"
     [opened]="!isScreenSmall">
     <!-- Navigation header hook -->
@@ -7,7 +7,7 @@
         <div class="flex items-center w-full p-4 pl-6">
             <!-- Logo -->
             <div class="flex items-center justify-center">
-                <h4 class="h1 ">{{user.roles[0].toUpperCase()}} PAGES</h4>
+                <h4 class="h1 ">{{getSidebarNavigationTitle()}} PAGES</h4>
             </div>
             <!-- Components -->
             <div class="flex items-center ml-auto">
@@ -24,7 +24,7 @@
             </div>
             <div class="flex flex-col items-center justify-center w-full mt-6">
                 <div
-                    class="w-full whitespace-nowrap overflow-ellipsis overflow-hidden text-center leading-normal font-medium">
+                    class="w-full whitespace-nowrap overflow-ellipsis overflow-hidden text-center text-md leading-normal font-medium text-secondary">
                     {{user.firstName}} {{user.lastName}}
                 </div>
                 <div
@@ -37,7 +37,7 @@
     <!-- Navigation footer hook -->
     <ng-container fuseVerticalNavigationContentFooter>
         <div class="flex flex-0 items-center justify-center h-16 pr-6 pl-2 mt-2 mb-4 opacity-10">
-            <h4 class="h2 text-3xl text-white">Axis Solutions</h4>
+            <h4 class="h2 text-3xl text-white">TSCZ</h4>
         </div>
     </ng-container>
 </fuse-vertical-navigation>

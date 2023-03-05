@@ -6,6 +6,8 @@ import { AnnouncementsComponent } from './announcements/announcements.component'
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { ManagerDashComponent } from './manager-dash/manager-dash.component';
+import { CalendarComponent } from '../employee-x/calendar/calendar.component';
+
 
 const routes: Routes = [
     {
@@ -23,7 +25,7 @@ const routes: Routes = [
     },
     {
         path: 'calendar',
-        component: MantainanceComponent,
+        component: CalendarComponent,
     },
 ];
 
